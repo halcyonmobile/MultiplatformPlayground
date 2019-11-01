@@ -1,20 +1,42 @@
 package com.nagyrobi.multiplatformplayground.api
 
+import com.nagyrobi.multiplatformplayground.model.Application
+import com.nagyrobi.multiplatformplayground.model.Category
+import com.nagyrobi.multiplatformplayground.model.Screenshot
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.header
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.contentType
+import io.ktor.http.takeFrom
 import kotlinx.serialization.json.Json
 
-abstract class KtorApi() {
+abstract class KtorApi {
     protected val client = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer(Json.nonstrict).apply {
-                // todo set Mappers
+                setMapper(Application::class, Application.serializer())
+                setMapper(Category::class, Category.serializer())
+                setMapper(Screenshot::class, Screenshot.serializer())
             }
         }
     }
 
+    protected fun HttpRequestBuilder.apiUrl(path: String) {
+        header(HttpHeaders.Authorization, "token $TOKEN")
+        header(HttpHeaders.CacheControl, "no-cache")
+        url {
+            takeFrom(BASE_URL)
+            encodedPath = path
+        }
+    }
+
     companion object {
-        const val BASE_URL = ""
+        // todo move to gradle
+        const val BASE_URL = "https://application-portfolio.herokuapp.com/api/v1/"
+        const val TOKEN = "qwertyasdfghzxcvbn"
     }
 }
