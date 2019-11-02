@@ -7,7 +7,7 @@ plugins {
 
 kotlin {
     val ktorVersion = "1.1.3"
-    val coroutinesVersion = "1.1.1"
+    val coroutinesVersion = "1.3.0"
     val serializationVersion = "0.10.0"
 
     //select iOS target platform depending on the Xcode environment variables
