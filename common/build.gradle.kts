@@ -9,6 +9,7 @@ kotlin {
     val ktorVersion = "1.1.3"
     val coroutinesVersion = "1.3.0"
     val serializationVersion = "0.10.0"
+    val kodeinVersion = "6.1.0"
 
     //select iOS target platform depending on the Xcode environment variables
     val iOSTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
@@ -33,6 +34,8 @@ kotlin {
         implementation("io.ktor:ktor-client-json:$ktorVersion")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion")
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
+        implementation("org.kodein.di:kodein-di-core:$kodeinVersion")
+        implementation("org.kodein.di:kodein-di-erased:$kodeinVersion")
     }
 
     sourceSets["androidMain"].dependencies {
