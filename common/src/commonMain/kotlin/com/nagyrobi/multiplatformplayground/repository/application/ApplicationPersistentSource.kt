@@ -1,0 +1,3 @@
+package com.nagyrobi.multiplatformplayground.repository.application
+
+internal expect class ApplicationPersistentSource : ApplicationLocalSource

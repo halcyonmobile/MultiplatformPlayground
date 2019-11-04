@@ -11,7 +11,7 @@ import kotlin.math.min
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class ApplicationMemorySource() : ApplicationSource {
+internal class ApplicationMemorySource () : ApplicationLocalSource {
 
     private val applicationsById = mutableMapOf<Long, Application>()
     private val applicationWithDetailsById = mutableMapOf<Long, Application>()
