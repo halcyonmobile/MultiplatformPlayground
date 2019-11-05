@@ -1,6 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.repository.category
 
 import com.halcyonmobile.multiplatformplayground.shared.util.getFromCacheFallbackOnRemote
+import kotlinx.coroutines.flow.flowOf
 
 internal class CategoryRepository(
     private val localSource: CategoryLocalSource,
@@ -11,7 +12,7 @@ internal class CategoryRepository(
         getFromCacheFallbackOnRemote(localSourceOp = {
             localSource.getCategories()
         }, remoteSourceOp = {
-            remoteSource.get(0, DEFAULT_PER_PAGE).also { localSource.cacheCategoryList() }
+            flowOf(remoteSource.get(0, DEFAULT_PER_PAGE).also { localSource.cacheCategoryList() })
         })
 
     companion object {

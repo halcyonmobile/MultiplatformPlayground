@@ -6,7 +6,7 @@ import io.ktor.client.request.parameter
 
 class CategoryApi : KtorApi() {
 
-    suspend fun getCategories(page: Int, perPage: Int): Category = client.get {
+    suspend fun getCategories(page: Int, perPage: Int): List<Category> = client.get {
         apiUrl("categories")
         parameter("page", page)
         parameter("perPage", perPage)
