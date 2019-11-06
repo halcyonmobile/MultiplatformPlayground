@@ -1,3 +1,3 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
-internal expect class ApplicationPersistentSource : ApplicationLocalSource
+internal expect class ApplicationPersistentSource: ApplicationLocalSource
