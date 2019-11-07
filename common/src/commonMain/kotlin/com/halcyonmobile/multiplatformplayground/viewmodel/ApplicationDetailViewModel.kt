@@ -4,6 +4,7 @@ import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
+import com.halcyonmobile.multiplatformplayground.shared.observer.observableOf
 import com.halcyonmobile.multiplatformplayground.shared.observer.observe
 import kotlinx.coroutines.launch
 
@@ -16,7 +17,7 @@ class ApplicationDetailViewModel internal constructor(
     val descLines = Observable<Int>()
     //    TODO solve resources
 //    val toggleButtonText = Obsvable<Int>(R.string.desc_show_more)
-    val backdrop = Observable("http://backdrops.io/images/screens/screen6.jpg")
+    val backdrop = observableOf("http://backdrops.io/images/screens/screen6.jpg")
     val isFavourite: Boolean get() = application.value?.favourite ?: false
 
     init {
@@ -27,7 +28,7 @@ class ApplicationDetailViewModel internal constructor(
             }
         }
 
-        launch {
+        coroutineScope.launch {
             // todo handle error, move to use-case
             applicationRepository.getById(applicationId).let {
                 application.value = it
@@ -38,7 +39,7 @@ class ApplicationDetailViewModel internal constructor(
 
     fun setFavourite() {
         val application = application.value ?: return
-        launch {
+        coroutineScope.launch {
             applicationRepository.updateFavourites(application.id, !application.favourite)
         }
     }

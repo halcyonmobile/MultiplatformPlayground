@@ -14,7 +14,7 @@ class HomeViewModel internal constructor(private val categoryRepository: Categor
     val categories = Observable<List<Category>>()
 
     init {
-        launch {
+        coroutineScope.launch {
             // todo move to use case and handle resource success or error
             categoryRepository.get().collect {
                 categories.value = it

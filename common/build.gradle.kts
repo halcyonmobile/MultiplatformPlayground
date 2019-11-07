@@ -59,6 +59,8 @@ kotlin {
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
         implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
         implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+
     }
     // endregion
 }

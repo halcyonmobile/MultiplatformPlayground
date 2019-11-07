@@ -14,7 +14,7 @@ class FavouritesViewModel internal constructor(private val applicationRepository
     val favourites = Observable<List<Application>>()
 
     init {
-        launch {
+        coroutineScope.launch {
             applicationRepository.favouritesStream.collect {
                 favourites.value = it
                 // todo update state

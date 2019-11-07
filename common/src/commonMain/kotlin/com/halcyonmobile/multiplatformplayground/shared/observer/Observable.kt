@@ -7,6 +7,8 @@ expect class Observable<T>() {
     fun removeObserver(observer: Observer<T>)
 }
 
+fun <T> observableOf(value: T) = Observable<T>().also { it.value = value }
+
 fun <T> Observable<T>.observe(doOnChange: (T?) -> Unit) =
     observe(object : Observer<T> {
         override fun onChanged(value: T?) {
