@@ -25,11 +25,20 @@ class ApplicationApi : KtorApi() {
         apiUrl("applications/$id")
     }
 
-    // TODO implement this
-//    suspend fun createApplication(application: Application, screenshotList: List<Screenshot>?): Unit = client.post{
-//        body = MultiPartFormDataContent(formData {
-//            append()
-//        })
-//
-//    }
+    suspend fun createApplication(
+        application: Application,
+        screenshotList: List<Screenshot>?
+    ): Unit = client.post {
+        body = MultiPartFormDataContent(formData {
+            append("name", application.name)
+            append("developer", application.developer)
+            application.description?.let { append("description", it) }
+            application.category?.id?.let { append("category_id", it) }
+            application.rating?.let { append("rating", it) }
+            application.downloads?.let { append("downloads", it) }
+        }
+            // TODO complete this
+
+        )
+    }
 }
