@@ -15,6 +15,12 @@ java {
 }
 
 dependencies {
-//    implementation(project(":common"))
+    //    implementation(project(":common"))
+    implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
+    implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
 
+    implementation("io.ktor:ktor-server-netty:${project.extra["ktorVersion"]}")
+    implementation("io.ktor:ktor-auth:${project.extra["ktorVersion"]}")
+    implementation("io.ktor:ktor-websockets:${project.extra["ktorVersion"]}")
+    implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
 }

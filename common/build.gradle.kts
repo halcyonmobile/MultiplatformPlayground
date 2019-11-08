@@ -19,10 +19,10 @@ android {
 kotlin {
     //select iOS target platform depending on the Xcode environment variables
     val iOSTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-            ::iosArm64
-        else
-            ::iosX64
+            if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
+                ::iosArm64
+            else
+                ::iosX64
 
     iOSTarget("ios") {
         binaries {
@@ -36,19 +36,15 @@ kotlin {
 //    jvm("android")
 
     // region common
-    val ktorVersion = "1.1.3"
-    val coroutinesVersion = "1.3.0"
-    val serializationVersion = "0.10.0"
-    val kodeinVersion = "6.1.0"
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-        implementation("io.ktor:ktor-client-core:$ktorVersion")
-        implementation("io.ktor:ktor-client-json:$ktorVersion")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
-        implementation("org.kodein.di:kodein-di-core:$kodeinVersion")
-        implementation("org.kodein.di:kodein-di-erased:$kodeinVersion")
+        implementation("io.ktor:ktor-client-core:${project.extra["ktorVersion"]}")
+        implementation("io.ktor:ktor-client-json:${project.extra["ktorVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${project.extra["coroutinesVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${project.extra["serializationVersion"]}")
+        implementation("org.kodein.di:kodein-di-core:${project.extra["kodeinVersion"]}")
+        implementation("org.kodein.di:kodein-di-erased:${project.extra["kodeinVersion"]}")
     }
     // endregion
 
@@ -73,8 +69,8 @@ val packForXcode by tasks.creating(Sync::class) {
     /// variables set by Xcode build
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
     val framework = kotlin.targets
-        .getByName<KotlinNativeTarget>("ios")
-        .binaries.getFramework(mode)
+            .getByName<KotlinNativeTarget>("ios")
+            .binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
 
@@ -85,10 +81,10 @@ val packForXcode by tasks.creating(Sync::class) {
     doLast {
         val gradlew = File(targetDir, "gradlew")
         gradlew.writeText(
-            "#!/bin/bash\n"
-                    + "export 'JAVA_HOME=${System.getProperty("java.home")}'\n"
-                    + "cd '${rootProject.rootDir}'\n"
-                    + "./gradlew \$@\n"
+                "#!/bin/bash\n"
+                        + "export 'JAVA_HOME=${System.getProperty("java.home")}'\n"
+                        + "cd '${rootProject.rootDir}'\n"
+                        + "./gradlew \$@\n"
         )
         gradlew.setExecutable(true)
     }
