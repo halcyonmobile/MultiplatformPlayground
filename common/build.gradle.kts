@@ -8,7 +8,7 @@ plugins {
 
 android {
     // todo extract these
-    compileSdkVersion(29)
+    compileSdkVersion(project.extra.get("compileSdk") as Int)
     buildToolsVersion("29.0.1")
     defaultConfig {
         minSdkVersion(19)
