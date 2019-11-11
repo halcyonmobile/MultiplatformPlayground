@@ -33,7 +33,7 @@ kotlin {
     }
 
     android()
-//    jvm("android")
+    jvm("backend")
 
     // region common
 
