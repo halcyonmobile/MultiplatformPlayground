@@ -2,15 +2,18 @@
 buildscript {
 
     extra["kotlinVersion"] = "1.3.50"
+    extra["shadowVersion"] = "2.0.2"
 
     repositories {
         google()
         jcenter()
-        maven("https://dl.bintray.com/kotlin/kotlin-eap")
+        maven("https://kotlin.bintray.com/kotlinx")
+        maven("https://dl.bintray.com/jetbrains/kotlin-native-dependencies")
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.5.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${project.extra["kotlinVersion"]}")
+        classpath("com.github.jengelman.gradle.plugins:shadow:${project.extra["shadowVersion"]}")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -18,6 +21,8 @@ buildscript {
 
 allprojects {
     project.extra.apply {
+        // TODO extract kotlinVersion and shadowVersion
+        set("shadowVersion", "2.0.2")
         set("kotlinVersion", "1.3.50")
         set("compileSdk", 28)
         set("minSdk", 21)
@@ -32,7 +37,8 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven("https://dl.bintray.com/kotlin/kotlin-eap")
+        maven("https://kotlin.bintray.com/kotlinx")
+        maven("https://dl.bintray.com/kotlin/ktor")
     }
 }
 

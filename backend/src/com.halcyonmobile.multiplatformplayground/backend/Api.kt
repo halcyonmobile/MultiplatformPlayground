@@ -1,4 +1,4 @@
-package com.halcyonmobile.multiplatformplayground.api
+package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.storage.Database
 import io.ktor.application.call

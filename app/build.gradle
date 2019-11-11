@@ -26,6 +26,8 @@ android {
 
 dependencies {
     def lifecycleVersion = "2.2.0-alpha05"
+    implementation project(":common")
+
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"

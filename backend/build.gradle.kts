@@ -1,9 +1,11 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization") version "1.3.50"
+    id("com.github.johnrengelman.shadow")
     application
 }
 
@@ -13,7 +15,6 @@ application {
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
@@ -34,6 +35,14 @@ sourceSets.main {
     resources.srcDirs("resources")
     withConvention(KotlinSourceSet::class) {
         kotlin.srcDirs("src")
+    }
+}
+tasks {
+    @Suppress("CAST_NEVER_SUCCEEDS")
+    named<ShadowJar>("shadowJar") {
+        archiveBaseName.set("backend")
+        archiveClassifier.set(null as? String)
+        archiveVersion.set(null as? String)
     }
 }
 
