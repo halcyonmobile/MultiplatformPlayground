@@ -1,12 +1,13 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin("multiplatform")
+    kotlin("jvm")
     kotlin("plugin.serialization") version "1.3.50"
     application
 }
 
 application {
-    // TODO add main class name
-    mainClassName = ""
+    mainClassName = "com.h`alcyonmobile.multiplatformplayground.ServerKt"
 }
 
 java {
@@ -23,4 +24,10 @@ dependencies {
     implementation("io.ktor:ktor-auth:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-websockets:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
+}
+
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions.apply {
+    apiVersion ="1.3"
+    languageVersion = "1.3"
 }
