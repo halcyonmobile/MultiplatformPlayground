@@ -18,6 +18,7 @@ buildscript {
 
 allprojects {
     project.extra.apply {
+        set("kotlinVersion", "1.3.50")
         set("compileSdk", 28)
         set("minSdk", 21)
         set("targetSdk", 27)

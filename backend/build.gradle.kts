@@ -16,10 +16,12 @@ java {
 }
 
 dependencies {
-    //    implementation(project(":common"))
+    implementation(project(":common"))
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
 
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.extra["kotlinVersion"]}")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:${project.extra["kotlinVersion"]}")
     implementation("io.ktor:ktor-server-netty:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-auth:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-websockets:${project.extra["ktorVersion"]}")
@@ -28,6 +30,6 @@ dependencies {
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.apply {
-    apiVersion ="1.3"
+    apiVersion = "1.3"
     languageVersion = "1.3"
 }
