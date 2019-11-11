@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -26,6 +27,14 @@ dependencies {
     implementation("io.ktor:ktor-auth:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-websockets:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
+}
+
+sourceSets.main {
+    java.srcDirs("src")
+    resources.srcDirs("resources")
+    withConvention(KotlinSourceSet::class) {
+        kotlin.srcDirs("src")
+    }
 }
 
 val compileKotlin: KotlinCompile by tasks
