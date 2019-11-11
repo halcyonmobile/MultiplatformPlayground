@@ -8,7 +8,7 @@ plugins {
 }
 
 application {
-    mainClassName = "com.h`alcyonmobile.multiplatformplayground.ServerKt"
+    mainClassName = "com.halcyonmobile.multiplatformplayground.ServerKt"
 }
 
 java {
