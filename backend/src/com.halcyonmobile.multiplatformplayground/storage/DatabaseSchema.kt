@@ -3,11 +3,11 @@ package com.halcyonmobile.multiplatformplayground.storage
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
-import org.jetbrains.squash.definition.*
-import org.jetbrains.squash.results.ResultRow
-import org.jetbrains.squash.results.get
+import org.jetbrains.exposed.sql.ReferenceOption
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.Table
 
-internal object ApplicationTable : TableDefinition() {
+internal object ApplicationTable : Table("applications") {
     val id = long("id").autoIncrement().primaryKey()
     val name = varchar("name", 50)
     val developer = varchar("developer", 50)
@@ -20,48 +20,51 @@ internal object ApplicationTable : TableDefinition() {
     val version = varchar("version", 50).nullable()
     val size = varchar("size", 50).nullable()
     val favourite = bool("favourite").default(false)
-    val categoryId = reference(CategoryTable.id, "category_id").nullable()
+    val categoryId =
+        long("category_id").references(CategoryTable.id, onDelete = ReferenceOption.SET_NULL)
+            .nullable()
 }
 
-internal object CategoryTable : TableDefinition() {
+internal object CategoryTable : Table("categories") {
     val id = long("id").autoIncrement().primaryKey()
     val name = varchar("name", 50)
-    val icon = varchar("icon", 255).nullable()
+    val icon = varchar("icon", 255)
 }
 
-internal object ScreenshotTable : TableDefinition() {
+internal object ScreenshotTable : Table("screenshots") {
     val id = long("id").autoIncrement().primaryKey()
     val name = varchar("name", 50).nullable()
     val image = varchar("image", 255)
-    val applicationId = reference(ApplicationTable.id, "application_id")
+    val applicationId =
+        long("application_id").references(ApplicationTable.id, onDelete = ReferenceOption.CASCADE)
 }
 
 fun ResultRow.mapRowToApplication(category: Category? = null, screenshots: List<Screenshot>) =
     Application(
-        id = get("id"),
-        name = get("name"),
-        developer = get("developer"),
-        icon = get("icon"),
-        rating = get("rating"),
-        ratingCount = get("ratingCount"),
-        storeUrl = get("storeUrl"),
-        description = get("description"),
-        downloads = get("downloads"),
-        version = get("version"),
-        size = get("size"),
-        favourite = get("favourite"),
+        id = get(ApplicationTable.id),
+        name = get(ApplicationTable.name),
+        developer = get(ApplicationTable.developer),
+        icon = get(ApplicationTable.icon),
+        rating = get(ApplicationTable.rating)?.toFloat(),
+        ratingCount = get(ApplicationTable.ratingCount),
+        storeUrl = get(ApplicationTable.storeUrl),
+        description = get(ApplicationTable.description),
+        downloads = get(ApplicationTable.downloads),
+        version = get(ApplicationTable.version),
+        size = get(ApplicationTable.size),
+        favourite = get(ApplicationTable.favourite),
         category = category,
         screenshots = screenshots
     )
 
 fun ResultRow.mapRowToCategory() = Category(
-    id = get("id"),
-    name = get("name"),
-    icon = get("name")
+    id = get(CategoryTable.id),
+    name = get(CategoryTable.name),
+    icon = get(CategoryTable.icon)
 )
 
 fun ResultRow.mapRowToScreenshot() = Screenshot(
-    id = get("id"),
-    name = get("name"),
-    image = get("image")
+    id = get(ScreenshotTable.id),
+    name = get(ScreenshotTable.name),
+    image = get(ScreenshotTable.image)
 )

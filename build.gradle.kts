@@ -39,7 +39,7 @@ allprojects {
         jcenter()
         maven("https://kotlin.bintray.com/kotlinx")
         maven("https://dl.bintray.com/kotlin/ktor")
-        maven("https://dl.bintray.com/kotlin/squash")
+        maven("https://dl.bintray.com/kotlin/exposed")
     }
 }
 

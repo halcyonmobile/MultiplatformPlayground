@@ -1,7 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.storage.Database
+import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
@@ -13,22 +13,22 @@ import io.ktor.routing.put
 import java.lang.Exception
 
 // todo general error handling
-internal fun Routing.api(database: Database) {
-    apiApplications(database)
-    apiCreateApplication(database)
-    apiUpdateApplication(database)
-    apiGetApplication(database)
-    apiFilterApplications(database)
-    apiGetCategories(database)
-    apiPostScreenshot(database)
+internal fun Routing.api(localSource: LocalSource) {
+    apiApplications(localSource)
+    apiCreateApplication(localSource)
+    apiUpdateApplication(localSource)
+    apiGetApplication(localSource)
+    apiFilterApplications(localSource)
+    apiGetCategories(localSource)
+    apiPostScreenshot(localSource)
 }
 
 /**
  * GET /api/v1/applications
  */
-private fun Routing.apiApplications(database: Database) {
+private fun Routing.apiApplications(localSource: LocalSource) {
     get("/applications") {
-        database.getApplications().let {
+        localSource.getApplications().let {
             call.respond(it)
         }
     }
@@ -37,11 +37,11 @@ private fun Routing.apiApplications(database: Database) {
 /**
  *  POST /api/v1/applications
  */
-private fun Routing.apiCreateApplication(database: Database) {
+private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
         call.receive<Application>().let {
             try {
-                database.createApplication(it)
+                localSource.createApplication(it)
                 call.respond(HttpStatusCode.Created)
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.Conflict)
@@ -53,11 +53,11 @@ private fun Routing.apiCreateApplication(database: Database) {
 /**
  * PUT /api/v1/applications
  */
-private fun Routing.apiUpdateApplication(database: Database) {
+private fun Routing.apiUpdateApplication(localSource: LocalSource) {
     put("/applications") {
         call.receive<Application>().let {
             try {
-                database.updateApplication(it)
+                localSource.updateApplication(it)
                 call.respond(HttpStatusCode.OK)
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.Conflict)
@@ -69,10 +69,10 @@ private fun Routing.apiUpdateApplication(database: Database) {
 /**
  * GET /api/v1/applications/:id
  */
-private fun Routing.apiGetApplication(database: Database) {
+private fun Routing.apiGetApplication(localSource: LocalSource) {
     get("/applications/{id}") {
         val id = call.parameters["id"].toString().toLong()
-        database.getApplication(id).let {
+        localSource.getApplication(id).let {
             call.respond(it)
         }
         // return application
@@ -82,12 +82,12 @@ private fun Routing.apiGetApplication(database: Database) {
 /**
  * GET /api/v1/applications/filter
  */
-private fun Routing.apiFilterApplications(database: Database) {
+private fun Routing.apiFilterApplications(localSource: LocalSource) {
     get("/applications/filter") {
         val name = call.request.queryParameters[NAME_QUERY_KEY].toString()
         val categoryId = call.request.queryParameters[CATEGORY_QUERY_KEY]!!.toLong()
 
-        database.getApplications(name, categoryId).let {
+        localSource.getApplications(name, categoryId).let {
             call.respond(it)
         }
     }
@@ -96,9 +96,9 @@ private fun Routing.apiFilterApplications(database: Database) {
 /**
  * GET /api/v1/categories
  */
-private fun Routing.apiGetCategories(database: Database) {
+private fun Routing.apiGetCategories(localSource: LocalSource) {
     get("/categories") {
-        database.getCategories().let {
+        localSource.getCategories().let {
             call.respond(it)
         }
     }
@@ -107,7 +107,7 @@ private fun Routing.apiGetCategories(database: Database) {
 /**
  * POST /api/v1/screenshots
  */
-private fun Routing.apiPostScreenshot(database: Database) {
+private fun Routing.apiPostScreenshot(localSource: LocalSource) {
     post("/screenshots") {
         // todo handle file
     }

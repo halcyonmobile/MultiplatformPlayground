@@ -5,7 +5,7 @@ import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
 
 // todo add paging
-internal interface Database {
+internal interface LocalSource {
 
     suspend fun getApplications(): List<Application>
 

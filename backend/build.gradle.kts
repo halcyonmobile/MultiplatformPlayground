@@ -18,8 +18,6 @@ java {
 }
 
 dependencies {
-    val squashVersion = "0.2.4"
-
     implementation(project(":common"))
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
@@ -31,8 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-websockets:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
 
-    implementation("org.jetbrains.squash:squash:$squashVersion")
-    implementation("org.jetbrains.squash:squash-h2:$squashVersion")
+    implementation("org.jetbrains.exposed:exposed:0.17.7")
     implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
 
 }
