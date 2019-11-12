@@ -36,12 +36,14 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
     }
 
     override suspend fun getApplications(): List<Application> = withContext(dispatcher) {
-        val applicationsWithCategories = transaction {
+        transaction {
             ApplicationTable.leftJoin(CategoryTable)
                 .selectAll()
+                .map {
+                    // todo implement screenshots
+                    it.mapRowToApplication(it.mapRowToCategory(), emptyList())
+                }
         }
-        // todo check out the join result
-        emptyList<Application>()
     }
 
     override suspend fun createApplication(application: Application) {
@@ -92,23 +94,21 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
 
     override suspend fun getApplication(id: Long): Application = withContext(dispatcher) {
         transaction {
-            // todo checkout join
+            // todo implement screenshots
             ApplicationTable.leftJoin(CategoryTable)
                 .select { ApplicationTable.id eq id }
-
-            val category = CategoryTable.selectAll().first().mapRowToCategory()
-
-            ApplicationTable.selectAll().first().mapRowToApplication(category, emptyList())
+                .single().let {
+                    it.mapRowToApplication(it.mapRowToCategory(), emptyList())
+                }
         }
     }
 
     override suspend fun getApplications(name: String, categoryId: Long): List<Application> =
         withContext(dispatcher) {
             transaction {
-                //todo complete this
+                //todo add screenshots
                 ApplicationTable.select { (ApplicationTable.name eq name) and (ApplicationTable.categoryId eq categoryId) }
-//                    .map { it.mapRowToApplication() }.toList()
-                emptyList<Application>()
+                    .map { it.mapRowToApplication(it.mapRowToCategory(), emptyList()) }
             }
         }
 
