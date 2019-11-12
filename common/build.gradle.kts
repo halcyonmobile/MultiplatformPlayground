@@ -38,7 +38,7 @@ kotlin {
     // region common
 
     sourceSets["commonMain"].dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib")
         implementation("io.ktor:ktor-client-core:${project.extra["ktorVersion"]}")
         implementation("io.ktor:ktor-client-json:${project.extra["ktorVersion"]}")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${project.extra["coroutinesVersion"]}")
