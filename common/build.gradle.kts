@@ -19,10 +19,10 @@ android {
 kotlin {
     //select iOS target platform depending on the Xcode environment variables
     val iOSTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-            if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-                ::iosArm64
-            else
-                ::iosX64
+        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
+            ::iosArm64
+        else
+            ::iosX64
 
     iOSTarget("ios") {
         binaries {
@@ -33,16 +33,18 @@ kotlin {
     }
 
     android()
-    jvm("backend")
+    jvm()
 
     // region common
-
     sourceSets["commonMain"].dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib")
+        // Ktor-client for network requests
         implementation("io.ktor:ktor-client-core:${project.extra["ktorVersion"]}")
         implementation("io.ktor:ktor-client-json:${project.extra["ktorVersion"]}")
+
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${project.extra["coroutinesVersion"]}")
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${project.extra["serializationVersion"]}")
+        // DI
         implementation("org.kodein.di:kodein-di-core:${project.extra["kodeinVersion"]}")
         implementation("org.kodein.di:kodein-di-erased:${project.extra["kodeinVersion"]}")
     }
@@ -59,6 +61,7 @@ kotlin {
 
     }
     // endregion
+
 }
 
 val packForXcode by tasks.creating(Sync::class) {
@@ -69,8 +72,8 @@ val packForXcode by tasks.creating(Sync::class) {
     /// variables set by Xcode build
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
     val framework = kotlin.targets
-            .getByName<KotlinNativeTarget>("ios")
-            .binaries.getFramework(mode)
+        .getByName<KotlinNativeTarget>("ios")
+        .binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
 
@@ -81,10 +84,10 @@ val packForXcode by tasks.creating(Sync::class) {
     doLast {
         val gradlew = File(targetDir, "gradlew")
         gradlew.writeText(
-                "#!/bin/bash\n"
-                        + "export 'JAVA_HOME=${System.getProperty("java.home")}'\n"
-                        + "cd '${rootProject.rootDir}'\n"
-                        + "./gradlew \$@\n"
+            "#!/bin/bash\n"
+                    + "export 'JAVA_HOME=${System.getProperty("java.home")}'\n"
+                    + "cd '${rootProject.rootDir}'\n"
+                    + "./gradlew \$@\n"
         )
         gradlew.setExecutable(true)
     }

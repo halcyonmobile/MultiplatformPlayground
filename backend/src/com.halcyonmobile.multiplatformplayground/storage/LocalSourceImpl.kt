@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
+import com.halcyonmobile.multiplatformplayground.NotFound
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
@@ -97,9 +98,9 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
             // todo implement screenshots
             ApplicationTable.leftJoin(CategoryTable)
                 .select { ApplicationTable.id eq id }
-                .single().let {
+                .singleOrNull()?.let {
                     it.mapRowToApplication(it.mapRowToCategory(), emptyList())
-                }
+                } ?: throw NotFound()
         }
     }
 
