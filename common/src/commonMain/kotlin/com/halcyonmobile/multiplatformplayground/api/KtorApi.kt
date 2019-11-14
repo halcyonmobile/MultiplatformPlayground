@@ -8,21 +8,25 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
-import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
-import io.ktor.http.contentType
 import io.ktor.http.takeFrom
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 
 abstract class KtorApi {
     protected val client = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer(Json.nonstrict).apply {
-                setMapper(Application::class, Application.serializer())
-                setMapper(Category::class, Category.serializer())
-                setMapper(Screenshot::class, Screenshot.serializer())
+                registerMapper(Application.serializer())
+                registerMapper(Category.serializer())
+                registerMapper(Screenshot.serializer())
             }
         }
+    }
+
+    private inline fun <reified T : Any> KotlinxSerializer.registerMapper(mapper: KSerializer<T>) {
+        register(mapper)
+        registerList(mapper)
     }
 
     protected fun HttpRequestBuilder.apiUrl(path: String) {
