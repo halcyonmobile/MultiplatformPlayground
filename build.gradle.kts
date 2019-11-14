@@ -29,7 +29,7 @@ allprojects {
         set("targetSdk", 27)
         set("version", 1)
         set("versionName", "1.0.0")
-        set("ktorVersion", "1.1.3")
+        set("ktorVersion", "1.2.5")
         set("coroutinesVersion", "1.3.0")
         set("serializationVersion", "0.10.0")
         set("kodeinVersion", "6.1.0")

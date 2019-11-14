@@ -16,7 +16,7 @@ android {
     }
 
     packagingOptions {
-        pickFirst("META-INF/ktor-http.kotlin_module")
+        pickFirst("META-INF/ktor-client-serialization.kotlin_module")
         pickFirst("META-INF/kotlinx-coroutines-io.kotlin_module")
     }
 }
@@ -47,6 +47,8 @@ kotlin {
                 // Ktor-client for network requests
                 implementation("io.ktor:ktor-client-core:${project.extra["ktorVersion"]}")
                 implementation("io.ktor:ktor-client-json:${project.extra["ktorVersion"]}")
+                implementation("io.ktor:ktor-client-serialization:${project.extra["ktorVersion"]}")
+
 
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${project.extra["coroutinesVersion"]}")
@@ -70,7 +72,7 @@ kotlin {
             implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
             // Ktor-client for network requests
-            implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
+            implementation("io.ktor:ktor-client-serialization-jvm:${project.extra["ktorVersion"]}")
             // Serialization
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
         }
@@ -81,8 +83,9 @@ kotlin {
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${project.extra["coroutinesVersion"]}")
 
         implementation("io.ktor:ktor-server-netty:${project.extra["ktorVersion"]}")
-        implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
+        implementation("io.ktor:ktor-client-serialization-jvm:${project.extra["ktorVersion"]}")
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+
 
         implementation("io.ktor:ktor-client-core-jvm:${project.extra["ktorVersion"]}")
     }

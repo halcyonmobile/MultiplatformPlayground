@@ -21,6 +21,7 @@ dependencies {
     implementation(project(":common"))
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
+    implementation("io.ktor:ktor-serialization:${project.extra["ktorVersion"]}")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.extra["kotlinVersion"]}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${project.extra["kotlinVersion"]}")

@@ -8,10 +8,10 @@ import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
-import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.Routing
+import io.ktor.serialization.serialization
 import io.ktor.util.error
 
 internal fun Application.main() {
@@ -30,7 +30,7 @@ internal fun Application.main() {
     }
 
     install(ContentNegotiation) {
-        register(ContentType.Application.Json, KotlinxConverter())
+        serialization()
     }
 
     // todo use DI
