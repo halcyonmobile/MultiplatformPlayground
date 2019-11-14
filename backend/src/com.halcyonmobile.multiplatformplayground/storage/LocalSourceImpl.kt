@@ -33,7 +33,9 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
 
         Database.connect(HikariDataSource(hikariConfig))
 
-//        create(listOf(ApplicationTable, CategoryTable, ScreenshotTable))
+        transaction {
+            SchemaUtils.create(ApplicationTable, CategoryTable, ScreenshotTable)
+        }
     }
 
     override suspend fun getApplications(): List<Application> = withContext(dispatcher) {

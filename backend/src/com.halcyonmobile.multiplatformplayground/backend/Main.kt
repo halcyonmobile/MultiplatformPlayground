@@ -29,13 +29,13 @@ internal fun Application.main() {
         }
     }
 
-    install(ContentNegotiation){
+    install(ContentNegotiation) {
         register(ContentType.Application.Json, KotlinxConverter())
     }
 
     // todo use DI
     val localSource: LocalSource = LocalSourceImpl(this)
-    install(Routing){
+    install(Routing) {
         api(localSource)
     }
 }

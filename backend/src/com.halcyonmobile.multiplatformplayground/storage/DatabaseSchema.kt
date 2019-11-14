@@ -12,7 +12,7 @@ internal object ApplicationTable : Table("applications") {
     val name = varchar("name", 50)
     val developer = varchar("developer", 50)
     val icon = varchar("icon", 255).nullable()
-    val rating = decimal("rating", 1, 3).nullable()
+    val rating = decimal("rating", 3, 1).nullable()
     val ratingCount = integer("ratingCount").nullable()
     val storeUrl = varchar("storeUrl", 255).nullable()
     val description = varchar("description", 255).nullable()
