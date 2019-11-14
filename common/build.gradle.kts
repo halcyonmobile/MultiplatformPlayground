@@ -14,6 +14,11 @@ android {
         minSdkVersion(19)
         targetSdkVersion(29)
     }
+
+    packagingOptions {
+        pickFirst("META-INF/ktor-http.kotlin_module")
+        pickFirst("META-INF/kotlinx-coroutines-io.kotlin_module")
+    }
 }
 
 kotlin {
@@ -33,34 +38,54 @@ kotlin {
     }
 
     android()
-    jvm()
+    jvm("backend")
 
     // region common
-    sourceSets["commonMain"].dependencies {
-        // Ktor-client for network requests
-        implementation("io.ktor:ktor-client-core:${project.extra["ktorVersion"]}")
-        implementation("io.ktor:ktor-client-json:${project.extra["ktorVersion"]}")
+    sourceSets {
+        commonMain {
+            dependencies {
+                // Ktor-client for network requests
+                implementation("io.ktor:ktor-client-core:${project.extra["ktorVersion"]}")
+                implementation("io.ktor:ktor-client-json:${project.extra["ktorVersion"]}")
 
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${project.extra["coroutinesVersion"]}")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${project.extra["serializationVersion"]}")
-        // DI
-        implementation("org.kodein.di:kodein-di-core:${project.extra["kodeinVersion"]}")
-        implementation("org.kodein.di:kodein-di-erased:${project.extra["kodeinVersion"]}")
+                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${project.extra["coroutinesVersion"]}")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${project.extra["serializationVersion"]}")
+                // DI
+                implementation("org.kodein.di:kodein-di-core:${project.extra["kodeinVersion"]}")
+                implementation("org.kodein.di:kodein-di-erased:${project.extra["kodeinVersion"]}")
+            }
+        }
     }
     // endregion
 
     // region android
     val lifecycleVersion = "2.2.0-alpha05"
 
-    sourceSets["androidMain"].dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib")
-        implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
-        implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
-        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    android.sourceSets.forEach { _ ->
+        dependencies {
+            implementation("org.jetbrains.kotlin:kotlin-stdlib")
+            implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
+            implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+            implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
+            // Ktor-client for network requests
+            implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
+            // Serialization
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+        }
     }
     // endregion
+    sourceSets["backendMain"].dependencies {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:${project.extra["kotlinVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${project.extra["coroutinesVersion"]}")
+
+        implementation("io.ktor:ktor-server-netty:${project.extra["ktorVersion"]}")
+        implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+
+        implementation("io.ktor:ktor-client-core-jvm:${project.extra["ktorVersion"]}")
+    }
 
 }
 

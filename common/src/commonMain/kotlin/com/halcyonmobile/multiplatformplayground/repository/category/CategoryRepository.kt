@@ -12,7 +12,7 @@ internal class CategoryRepository(
         getFromCacheFallbackOnRemote(localSourceOp = {
             localSource.getCategories()
         }, remoteSourceOp = {
-            flowOf(remoteSource.get(0, DEFAULT_PER_PAGE).also { localSource.cacheCategoryList() })
+            flowOf(remoteSource.get(0, DEFAULT_PER_PAGE).also { localSource.cacheCategoryList(it) })
         })
 
     companion object {

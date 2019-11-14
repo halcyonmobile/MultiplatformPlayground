@@ -6,6 +6,7 @@ import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
 import com.halcyonmobile.multiplatformplayground.shared.observer.observableOf
 import com.halcyonmobile.multiplatformplayground.shared.observer.observe
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ApplicationDetailViewModel internal constructor(
@@ -32,7 +33,9 @@ class ApplicationDetailViewModel internal constructor(
             // todo handle error, move to use-case
             applicationRepository.getById(applicationId).let {
                 application.value = it
-                application.value = applicationRepository.getDetailById(it.id)
+                applicationRepository.getDetailById(it.id).collect { applicationWithDetail ->
+                    application.value = applicationWithDetail
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
 import com.halcyonmobile.multiplatformplayground.shared.util.getFromCacheFallbackOnRemote
+import kotlinx.coroutines.flow.flowOf
 
 internal class ApplicationRepository(
     private val localSource: ApplicationLocalSource,
@@ -17,7 +18,7 @@ internal class ApplicationRepository(
     suspend fun getDetailById(id: Long) = getFromCacheFallbackOnRemote(localSourceOp = {
         localSource.getDetailById(id)
     }, remoteSourceOp = {
-        getApplicationWithDetailFromRemoteAndCacheToMemory(id)
+        flowOf(getApplicationWithDetailFromRemoteAndCacheToMemory(id))
     })
 
     suspend fun getByCategory(id: Long) = getFromCacheFallbackOnRemote(
