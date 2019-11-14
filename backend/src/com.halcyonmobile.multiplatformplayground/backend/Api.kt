@@ -1,10 +1,14 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.PartData
+import io.ktor.http.content.forEachPart
 import io.ktor.request.receive
+import io.ktor.request.receiveMultipart
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
@@ -13,14 +17,14 @@ import io.ktor.routing.put
 import java.lang.Exception
 
 // todo general error handling
-internal fun Routing.api(localSource: LocalSource) {
+internal fun Routing.api(localSource: LocalSource, uploadDir: String) {
     apiApplications(localSource)
     apiCreateApplication(localSource)
     apiUpdateApplication(localSource)
     apiGetApplication(localSource)
     apiFilterApplications(localSource)
     apiGetCategories(localSource)
-    apiPostScreenshot(localSource)
+    apiPostScreenshot(localSource, uploadDir)
 }
 
 /**
@@ -37,6 +41,7 @@ private fun Routing.apiApplications(localSource: LocalSource) {
 /**
  *  POST /api/v1/applications
  */
+// todo handle file
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
         call.receive<Application>().let {
@@ -107,9 +112,23 @@ private fun Routing.apiGetCategories(localSource: LocalSource) {
 /**
  * POST /api/v1/screenshots
  */
-private fun Routing.apiPostScreenshot(localSource: LocalSource) {
+private fun Routing.apiPostScreenshot(localSource: LocalSource, uploadDir: String) {
     post("/screenshots") {
-        // todo handle file
+        call.receiveMultipart().forEachPart { part ->
+            var name = "img-${System.currentTimeMillis()}"
+            when (part) {
+                is PartData.FormItem -> {
+                    if (part.name == "name") {
+                        name = part.value + name
+                    }
+                }
+                is PartData.FileItem -> {
+                    // todo handle file
+                }
+            }
+            localSource.createScreenshot(Screenshot(name = name, image = ""))
+            part.dispose()
+        }
     }
 }
 
