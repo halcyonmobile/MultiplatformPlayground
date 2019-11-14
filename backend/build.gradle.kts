@@ -10,7 +10,7 @@ plugins {
 }
 
 application {
-    mainClassName = "com.halcyonmobile.multiplatformplayground.ServerKt"
+    mainClassName = "com.halcyonmobile.multiplatformplayground.backend.ServerKt"
 }
 
 java {

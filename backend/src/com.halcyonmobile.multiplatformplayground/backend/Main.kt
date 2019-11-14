@@ -17,20 +17,11 @@ import io.ktor.util.error
 internal fun Application.main() {
 
     install(StatusPages) {
-        exception<ServiceUnavailable> {
-            call.respond(HttpStatusCode.ServiceUnavailable)
-        }
-        exception<BadRequest> {
-            call.respond(HttpStatusCode.BadRequest)
-        }
         exception<Unauthorized> {
             call.respond(HttpStatusCode.Unauthorized)
         }
         exception<NotFound> {
             call.respond(HttpStatusCode.NotFound)
-        }
-        exception<SecretInvalidError> {
-            call.respond(HttpStatusCode.Forbidden)
         }
         exception<Throwable> { cause ->
             environment.log.error(cause)
