@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.shared.util.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -48,7 +49,7 @@ private fun Routing.apiCreateApplication(localSource: LocalSource) {
         val parts = call.receiveMultipart().readAllParts()
         val application = parts.filterIsInstance<PartData.FormItem>().createAppFromPartMap()
         // todo handle icon
-        val icon = (parts.firstOrNull { it.name == "icon" } as? PartData.FileItem)
+        val icon = (parts.firstOrNull { it.name == APP_ICON } as? PartData.FileItem)
         // todo handle screenshot ids
 //        val screenshotIds = parts.firstOrNull { it.name == "screenshot_ids[]" } as? PartData.FormItem)
 
@@ -126,7 +127,7 @@ private fun Routing.apiPostScreenshot(localSource: LocalSource, uploadDir: Strin
             var name = "img-${System.currentTimeMillis()}"
             when (part) {
                 is PartData.FormItem -> {
-                    if (part.name == "name") {
+                    if (part.name == SCREENSHOT_NAME) {
                         name = part.value + name
                     }
                 }
@@ -142,12 +143,12 @@ private fun Routing.apiPostScreenshot(localSource: LocalSource, uploadDir: Strin
 
 // TODO maybe move out these as constants to the common, so that if backend changes a key, then it will change on the mobile side too
 private fun List<PartData.FormItem>.createAppFromPartMap(): Application {
-    val name = first { it.name == "name" }.value
-    val developer = first { it.name == "developer" }.value
-    val description = firstOrNull { it.name == "description" }?.value
-    val categoryId = firstOrNull { it.name == "category_id" }
-    val rating = firstOrNull { it.name == "rating" }?.value?.toFloat()
-    val downloads = firstOrNull { it.name == "downloads" }?.value
+    val name = first { it.name == APP_NAME }.value
+    val developer = first { it.name == APP_DEVELOPER }.value
+    val description = firstOrNull { it.name == APP_DESCRIPTION }?.value
+    val categoryId = firstOrNull { it.name == APP_CATEGORY_ID }
+    val rating = firstOrNull { it.name == APP_RATING }?.value?.toFloat()
+    val downloads = firstOrNull { it.name == APP_DOWNLOADS }?.value
 
     // todo solve categoryId
     return Application(

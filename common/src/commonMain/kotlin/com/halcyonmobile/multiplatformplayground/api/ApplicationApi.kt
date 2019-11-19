@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground.api
 
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.shared.util.*
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.get
@@ -16,9 +17,9 @@ class ApplicationApi : KtorApi() {
         categoryId: Long
     ): List<Application> = client.get {
         apiUrl("applications/filter")
-        parameter("page", page)
-        parameter("perPage", perPage)
-        parameter("categoryId", categoryId)
+        parameter(PAGE, page)
+        parameter(PER_PAGE, perPage)
+        parameter(APP_CATEGORY_ID, categoryId)
     }
 
     suspend fun getApplicationDetails(id: Long): Application = client.get {
@@ -30,12 +31,12 @@ class ApplicationApi : KtorApi() {
         screenshotList: List<Screenshot>?
     ): Unit = client.post {
         body = MultiPartFormDataContent(formData {
-            append("name", application.name)
-            append("developer", application.developer)
-            application.description?.let { append("description", it) }
-            application.category?.id?.let { append("category_id", it) }
-            application.rating?.let { append("rating", it) }
-            application.downloads?.let { append("downloads", it) }
+            append(APP_NAME, application.name)
+            append(APP_DEVELOPER, application.developer)
+            application.description?.let { append(APP_DESCRIPTION, it) }
+            application.category?.id?.let { append(APP_CATEGORY_ID, it) }
+            application.rating?.let { append(APP_RATING, it) }
+            application.downloads?.let { append(APP_DOWNLOADS, it) }
         }
             // TODO complete this
 
