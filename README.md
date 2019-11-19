@@ -1,6 +1,6 @@
 # Todos without any blocker
 * Finish the client-side networking in ktor
-   - File support in multiplatform should be added.   [Okio](https://github.com/square/okio) can be a solution
+    - File support in multiplatform should be added.   [Okio](https://github.com/square/okio) can be a solution
 * Finish backend Api's
     - Upload files to some File sharing api
     - Handle files and `partMap`s
