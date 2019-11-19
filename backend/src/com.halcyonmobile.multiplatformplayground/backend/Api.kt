@@ -7,6 +7,7 @@ import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.PartData
 import io.ktor.http.content.forEachPart
+import io.ktor.http.content.readAllParts
 import io.ktor.request.receive
 import io.ktor.request.receiveMultipart
 import io.ktor.response.respond
@@ -44,16 +45,23 @@ private fun Routing.apiApplications(localSource: LocalSource) {
 // todo handle file
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
-        call.receive<Application>().let {
-            try {
-                localSource.createApplication(it)
-                call.respond(HttpStatusCode.Created)
-            } catch (e: Exception) {
-                call.respond(HttpStatusCode.Conflict)
-            }
+        val parts = call.receiveMultipart().readAllParts()
+        val application = parts.filterIsInstance<PartData.FormItem>().createAppFromPartMap()
+        // todo handle icon
+        val icon = (parts.firstOrNull { it.name == "icon" } as? PartData.FileItem)
+        // todo handle screenshot ids
+//        val screenshotIds = parts.firstOrNull { it.name == "screenshot_ids[]" } as? PartData.FormItem)
+
+        try {
+//                val screenshots = localSource.getScreenshots(screenshotIds)
+            localSource.createApplication(application.copy())
+            call.respond(HttpStatusCode.Created)
+        } catch (e: Exception) {
+            call.respond(HttpStatusCode.Conflict)
         }
     }
 }
+
 
 /**
  * PUT /api/v1/applications
@@ -130,6 +138,26 @@ private fun Routing.apiPostScreenshot(localSource: LocalSource, uploadDir: Strin
             part.dispose()
         }
     }
+}
+
+// TODO maybe move out these as constants to the common, so that if backend changes a key, then it will change on the mobile side too
+private fun List<PartData.FormItem>.createAppFromPartMap(): Application {
+    val name = first { it.name == "name" }.value
+    val developer = first { it.name == "developer" }.value
+    val description = firstOrNull { it.name == "description" }?.value
+    val categoryId = firstOrNull { it.name == "category_id" }
+    val rating = firstOrNull { it.name == "rating" }?.value?.toFloat()
+    val downloads = firstOrNull { it.name == "downloads" }?.value
+
+    // todo solve categoryId
+    return Application(
+        id = 0,
+        name = name,
+        developer = developer,
+        description = description,
+        rating = rating,
+        downloads = downloads
+    )
 }
 
 const val NAME_QUERY_KEY = "name"

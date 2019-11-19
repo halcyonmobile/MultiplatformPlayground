@@ -20,4 +20,6 @@ internal interface LocalSource {
     suspend fun getCategories(): List<Category>
 
     suspend fun createScreenshot(screenshot: Screenshot)
+
+    suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot>
 }
