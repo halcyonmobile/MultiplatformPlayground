@@ -11,6 +11,7 @@ import com.halcyonmobile.multiplatformplayground.repository.category.CategoryLoc
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetFavouritesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.UploadScreenshotUseCase
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
@@ -41,6 +42,7 @@ private val useCaseModule = Kodein.Module("useCaseModule") {
 
     bind<GetCategoriesUseCase>() with provider { GetCategoriesUseCase(instance()) }
     bind<UploadScreenshotUseCase>() with provider { UploadScreenshotUseCase(instance()) }
+    bind<GetFavouritesUseCase>() with provider { GetFavouritesUseCase(instance()) }
 }
 
 val kodein = Kodein {
