@@ -36,6 +36,7 @@ internal fun Application.main() {
     // todo use DI
     val localSource: LocalSource = LocalSourceImpl(this)
     install(Routing) {
-        api(localSource)
+        // todo update uploadDir
+        api(localSource, "")
     }
 }

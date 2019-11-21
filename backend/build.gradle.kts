@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 //import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
@@ -29,6 +30,9 @@ dependencies {
     implementation("io.ktor:ktor-auth:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-websockets:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
+
+    // DI
+    implementation("org.kodein.di:kodein-di-generic-jvm:${project.extra["kodeinVersion"]}")
 
     implementation("org.jetbrains.exposed:exposed:0.17.7")
     implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
