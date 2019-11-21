@@ -8,7 +8,6 @@
     1. **commonClient** - contains the common code for Frontend, like :requests, repositories, usecases, viewmodels
     2. **common** -> mainly contains the models and other dependencies that all the platforms need, backend included
 * Refactor common repository logic and add use-cases according to  [Arch Apportfolio](https://gitlab.com/halcyonmobile/android-technical/architecture-appportfolio)
-* Add DI to backend
 * Add DI to mobile apps
 * Move UI from  [Arch Apportfolio](https://gitlab.com/halcyonmobile/android-technical/architecture-appportfolio) to the android app
 * Make UI for the **iOS** app
