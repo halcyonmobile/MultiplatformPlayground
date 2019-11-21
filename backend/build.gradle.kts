@@ -16,6 +16,7 @@ application {
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
@@ -33,6 +34,7 @@ dependencies {
 
     // DI
     implementation("org.kodein.di:kodein-di-generic-jvm:${project.extra["kodeinVersion"]}")
+    implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:${project.extra["kodeinVersion"]}")
 
     implementation("org.jetbrains.exposed:exposed:0.17.7")
     implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
@@ -59,4 +61,5 @@ val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.apply {
     apiVersion = "1.3"
     languageVersion = "1.3"
+    jvmTarget = "1.8"
 }

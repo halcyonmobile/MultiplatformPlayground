@@ -124,4 +124,11 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
     override suspend fun createScreenshot(screenshot: Screenshot) = withContext(dispatcher) {
         // todo implement this
     }
+
+    override suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot> =
+        withContext(dispatcher) {
+            transaction {
+                ScreenshotTable.selectAll().map { it.mapRowToScreenshot() }.toList()
+            }
+        }
 }

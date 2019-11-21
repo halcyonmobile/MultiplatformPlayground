@@ -1,8 +1,8 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.*
+import com.halcyonmobile.multiplatformplayground.di.installKodeinFeature
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
-import com.halcyonmobile.multiplatformplayground.storage.LocalSourceImpl
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -13,6 +13,8 @@ import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.serialization.serialization
 import io.ktor.util.error
+import org.kodein.di.generic.instance
+import org.kodein.di.ktor.kodein
 
 internal fun Application.main() {
 
@@ -32,9 +34,10 @@ internal fun Application.main() {
     install(ContentNegotiation) {
         serialization()
     }
+    installKodeinFeature()
 
-    // todo use DI
-    val localSource: LocalSource = LocalSourceImpl(this)
+
+    val localSource by kodein().instance<LocalSource>()
     install(Routing) {
         // todo update uploadDir
         api(localSource, "")

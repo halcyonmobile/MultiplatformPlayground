@@ -1,13 +1,11 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
-import com.halcyonmobile.multiplatformplayground.di.getKodeinModule
+import io.ktor.server.engine.commandLineEnvironment
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 
-fun main() {
-    embeddedServer(Netty, port = 8080) {
-        getKodeinModule(this)
-    }.apply {
+fun main(args: Array<String>) {
+    embeddedServer(Netty, commandLineEnvironment(args)).apply {
         start()
     }
 }

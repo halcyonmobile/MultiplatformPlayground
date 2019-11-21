@@ -32,7 +32,7 @@ allprojects {
         set("ktorVersion", "1.2.5")
         set("coroutinesVersion", "1.3.0")
         set("serializationVersion", "0.10.0")
-        set("kodeinVersion", "6.1.0")
+        set("kodeinVersion", "6.4.1")
     }
     repositories {
         google()
