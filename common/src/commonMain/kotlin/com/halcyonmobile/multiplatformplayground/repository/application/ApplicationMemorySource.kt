@@ -56,10 +56,7 @@ internal class ApplicationMemorySource : ApplicationLocalSource {
         applicationsById[application.id] = application
     }
 
-    override suspend fun getByCategory(categoryId: Long, limit: Int): List<Application> =
-        applicationsByCategoryId[categoryId]?.take(limit) ?: throw NoCacheFoundException()
-
-    override suspend fun getMoreByCategory(
+    override suspend fun getByCategory(
         categoryId: Long,
         page: Int,
         limit: Int
@@ -76,24 +73,35 @@ internal class ApplicationMemorySource : ApplicationLocalSource {
             ?: throw NoCacheFoundException()
     }
 
-    override suspend fun replaceByCategory(
+    override suspend fun cacheByCategory(
         categoryId: Long,
+        offset: Int,
         applications: List<Application>
     ): List<Application> {
-        applicationsByCategoryId[categoryId] = applications.toMutableList()
-        applications.forEach { cacheApplicationById(it) }
+
+        // todo implement this
+
         return applications
     }
 
-    override suspend fun addMoreByCategory(
-        categoryId: Long,
-        applications: List<Application>
-    ): List<Application> {
-        applicationsByCategoryId[categoryId] =
-            applicationsByCategoryId[categoryId]?.plus(applications) ?: applications.toList()
-        applications.forEach { cacheApplicationById(it) }
-        return applications
-    }
+//    override suspend fun replaceByCategory(
+//        categoryId: Long,
+//        applications: List<Application>
+//    ): List<Application> {
+//        applicationsByCategoryId[categoryId] = applications.toMutableList()
+//        applications.forEach { cacheApplicationById(it) }
+//        return applications
+//    }
+//
+//    override suspend fun addMoreByCategory(
+//        categoryId: Long,
+//        applications: List<Application>
+//    ): List<Application> {
+//        applicationsByCategoryId[categoryId] =
+//            applicationsByCategoryId[categoryId]?.plus(applications) ?: applications.toList()
+//        applications.forEach { cacheApplicationById(it) }
+//        return applications
+//    }
 
     override suspend fun saveToMemory(application: Application): Application {
         // TODO we should check this because the application is only stored in the applicationsByCategoryId map

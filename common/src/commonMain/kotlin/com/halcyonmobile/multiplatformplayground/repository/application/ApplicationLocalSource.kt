@@ -35,30 +35,17 @@ interface ApplicationLocalSource {
     suspend fun cacheApplicationWithDetail(application: Application): Flow<Application>
 
     /**
-     * Emits a [limit] number of Applications with their most basic fields.
-     * If there is not enough application cached, it will emit [NoCacheFoundException].
-     */
-    suspend fun getByCategory(categoryId: Long, limit: Int): List<Application>
-
-    /**
      * Skips [page] * [limit] from all application lists then emits a [limit] number of Applications with their most basic fields.
      * If there is not enough application cached, it will emit [NoCacheFoundException].
      */
-    suspend fun getMoreByCategory(categoryId: Long, page: Int, limit: Int): List<Application>
+    suspend fun getByCategory(categoryId: Long, page: Int, limit: Int): List<Application>
 
     /**
      * Removes every application associated with [categoryId] then saves the new [applications] list with that [categoryId]
      */
-    suspend fun replaceByCategory(
+    suspend fun cacheByCategory(
         categoryId: Long,
-        applications: List<Application>
-    ): List<Application>
-
-    /**
-     * Saves the [applications] list with the given [categoryId]
-     */
-    suspend fun addMoreByCategory(
-        categoryId: Long,
+        offset: Int,
         applications: List<Application>
     ): List<Application>
 

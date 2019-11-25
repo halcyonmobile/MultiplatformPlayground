@@ -21,23 +21,14 @@ internal class ApplicationRepository(
         flowOf(getApplicationWithDetailFromRemoteAndCacheToMemory(id))
     })
 
-    suspend fun getByCategory(id: Long) = getFromCacheFallbackOnRemote(
-        localSourceOp = { localSource.getByCategory(id, DEFAULT_PER_PAGE) },
-        remoteSourceOp = { this.reloadByCategory(id) })
-
-    suspend fun loadMoreByCategory(categoryId: Long, offset: Int) =
-        getFromCacheFallbackOnRemote(localSourceOp = {
-            localSource.getMoreByCategory(categoryId, offset, DEFAULT_PER_PAGE)
-        }, remoteSourceOp = {
-            remoteSource.get(categoryId, offset, DEFAULT_PER_PAGE).also {
-                localSource.addMoreByCategory(categoryId, it)
-            }
-        })
-
-    suspend fun reloadByCategory(categoryId: Long) =
-        remoteSource.get(categoryId, FIRST_PAGE_OFFSET, DEFAULT_PER_PAGE).also {
-            localSource.replaceByCategory(categoryId, it)
-        }
+    suspend fun getByCategory(id: Long, page: Int = FIRST_PAGE_OFFSET, perPage: Int = DEFAULT_PER_PAGE) =
+        getFromCacheFallbackOnRemote(
+            localSourceOp = { localSource.getByCategory(id, page, perPage) },
+            remoteSourceOp = {
+                remoteSource.get(id, page, perPage).also {
+                    localSource.cacheByCategory(id, page, it)
+                }
+            })
 
     private suspend fun getApplicationWithDetailFromRemoteAndCacheToMemory(appId: Long) =
         remoteSource.getDetail(appId).also {
@@ -54,6 +45,5 @@ internal class ApplicationRepository(
     companion object {
         const val DEFAULT_PER_PAGE = 10
         private const val FIRST_PAGE_OFFSET = 1
-        private const val SECOND_PAGE = 2
     }
 }
