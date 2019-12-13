@@ -6,7 +6,7 @@ import com.halcyonmobile.multiplatformplayground.shared.util.PER_PAGE
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
-class CategoryApi : KtorApi() {
+internal class CategoryApi : KtorApi() {
 
     suspend fun getCategories(page: Int, perPage: Int): List<Category> = client.get {
         apiUrl("categories")

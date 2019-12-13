@@ -1,150 +1,95 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
 import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
+import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import com.halcyonmobile.multiplatformplayground.repository.NoCacheFoundException
+import com.halcyonmobile.multiplatformplayground.shared.util.extension.safeSubList
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 import kotlin.math.min
 
+@UseExperimental(ExperimentalCoroutinesApi::class, FlowPreview::class)
+class ApplicationMemorySource : ApplicationLocalSource {
 
-@FlowPreview
-@ExperimentalCoroutinesApi
-internal class ApplicationMemorySource : ApplicationLocalSource {
+    private val _applications = ConflatedBroadcastChannel<List<CachedApplication>>(emptyList())
+    private val applications
+        get() = _applications.asFlow().distinctUntilChanged()
 
-    private val applicationsById = mutableMapOf<Long, Application>()
-    private val applicationWithDetailsById = mutableMapOf<Long, Application>()
-    private val applicationsByCategoryId = mutableMapOf<Long, List<Application>>()
+    override val favouritesStream
+        get() = applications.map { applications ->
+            applications.filter { it.application.favourite }.map { it.application }
+        }.distinctUntilChanged()
+            .flowOn(Dispatchers.Default)
 
-    private val _favouritesStream =
-        ConflatedBroadcastChannel<List<Application>>().apply { offer(emptyList()) }
-    override val favouritesStream = _favouritesStream.openSubscription().consumeAsFlow()
+    override suspend fun getById(id: Long) =
+        _applications.valueOrNull?.firstOrNull { it.application.id == id }?.application
 
-    private val applicationDetailChannel = ConflatedBroadcastChannel<Application>()
-    private val applicationDetailFlow = applicationDetailChannel.openSubscription().consumeAsFlow()
+    override fun getDetailById(id: Long) = applications.map { applications ->
+        applications.firstOrNull { it.application.id == id }?.toApplicationWithDetail()
+    }.distinctUntilChanged()
+        .flowOn(Dispatchers.Default)
 
-    override suspend fun getById(id: Long): Application =
-        applicationsById[id] ?: throw NoCacheFoundException()
-
-    override suspend fun getDetailById(id: Long): Flow<Application> =
-        flowOf(applicationWithDetailsById[id] ?: throw  NoCacheFoundException())
-            .onCompletion { emitAll(applicationDetailFlow) }
-
-    override suspend fun cacheApplicationWithDetail(application: Application): Flow<Application> {
-        application.category?.id?.let { categoryId ->
-            val applicationsByCategoryId =
-                applicationsByCategoryId[categoryId]?.toMutableList()?.also { applications ->
-                    applications.indexOfFirst { application.id == it.id }.let { index ->
-                        applications.removeAt(index)
-                        applications.add(index, application)
-                    }
-                }
-            if (applicationsByCategoryId != null) {
-                this.applicationsByCategoryId[categoryId] = applicationsByCategoryId
+    override suspend fun cacheApplicationWithDetail(applicationWithDetail: ApplicationWithDetail) {
+        withContext(Dispatchers.Default) {
+            val updatedApplications = _applications.value.toMutableList()
+            val index =
+                updatedApplications.indexOfFirst { it.application.id == applicationWithDetail.application.id }
+            if (index < 0) {
+                updatedApplications.add(applicationWithDetail.toCachedApplication())
             } else {
-                this.applicationsByCategoryId.remove(categoryId)
+                updatedApplications[index] = applicationWithDetail.toCachedApplication()
             }
+
+            _applications.offer(updatedApplications)
         }
-        cacheApplicationById(application)
-        applicationWithDetailsById[application.id] = application
-
-        return getDetailById(application.id)
     }
 
-    private fun cacheApplicationById(application: Application) {
-        applicationsById[application.id] = application
-    }
+    override fun getByCategory(categoryId: Long, page: Int, limit: Int) =
+        applications.map { applications ->
+            applications.filter { it.application.category?.id == categoryId }.safeSubList(
+                page * limit,
+                (page + 1) * limit
+            ).map { it.application }
+        }.flowOn(Dispatchers.Default)
 
-    override suspend fun getByCategory(
-        categoryId: Long,
-        page: Int,
-        limit: Int
-    ): List<Application> {
-        val fromIndex = (page - 1) * limit
-        val toIndex = min(
-            page * limit, (applicationsByCategoryId[categoryId]?.size
-                ?: 1)
-        )
-        if (fromIndex >= toIndex) {
-            throw NoCacheFoundException()
+    override suspend fun cacheApplications(applications: List<Application>) {
+        withContext(Dispatchers.Default) {
+            _applications.offer(applications.map { CachedApplication(it) }.plus(_applications.value).distinct())
         }
-        return applicationsByCategoryId[categoryId]?.subList(fromIndex, toIndex)
-            ?: throw NoCacheFoundException()
-    }
-
-    override suspend fun cacheByCategory(
-        categoryId: Long,
-        offset: Int,
-        applications: List<Application>
-    ): List<Application> {
-
-        // todo implement this
-
-        return applications
-    }
-
-//    override suspend fun replaceByCategory(
-//        categoryId: Long,
-//        applications: List<Application>
-//    ): List<Application> {
-//        applicationsByCategoryId[categoryId] = applications.toMutableList()
-//        applications.forEach { cacheApplicationById(it) }
-//        return applications
-//    }
-//
-//    override suspend fun addMoreByCategory(
-//        categoryId: Long,
-//        applications: List<Application>
-//    ): List<Application> {
-//        applicationsByCategoryId[categoryId] =
-//            applicationsByCategoryId[categoryId]?.plus(applications) ?: applications.toList()
-//        applications.forEach { cacheApplicationById(it) }
-//        return applications
-//    }
-
-    override suspend fun saveToMemory(application: Application): Application {
-        // TODO we should check this because the application is only stored in the applicationsByCategoryId map
-        applicationsByCategoryId[application.category?.id]?.plus(application)
-            ?: listOf(application)
-        return application
     }
 
     override suspend fun updateFavourites(applicationId: Long, isFavourite: Boolean) {
-        val oldApplication = applicationsById.values.first { it.id == applicationId }
-        val updatedApplication = oldApplication.copy(favourite = isFavourite)
-
-        applicationsById[oldApplication.id] = updatedApplication
-
-        val updatedDetailApplication =
-            applicationWithDetailsById[applicationId]?.let { oldApplicationWithDetail ->
-                oldApplicationWithDetail.copy(favourite = isFavourite).apply {
-                    // Category and Screenshots are not part of the main constructor, so they are not part of the copy method either
-                    category = oldApplicationWithDetail.category
-                    screenshots = oldApplicationWithDetail.screenshots
+        withContext(Dispatchers.Default) {
+            val updatedApplications = _applications.value.map {
+                if (it.application.id == applicationId) {
+                    it.copy(
+                        application = it.application.copy(favourite = isFavourite)
+                    )
+                } else {
+                    it
                 }
             }
-        updatedDetailApplication?.let {
-            applicationWithDetailsById[applicationId] = it
-        }
 
-        oldApplication.category?.id?.let { categoryId ->
-            val applicationsByCategoryId =
-                applicationsByCategoryId[categoryId]?.toMutableList()?.also { applications ->
-                    applications.indexOf(oldApplication).also { position ->
-                        applications.removeAt(position)
-                        applications.add(position, updatedApplication)
-                    }
-                }
-            if (applicationsByCategoryId != null) {
-                this.applicationsByCategoryId[categoryId] = applicationsByCategoryId
-            } else {
-                this.applicationsByCategoryId.remove(categoryId)
-            }
-        }
-        _favouritesStream.offer(applicationsById.values.distinct().filter { it.favourite })
-        updatedDetailApplication?.let {
-            applicationDetailChannel.offer(updatedDetailApplication)
+            _applications.offer(updatedApplications)
         }
     }
+
+    private data class CachedApplication(
+        val application: Application,
+        val applicationDetail: ApplicationDetail? = null
+    )
+
+    private fun CachedApplication.toApplicationWithDetail() =
+        if (applicationDetail == null) null else ApplicationWithDetail(
+            application = application,
+            applicationDetail = applicationDetail
+        )
+
+    private fun ApplicationWithDetail.toCachedApplication() =
+        CachedApplication(application = application, applicationDetail = applicationDetail)
 }

@@ -13,7 +13,7 @@ import io.ktor.http.takeFrom
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 
-abstract class KtorApi {
+abstract internal class KtorApi {
     protected val client = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer(Json.nonstrict).apply {

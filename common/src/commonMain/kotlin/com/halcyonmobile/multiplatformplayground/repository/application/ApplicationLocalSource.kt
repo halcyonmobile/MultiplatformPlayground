@@ -1,8 +1,8 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
 import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import kotlinx.coroutines.flow.Flow
-import com.halcyonmobile.multiplatformplayground.repository.NoCacheFoundException
 
 
 /**
@@ -18,45 +18,36 @@ interface ApplicationLocalSource {
 
     /**
      * Emits an [Application] with it's most basic fields.
-     * If there is no such application cached, it will emit [NoCacheFoundException].
+     * If there is not such application cached, it will emit null.
      */
-    suspend fun getById(id: Long): Application
+    suspend fun getById(id: Long): Application?
 
     /**
-     * Emits an [Application] with all of it's field.
-     * If there is not such application cached, it will emit [NoCacheFoundException].
+     * Emits an [ApplicationWithDetail] with all of it's field.
+     * If there is not such application cached, it will emit null.
      */
-    suspend fun getDetailById(id: Long): Flow<Application>
+    fun getDetailById(id: Long): Flow<ApplicationWithDetail?>
 
     /**
-     * Saves an [Application] with every bit of details of it then emits the saved data.
-     * Every change to that [Application] will be emitted in this stream.
+     * Saves an [ApplicationWithDetail] with every bit of details.
+     * Throws [IllegalArgumentException] if [ApplicationDetail] is null
      */
-    suspend fun cacheApplicationWithDetail(application: Application): Flow<Application>
+    suspend fun cacheApplicationWithDetail(applicationWithDetail: ApplicationWithDetail)
 
     /**
-     * Skips [page] * [limit] from all application lists then emits a [limit] number of Applications with their most basic fields.
-     * If there is not enough application cached, it will emit [NoCacheFoundException].
+     * Saves a [List] of [Application]s
      */
-    suspend fun getByCategory(categoryId: Long, page: Int, limit: Int): List<Application>
+    suspend fun cacheApplications(applications: List<Application>)
 
     /**
-     * Removes every application associated with [categoryId] then saves the new [applications] list with that [categoryId]
+     * Emits a [limit] number of Applications with their most basic fields on the given [page].
      */
-    suspend fun cacheByCategory(
-        categoryId: Long,
-        offset: Int,
-        applications: List<Application>
-    ): List<Application>
-
-    /**
-     * Saves the given [Application], similar to [cacheApplicationWithDetail], but it won't notify about the changes.
-     */
-    suspend fun saveToMemory(application: Application): Application
+    fun getByCategory(categoryId: Long, page: Int, limit: Int): Flow<List<Application>>
 
     /**
      * Updates the favorite field of the [Application] associated with the given [applicationId] to [isFavourite].
      * The [favouritesStream] will be notified with the updated list.
+     *
      */
     suspend fun updateFavourites(applicationId: Long, isFavourite: Boolean)
 }

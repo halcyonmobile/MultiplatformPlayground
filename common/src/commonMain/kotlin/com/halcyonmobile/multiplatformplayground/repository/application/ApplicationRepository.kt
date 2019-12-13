@@ -1,7 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
-import com.halcyonmobile.multiplatformplayground.shared.util.getFromCacheFallbackOnRemote
-import kotlinx.coroutines.flow.flowOf
+import com.halcyonmobile.multiplatformplayground.shared.util.getStreamFromCacheFallbackOnRemote
+
 
 internal class ApplicationRepository(
     private val localSource: ApplicationLocalSource,
@@ -9,41 +9,42 @@ internal class ApplicationRepository(
 ) {
     val favouritesStream = localSource.favouritesStream
 
-    suspend fun getById(id: Long) = getFromCacheFallbackOnRemote(localSourceOp = {
-        localSource.getById(id)
-    }, remoteSourceOp = {
-        getApplicationWithDetailFromRemoteAndCacheToMemory(id)
-    })
-
-    suspend fun getDetailById(id: Long) = getFromCacheFallbackOnRemote(localSourceOp = {
-        localSource.getDetailById(id)
-    }, remoteSourceOp = {
-        flowOf(getApplicationWithDetailFromRemoteAndCacheToMemory(id))
-    })
-
-    suspend fun getByCategory(id: Long, page: Int = FIRST_PAGE_OFFSET, perPage: Int = DEFAULT_PER_PAGE) =
-        getFromCacheFallbackOnRemote(
-            localSourceOp = { localSource.getByCategory(id, page, perPage) },
-            remoteSourceOp = {
-                remoteSource.get(id, page, perPage).also {
-                    localSource.cacheByCategory(id, page, it)
-                }
-            })
-
-    private suspend fun getApplicationWithDetailFromRemoteAndCacheToMemory(appId: Long) =
-        remoteSource.getDetail(appId).also {
+    fun getDetailById(appId: Long) =
+        getStreamFromCacheFallbackOnRemote(localSource.getDetailById(appId), remoteSourceOp = {
+            remoteSource.getDetail(appId)
+        }, cacheOperation = {
             localSource.cacheApplicationWithDetail(it)
-        }
+        })
 
-    // todo add create
-    // todo update paging
+    fun getByCategory(categoryId: Long, page: Int = 0, perPage: Int = DEFAULT_PER_PAGE) =
+        getStreamFromCacheFallbackOnRemote(
+            perPage,
+            localSource.getByCategory(categoryId, page, perPage),
+            remoteSourceOp = {
+                remoteSource.get(categoryId, page, perPage)
+            },
+            cacheOperation = {
+                localSource.cacheApplications(it)
+            }
+        )
 
-    suspend fun updateFavourites(appId: Long, isFavorite: Boolean) =
-        localSource.updateFavourites(appId, isFavorite)
+//    suspend fun create(
+//        application: ApplicationWithDetail,
+//        icon: File,
+//        screenshots: List<Screenshot>?
+//    ) =
+//        remoteSource.create(
+//            application,
+//            icon,
+//            screenshots
+//        ).also { localSource.cacheApplicationWithDetail(application) }
 
+    suspend fun updateFavourites(applicationId: Long, isFavourite: Boolean) =
+        localSource.updateFavourites(applicationId, isFavourite)
+
+    // TODO add paging methods
 
     companion object {
         const val DEFAULT_PER_PAGE = 10
-        private const val FIRST_PAGE_OFFSET = 1
     }
 }
