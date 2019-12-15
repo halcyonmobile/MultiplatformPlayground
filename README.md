@@ -4,9 +4,6 @@
 * Finish backend Api's
     - Upload files to some File sharing api
     - Handle files and `partMap`s
-* Separate the **common module** into two parts
-    1. **commonClient** - contains the common code for Frontend, like :requests, repositories, usecases, viewmodels
-    2. **common** -> mainly contains the models and other dependencies that all the platforms need, backend included
 * Refactor common repository logic and add use-cases according to  [Arch Apportfolio](https://gitlab.com/halcyonmobile/android-technical/architecture-appportfolio)
 * Add DI to mobile apps
 * Move UI from  [Arch Apportfolio](https://gitlab.com/halcyonmobile/android-technical/architecture-appportfolio) to the android app
