@@ -151,14 +151,14 @@ private fun List<PartData.FormItem>.createAppFromPartMap(): Application {
     val downloads = firstOrNull { it.name == APP_DOWNLOADS }?.value
 
     // todo solve categoryId
-    return Application(
-        id = 0,
-        name = name,
-        developer = developer,
-        description = description,
-        rating = rating,
-        downloads = downloads
-    )
+//    return Application(
+//        id = 0,
+//        name = name,
+//        developer = developer,
+//        description = description,
+//        rating = rating,
+//        downloads = downloads
+//    )
 }
 
 const val NAME_QUERY_KEY = "name"

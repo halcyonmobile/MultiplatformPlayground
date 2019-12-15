@@ -19,13 +19,24 @@ kotlin {
         }
     }
 
-    jvm()
+    jvm("backend")
+
+    sourceSets["iosMain"].dependencies {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:${project.extra["kotlinVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+    }
 
     sourceSets {
         commonMain {
             dependencies {
+                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${project.extra["serializationVersion"]}")
             }
         }
+    }
+
+    sourceSets["backendMain"].dependencies {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:${project.extra["kotlinVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
     }
 }

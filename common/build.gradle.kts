@@ -38,6 +38,7 @@ kotlin {
     }
 
     android()
+    jvm("backend")
 
     // region common
     sourceSets {
@@ -78,6 +79,18 @@ kotlin {
         }
     }
     // endregion
+    sourceSets["backendMain"].dependencies {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:${project.extra["kotlinVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${project.extra["coroutinesVersion"]}")
+
+        implementation("io.ktor:ktor-server-netty:${project.extra["ktorVersion"]}")
+        implementation("io.ktor:ktor-client-serialization-jvm:${project.extra["ktorVersion"]}")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+
+
+        implementation("io.ktor:ktor-client-core-jvm:${project.extra["ktorVersion"]}")
+    }
+
 }
 
 val packForXcode by tasks.creating(Sync::class) {
