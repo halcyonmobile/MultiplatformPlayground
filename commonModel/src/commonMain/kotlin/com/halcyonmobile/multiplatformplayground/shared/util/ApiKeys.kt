@@ -29,6 +29,7 @@ const val CATEGORY_ICON = "icon"
 const val SCREENSHOT_ID = "id"
 const val SCREENSHOT_NAME = "name"
 const val SCREENSHOT_IMAGE = "image"
+const val SCREENSHOT_APP_ID = "application_id"
 // endregion
 
 // region common
