@@ -43,6 +43,7 @@ private val useCaseModule = Kodein.Module("useCaseModule") {
     bind<GetFavouritesUseCase>() with provider { GetFavouritesUseCase(instance()) }
     bind<GetApplicationUseCase>() with provider { GetApplicationUseCase(instance()) }
     bind<GetApplicationsUseCase>() with provider { GetApplicationsUseCase(instance()) }
+    bind<UpdateFavouriteUseCase>() with provider { UpdateFavouriteUseCase(instance()) }
 }
 
 val kodein = Kodein {

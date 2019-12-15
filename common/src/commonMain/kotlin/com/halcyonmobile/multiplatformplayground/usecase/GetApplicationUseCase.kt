@@ -7,8 +7,7 @@ import kotlinx.coroutines.flow.*
 class GetApplicationUseCase internal constructor(private val applicationRepository: ApplicationRepository) {
 
     // todo wrap to resource
-    suspend operator fun invoke(id: Long) =
-        flowOf(applicationRepository.getById(id))
-            .merge(applicationRepository.getDetailById(id))
+    operator fun invoke(id: Long) =
+        applicationRepository.getDetailById(id)
 
 }

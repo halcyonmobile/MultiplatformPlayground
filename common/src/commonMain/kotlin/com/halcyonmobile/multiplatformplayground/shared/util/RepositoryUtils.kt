@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground.shared.util
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 /**
@@ -18,14 +19,11 @@ inline fun <T> getStreamFromCacheFallbackOnRemote(
     localStream: Flow<T?>,
     crossinline remoteSourceOp: suspend () -> T,
     crossinline cacheOperation: suspend (T) -> Unit
-) = localStream.onEach {
-    if (it == null) {
-        remoteSourceOp().also { remoteResult ->
-            cacheOperation(remoteResult)
-        }
+) = localStream.map {
+    it ?: remoteSourceOp().also { remoteResult ->
+        cacheOperation(remoteResult)
     }
 }
-    .filter { it != null }
 
 inline fun <T> getStreamFromCacheFallbackOnRemote(
     limit: Int,

@@ -1,25 +1,28 @@
 package com.halcyonmobile.multiplatformplayground.viewmodel
 
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
+import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
 import com.halcyonmobile.multiplatformplayground.shared.observer.observableOf
 import com.halcyonmobile.multiplatformplayground.shared.observer.observe
+import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.UpdateFavouriteUseCase
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ApplicationDetailViewModel internal constructor(
-    private val applicationRepository: ApplicationRepository,
+    private val getApplication: GetApplicationUseCase,
+    private val updateFavourite: UpdateFavouriteUseCase,
     applicationId: Long
 ) : CoroutineViewModel() {
 
-    val application = Observable<Application>()
+    val applicationWithDetail = Observable<ApplicationWithDetail>()
     val descLines = Observable<Int>()
     //    TODO solve resources
 //    val toggleButtonText = Obsvable<Int>(R.string.desc_show_more)
     val backdrop = observableOf("http://backdrops.io/images/screens/screen6.jpg")
-    val isFavourite: Boolean get() = application.value?.favourite ?: false
+    val isFavourite: Boolean get() = applicationWithDetail.value?.application?.favourite ?: false
 
     init {
         descLines.observe { desc ->
@@ -30,20 +33,22 @@ class ApplicationDetailViewModel internal constructor(
         }
 
         coroutineScope.launch {
-            // todo handle error, move to use-case
-            applicationRepository.getById(applicationId).let {
-                application.value = it
-                applicationRepository.getDetailById(it.id).collect { applicationWithDetail ->
-                    application.value = applicationWithDetail
-                }
+            getApplication(applicationId).catch {
+                // todo handle error
+            }.collect {
+                applicationWithDetail.value = it
             }
         }
     }
 
     fun setFavourite() {
-        val application = application.value ?: return
-        coroutineScope.launch {
-            applicationRepository.updateFavourites(application.id, !application.favourite)
+        applicationWithDetail.value?.application?.let {
+            coroutineScope.launch {
+                updateFavourite(
+                    it.id,
+                    it.favourite
+                )
+            }
         }
     }
 }
