@@ -12,7 +12,7 @@
 * Move UI from  [Arch Apportfolio](https://gitlab.com/halcyonmobile/android-technical/architecture-appportfolio) to the android app
 * Make UI for the **iOS** app
 # Todos with pending issue
-* Solve multithreading -> [Check out the issue](https://github.com/Kotlin/kotlinx.coroutines/issues/462)
+* Solve multithreading -> [Check out the issue](https://github.com/Kotlin/kotlinx.coroutines/issues/462) [and this](https://github.com/Kotlin/kotlinx.coroutines/pull/1648)
 * Come up with a solution for exposing `Flow`s and `suspend` functions
 
 # Resources
