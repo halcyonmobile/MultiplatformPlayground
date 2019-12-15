@@ -20,7 +20,7 @@ java {
 }
 
 dependencies {
-    implementation(project(":common"))
+    implementation(project(":commonModel"))
     implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
     implementation("io.ktor:ktor-serialization:${project.extra["ktorVersion"]}")

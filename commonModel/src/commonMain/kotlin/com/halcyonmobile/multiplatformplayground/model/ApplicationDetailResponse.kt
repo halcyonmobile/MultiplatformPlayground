@@ -1,6 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.model
 
 import com.halcyonmobile.multiplatformplayground.shared.util.*
+import com.halcyonmobile.multiplatformplayground.util.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
