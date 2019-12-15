@@ -1,12 +1,14 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
 import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import com.halcyonmobile.multiplatformplayground.shared.util.*
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
+import org.omg.CosNaming.NamingContextPackage.NotFound
 
 internal object ApplicationTable : Table("applications") {
     val id = long(APP_ID).autoIncrement().primaryKey()
@@ -45,14 +47,26 @@ fun ResultRow.mapRowToApplication(category: Category? = null, screenshots: List<
         id = get(ApplicationTable.id),
         name = get(ApplicationTable.name),
         developer = get(ApplicationTable.developer),
-        icon = get(ApplicationTable.icon),
-        rating = get(ApplicationTable.rating)?.toFloat(),
-        ratingCount = get(ApplicationTable.ratingCount),
-        storeUrl = get(ApplicationTable.storeUrl),
-        description = get(ApplicationTable.description),
-        downloads = get(ApplicationTable.downloads),
-        version = get(ApplicationTable.version),
-        size = get(ApplicationTable.size),
+        favourite = get(ApplicationTable.favourite),
+        category = category
+    )
+
+fun ResultRow.mapRowToApplicationDetailResponse(
+    category: Category? = null,
+    screenshots: List<Screenshot>
+) =
+    ApplicationDetailResponse(
+        id = get(ApplicationTable.id),
+        name = get(ApplicationTable.name),
+        developer = get(ApplicationTable.developer),
+        icon = get(ApplicationTable.icon) ?: throw NotFound(),
+        rating = get(ApplicationTable.rating)?.toFloat() ?: throw NotFound(),
+        ratingCount = get(ApplicationTable.ratingCount) ?: throw NotFound(),
+        storeUrl = get(ApplicationTable.storeUrl) ?: throw NotFound(),
+        description = get(ApplicationTable.description) ?: throw NotFound(),
+        downloads = get(ApplicationTable.downloads) ?: throw NotFound(),
+        version = get(ApplicationTable.version) ?: throw NotFound(),
+        size = get(ApplicationTable.size) ?: throw NotFound(),
         favourite = get(ApplicationTable.favourite),
         category = category,
         screenshots = screenshots

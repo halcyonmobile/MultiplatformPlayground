@@ -1,20 +1,19 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
 import com.halcyonmobile.multiplatformplayground.NotFound
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.model.*
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.log
 import io.ktor.util.KtorExperimentalAPI
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.newFixedThreadPoolContext
 import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.coroutines.CoroutineContext
 
-@UseExperimental(KtorExperimentalAPI::class)
+@UseExperimental(KtorExperimentalAPI::class, ObsoleteCoroutinesApi::class)
 internal class LocalSourceImpl(application: io.ktor.application.Application) : LocalSource {
     private val dispatcher: CoroutineContext
 
@@ -51,24 +50,26 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
-    override suspend fun createApplication(application: Application) {
+    override suspend fun createApplication(applicationWithDetail: ApplicationWithDetail) {
         withContext(dispatcher) {
             transaction {
-                ApplicationTable.insert {
-                    it[id] = application.id
-                    it[name] = application.name
-                    it[developer] = application.developer
-                    it[icon] = application.icon
-                    it[rating] = application.rating?.toBigDecimal()
-                    it[ratingCount] = application.ratingCount
-                    it[storeUrl] = application.storeUrl
-                    it[description] = application.description
-                    it[downloads] = application.downloads
-                    it[version] = application.version
-                    it[size] = application.size
-                    it[favourite] = application.favourite
-                    it[categoryId] = application.category?.id
-                    // todo add screenshots also
+                with(applicationWithDetail) {
+                    ApplicationTable.insert {
+                        it[id] = application.id
+                        it[name] = application.name
+                        it[developer] = application.developer
+                        it[icon] = applicationDetail.icon
+                        it[rating] = applicationDetail.rating.toBigDecimal()
+                        it[ratingCount] = applicationDetail.ratingCount
+                        it[storeUrl] = applicationDetail.storeUrl
+                        it[description] = applicationDetail.description
+                        it[downloads] = applicationDetail.downloads
+                        it[version] = applicationDetail.version
+                        it[size] = applicationDetail.size
+                        it[favourite] = application.favourite
+                        it[categoryId] = application.category?.id
+                        // todo add screenshots also
+                    }
                 }
             }
         }
@@ -81,14 +82,6 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                     it[id] = application.id
                     it[name] = application.name
                     it[developer] = application.developer
-                    it[icon] = application.icon
-                    it[rating] = application.rating?.toBigDecimal()
-                    it[ratingCount] = application.ratingCount
-                    it[storeUrl] = application.storeUrl
-                    it[description] = application.description
-                    it[downloads] = application.downloads
-                    it[version] = application.version
-                    it[size] = application.size
                     it[favourite] = application.favourite
                     it[categoryId] = application.category?.id
                     // todo update screenshots also
@@ -107,6 +100,18 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                 } ?: throw NotFound()
         }
     }
+
+    override suspend fun getApplicationWithDetail(id: Long): ApplicationDetailResponse =
+        withContext(dispatcher) {
+            transaction {
+                // todo implement screenshots
+                ApplicationTable.leftJoin(CategoryTable)
+                    .select { ApplicationTable.id eq id }
+                    .singleOrNull()?.let {
+                        it.mapRowToApplicationDetailResponse(it.mapRowToCategory(), emptyList())
+                    } ?: throw NotFound()
+            }
+        }
 
     override suspend fun getApplications(name: String, categoryId: Long): List<Application> =
         withContext(dispatcher) {

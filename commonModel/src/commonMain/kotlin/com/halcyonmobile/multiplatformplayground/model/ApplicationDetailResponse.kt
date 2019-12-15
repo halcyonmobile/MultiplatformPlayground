@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class ApplicationDetailResponse(
+data class ApplicationDetailResponse(
     @SerialName(APP_ID)
     val id: Long,
     @SerialName(APP_NAME)

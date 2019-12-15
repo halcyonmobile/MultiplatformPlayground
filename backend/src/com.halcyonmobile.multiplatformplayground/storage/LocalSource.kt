@@ -1,19 +1,19 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.model.*
 
 // todo add paging
 internal interface LocalSource {
 
     suspend fun getApplications(): List<Application>
 
-    suspend fun createApplication(application: Application)
+    suspend fun createApplication(applicationWithDetail: ApplicationWithDetail)
 
     suspend fun updateApplication(application: Application)
 
     suspend fun getApplication(id: Long): Application
+
+    suspend fun getApplicationWithDetail(id: Long): ApplicationDetailResponse
 
     suspend fun getApplications(name: String, categoryId: Long): List<Application>
 

@@ -1,6 +1,8 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
+import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import com.halcyonmobile.multiplatformplayground.shared.util.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
@@ -142,23 +144,29 @@ private fun Routing.apiPostScreenshot(localSource: LocalSource, uploadDir: Strin
 }
 
 // TODO maybe move out these as constants to the common, so that if backend changes a key, then it will change on the mobile side too
-private fun List<PartData.FormItem>.createAppFromPartMap(): Application {
+private fun List<PartData.FormItem>.createAppFromPartMap(): ApplicationWithDetail {
     val name = first { it.name == APP_NAME }.value
     val developer = first { it.name == APP_DEVELOPER }.value
-    val description = firstOrNull { it.name == APP_DESCRIPTION }?.value
-    val categoryId = firstOrNull { it.name == APP_CATEGORY_ID }
-    val rating = firstOrNull { it.name == APP_RATING }?.value?.toFloat()
-    val downloads = firstOrNull { it.name == APP_DOWNLOADS }?.value
+    val description = first { it.name == APP_DESCRIPTION }.value
+    val categoryId = first { it.name == APP_CATEGORY_ID }
+    val rating = first { it.name == APP_RATING }.value.toFloat()
+    val downloads = first { it.name == APP_DOWNLOADS }.value
+    val version = first { it.name == APP_VERSION}.value
 
     // todo solve categoryId
-//    return Application(
-//        id = 0,
-//        name = name,
-//        developer = developer,
-//        description = description,
-//        rating = rating,
-//        downloads = downloads
-//    )
+    return ApplicationWithDetail(
+        Application(
+            id = 0,
+            name = name,
+            developer = developer
+        ),
+        ApplicationDetail(
+            description = description,
+            rating = rating,
+            downloads = downloads,
+            version = version
+        )
+    )
 }
 
 const val NAME_QUERY_KEY = "name"
