@@ -38,7 +38,6 @@ kotlin {
     }
 
     android()
-    jvm("backend")
 
     // region common
     sourceSets {
@@ -76,18 +75,6 @@ kotlin {
         }
     }
     // endregion
-    sourceSets["backendMain"].dependencies {
-        implementation(Versions.Shared.stdlib)
-        implementation(Versions.Shared.coroutinesCore)
-
-        implementation(Versions.Jvm.ktorServerNetty)
-        implementation(Versions.Jvm.ktorClientSerialization)
-        implementation(Versions.Shared.serializationRuntime)
-
-
-        implementation(Versions.Jvm.ktorClientCore)
-    }
-
 }
 
 val packForXcode by tasks.creating(Sync::class) {
