@@ -45,7 +45,7 @@ data class ApplicationDetail(
     var screenshots: List<Screenshot>
 )
 
-internal fun ApplicationDetailResponse.toApplicationWithDetail() = ApplicationWithDetail(
+fun ApplicationDetailResponse.toApplicationWithDetail() = ApplicationWithDetail(
     application = Application(id, name, developer, favourite, category),
     applicationDetail = ApplicationDetail(
         icon,
