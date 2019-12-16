@@ -22,21 +22,21 @@ kotlin {
     jvm("backend")
 
     sourceSets["iosMain"].dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib:${project.extra["kotlinVersion"]}")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+        implementation(Versions.Shared.stdlib)
+        implementation(Versions.Shared.serializationRuntime)
     }
 
     sourceSets {
         commonMain {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${project.extra["serializationVersion"]}")
+                implementation(Versions.Common.stdlib)
+                implementation(Versions.Common.serialization)
             }
         }
     }
 
     sourceSets["backendMain"].dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib:${project.extra["kotlinVersion"]}")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+        implementation(Versions.Shared.stdlib)
+        implementation(Versions.Shared.serializationRuntime)
     }
 }

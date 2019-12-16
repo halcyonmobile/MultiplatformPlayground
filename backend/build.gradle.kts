@@ -21,22 +21,22 @@ java {
 
 dependencies {
     implementation(project(":commonModel"))
-    implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
-    implementation("io.ktor:ktor-client-json-jvm:${project.extra["ktorVersion"]}")
-    implementation("io.ktor:ktor-serialization:${project.extra["ktorVersion"]}")
+    implementation(Versions.Jvm.ktorClientApache)
+    implementation(Versions.Jvm.ktorClientJson)
+    implementation(Versions.Jvm.ktorSerialization)
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.extra["kotlinVersion"]}")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${project.extra["kotlinVersion"]}")
-    implementation("io.ktor:ktor-server-netty:${project.extra["ktorVersion"]}")
-    implementation("io.ktor:ktor-auth:${project.extra["ktorVersion"]}")
-    implementation("io.ktor:ktor-websockets:${project.extra["ktorVersion"]}")
-    implementation("io.ktor:ktor-client-apache:${project.extra["ktorVersion"]}")
+    implementation(Versions.Jvm.stdlib)
+    implementation(Versions.Jvm.kotlinReflect)
+    implementation(Versions.Jvm.ktorServerNetty)
+    implementation(Versions.Jvm.ktorAuth)
+    implementation(Versions.Jvm.ktorWebSockets)
+    implementation(Versions.Jvm.ktorClientApache)
 
     // DI
-    implementation("org.kodein.di:kodein-di-generic-jvm:${project.extra["kodeinVersion"]}")
-    implementation("org.kodein.di:kodein-di-framework-ktor-server-jvm:${project.extra["kodeinVersion"]}")
+    implementation(Versions.Jvm.kodeinGeneric)
+    implementation(Versions.Jvm.kodeinKtorServer)
 
-    implementation("org.jetbrains.exposed:exposed:0.17.7")
+    implementation(Versions.Jvm.jetbrainsExposed)
     implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
 
 }

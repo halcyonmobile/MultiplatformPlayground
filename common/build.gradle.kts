@@ -46,49 +46,46 @@ kotlin {
             dependencies {
                 implementation(project(":commonModel"))
                 // Ktor-client for network requests
-                implementation("io.ktor:ktor-client-core:${project.extra["ktorVersion"]}")
-                implementation("io.ktor:ktor-client-json:${project.extra["ktorVersion"]}")
-                implementation("io.ktor:ktor-client-serialization:${project.extra["ktorVersion"]}")
+                implementation(Versions.Common.ktorClientCore)
+                implementation(Versions.Common.ktorClientJson)
+                implementation(Versions.Common.ktorClientSerialization)
 
-
-                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${project.extra["coroutinesVersion"]}")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${project.extra["serializationVersion"]}")
+                implementation(Versions.Common.stdlib)
+                implementation(Versions.Common.coroutinesCore)
+                implementation(Versions.Common.serialization)
                 // DI
-                implementation("org.kodein.di:kodein-di-core:${project.extra["kodeinVersion"]}")
-                implementation("org.kodein.di:kodein-di-erased:${project.extra["kodeinVersion"]}")
+                implementation(Versions.Shared.kodeinCore)
+                implementation(Versions.Shared.kodeinErased)
             }
         }
     }
     // endregion
 
     // region android
-    val lifecycleVersion = "2.2.0-alpha05"
-
     android.sourceSets.forEach { _ ->
         dependencies {
-            implementation("org.jetbrains.kotlin:kotlin-stdlib")
-            implementation("androidx.lifecycle:lifecycle-extensions:$lifecycleVersion")
-            implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
-            implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+            implementation(Versions.Shared.stdlib)
+            implementation(Versions.Android.lifecycleExtensions)
+            implementation(Versions.Android.liveData)
+            implementation(Versions.Android.viewModel)
 
             // Ktor-client for network requests
-            implementation("io.ktor:ktor-client-serialization-jvm:${project.extra["ktorVersion"]}")
+            implementation(Versions.Jvm.ktorClientSerialization)
             // Serialization
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+            implementation(Versions.Shared.serializationRuntime)
         }
     }
     // endregion
     sourceSets["backendMain"].dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib:${project.extra["kotlinVersion"]}")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${project.extra["coroutinesVersion"]}")
+        implementation(Versions.Shared.stdlib)
+        implementation(Versions.Shared.coroutinesCore)
 
-        implementation("io.ktor:ktor-server-netty:${project.extra["ktorVersion"]}")
-        implementation("io.ktor:ktor-client-serialization-jvm:${project.extra["ktorVersion"]}")
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${project.extra["serializationVersion"]}")
+        implementation(Versions.Jvm.ktorServerNetty)
+        implementation(Versions.Jvm.ktorClientSerialization)
+        implementation(Versions.Shared.serializationRuntime)
 
 
-        implementation("io.ktor:ktor-client-core-jvm:${project.extra["ktorVersion"]}")
+        implementation(Versions.Jvm.ktorClientCore)
     }
 
 }
