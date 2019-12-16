@@ -49,11 +49,11 @@ private fun Routing.apiApplications(localSource: LocalSource) {
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
         val parts = call.receiveMultipart().readAllParts()
-        val application = parts.filterIsInstance<PartData.FormItem>().createAppFromPartMap()
         // todo handle icon
         val icon = (parts.firstOrNull { it.name == APP_ICON } as? PartData.FileItem)
         // todo handle screenshot ids
 //        val screenshotIds = parts.firstOrNull { it.name == "screenshot_ids[]" } as? PartData.FormItem)
+        val application = parts.filterIsInstance<PartData.FormItem>().createAppFromPartMap("", emptyList())
 
         try {
 //                val screenshots = localSource.getScreenshots(screenshotIds)
@@ -143,15 +143,17 @@ private fun Routing.apiPostScreenshot(localSource: LocalSource, uploadDir: Strin
     }
 }
 
-// TODO maybe move out these as constants to the common, so that if backend changes a key, then it will change on the mobile side too
-private fun List<PartData.FormItem>.createAppFromPartMap(): ApplicationWithDetail {
+private fun List<PartData.FormItem>.createAppFromPartMap(icon: String, screenshots: List<Screenshot>): ApplicationWithDetail {
     val name = first { it.name == APP_NAME }.value
     val developer = first { it.name == APP_DEVELOPER }.value
     val description = first { it.name == APP_DESCRIPTION }.value
     val categoryId = first { it.name == APP_CATEGORY_ID }
     val rating = first { it.name == APP_RATING }.value.toFloat()
+    val ratingCount = first { it.name == APP_RATING_COUNT }.value.toInt()
     val downloads = first { it.name == APP_DOWNLOADS }.value
-    val version = first { it.name == APP_VERSION}.value
+    val version = first { it.name == APP_VERSION }.value
+    val storeUrl = first { it.name == APP_STORE_URL }.value
+    val size = first { it.name == APP_SIZE }.value
 
     // todo solve categoryId
     return ApplicationWithDetail(
@@ -161,10 +163,15 @@ private fun List<PartData.FormItem>.createAppFromPartMap(): ApplicationWithDetai
             developer = developer
         ),
         ApplicationDetail(
+            icon = icon,
             description = description,
             rating = rating,
+            ratingCount = ratingCount,
             downloads = downloads,
-            version = version
+            version = version,
+            size = size,
+            storeUrl = storeUrl,
+            screenshots = screenshots
         )
     )
 }
