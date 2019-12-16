@@ -1,10 +1,8 @@
-import org.gradle.kotlin.dsl.extra
-
 object Versions {
     private const val kotlinVersion = "1.3.50"
     private const val ktorVersion = "1.2.5"
     private const val coroutinesVersion = "1.3.2"
-    private const val serializationVersion = "0.10.0"
+    private const val serializationVersion = "0.14.0"
     private const val kodeinVersion = "6.4.1"
 
     object Shared {
@@ -32,6 +30,8 @@ object Versions {
             "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
         const val serialization =
             "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion"
+
+        const val okio = "com.squareup.okio:okio-multiplatform:2.4.2"
     }
 
     object Jvm {
@@ -48,7 +48,8 @@ object Versions {
         const val ktorSerialization = "io.ktor:ktor-serialization:$ktorVersion"
 
         const val kodeinGeneric = "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
-        const val kodeinKtorServer = "org.kodein.di:kodein-di-framework-ktor-server-jvm:$kodeinVersion"
+        const val kodeinKtorServer =
+            "org.kodein.di:kodein-di-framework-ktor-server-jvm:$kodeinVersion"
         const val jetbrainsExposed = "org.jetbrains.exposed:exposed:0.17.7"
     }
 
