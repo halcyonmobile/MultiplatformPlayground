@@ -48,6 +48,7 @@ kotlin {
                 implementation(Versions.Common.ktorClientCore)
                 implementation(Versions.Common.ktorClientJson)
                 implementation(Versions.Common.ktorClientSerialization)
+                implementation(Versions.Common.ktorUtility)
 
                 implementation(Versions.Common.stdlib)
                 implementation(Versions.Common.coroutinesCore)

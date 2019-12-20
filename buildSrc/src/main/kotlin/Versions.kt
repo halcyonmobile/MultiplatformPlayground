@@ -22,6 +22,7 @@ object Versions {
     object Common {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
 
+        const val ktorUtility = "io.ktor:ktor-utils-native:$ktorVersion"
         const val ktorClientCore = "io.ktor:ktor-client-core:$ktorVersion"
         const val ktorClientJson = "io.ktor:ktor-client-json:$ktorVersion"
         const val ktorClientSerialization = "io.ktor:ktor-client-serialization:$ktorVersion"

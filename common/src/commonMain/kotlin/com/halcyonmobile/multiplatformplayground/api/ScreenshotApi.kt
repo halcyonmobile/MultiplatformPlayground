@@ -1,8 +1,9 @@
 package com.halcyonmobile.multiplatformplayground.api
 
+import com.halcyonmobile.multiplatformplayground.shared.util.File
+
 internal class ScreenshotApi : KtorApi() {
 
-//    Todo implement this
-//    Use expect-actual for providing files or wait for a library
-//    suspend fun uploadScreenshot()
+    suspend fun uploadScreenshot(screenshot: File){
+    }
 }
