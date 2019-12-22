@@ -1,15 +1,11 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.model.*
-import com.halcyonmobile.multiplatformplayground.shared.util.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import com.halcyonmobile.multiplatformplayground.storage.file.FileStorage
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.content.PartData
-import io.ktor.http.content.readAllParts
 import io.ktor.request.receive
-import io.ktor.request.receiveMultipart
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
@@ -27,6 +23,7 @@ internal fun Routing.api(localSource: LocalSource, fileStorage: FileStorage) {
     apiGetApplication(localSource)
     apiFilterApplications(localSource)
     apiGetCategories(localSource)
+    apiPostCategory(localSource, fileStorage)
     apiPostScreenshot(localSource, fileStorage)
 }
 
@@ -59,7 +56,7 @@ private fun Routing.apiCreateApplication(localSource: LocalSource, fileStorage: 
             val screenshots = localSource.getScreenshots(applicationRequest.screenshots)
             val category = localSource.getCategory(applicationRequest.categoryId)
 
-            localSource.createApplication(
+            localSource.saveApplication(
                 applicationRequest.toApplication(
                     iconUrl,
                     category,
@@ -125,6 +122,21 @@ private fun Routing.apiGetCategories(localSource: LocalSource) {
         localSource.getCategories().let {
             call.respond(it)
         }
+    }
+}
+
+/**
+ * POST /api/v1/categories
+ */
+@UseExperimental(InternalAPI::class)
+private fun Routing.apiPostCategory(localSource: LocalSource, fileStorage: FileStorage) {
+    post("/category") {
+        val category = call.receive<Category>()
+        val iconUrl = fileStorage.uploadCategory(category.icon.decodeBase64Bytes(), category.name)
+        val savedCategory = category.copy(icon = iconUrl)
+        val id = localSource.saveCategory(savedCategory)
+
+        call.respond(savedCategory.copy(id))
     }
 }
 

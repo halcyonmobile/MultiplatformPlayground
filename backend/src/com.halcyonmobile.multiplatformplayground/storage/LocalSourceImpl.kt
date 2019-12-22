@@ -50,12 +50,11 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
-    override suspend fun createApplication(applicationWithDetail: ApplicationWithDetail) {
+    override suspend fun saveApplication(applicationWithDetail: ApplicationWithDetail) {
         withContext(dispatcher) {
             transaction {
                 with(applicationWithDetail) {
                     ApplicationTable.insert {
-                        it[id] = application.id
                         it[name] = application.name
                         it[developer] = application.developer
                         it[icon] = applicationDetail.icon
@@ -113,6 +112,15 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
             }
         }
 
+    override suspend fun saveCategory(category: Category) = withContext(dispatcher) {
+        transaction {
+            CategoryTable.insert {
+                it[name] = category.name
+                it[icon] = category.icon
+            }[CategoryTable.id]
+        }
+    }
+
     override suspend fun getApplications(name: String, categoryId: Long): List<Application> =
         withContext(dispatcher) {
             transaction {
@@ -135,7 +143,12 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
     }
 
     override suspend fun saveScreenshot(screenshot: Screenshot) = withContext(dispatcher) {
-        // todo implement this
+        transaction {
+            ScreenshotTable.insert {
+                it[name] = screenshot.name
+                it[image] = screenshot.image
+            }[ScreenshotTable.id]
+        }
     }
 
     override suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot> =

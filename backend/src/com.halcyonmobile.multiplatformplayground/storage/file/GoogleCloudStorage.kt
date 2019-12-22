@@ -7,7 +7,8 @@ import com.google.cloud.storage.StorageOptions
 class GoogleCloudStorage : FileStorage() {
 
     override val screenshotPath = "multiplatform_screenshot"
-    override val iconPath = "multiplatform_icon"
+    override val appIconPath = "multiplatform_app"
+    override val categoryIconPath = "multiplatform_category"
 
     private val storage = StorageOptions.getDefaultInstance().service
 

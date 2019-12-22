@@ -7,7 +7,7 @@ internal interface LocalSource {
 
     suspend fun getApplications(): List<Application>
 
-    suspend fun createApplication(applicationWithDetail: ApplicationWithDetail)
+    suspend fun saveApplication(applicationWithDetail: ApplicationWithDetail)
 
     suspend fun updateApplication(application: Application)
 
@@ -16,6 +16,8 @@ internal interface LocalSource {
     suspend fun getApplicationWithDetail(id: Long): ApplicationDetailResponse
 
     suspend fun getApplications(name: String, categoryId: Long): List<Application>
+
+    suspend fun saveCategory(category: Category): Long
 
     suspend fun getCategories(): List<Category>
 

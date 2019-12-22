@@ -36,7 +36,7 @@ internal object CategoryTable : Table("categories") {
 
 internal object ScreenshotTable : Table("screenshots") {
     val id = long(SCREENSHOT_ID).autoIncrement().primaryKey()
-    val name = varchar(SCREENSHOT_NAME, 50).nullable()
+    val name = varchar(SCREENSHOT_NAME, 50)
     val image = varchar(SCREENSHOT_IMAGE, 255)
     val applicationId =
         long(SCREENSHOT_APP_ID).references(ApplicationTable.id, onDelete = ReferenceOption.CASCADE)
