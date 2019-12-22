@@ -21,9 +21,9 @@ internal interface LocalSource {
 
     suspend fun getCategories(): List<Category>
 
-    suspend fun getCategory(id: Long): Category?
+    suspend fun getCategory(id: Long): Category
 
-    suspend fun saveScreenshot(screenshot: Screenshot): Long
+    suspend fun saveScreenshot(screenshot: Screenshot, appId: Long): Long
 
     suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot>
 }

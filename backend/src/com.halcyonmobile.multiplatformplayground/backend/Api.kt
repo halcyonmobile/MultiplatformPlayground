@@ -24,7 +24,7 @@ internal fun Routing.api(localSource: LocalSource, fileStorage: FileStorage) {
     apiFilterApplications(localSource)
     apiGetCategories(localSource)
     apiPostCategory(localSource, fileStorage)
-    apiPostScreenshot(localSource, fileStorage)
+//    apiPostScreenshot(localSource, fileStorage)
 }
 
 /**
@@ -41,7 +41,7 @@ private fun Routing.apiApplications(localSource: LocalSource) {
 /**
  *  POST /api/v1/applications
  */
-// todo handle file
+// todo handle lists
 @UseExperimental(InternalAPI::class)
 private fun Routing.apiCreateApplication(localSource: LocalSource, fileStorage: FileStorage) {
     post("/applications") {
@@ -52,8 +52,15 @@ private fun Routing.apiCreateApplication(localSource: LocalSource, fileStorage: 
             applicationRequest.name
         )
 
+        val appId = localSource.getNextApplicationId()
         try {
-            val screenshots = localSource.getScreenshots(applicationRequest.screenshots)
+            val screenshots = applicationRequest.screenshots.map {
+                val imageUrl = fileStorage.uploadScreenshot(it.image.decodeBase64Bytes(), it.name)
+                val savedScreenshot = it.copy(name = it.name, image = imageUrl)
+                val id = localSource.saveScreenshot(savedScreenshot, appId)
+
+                savedScreenshot.copy(id = id)
+            }
             val category = localSource.getCategory(applicationRequest.categoryId)
 
             localSource.saveApplication(
@@ -143,22 +150,25 @@ private fun Routing.apiPostCategory(localSource: LocalSource, fileStorage: FileS
 /**
  * POST /api/v1/screenshots
  */
-@UseExperimental(InternalAPI::class)
-private fun Routing.apiPostScreenshot(localSource: LocalSource, fileStorage: FileStorage) {
-    post("/screenshots") {
-        val screenshot = call.receive<Screenshot>()
-        val screenshotUrl =
-            fileStorage.uploadScreenshot(screenshot.image.decodeBase64Bytes(), screenshot.name)
+//@UseExperimental(InternalAPI::class)
+//private fun Routing.apiPostScreenshot(localSource: LocalSource, fileStorage: FileStorage) {
+//    post("/screenshots") {
+//        val screenshot = call.receive<Screenshot>()
+//        val screenshotUrl =
+//            fileStorage.uploadScreenshot(screenshot.image.decodeBase64Bytes(), screenshot.name)
+//
+//        val savedScreenshot = Screenshot(name = screenshot.name, image = screenshotUrl)
+//        val id = localSource.saveScreenshot(savedScreenshot)
+//        call.respond(savedScreenshot.copy(id = id))
+//    }
+//}
 
-        val savedScreenshot = Screenshot(name = screenshot.name, image = screenshotUrl)
-        val id = localSource.saveScreenshot(savedScreenshot)
-        call.respond(savedScreenshot.copy(id = id))
-    }
-}
+private suspend fun LocalSource.getNextApplicationId() =
+    getApplications().map { it.id }.max() ?: 0 + 1
 
 private fun ApplicationRequest.toApplication(
     iconUrl: String,
-    category: Category?,
+    category: Category,
     screenshots: List<Screenshot>
 ) =
     ApplicationWithDetail(
