@@ -52,6 +52,8 @@ object Versions {
         const val kodeinKtorServer =
             "org.kodein.di:kodein-di-framework-ktor-server-jvm:$kodeinVersion"
         const val jetbrainsExposed = "org.jetbrains.exposed:exposed:0.17.7"
+
+        const val googleCloudStorage = "com.google.cloud:google-cloud-storage:1.102.0"
     }
 
     object Android {

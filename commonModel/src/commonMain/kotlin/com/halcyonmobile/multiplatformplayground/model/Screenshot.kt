@@ -11,7 +11,7 @@ data class Screenshot(
     @SerialName(SCREENSHOT_ID)
     val id: Long = 0,
     @SerialName(SCREENSHOT_NAME)
-    val name: String?,
+    val name: String,
     @SerialName(SCREENSHOT_IMAGE)
     val image: String
 )

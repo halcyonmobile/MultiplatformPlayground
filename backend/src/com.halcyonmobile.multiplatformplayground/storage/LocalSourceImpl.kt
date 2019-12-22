@@ -128,7 +128,7 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
-    override suspend fun createScreenshot(screenshot: Screenshot) = withContext(dispatcher) {
+    override suspend fun saveScreenshot(screenshot: Screenshot) = withContext(dispatcher) {
         // todo implement this
     }
 

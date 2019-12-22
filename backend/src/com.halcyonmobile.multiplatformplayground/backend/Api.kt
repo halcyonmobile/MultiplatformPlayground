@@ -1,15 +1,12 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
-import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
-import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.shared.util.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
+import com.halcyonmobile.multiplatformplayground.storage.file.FileStorage
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.PartData
-import io.ktor.http.content.forEachPart
 import io.ktor.http.content.readAllParts
 import io.ktor.request.receive
 import io.ktor.request.receiveMultipart
@@ -18,17 +15,19 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
+import io.ktor.util.InternalAPI
+import io.ktor.util.decodeBase64Bytes
 import java.lang.Exception
 
 // todo general error handling
-internal fun Routing.api(localSource: LocalSource, uploadDir: String) {
+internal fun Routing.api(localSource: LocalSource, fileStorage: FileStorage) {
     apiApplications(localSource)
     apiCreateApplication(localSource)
     apiUpdateApplication(localSource)
     apiGetApplication(localSource)
     apiFilterApplications(localSource)
     apiGetCategories(localSource)
-    apiPostScreenshot(localSource, uploadDir)
+    apiPostScreenshot(localSource, fileStorage)
 }
 
 /**
@@ -53,11 +52,12 @@ private fun Routing.apiCreateApplication(localSource: LocalSource) {
         val icon = (parts.firstOrNull { it.name == APP_ICON } as? PartData.FileItem)
         // todo handle screenshot ids
 //        val screenshotIds = parts.firstOrNull { it.name == "screenshot_ids[]" } as? PartData.FormItem)
-        val application = parts.filterIsInstance<PartData.FormItem>().createAppFromPartMap("", emptyList())
+        val applicationRequest =
+            parts.filterIsInstance<PartData.FormItem>().createAppRequestFromPartMap()
 
         try {
-//                val screenshots = localSource.getScreenshots(screenshotIds)
-            localSource.createApplication(application.copy())
+            val screenshots = localSource.getScreenshots(applicationRequest.screenshots)
+            localSource.createApplication()
             call.respond(HttpStatusCode.Created)
         } catch (e: Exception) {
             call.respond(HttpStatusCode.Conflict)
@@ -123,56 +123,47 @@ private fun Routing.apiGetCategories(localSource: LocalSource) {
 /**
  * POST /api/v1/screenshots
  */
-private fun Routing.apiPostScreenshot(localSource: LocalSource, uploadDir: String) {
+@UseExperimental(InternalAPI::class)
+private fun Routing.apiPostScreenshot(localSource: LocalSource, fileStorage: FileStorage) {
     post("/screenshots") {
-        call.receiveMultipart().forEachPart { part ->
-            var name = "img-${System.currentTimeMillis()}"
-            when (part) {
-                is PartData.FormItem -> {
-                    if (part.name == SCREENSHOT_NAME) {
-                        name = part.value + name
-                    }
-                }
-                is PartData.FileItem -> {
-                    // todo handle file
-                }
-            }
-            localSource.createScreenshot(Screenshot(name = name, image = ""))
-            part.dispose()
-        }
+        val screenshot = call.receive<Screenshot>()
+        val mediaUrl =
+            fileStorage.uploadScreenshot(screenshot.image.decodeBase64Bytes(), screenshot.name)
+
+        val savedScreenshot = Screenshot(name = screenshot.name, image = mediaUrl)
+        val id = localSource.saveScreenshot(savedScreenshot)
+        call.respond(savedScreenshot.copy(id = id))
     }
 }
 
-private fun List<PartData.FormItem>.createAppFromPartMap(icon: String, screenshots: List<Screenshot>): ApplicationWithDetail {
+
+private fun List<PartData.FormItem>.createAppRequestFromPartMap(): ApplicationRequest {
     val name = first { it.name == APP_NAME }.value
     val developer = first { it.name == APP_DEVELOPER }.value
     val description = first { it.name == APP_DESCRIPTION }.value
-    val categoryId = first { it.name == APP_CATEGORY_ID }
+    val categoryId = first { it.name == APP_CATEGORY_ID }.value.toLong()
     val rating = first { it.name == APP_RATING }.value.toFloat()
     val ratingCount = first { it.name == APP_RATING_COUNT }.value.toInt()
     val downloads = first { it.name == APP_DOWNLOADS }.value
     val version = first { it.name == APP_VERSION }.value
     val storeUrl = first { it.name == APP_STORE_URL }.value
     val size = first { it.name == APP_SIZE }.value
+    val screenshots = first { it.name == APP_SCREENSHOTS }.value
 
     // todo solve categoryId
-    return ApplicationWithDetail(
-        Application(
-            id = 0,
-            name = name,
-            developer = developer
-        ),
-        ApplicationDetail(
-            icon = icon,
-            description = description,
-            rating = rating,
-            ratingCount = ratingCount,
-            downloads = downloads,
-            version = version,
-            size = size,
-            storeUrl = storeUrl,
-            screenshots = screenshots
-        )
+    return ApplicationRequest(
+        id = 0,
+        name = name,
+        developer = developer,
+        categoryId = categoryId,
+        description = description,
+        rating = rating,
+        ratingCount = ratingCount,
+        downloads = downloads,
+        version = version,
+        size = size,
+        storeUrl = storeUrl,
+        screenshots = screenshots
     )
 }
 
