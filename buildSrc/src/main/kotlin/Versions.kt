@@ -54,6 +54,7 @@ object Versions {
         const val jetbrainsExposed = "org.jetbrains.exposed:exposed:0.17.7"
 
         const val googleCloudStorage = "com.google.cloud:google-cloud-storage:1.102.0"
+        const val logback = "ch.qos.logback:logback-classic:1.2.3"
     }
 
     object Android {
