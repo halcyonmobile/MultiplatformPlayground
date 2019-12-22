@@ -1,4 +1,4 @@
-package com.halcyonmobile.multiplatformplayground
+package com.halcyonmobile.multiplatformplayground.serialization
 
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
@@ -8,15 +8,18 @@ import io.ktor.http.ContentType
 import io.ktor.http.content.TextContent
 import io.ktor.http.withCharset
 import io.ktor.request.ApplicationReceiveRequest
+import io.ktor.util.KtorExperimentalAPI
 import io.ktor.util.pipeline.PipelineContext
-import kotlinx.coroutines.io.ByteReadChannel
-import kotlinx.coroutines.io.readRemaining
+import io.ktor.utils.io.ByteReadChannel
+import io.ktor.utils.io.readRemaining
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.SerializationStrategy
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 
 internal class KotlinxConverter : ContentConverter {
+    @UseExperimental(KtorExperimentalAPI::class)
     override suspend fun convertForSend(
         context: PipelineContext<Any, ApplicationCall>,
         contentType: ContentType,
@@ -27,6 +30,7 @@ internal class KotlinxConverter : ContentConverter {
         return TextContent(text, contentType.withCharset(context.call.suitableCharset()))
     }
 
+    @UseExperimental(UnstableDefault::class)
     override suspend fun convertForReceive(context: PipelineContext<ApplicationReceiveRequest, ApplicationCall>): Any? {
         val request = context.subject
         val channel = request.value as? ByteReadChannel ?: return null

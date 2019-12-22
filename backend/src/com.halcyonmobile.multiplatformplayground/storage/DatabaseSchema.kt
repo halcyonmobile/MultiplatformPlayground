@@ -24,8 +24,7 @@ internal object ApplicationTable : Table("applications") {
     val size = varchar(APP_SIZE, 50).nullable()
     val favourite = bool(APP_FAVOURITE).default(false)
     val categoryId =
-        long(APP_CATEGORY_ID).references(CategoryTable.id, onDelete = ReferenceOption.SET_NULL)
-            .nullable()
+        long(APP_CATEGORY_ID).references(CategoryTable.id, onDelete = ReferenceOption.CASCADE)
 }
 
 internal object CategoryTable : Table("categories") {
@@ -42,7 +41,7 @@ internal object ScreenshotTable : Table("screenshots") {
         long(SCREENSHOT_APP_ID).references(ApplicationTable.id, onDelete = ReferenceOption.CASCADE)
 }
 
-fun ResultRow.mapRowToApplication(category: Category? = null, screenshots: List<Screenshot>) =
+fun ResultRow.mapRowToApplication(category: Category, screenshots: List<Screenshot>) =
     Application(
         id = get(ApplicationTable.id),
         name = get(ApplicationTable.name),
@@ -52,7 +51,7 @@ fun ResultRow.mapRowToApplication(category: Category? = null, screenshots: List<
     )
 
 fun ResultRow.mapRowToApplicationDetailResponse(
-    category: Category? = null,
+    category: Category,
     screenshots: List<Screenshot>
 ) =
     ApplicationDetailResponse(

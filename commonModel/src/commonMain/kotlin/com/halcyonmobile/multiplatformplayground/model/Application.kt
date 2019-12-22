@@ -20,7 +20,7 @@ data class Application(
     @SerialName(APP_FAVOURITE)
     val favourite: Boolean = false,
     @SerialName(APP_CATEGORY)
-    var category: Category? = null
+    var category: Category
 )
 
 @Serializable

@@ -136,20 +136,22 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
-    override suspend fun getCategory(id: Long): Category? = withContext(dispatcher) {
+    override suspend fun getCategory(id: Long): Category = withContext(dispatcher) {
         transaction {
-            CategoryTable.select { (CategoryTable.id eq id) }.firstOrNull()?.mapRowToCategory()
+            CategoryTable.select { (CategoryTable.id eq id) }.first().mapRowToCategory()
         }
     }
 
-    override suspend fun saveScreenshot(screenshot: Screenshot) = withContext(dispatcher) {
-        transaction {
-            ScreenshotTable.insert {
-                it[name] = screenshot.name
-                it[image] = screenshot.image
-            }[ScreenshotTable.id]
+    override suspend fun saveScreenshot(screenshot: Screenshot, appId: Long) =
+        withContext(dispatcher) {
+            transaction {
+                ScreenshotTable.insert {
+                    it[name] = screenshot.name
+                    it[image] = screenshot.image
+                    it[applicationId] = appId
+                }[ScreenshotTable.id]
+            }
         }
-    }
 
     override suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot> =
         withContext(dispatcher) {

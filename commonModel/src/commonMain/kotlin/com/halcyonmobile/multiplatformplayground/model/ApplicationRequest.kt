@@ -31,5 +31,5 @@ class ApplicationRequest(
     @SerialName(APP_CATEGORY_ID)
     var categoryId: Long,
     @SerialName(APP_SCREENSHOTS)
-    var screenshots: List<Long>
+    var screenshots: List<Screenshot>
 )

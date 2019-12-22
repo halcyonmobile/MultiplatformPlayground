@@ -31,7 +31,7 @@ data class ApplicationDetailResponse(
     @SerialName(APP_FAVOURITE)
     val favourite: Boolean = false,
     @SerialName(APP_CATEGORY)
-    var category: Category?,
+    var category: Category,
     @SerialName(APP_SCREENSHOTS)
     var screenshots: List<Screenshot>
 )
