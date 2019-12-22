@@ -10,6 +10,8 @@ class ApplicationRequest(
     val name: String,
     @SerialName(APP_DEVELOPER)
     val developer: String,
+    @SerialName(APP_ICON)
+    val encodedIcon: String,
     @SerialName(APP_RATING)
     val rating: Float,
     @SerialName(APP_RATING_COUNT)

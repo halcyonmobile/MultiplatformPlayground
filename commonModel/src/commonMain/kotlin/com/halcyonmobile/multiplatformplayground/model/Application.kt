@@ -12,7 +12,7 @@ data class ApplicationWithDetail(
 @Serializable
 data class Application(
     @SerialName(APP_ID)
-    val id: Long,
+    val id: Long = 0,
     @SerialName(APP_NAME)
     val name: String,
     @SerialName(APP_DEVELOPER)

@@ -11,6 +11,7 @@ class GoogleCloudStorage : FileStorage() {
 
     private val storage = StorageOptions.getDefaultInstance().service
 
+    // todo update it to writer
     override fun upload(bytes: ByteArray, name: String, uploadPath: String): String =
         storage.create(
             BlobInfo.newBuilder(uploadPath, name)
@@ -18,4 +19,5 @@ class GoogleCloudStorage : FileStorage() {
                 .build()
             , bytes
         ).mediaLink
+
 }

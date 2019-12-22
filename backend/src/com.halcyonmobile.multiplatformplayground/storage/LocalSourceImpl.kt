@@ -128,6 +128,12 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
+    override suspend fun getCategory(id: Long): Category? = withContext(dispatcher) {
+        transaction {
+            CategoryTable.select { (CategoryTable.id eq id) }.firstOrNull()?.mapRowToCategory()
+        }
+    }
+
     override suspend fun saveScreenshot(screenshot: Screenshot) = withContext(dispatcher) {
         // todo implement this
     }

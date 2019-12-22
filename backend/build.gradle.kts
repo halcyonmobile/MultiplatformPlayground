@@ -39,6 +39,8 @@ dependencies {
     implementation(Versions.Jvm.jetbrainsExposed)
     implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
 
+    implementation(Versions.Jvm.googleCloudStorage)
+
 }
 
 sourceSets.main {

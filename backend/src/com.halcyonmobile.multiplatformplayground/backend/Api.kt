@@ -22,7 +22,7 @@ import java.lang.Exception
 // todo general error handling
 internal fun Routing.api(localSource: LocalSource, fileStorage: FileStorage) {
     apiApplications(localSource)
-    apiCreateApplication(localSource)
+    apiCreateApplication(localSource, fileStorage)
     apiUpdateApplication(localSource)
     apiGetApplication(localSource)
     apiFilterApplications(localSource)
@@ -45,19 +45,27 @@ private fun Routing.apiApplications(localSource: LocalSource) {
  *  POST /api/v1/applications
  */
 // todo handle file
-private fun Routing.apiCreateApplication(localSource: LocalSource) {
+@UseExperimental(InternalAPI::class)
+private fun Routing.apiCreateApplication(localSource: LocalSource, fileStorage: FileStorage) {
     post("/applications") {
-        val parts = call.receiveMultipart().readAllParts()
-        // todo handle icon
-        val icon = (parts.firstOrNull { it.name == APP_ICON } as? PartData.FileItem)
-        // todo handle screenshot ids
-//        val screenshotIds = parts.firstOrNull { it.name == "screenshot_ids[]" } as? PartData.FormItem)
-        val applicationRequest =
-            parts.filterIsInstance<PartData.FormItem>().createAppRequestFromPartMap()
+        val applicationRequest = call.receive<ApplicationRequest>()
+
+        val iconUrl = fileStorage.uploadIcon(
+            applicationRequest.encodedIcon.decodeBase64Bytes(),
+            applicationRequest.name
+        )
 
         try {
             val screenshots = localSource.getScreenshots(applicationRequest.screenshots)
-            localSource.createApplication()
+            val category = localSource.getCategory(applicationRequest.categoryId)
+
+            localSource.createApplication(
+                applicationRequest.toApplication(
+                    iconUrl,
+                    category,
+                    screenshots
+                )
+            )
             call.respond(HttpStatusCode.Created)
         } catch (e: Exception) {
             call.respond(HttpStatusCode.Conflict)
@@ -127,45 +135,39 @@ private fun Routing.apiGetCategories(localSource: LocalSource) {
 private fun Routing.apiPostScreenshot(localSource: LocalSource, fileStorage: FileStorage) {
     post("/screenshots") {
         val screenshot = call.receive<Screenshot>()
-        val mediaUrl =
+        val screenshotUrl =
             fileStorage.uploadScreenshot(screenshot.image.decodeBase64Bytes(), screenshot.name)
 
-        val savedScreenshot = Screenshot(name = screenshot.name, image = mediaUrl)
+        val savedScreenshot = Screenshot(name = screenshot.name, image = screenshotUrl)
         val id = localSource.saveScreenshot(savedScreenshot)
         call.respond(savedScreenshot.copy(id = id))
     }
 }
 
-
-private fun List<PartData.FormItem>.createAppRequestFromPartMap(): ApplicationRequest {
-    val name = first { it.name == APP_NAME }.value
-    val developer = first { it.name == APP_DEVELOPER }.value
-    val description = first { it.name == APP_DESCRIPTION }.value
-    val categoryId = first { it.name == APP_CATEGORY_ID }.value.toLong()
-    val rating = first { it.name == APP_RATING }.value.toFloat()
-    val ratingCount = first { it.name == APP_RATING_COUNT }.value.toInt()
-    val downloads = first { it.name == APP_DOWNLOADS }.value
-    val version = first { it.name == APP_VERSION }.value
-    val storeUrl = first { it.name == APP_STORE_URL }.value
-    val size = first { it.name == APP_SIZE }.value
-    val screenshots = first { it.name == APP_SCREENSHOTS }.value
-
-    // todo solve categoryId
-    return ApplicationRequest(
-        id = 0,
-        name = name,
-        developer = developer,
-        categoryId = categoryId,
-        description = description,
-        rating = rating,
-        ratingCount = ratingCount,
-        downloads = downloads,
-        version = version,
-        size = size,
-        storeUrl = storeUrl,
-        screenshots = screenshots
+private fun ApplicationRequest.toApplication(
+    iconUrl: String,
+    category: Category?,
+    screenshots: List<Screenshot>
+) =
+    ApplicationWithDetail(
+        application = Application(
+            name = name,
+            developer = developer,
+            favourite = favourite,
+            category = category
+        ),
+        applicationDetail = ApplicationDetail(
+            iconUrl,
+            rating,
+            ratingCount,
+            storeUrl,
+            description,
+            downloads,
+            version,
+            size,
+            screenshots
+        )
     )
-}
 
 const val NAME_QUERY_KEY = "name"
 const val CATEGORY_QUERY_KEY = "category"
