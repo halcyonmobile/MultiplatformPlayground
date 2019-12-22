@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Category(
     @SerialName(CATEGORY_ID)
-    val id: Long,
+    val id: Long = 0,
     @SerialName(CATEGORY_NAME)
     val name: String,
     @SerialName(CATEGORY_ICON)

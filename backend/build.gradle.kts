@@ -40,7 +40,7 @@ dependencies {
     implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
 
     implementation(Versions.Jvm.googleCloudStorage)
-
+    implementation(Versions.Jvm.logback)
 }
 
 sourceSets.main {

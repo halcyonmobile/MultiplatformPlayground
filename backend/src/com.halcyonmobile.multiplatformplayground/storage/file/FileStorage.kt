@@ -5,12 +5,17 @@ abstract class FileStorage {
     protected abstract val appIconPath: String
     protected abstract val categoryIconPath: String
 
-    fun uploadScreenshot(bytes: ByteArray, name: String) =
+    suspend fun uploadScreenshot(bytes: ByteArray, name: String) =
         upload(bytes, name, screenshotPath)
 
-    fun uploadIcon(bytes: ByteArray, name: String) = upload(bytes, name, appIconPath)
+    suspend fun uploadIcon(bytes: ByteArray, name: String) = upload(bytes, name, appIconPath)
 
-    fun uploadCategory(bytes: ByteArray, name: String) = upload(bytes, name, categoryIconPath)
+    suspend fun uploadCategory(bytes: ByteArray, name: String) =
+        upload(bytes, name, categoryIconPath)
 
-    protected abstract fun upload(bytes: ByteArray, name: String, uploadPath: String): String
+    protected abstract suspend fun upload(
+        bytes: ByteArray,
+        name: String,
+        uploadPath: String
+    ): String
 }
