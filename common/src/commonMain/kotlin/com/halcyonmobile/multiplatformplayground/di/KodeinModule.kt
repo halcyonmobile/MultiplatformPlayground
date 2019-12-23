@@ -39,7 +39,6 @@ private val useCaseModule = Kodein.Module("useCaseModule") {
     import(repositoryModule)
 
     bind<GetCategoriesUseCase>() with provider { GetCategoriesUseCase(instance()) }
-    bind<UploadScreenshotUseCase>() with provider { UploadScreenshotUseCase(instance()) }
     bind<GetFavouritesUseCase>() with provider { GetFavouritesUseCase(instance()) }
     bind<GetApplicationUseCase>() with provider { GetApplicationUseCase(instance()) }
     bind<GetApplicationsUseCase>() with provider { GetApplicationsUseCase(instance()) }
