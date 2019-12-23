@@ -14,11 +14,6 @@ android {
         minSdkVersion(19)
         targetSdkVersion(29)
     }
-
-    packagingOptions {
-        pickFirst("META-INF/ktor-client-serialization.kotlin_module")
-        pickFirst("META-INF/kotlinx-coroutines-io.kotlin_module")
-    }
 }
 
 kotlin {
