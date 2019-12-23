@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.halcyonmobile.appportfolio.feature.favourites.FavouritesViewModel" />
+            type="com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel" />
     </data>
 
     <TextView

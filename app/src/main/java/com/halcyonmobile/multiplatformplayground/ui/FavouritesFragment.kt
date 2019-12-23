@@ -7,5 +7,5 @@ import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
 
 class FavouritesFragment : AppPortfolioFragment<FavouritesFragmentBinding, FavouritesViewModel>(R.layout.fragment_favourites) {
 
-    override val viewModel: FavouritesViewModel by viewModel()
+    override val viewModel: FavouritesViewModel
 }
