@@ -43,6 +43,10 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
+    // DI
+    implementation("org.kodein.di:kodein-di-generic-jvm:${Versions.kodeinVersion}")
+    implementation("org.kodein.di:kodein-di-framework-android-core:${Versions.kodeinVersion}")
+
     // MDC
     implementation 'com.google.android.material:material:1.2.0-alpha03'
 
