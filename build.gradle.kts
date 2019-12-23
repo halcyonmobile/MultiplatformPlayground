@@ -37,6 +37,8 @@ allprojects {
         maven("https://kotlin.bintray.com/kotlinx")
         maven("https://dl.bintray.com/kotlin/ktor")
         maven("https://dl.bintray.com/kotlin/exposed")
+        maven("https://jitpack.io")
+        maven("https://dl.bintray.com/kodein-framework/Kodein-DI")
     }
 }
 

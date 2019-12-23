@@ -9,6 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".AppPortfolioApp"
         android:theme="@style/BaseTheme.App"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".ui.HomeActivity">
