@@ -2,9 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data class=".SettingsFragmentBinding" >
-        <variable
-            name="viewModel"
-            type="com.halcyonmobile.appportfolio.feature.settings.SettingsViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.halcyonmobile.Settin" />-->
     </data>
 
     <TextView

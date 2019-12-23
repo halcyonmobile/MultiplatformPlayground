@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.halcyonmobile.multiplatformplayground.HomeBinding
 import com.halcyonmobile.multiplatformplayground.R
 

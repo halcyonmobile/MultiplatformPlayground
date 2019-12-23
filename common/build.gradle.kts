@@ -11,7 +11,7 @@ android {
     compileSdkVersion(project.extra.get("compileSdk") as Int)
     buildToolsVersion("29.0.1")
     defaultConfig {
-        minSdkVersion(19)
+        minSdkVersion(21)
         targetSdkVersion(29)
     }
 }

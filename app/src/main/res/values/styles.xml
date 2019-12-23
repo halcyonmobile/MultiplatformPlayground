@@ -1,11 +1,25 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="android:windowBackground">@color/white</item>
+
+        <item name="textAppearanceCaption">@style/Caption</item>
+        <item name="textAppearanceBody1">@style/Body1</item>
+        <item name="textAppearanceBody2">@style/Body2</item>
+        <item name="textAppearanceSubtitle1">@style/Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/Subtitle2</item>
+        <item name="textAppearanceHeadline6">@style/Headline6</item>
+        <item name="textAppearanceHeadline5">@style/Headline5</item>
+        <item name="textAppearanceHeadline4">@style/Headline4</item>
+        <item name="textAppearanceHeadline3">@style/Headline3</item>
+        <item name="textAppearanceHeadline2">@style/Headline2</item>
+        <item name="textAppearanceHeadline1">@style/Headline1</item>
     </style>
+
+    <!-- Base application theme. -->
+    <style name="BaseTheme.App" />
 
 </resources>

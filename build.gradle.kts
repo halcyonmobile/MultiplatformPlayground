@@ -14,6 +14,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:3.5.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${project.extra["kotlinVersion"]}")
         classpath("com.github.jengelman.gradle.plugins:shadow:${project.extra["shadowVersion"]}")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.2.0-rc04")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -26,7 +27,7 @@ allprojects {
         set("kotlinVersion", "1.3.50")
         set("compileSdk", 28)
         set("minSdk", 21)
-        set("targetSdk", 27)
+        set("targetSdk", 29)
         set("version", 1)
         set("versionName", "1.0.0")
     }
