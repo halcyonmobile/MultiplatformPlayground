@@ -147,22 +147,6 @@ private fun Routing.apiPostCategory(localSource: LocalSource, fileStorage: FileS
     }
 }
 
-/**
- * POST /api/v1/screenshots
- */
-//@UseExperimental(InternalAPI::class)
-//private fun Routing.apiPostScreenshot(localSource: LocalSource, fileStorage: FileStorage) {
-//    post("/screenshots") {
-//        val screenshot = call.receive<Screenshot>()
-//        val screenshotUrl =
-//            fileStorage.uploadScreenshot(screenshot.image.decodeBase64Bytes(), screenshot.name)
-//
-//        val savedScreenshot = Screenshot(name = screenshot.name, image = screenshotUrl)
-//        val id = localSource.saveScreenshot(savedScreenshot)
-//        call.respond(savedScreenshot.copy(id = id))
-//    }
-//}
-
 private suspend fun LocalSource.getNextApplicationId() =
     getApplications().map { it.id }.max() ?: 0 + 1
 

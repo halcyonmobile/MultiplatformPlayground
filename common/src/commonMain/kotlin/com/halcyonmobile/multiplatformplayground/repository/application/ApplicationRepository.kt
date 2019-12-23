@@ -1,5 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
+import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
+import com.halcyonmobile.multiplatformplayground.shared.util.File
 import com.halcyonmobile.multiplatformplayground.shared.util.getStreamFromCacheFallbackOnRemote
 
 
@@ -28,21 +30,19 @@ internal class ApplicationRepository(
             }
         )
 
-//    suspend fun create(
-//        application: ApplicationWithDetail,
-//        icon: File,
-//        screenshots: List<Screenshot>?
-//    ) =
-//        remoteSource.create(
-//            application,
-//            icon,
-//            screenshots
-//        ).also { localSource.cacheApplicationWithDetail(application) }
+    suspend fun create(
+        application: ApplicationWithDetail,
+        icon: File,
+        screenshots: List<File>
+    ) =
+        remoteSource.create(
+            application,
+            icon,
+            screenshots
+        ).also { localSource.cacheApplicationWithDetail(application) }
 
     suspend fun updateFavourites(applicationId: Long, isFavourite: Boolean) =
         localSource.updateFavourites(applicationId, isFavourite)
-
-    // TODO add paging methods
 
     companion object {
         const val DEFAULT_PER_PAGE = 10
