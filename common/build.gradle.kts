@@ -68,8 +68,14 @@ kotlin {
 
             // Ktor-client for network requests
             implementation(Versions.Jvm.ktorClientSerialization)
+            implementation(Versions.Jvm.ktorClientCore)
+            implementation(Versions.Android.androidEngine)
+            implementation(Versions.Jvm.ktorClientJson)
             // Serialization
             implementation(Versions.Shared.serializationRuntime)
+
+            implementation(Versions.Jvm.kodeinGeneric)
+            implementation(Versions.Android.kodeinAndroidX)
         }
     }
     // endregion

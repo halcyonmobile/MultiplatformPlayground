@@ -45,6 +45,6 @@ private val useCaseModule = Kodein.Module("useCaseModule") {
     bind<UpdateFavouriteUseCase>() with provider { UpdateFavouriteUseCase(instance()) }
 }
 
-val kodein = Kodein {
+fun Kodein.MainBuilder.bindCommonModule() {
     import(useCaseModule)
 }

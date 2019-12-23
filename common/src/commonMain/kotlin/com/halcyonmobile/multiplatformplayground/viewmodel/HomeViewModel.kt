@@ -9,20 +9,27 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class HomeViewModel internal constructor(private val getCategories: GetCategoriesUseCase) :
+class HomeViewModel internal constructor(
+    private val getCategories: GetCategoriesUseCase,
+    private val categoryRepository: CategoryRepository
+) :
     CoroutineViewModel() {
 
     val categories = Observable<List<Category>>()
 
     init {
         coroutineScope.launch {
-            getCategories()
-                .catch { e ->
-                    // todo handle error
-                }
+            categoryRepository.stream
                 .collect {
                     categories.value = it
                 }
+        }
+        coroutineScope.launch {
+            try {
+                getCategories()
+            } catch (e: Exception) {
+                // todo handle error
+            }
         }
     }
 }
