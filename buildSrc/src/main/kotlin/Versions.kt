@@ -63,5 +63,8 @@ object Versions {
         const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
         const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
+        const val kodeinAndroidX = "org.kodein.di:kodein-di-framework-android-x:$kodeinVersion"
+        const val androidEngine = "io.ktor:ktor-client-android:$ktorVersion"
     }
 }
