@@ -1,8 +1,5 @@
 package com.halcyonmobile.multiplatformplayground.api
 
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -11,11 +8,7 @@ import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.header
-import io.ktor.http.HttpHeaders
 import io.ktor.http.takeFrom
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.Json
 
 internal abstract class KtorApi {
     protected val client = HttpClient {
@@ -24,18 +17,10 @@ internal abstract class KtorApi {
             level = LogLevel.ALL
         }
         install(JsonFeature) {
-            serializer = KotlinxSerializer(Json.nonstrict).apply {
-                registerMapper(Application.serializer())
-                registerMapper(Category.serializer())
-                registerMapper(Screenshot.serializer())
-            }
+            serializer = KotlinxSerializer()
         }
     }
 
-    private inline fun <reified T : Any> KotlinxSerializer.registerMapper(mapper: KSerializer<T>) {
-        register(mapper)
-        registerList(mapper)
-    }
 
     protected fun HttpRequestBuilder.apiUrl(path: String) {
 //        header(HttpHeaders.Authorization, "token $TOKEN")
