@@ -28,6 +28,7 @@ object Versions {
         const val ktorUtility = "io.ktor:ktor-utils-native:$ktorVersion"
         const val ktorClientCore = "io.ktor:ktor-client-core:$ktorVersion"
         const val ktorClientJson = "io.ktor:ktor-client-json:$ktorVersion"
+        const val ktorLogging = "io.ktor:ktor-client-logging:$ktorVersion"
         const val ktorClientSerialization = "io.ktor:ktor-client-serialization:$ktorVersion"
 
         const val coroutinesCore =
@@ -47,6 +48,7 @@ object Versions {
         const val ktorClientApache = "io.ktor:ktor-client-apache:$ktorVersion"
         const val ktorClientCore = "io.ktor:ktor-client-core-jvm:$ktorVersion"
         const val ktorClientJson = "io.ktor:ktor-client-json-jvm:$ktorVersion"
+        const val ktorLogging = "io.ktor:ktor-client-logging-jvm:$ktorVersion"
         const val ktorClientSerialization = "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
         const val ktorServerNetty = "io.ktor:ktor-server-netty:$ktorVersion"
         const val ktorSerialization = "io.ktor:ktor-serialization:$ktorVersion"
@@ -58,6 +60,10 @@ object Versions {
 
         const val googleCloudStorage = "com.google.cloud:google-cloud-storage:1.102.0"
         const val logback = "ch.qos.logback:logback-classic:1.2.3"
+    }
+
+    object iOS {
+        const val ktorLogging = "io.ktor:ktor-client-logging-native:$ktorVersion"
     }
 
     object Android {
