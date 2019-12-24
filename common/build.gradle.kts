@@ -80,6 +80,12 @@ kotlin {
             implementation(Versions.Android.kodeinAndroidX)
         }
     }
+
+    ios {
+        dependencies{
+            implementation(Versions.iOS.ktorLogging)
+        }
+    }
     // endregion
 }
 

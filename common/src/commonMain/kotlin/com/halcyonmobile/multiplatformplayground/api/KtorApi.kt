@@ -39,16 +39,16 @@ internal abstract class KtorApi {
 
     protected fun HttpRequestBuilder.apiUrl(path: String) {
 //        header(HttpHeaders.Authorization, "token $TOKEN")
-        header(HttpHeaders.CacheControl, "no-cache")
+//        header(HttpHeaders.CacheControl, "no-cache")
         url {
             takeFrom(BASE_URL)
             encodedPath = path
+            port = 8080
         }
     }
 
     companion object {
         // todo move to gradle
-        const val BASE_URL = "localhost:8080/"
-//        const val TOKEN = "qwertyasdfghzxcvbn"
+        const val BASE_URL = "localhost"
     }
 }
