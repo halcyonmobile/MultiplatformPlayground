@@ -22,6 +22,7 @@ class HomeViewModel internal constructor(
             categoryRepository.stream
                 .collect {
                     categories.value = it
+                    println(it)
                 }
         }
         coroutineScope.launch {

@@ -6,9 +6,3 @@ import kotlinx.coroutines.flow.flattenMerge
 import kotlinx.coroutines.flow.flowOf
 
 fun <T> Flow<T>.merge(vararg other: Flow<T>): Flow<T> = flowOf(this, *other).flattenMerge()
-
-suspend fun <T> Flow<T>.firstOrNull(): T? = try {
-    first()
-}catch (e: NoSuchElementException){
-    null
-}

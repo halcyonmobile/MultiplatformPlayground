@@ -41,6 +41,7 @@ kotlin {
                 implementation(project(":commonModel"))
                 // Ktor-client for network requests
                 implementation(Versions.Common.ktorClientCore)
+                implementation(Versions.Common.ktorLogging)
                 implementation(Versions.Common.ktorClientJson)
                 implementation(Versions.Common.ktorClientSerialization)
                 implementation(Versions.Common.ktorUtility)
@@ -71,6 +72,7 @@ kotlin {
             implementation(Versions.Jvm.ktorClientCore)
             implementation(Versions.Android.androidEngine)
             implementation(Versions.Jvm.ktorClientJson)
+            implementation(Versions.Jvm.ktorLogging)
             // Serialization
             implementation(Versions.Shared.serializationRuntime)
 
