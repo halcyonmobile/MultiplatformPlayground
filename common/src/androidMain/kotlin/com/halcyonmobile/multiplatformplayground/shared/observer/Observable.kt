@@ -17,6 +17,10 @@ actual class Observable<T> {
             ?: throw IllegalArgumentException("Observer should be a ${LiveDataObserver::class.java.canonicalName}")
     }
 
+    fun observe(lifecycleOwner: LifecycleOwner, androidObserver: androidx.lifecycle.Observer<T>) {
+        observe(LiveDataObserver(lifecycleOwner, androidObserver))
+    }
+
     actual fun removeObserver(observer: Observer<T>) {
         (observer as? LiveDataObserver?)?.let {
             liveData.removeObserver(it.androidObserver)

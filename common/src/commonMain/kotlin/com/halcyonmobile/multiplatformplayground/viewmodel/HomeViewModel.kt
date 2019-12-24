@@ -4,6 +4,7 @@ import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
+import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -11,11 +12,12 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel internal constructor(
     private val getCategories: GetCategoriesUseCase,
+    private val fetchCategories: FetchCategoriesUseCase,
     private val categoryRepository: CategoryRepository
-) :
-    CoroutineViewModel() {
+) : CoroutineViewModel() {
 
     val categories = Observable<List<Category>>()
+    val error = Observable<String>()
 
     init {
         coroutineScope.launch {
@@ -29,8 +31,16 @@ class HomeViewModel internal constructor(
             try {
                 getCategories()
             } catch (e: Exception) {
-                // todo handle error
+                error.value = e.message
             }
+        }
+    }
+
+    private fun fetch() = coroutineScope.launch {
+        try {
+            fetchCategories()
+        } catch (e: Exception) {
+            error.value = e.message
         }
     }
 }
