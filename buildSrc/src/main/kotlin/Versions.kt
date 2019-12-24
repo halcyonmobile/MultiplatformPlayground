@@ -1,9 +1,12 @@
 object Versions {
-    private const val kotlinVersion = "1.3.50"
+    private const val kotlinVersion = "1.3.60"
     private const val ktorVersion = "1.3.0-rc"
     private const val coroutinesVersion = "1.3.2"
     private const val serializationVersion = "0.14.0"
     private const val kodeinVersion = "6.4.1"
+
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    const val shadow = "com.github.jengelman.gradle.plugins:shadow:2.0.2"
 
     object Shared {
         const val kodeinCore = "org.kodein.di:kodein-di-core:$kodeinVersion"
