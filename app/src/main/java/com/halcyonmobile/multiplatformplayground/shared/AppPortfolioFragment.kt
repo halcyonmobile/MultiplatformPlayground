@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.halcyonmobile.multiplatformplayground.BR
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -22,7 +24,6 @@ abstract class AppPortfolioFragment<VB : ViewDataBinding, VM : ViewModel>(@Layou
     protected abstract val viewModel: VM
 
     override val kodein: Kodein by closestKodein()
-
 
     @CallSuper
     override fun onCreateView(
@@ -43,4 +44,12 @@ abstract class AppPortfolioFragment<VB : ViewDataBinding, VM : ViewModel>(@Layou
 
     protected fun requireBinding(): VB =
         binding ?: throw NullPointerException("View is in destroyed state and the Binding is null")
+
+    protected fun showSnackBar(text: String, duration: Int = Snackbar.LENGTH_LONG) {
+        Snackbar.make(requireBinding().root, text, duration).show()
+    }
+
+    protected inline fun showSnackBar(@StringRes textRes: Int, crossinline action: () -> Unit) {
+        Snackbar.make(requireBinding().root, getString(textRes), Snackbar.LENGTH_LONG).setAction("retry") { action() }.show()
+    }
 }
