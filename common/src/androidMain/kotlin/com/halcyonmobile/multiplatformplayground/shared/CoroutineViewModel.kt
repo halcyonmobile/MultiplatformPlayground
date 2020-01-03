@@ -7,4 +7,7 @@ actual open class CoroutineViewModel : ViewModel() {
 
     actual val coroutineScope = viewModelScope
 
+    actual override fun onCleared() {
+        super.onCleared()
+    }
 }
