@@ -11,7 +11,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.takeFrom
 
 internal abstract class KtorApi {
-    protected val client = HttpClient {
+    protected val client = HttpClient(engine) {
         install(Logging) {
             logger = Logger.DEFAULT
             level = LogLevel.ALL

@@ -63,6 +63,13 @@ object Versions {
     }
 
     object iOS {
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutinesVersion"
+        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion"
+
+        const val ktorClient = "io.ktor:ktor-client-ios:$ktorVersion"
+        const val ktorClientJson = "io.ktor:ktor-client-json-native:$ktorVersion"
+        const val ktorSerialization = "io.ktor:ktor-client-serialization-native:$ktorVersion"
         const val ktorLogging = "io.ktor:ktor-client-logging-native:$ktorVersion"
     }
 
