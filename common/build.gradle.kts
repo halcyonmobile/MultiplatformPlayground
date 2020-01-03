@@ -14,6 +14,14 @@ android {
         minSdkVersion(21)
         targetSdkVersion(29)
     }
+
+    sourceSets {
+        getByName("main") {
+            manifest.srcFile("src/androidMain/AndroidManifest.xml")
+            java.srcDirs("src/androidMain/kotlin")
+            res.srcDirs("src/androidMain/res")
+        }
+    }
 }
 
 kotlin {
