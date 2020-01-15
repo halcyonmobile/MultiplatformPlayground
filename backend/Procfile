@@ -1,1 +1,1 @@
-web:    java -jar target/helloworld.jar
+web: build/install/multiplatformplayground-backend/bin/multiplatformplayground-backend

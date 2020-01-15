@@ -6,7 +6,6 @@ object Versions {
     private const val kodeinVersion = "6.4.1"
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    const val shadow = "com.github.jengelman.gradle.plugins:shadow:2.0.2"
 
     object Shared {
         const val kodeinCore = "org.kodein.di:kodein-di-core:$kodeinVersion"
