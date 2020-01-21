@@ -89,17 +89,15 @@ kotlin {
         }
     }
 
-    ios {
-        dependencies {
-            implementation(Versions.iOS.stdlib)
-            implementation(Versions.iOS.coroutines)
-            implementation(Versions.iOS.serialization)
+    sourceSets["iosMain"].dependencies {
+        implementation(Versions.iOS.stdlib)
+        implementation(Versions.iOS.coroutines)
+        implementation(Versions.iOS.serialization)
 
-//            implementation(Versions.iOS.ktorClient)
-            implementation(Versions.iOS.ktorClientJson)
-            implementation(Versions.iOS.ktorSerialization)
-            implementation(Versions.iOS.ktorLogging)
-        }
+        implementation(Versions.iOS.ktorClient)
+        implementation(Versions.iOS.ktorClientJson)
+        implementation(Versions.iOS.ktorSerialization)
+        implementation(Versions.iOS.ktorLogging)
     }
     // endregion
 }
