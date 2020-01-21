@@ -45,6 +45,7 @@ kotlin {
 
     cocoapods {
         summary = "AppPortfolio common code"
+        homepage = "AppPortfolio home page"
     }
 
     android()

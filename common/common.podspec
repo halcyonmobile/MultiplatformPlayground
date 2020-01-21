@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'common'
     spec.version                  = '1.0.0'
-    spec.homepage                 = ''
+    spec.homepage                 = 'AppPortfolio home page'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
