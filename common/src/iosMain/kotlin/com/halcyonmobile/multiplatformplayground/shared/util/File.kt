@@ -7,7 +7,6 @@ import platform.Foundation.NSFileHandle
 import platform.Foundation.readDataToEndOfFile
 import platform.posix.memcpy
 
-
 actual typealias File = NSFileHandle
 
 actual fun File.toByteArray() = readDataToEndOfFile().toByteArray()
