@@ -96,11 +96,12 @@ kotlin {
             implementation(Versions.Android.kodeinAndroidX)
         }
     }
+    //endregion
 
+    // region iOS
     sourceSets["iosMain"].dependencies {
         implementation(Versions.iOS.stdlib)
         implementation(Versions.iOS.coroutines)
-        implementation(Versions.iOS.serialization)
 
         implementation(Versions.iOS.ktorClient)
         implementation(Versions.iOS.ktorClientJson)
