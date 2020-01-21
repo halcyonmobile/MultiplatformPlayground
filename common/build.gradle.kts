@@ -4,7 +4,10 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization") version "1.3.50"
     id("com.android.library")
+    id("org.jetbrains.kotlin.native.cocoapods")
 }
+
+version = "1.0.0"
 
 android {
     // todo extract these
@@ -38,6 +41,10 @@ kotlin {
                 kotlinOptions.freeCompilerArgs = listOf("-Xobjc-generics")
             }
         }
+    }
+
+    cocoapods {
+        summary = "AppPortfolio common code"
     }
 
     android()
