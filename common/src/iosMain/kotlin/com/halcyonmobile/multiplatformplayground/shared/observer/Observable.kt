@@ -1,6 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.shared.observer
 
-actual class Observable<T> {
+actual class Observable<T : Any> {
     actual var value: T? = null
         set(value) {
             field = value

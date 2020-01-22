@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import java.lang.IllegalArgumentException
 
-actual class Observable<T> {
+actual class Observable<T : Any> {
 
     actual var value: T? = null
 
@@ -29,10 +29,10 @@ actual class Observable<T> {
     }
 }
 
-class LiveDataObserver<T>(
+class LiveDataObserver<T : Any>(
     val lifecycleOwner: LifecycleOwner,
     val androidObserver: androidx.lifecycle.Observer<T>
-) : Observer<T> {
+) : Observer<T>() {
 
     override fun onChanged(value: T?) {
         androidObserver.onChanged(value)
