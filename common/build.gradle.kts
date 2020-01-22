@@ -68,8 +68,6 @@ kotlin {
                 // DI
                 implementation(Versions.Shared.kodeinCore)
                 implementation(Versions.Shared.kodeinErased)
-                // I/O library
-                implementation(Versions.Common.okio)
             }
         }
     }

@@ -1,8 +1,8 @@
 object Versions {
-    private const val kotlinVersion = "1.3.60"
-    private const val ktorVersion = "1.3.0"
+    private const val kotlinVersion = "1.3.50"
+    private const val ktorVersion = "1.2.5"
     private const val coroutinesVersion = "1.3.2"
-    private const val serializationVersion = "0.14.0"
+    private const val serializationVersion = "0.13.0"
     private const val kodeinVersion = "6.4.1"
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
@@ -34,8 +34,6 @@ object Versions {
             "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
         const val serialization =
             "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion"
-
-        const val okio = "com.squareup.okio:okio-multiplatform:2.4.2"
     }
 
     object Jvm {
@@ -68,7 +66,7 @@ object Versions {
         const val serialization =
             "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion"
 
-        const val ktorClient = "io.ktor:ktor-client-ios:1.0.1"
+        const val ktorClient = "io.ktor:ktor-client-ios:$ktorVersion"
         const val ktorClientJson = "io.ktor:ktor-client-json-native:$ktorVersion"
         const val ktorSerialization = "io.ktor:ktor-client-serialization-native:$ktorVersion"
         const val ktorLogging = "io.ktor:ktor-client-logging-native:$ktorVersion"
