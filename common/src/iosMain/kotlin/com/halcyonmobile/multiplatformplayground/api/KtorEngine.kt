@@ -1,5 +1,5 @@
 package com.halcyonmobile.multiplatformplayground.api
 
-import io.ktor.client.engine.ios.IosClientEngine
+import io.ktor.client.engine.ios.Ios
 
-internal actual val engine by lazy { IosClientEngine }
+internal actual val engine by lazy { Ios.create() }
