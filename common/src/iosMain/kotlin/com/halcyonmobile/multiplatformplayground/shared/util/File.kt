@@ -4,7 +4,6 @@ import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.usePinned
 import platform.Foundation.NSData
 import platform.Foundation.NSFileHandle
-import platform.Foundation.readDataToEndOfFile
 import platform.posix.memcpy
 
 actual typealias File = NSFileHandle
