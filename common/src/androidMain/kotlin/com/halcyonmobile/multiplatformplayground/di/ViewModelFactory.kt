@@ -1,4 +1,4 @@
-package com.halcyonmobile.multiplatformplayground.shared.di
+package com.halcyonmobile.multiplatformplayground.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
