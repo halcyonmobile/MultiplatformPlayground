@@ -2,7 +2,9 @@ package com.halcyonmobile.multiplatformplayground.model
 
 import com.halcyonmobile.multiplatformplayground.shared.util.*
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class ApplicationRequest(
     @SerialName(APP_ID)
     val id: Long,
