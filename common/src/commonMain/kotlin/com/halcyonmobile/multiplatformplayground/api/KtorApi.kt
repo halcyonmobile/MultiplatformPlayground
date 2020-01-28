@@ -1,11 +1,13 @@
 package com.halcyonmobile.multiplatformplayground.api
 
+import com.halcyonmobile.multiplatformplayground.model.*
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.takeFrom
+import kotlinx.serialization.list
 
 internal abstract class KtorApi {
     protected val client = HttpClient(engine) {
@@ -14,7 +16,11 @@ internal abstract class KtorApi {
             level = LogLevel.ALL
         }
         install(JsonFeature) {
-            serializer = KotlinxSerializer()
+            serializer = KotlinxSerializer().apply {
+                register(Application.serializer().list)
+                register(Category.serializer().list)
+                register(Screenshot.serializer().list)
+            }
         }
     }
 

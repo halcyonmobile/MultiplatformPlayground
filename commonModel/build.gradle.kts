@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization") version "1.3.50"
+    id("kotlinx-serialization")
 }
 
 kotlin {
@@ -16,7 +16,7 @@ kotlin {
     iOSTarget("ios") {
         compilations {
             val main by getting {
-                kotlinOptions.freeCompilerArgs = listOf("-Xobjc-generics")
+                kotlinOptions.freeCompilerArgs = listOf("-Xobjc-generics", "-Xinline-classes")
             }
         }
     }
