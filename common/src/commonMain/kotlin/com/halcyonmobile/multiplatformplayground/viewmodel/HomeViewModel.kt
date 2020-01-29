@@ -43,4 +43,12 @@ class HomeViewModel internal constructor(
             error.value = e.message
         }
     }
+
+    fun login(): Boolean {
+        // for showcasing functionality
+        return true
+    }
+
+    fun validate(validationBlock: (String) -> Boolean) =
+        validationBlock("s")
 }

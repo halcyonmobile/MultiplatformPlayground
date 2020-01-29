@@ -21,6 +21,14 @@ actual class Observable<T : Any> {
         observe(LiveDataObserver(lifecycleOwner, androidObserver))
     }
 
+    actual fun observe(doOnChange: (T?) -> Unit) =
+        observe(object : Observer<T>() {
+            override fun onChanged(value: T?) {
+                doOnChange(value)
+            }
+        })
+
+
     actual fun removeObserver(observer: Observer<T>) {
         (observer as? LiveDataObserver?)?.let {
             liveData.removeObserver(it.androidObserver)

@@ -4,7 +4,6 @@ import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
 import com.halcyonmobile.multiplatformplayground.shared.observer.observableOf
-import com.halcyonmobile.multiplatformplayground.shared.observer.observe
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.UpdateFavouriteUseCase
 import kotlinx.coroutines.flow.catch
