@@ -74,13 +74,28 @@ object Versions {
     }
 
     object Android {
-        private const val lifecycleVersion = "2.2.0-alpha05"
+        const val sdkVersion = 29
+        const val minSdkVersion = 21
+        const val buildToolsVersion = "29.0.1"
 
+        private const val lifecycleVersion = "2.2.0-alpha05"
+        const val navigationVersion = "2.2.0"
+
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+        const val appCompat = "androidx.appcompat:appcompat:1.1.0"
+        const val ktx = "androidx.core:core-ktx:1.1.0"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
+        const val materialComponents = "com.google.android.material:material:1.2.0-alpha04"
         const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
         const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
+        const val kodeinGeneric = "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
         const val kodeinAndroidX = "org.kodein.di:kodein-di-framework-android-x:$kodeinVersion"
+
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+        const val navigationUi = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
         const val androidEngine = "io.ktor:ktor-client-android:$ktorVersion"
     }
 }
