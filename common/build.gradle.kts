@@ -11,11 +11,11 @@ version = "1.0.0"
 
 android {
     // todo extract these
-    compileSdkVersion(project.extra.get("compileSdk") as Int)
-    buildToolsVersion("29.0.1")
+    compileSdkVersion(Versions.Android.sdkVersion)
+    buildToolsVersion(Versions.Android.buildToolsVersion)
     defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(29)
+        minSdkVersion(Versions.Android.minSdkVersion)
+        targetSdkVersion(Versions.Android.sdkVersion)
     }
 
     sourceSets {
