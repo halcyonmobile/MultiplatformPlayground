@@ -1,9 +1,9 @@
 object Versions {
     const val kotlinVersion = "1.3.50"
-    private const val ktorVersion = "1.2.5"
-    private const val coroutinesVersion = "1.3.2"
-    private const val serializationVersion = "0.13.0"
-    private const val kodeinVersion = "6.4.1"
+    private const val ktorVersion = "1.3.0"
+    private const val coroutinesVersion = "1.3.3"
+    private const val serializationVersion = "0.14.0"
+    private const val kodeinVersion = "6.5.1"
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     const val kotlinSerializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"
