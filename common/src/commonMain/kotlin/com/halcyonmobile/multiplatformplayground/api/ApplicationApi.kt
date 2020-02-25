@@ -28,7 +28,8 @@ internal class ApplicationApi : KtorApi() {
 
     suspend fun createApplication(
         applicationRequest: ApplicationRequest
-    ) = client.post<Unit> {
+    ): Unit = client.post {
+        json()
         apiUrl("applications")
         body = applicationRequest
     }

@@ -6,6 +6,8 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.*
 import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import io.ktor.http.takeFrom
 import kotlinx.serialization.list
 
@@ -33,6 +35,10 @@ internal abstract class KtorApi {
             encodedPath = path
             port = 8080
         }
+    }
+
+    protected fun HttpRequestBuilder.json() {
+        contentType(ContentType.Application.Json)
     }
 
     companion object {
