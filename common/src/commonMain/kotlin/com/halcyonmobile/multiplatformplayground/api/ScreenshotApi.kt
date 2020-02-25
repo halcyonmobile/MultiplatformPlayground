@@ -6,6 +6,7 @@ import io.ktor.client.request.post
 internal class ScreenshotApi : KtorApi() {
 
     suspend fun uploadScreenshot(screenshot: File): Unit = client.post {
+        json()
         apiUrl("/screenshots")
     }
 }
