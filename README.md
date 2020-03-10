@@ -6,6 +6,7 @@
 # Todos with pending issue
 * Add multithreading -> [Check out the issue](https://github.com/Kotlin/kotlinx.coroutines/issues/462) [and this](https://github.com/Kotlin/kotlinx.coroutines/pull/1648)
 * Come up with a solution for exposing `Flow`s and `suspend` functions or use a 3rd party DB library for the LocalSource
+* Discuss if it's worth using Kodein (since iOS doesn't necessarily use service locators & Kodein is still incomplete)
 * Update to [Kotlin 1.3.70](https://github.com/touchlab/KaMPKit/issues/62)
 
 # Known Kotlin <-> Obj-c <-> Swift interopability issues
