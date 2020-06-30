@@ -1,8 +1,8 @@
 object Versions {
-    const val kotlinVersion = "1.3.60"
-    private const val ktorVersion = "1.3.0"
-    private const val coroutinesVersion = "1.3.3"
-    private const val serializationVersion = "0.14.0"
+    const val kotlinVersion = "1.3.70"
+    private const val ktorVersion = "1.3.2"
+    private const val coroutinesVersion = "1.3.4"
+    private const val serializationVersion = "0.20.0"
     private const val kodeinVersion = "6.5.1"
 
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
@@ -54,7 +54,9 @@ object Versions {
         const val kodeinGeneric = "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
         const val kodeinKtorServer =
             "org.kodein.di:kodein-di-framework-ktor-server-jvm:$kodeinVersion"
-        const val jetbrainsExposed = "org.jetbrains.exposed:exposed:0.17.7"
+        const val jetbrainsExposedCore = "org.jetbrains.exposed:exposed-core:0.23.1"
+        const val jetbrainsExposedDao = "org.jetbrains.exposed:exposed-dao:0.23.1"
+        const val jetbrainsExposedJdbc = "org.jetbrains.exposed:exposed-jdbc:0.23.1"
 
         const val googleCloudStorage = "com.google.cloud:google-cloud-storage:1.102.0"
         const val logback = "ch.qos.logback:logback-classic:1.2.3"
@@ -78,7 +80,7 @@ object Versions {
         const val minSdkVersion = 21
         const val buildToolsVersion = "29.0.1"
 
-        private const val lifecycleVersion = "2.2.0-alpha05"
+        private const val lifecycleVersion = "2.2.0"
         const val navigationVersion = "2.2.0"
 
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
@@ -93,7 +95,8 @@ object Versions {
         const val kodeinGeneric = "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
         const val kodeinAndroidX = "org.kodein.di:kodein-di-framework-android-x:$kodeinVersion"
 
-        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+        const val navigationFragment =
+            "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
         const val androidEngine = "io.ktor:ktor-client-android:$ktorVersion"
