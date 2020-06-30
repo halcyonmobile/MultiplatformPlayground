@@ -10,8 +10,10 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.takeFrom
 import kotlinx.serialization.list
+import kotlin.reflect.typeOf
 
 internal abstract class KtorApi {
+    @OptIn(ExperimentalStdlibApi::class)
     protected val client = HttpClient(engine) {
         install(Logging) {
             logger = Logger.SIMPLE
@@ -19,9 +21,10 @@ internal abstract class KtorApi {
         }
         install(JsonFeature) {
             serializer = KotlinxSerializer().apply {
-                register(Application.serializer().list)
-                register(Category.serializer().list)
-                register(Screenshot.serializer().list)
+                // TODO check out this, might not be needed anymore
+                typeOf<Application>()
+                typeOf<Category>()
+                typeOf<Screenshot>()
             }
         }
     }

@@ -11,7 +11,7 @@ application {
     mainClassName = "com.halcyonmobile.multiplatformplayground.backend.ServerKt"
 }
 
-task("stage"){
+task("stage") {
     dependsOn("installDist")
 }
 
@@ -37,7 +37,9 @@ dependencies {
     implementation(Versions.Jvm.kodeinGeneric)
     implementation(Versions.Jvm.kodeinKtorServer)
 
-    implementation(Versions.Jvm.jetbrainsExposed)
+    implementation(Versions.Jvm.jetbrainsExposedCore)
+    implementation(Versions.Jvm.jetbrainsExposedDao)
+    implementation(Versions.Jvm.jetbrainsExposedJdbc)
     implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
 
     implementation(Versions.Jvm.googleCloudStorage)
