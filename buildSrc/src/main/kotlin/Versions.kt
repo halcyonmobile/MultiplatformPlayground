@@ -57,6 +57,8 @@ object Versions {
         const val jetbrainsExposedCore = "org.jetbrains.exposed:exposed-core:0.23.1"
         const val jetbrainsExposedDao = "org.jetbrains.exposed:exposed-dao:0.23.1"
         const val jetbrainsExposedJdbc = "org.jetbrains.exposed:exposed-jdbc:0.23.1"
+        const val h2Database = "com.h2database:h2:1.4.200"
+        const val hikariConnectionPool = "com.zaxxer:HikariCP:3.4.5"
 
         const val googleCloudStorage = "com.google.cloud:google-cloud-storage:1.102.0"
         const val logback = "ch.qos.logback:logback-classic:1.2.3"

@@ -11,5 +11,5 @@ import org.kodein.di.ktor.kodein
 
 internal fun Application.installKodeinFeature() = kodein {
     bind<LocalSource>() with singleton { LocalSourceImpl(this@installKodeinFeature) }
-    bind<FileStorage>() with singleton { GoogleCloudStorage() }
+    bind<FileStorage>() with singleton { GoogleCloudStorage(this@installKodeinFeature) }
 }

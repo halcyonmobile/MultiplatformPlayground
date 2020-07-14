@@ -40,7 +40,8 @@ dependencies {
     implementation(Versions.Jvm.jetbrainsExposedCore)
     implementation(Versions.Jvm.jetbrainsExposedDao)
     implementation(Versions.Jvm.jetbrainsExposedJdbc)
-    implementation(group = "com.zaxxer", name = "HikariCP", version = "2.7.2")
+    implementation(Versions.Jvm.h2Database)
+    implementation(Versions.Jvm.hikariConnectionPool)
 
     implementation(Versions.Jvm.googleCloudStorage)
     implementation(Versions.Jvm.logback)
