@@ -4,15 +4,18 @@ import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.storage.Acl
 import com.google.cloud.storage.BlobInfo
 import com.google.cloud.storage.StorageOptions
+import io.ktor.application.Application
 import java.io.FileInputStream
 
-class GoogleCloudStorage : FileStorage() {
+class GoogleCloudStorage(application: Application) : FileStorage() {
 
     override val screenshotPath = "multiplatform_screenshot"
     override val appIconPath = "multiplatform_app"
     override val categoryIconPath = "multiplatform_category"
 
-    private val credentials = GoogleCredentials.fromStream(FileInputStream(KEY_PATH))
+    private val credentials = GoogleCredentials.fromStream(
+        application.environment.classLoader.getResourceAsStream(KEY_FILE_NAME)
+    )
     private val storage = StorageOptions.newBuilder().setCredentials(credentials)
         .setProjectId("multiplatformplayground").build().service
 
@@ -27,7 +30,6 @@ class GoogleCloudStorage : FileStorage() {
         ).mediaLink
 
     companion object {
-        private const val KEY_PATH =
-            "/Users/nagyrobi/Documents/Android/multiplatformplayground/backend/resources/multiplatformplayground-31d4d63c0077.json"
+        private const val KEY_FILE_NAME = "multiplatformplayground-31d4d63c0077.json"
     }
 }
