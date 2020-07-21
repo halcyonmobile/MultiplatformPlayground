@@ -3,6 +3,7 @@ package com.halcyonmobile.multiplatformplayground.viewmodel
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
+import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
 import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
@@ -28,19 +29,15 @@ class HomeViewModel internal constructor(
                 }
         }
         coroutineScope.launch {
-            try {
-                getCategories()
-            } catch (e: Exception) {
-                error.value = e.message
+            when (val result = getCategories()) {
+                is Result.Error -> error.value = result.exception.message
             }
         }
     }
 
     private fun fetch() = coroutineScope.launch {
-        try {
-            fetchCategories()
-        } catch (e: Exception) {
-            error.value = e.message
+        when (val result = fetchCategories()) {
+            is Result.Error -> error.value = result.exception.message
         }
     }
 

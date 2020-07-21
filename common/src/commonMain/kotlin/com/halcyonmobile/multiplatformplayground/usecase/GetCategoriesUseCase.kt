@@ -1,9 +1,11 @@
 package com.halcyonmobile.multiplatformplayground.usecase
 
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
+import com.halcyonmobile.multiplatformplayground.shared.Result
 
-class GetCategoriesUseCase internal constructor(private val categoryRepository: CategoryRepository) {
+internal class GetCategoriesUseCase(private val categoryRepository: CategoryRepository) {
 
-    suspend operator fun invoke() = categoryRepository.get()
-
+    suspend operator fun invoke() = Result {
+        categoryRepository.get()
+    }
 }
