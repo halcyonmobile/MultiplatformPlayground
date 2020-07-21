@@ -56,4 +56,7 @@ dependencies {
 
     implementation(Versions.Android.lifecycleExtensions)
     implementation(Versions.Android.liveData)
+
+    debugImplementation(Versions.Android.beagleDrawer)
+    releaseImplementation(Versions.Android.beagleNoop)
 }

@@ -102,5 +102,9 @@ object Versions {
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
         const val androidEngine = "io.ktor:ktor-client-android:$ktorVersion"
+
+        private const val beagleVersion = "2.0.0-beta06"
+        const val beagleDrawer = "com.github.pandulapeter.beagle:ui-drawer:$beagleVersion"
+        const val beagleNoop = "com.github.pandulapeter.beagle:noop:$beagleVersion"
     }
 }
