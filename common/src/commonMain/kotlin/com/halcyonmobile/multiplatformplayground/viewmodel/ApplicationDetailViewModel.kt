@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground.viewmodel
 
 import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
+import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
 import com.halcyonmobile.multiplatformplayground.shared.observer.observableOf
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationUseCase
@@ -18,10 +19,12 @@ class ApplicationDetailViewModel internal constructor(
 
     val applicationWithDetail = Observable<ApplicationWithDetail>()
     val descLines = Observable<Int>()
+
     //    TODO solve resources
 //    val toggleButtonText = Obsvable<Int>(R.string.desc_show_more)
     val backdrop = observableOf("http://backdrops.io/images/screens/screen6.jpg")
     val isFavourite: Boolean get() = applicationWithDetail.value?.application?.favourite ?: false
+    val error = Observable<String>()
 
     init {
         descLines.observe { desc ->
@@ -43,10 +46,9 @@ class ApplicationDetailViewModel internal constructor(
     fun setFavourite() {
         applicationWithDetail.value?.application?.let {
             coroutineScope.launch {
-                updateFavourite(
-                    it.id,
-                    it.favourite
-                )
+                when (val result = updateFavourite(it.id, it.favourite)) {
+                    is Result.Error -> error.value = result.exception.message
+                }
             }
         }
     }
