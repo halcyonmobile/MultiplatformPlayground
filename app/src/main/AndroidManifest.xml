@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
 
-        <activity android:name=".ui.HomeActivity">
+        <activity android:name=".ui.AppPortfolioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

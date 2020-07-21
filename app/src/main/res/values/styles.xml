@@ -3,6 +3,7 @@
     <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorSecondary">@color/secondary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="textAppearanceCaption">@style/Caption</item>
         <item name="textAppearanceBody1">@style/Body1</item>
         <item name="textAppearanceBody2">@style/Body2</item>
