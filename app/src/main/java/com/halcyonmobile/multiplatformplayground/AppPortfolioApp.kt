@@ -25,20 +25,23 @@ class AppPortfolioApp : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        Beagle.initialize(this)
-        Beagle.set(
-            HeaderModule(
-                title = getString(R.string.app_name),
-                subtitle = BuildConfig.APPLICATION_ID,
-                text = "${BuildConfig.BUILD_TYPE} v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-            ),
-            AppInfoButtonModule(),
-            DeveloperOptionsButtonModule(),
-            ScreenshotButtonModule(),
-            ScreenRecordingButtonModule(),
-            KeylineOverlaySwitchModule(),
-            AnimationDurationSwitchModule(),
-            DeviceInfoModule()
-        )
+        @Suppress("ConstantConditionIf")
+        if (BuildConfig.BUILD_TYPE != "release") {
+            Beagle.initialize(this)
+            Beagle.set(
+                HeaderModule(
+                    title = getString(R.string.app_name),
+                    subtitle = BuildConfig.APPLICATION_ID,
+                    text = "${BuildConfig.BUILD_TYPE} v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+                ),
+                AppInfoButtonModule(),
+                DeveloperOptionsButtonModule(),
+                ScreenshotButtonModule(),
+                ScreenRecordingButtonModule(),
+                KeylineOverlaySwitchModule(),
+                AnimationDurationSwitchModule(),
+                DeviceInfoModule()
+            )
+        }
     }
 }
