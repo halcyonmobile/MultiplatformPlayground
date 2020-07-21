@@ -68,7 +68,7 @@ object Versions {
 
     object Android {
         const val SDK_VERSION = 29
-        const val MINIMUM_SDK_VERSION = 21
+        const val MINIMUM_SDK_VERSION = 23
         const val BUILD_TOOLS_VERSION = "29.0.1"
         
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
