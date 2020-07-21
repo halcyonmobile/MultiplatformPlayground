@@ -11,11 +11,11 @@ version = "1.0.0"
 
 android {
     // todo extract these
-    compileSdkVersion(Versions.Android.sdkVersion)
-    buildToolsVersion(Versions.Android.buildToolsVersion)
+    compileSdkVersion(Versions.Android.SDK_VERSION)
+    buildToolsVersion(Versions.Android.BUILD_TOOLS_VERSION)
     defaultConfig {
-        minSdkVersion(Versions.Android.minSdkVersion)
-        targetSdkVersion(Versions.Android.sdkVersion)
+        minSdkVersion(Versions.Android.MINIMUM_SDK_VERSION)
+        targetSdkVersion(Versions.Android.SDK_VERSION)
     }
 
     sourceSets {
@@ -28,7 +28,7 @@ android {
 }
 
 kotlin {
-    //select iOS target platform depending on the Xcode environment variables
+    // Select iOS target platform depending on the Xcode environment variables
     val iOSTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
             ::iosArm64
@@ -50,61 +50,61 @@ kotlin {
 
     android()
 
-    // region common
+    // region Common
     sourceSets {
         commonMain {
             dependencies {
                 implementation(project(":commonModel"))
                 // Ktor-client for network requests
-                implementation(Versions.Common.ktorClientCore)
-                implementation(Versions.Common.ktorLogging)
-                implementation(Versions.Common.ktorClientJson)
-                implementation(Versions.Common.ktorClientSerialization)
-                implementation(Versions.Common.ktorUtility)
+                implementation(Versions.Common.KTOR_CLIENT_CORE)
+                implementation(Versions.Common.KTOR_LOGGING)
+                implementation(Versions.Common.KTOR_CLIENT_JSON)
+                implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
+                implementation(Versions.Common.KTOR_UTILITY)
 
-                implementation(Versions.Common.stdlib)
-                implementation(Versions.Common.coroutinesCore)
-                implementation(Versions.Common.serialization)
+                implementation(Versions.Common.STANDARD_LIBRARY)
+                implementation(Versions.Common.COROUTINES_CORE)
+                implementation(Versions.Common.SERIALIZATION)
                 // DI
-                implementation(Versions.Shared.kodeinCore)
-                implementation(Versions.Shared.kodeinErased)
+                implementation(Versions.Shared.KODEIN_CORE)
+                implementation(Versions.Shared.KODEIN_ERASED)
             }
         }
     }
     // endregion
 
-    // region android
+    // region Android
     android.sourceSets.forEach { _ ->
         dependencies {
-            implementation(Versions.Shared.stdlib)
-            implementation(Versions.Android.lifecycleExtensions)
-            implementation(Versions.Android.liveData)
-            implementation(Versions.Android.viewModel)
+            implementation(Versions.Shared.STANDARD_LIBRARY)
+            implementation(Versions.Android.LIFECYCLE_EXTENSIONS)
+            implementation(Versions.Android.LIVE_DATA)
+            implementation(Versions.Android.VIEW_MODEL)
 
             // Ktor-client for network requests
-            implementation(Versions.Jvm.ktorClientSerialization)
-            implementation(Versions.Jvm.ktorClientCore)
-            implementation(Versions.Android.androidEngine)
-            implementation(Versions.Jvm.ktorClientJson)
-            implementation(Versions.Jvm.ktorLogging)
+            implementation(Versions.Jvm.KTOR_CLIENT_SERIALIZATION)
+            implementation(Versions.Jvm.KTOR_CLIENT_CORE)
+            implementation(Versions.Android.KTOR_CLIENT)
+            implementation(Versions.Jvm.KTOR_CLIENT_JSON)
+            implementation(Versions.Jvm.KTOR_LOGGING)
             // Serialization
-            implementation(Versions.Shared.serializationRuntime)
+            implementation(Versions.Shared.SERIALIZATION_RUNTIME)
 
-            implementation(Versions.Jvm.kodeinGeneric)
-            implementation(Versions.Android.kodeinAndroidX)
+            implementation(Versions.Jvm.KODEIN_GENERIC)
+            implementation(Versions.Android.KODEIN_ANDROID_X)
         }
     }
     //endregion
 
     // region iOS
     sourceSets["iosMain"].dependencies {
-        implementation(Versions.iOS.stdlib)
-        implementation(Versions.iOS.coroutines)
+        implementation(Versions.iOS.STANDARD_LIBRARY)
+        implementation(Versions.iOS.COROUTINES)
 
-        implementation(Versions.iOS.ktorClient)
-        implementation(Versions.iOS.ktorClientJson)
-        implementation(Versions.iOS.ktorSerialization)
-        implementation(Versions.iOS.ktorLogging)
+        implementation(Versions.iOS.KTOR_CLIENT)
+        implementation(Versions.iOS.KTOR_CLIENT_JSON)
+        implementation(Versions.iOS.KTOR_SERIALIZATION)
+        implementation(Versions.iOS.KTOR_LOGGING)
     }
     // endregion
 }

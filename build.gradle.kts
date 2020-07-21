@@ -9,9 +9,9 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.5.3")
-        classpath(Versions.kotlinGradlePlugin)
-        classpath(Versions.kotlinSerializationPlugin)
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Android.navigationVersion}")
+        classpath(Versions.KOTLIN_GRADLE_PLUGIN)
+        classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Android.NAVIGATION_VERSION}")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

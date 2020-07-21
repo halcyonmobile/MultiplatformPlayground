@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.Android.sdkVersion)
+    compileSdkVersion(Versions.Android.SDK_VERSION)
 
     defaultConfig {
         applicationId = "com.halcyonmobile.multiplatformplayground"
-        minSdkVersion(Versions.Android.minSdkVersion)
-        targetSdkVersion(Versions.Android.sdkVersion)
+        minSdkVersion(Versions.Android.MINIMUM_SDK_VERSION)
+        targetSdkVersion(Versions.Android.SDK_VERSION)
         versionCode = 1
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -41,22 +41,22 @@ dependencies {
     implementation(project(":common"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(Versions.Android.stdlib)
+    implementation(Versions.Android.STANDARD_LIBRARY)
 
-    implementation(Versions.Android.appCompat)
-    implementation(Versions.Android.ktx)
-    implementation(Versions.Android.constraintLayout)
-    implementation(Versions.Android.materialComponents)
+    implementation(Versions.Android.APP_COMPAT)
+    implementation(Versions.Android.KOTLIN_EXTENSIONS)
+    implementation(Versions.Android.CONSTRAINT_LAYOUT)
+    implementation(Versions.Android.MATERIAL_COMPONENTS)
 
-    implementation(Versions.Android.kodeinGeneric)
-    implementation(Versions.Android.kodeinAndroidX)
+    implementation(Versions.Android.KODEIN_GENERIC)
+    implementation(Versions.Android.KODEIN_ANDROID_X)
 
-    implementation(Versions.Android.navigationFragment)
-    implementation(Versions.Android.navigationUi)
+    implementation(Versions.Android.NAVIGATON_FRAGMENT)
+    implementation(Versions.Android.NAVIGATION_UI)
 
-    implementation(Versions.Android.lifecycleExtensions)
-    implementation(Versions.Android.liveData)
+    implementation(Versions.Android.LIFECYCLE_EXTENSIONS)
+    implementation(Versions.Android.LIVE_DATA)
 
-    debugImplementation(Versions.Android.beagleDrawer)
-    releaseImplementation(Versions.Android.beagleNoop)
+    debugImplementation(Versions.Android.BEAGLE_DRAWER)
+    releaseImplementation(Versions.Android.BEAGLE_NOOP)
 }
