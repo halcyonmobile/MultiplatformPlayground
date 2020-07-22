@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.3")
+        classpath("com.android.tools.build:gradle:4.0.1")
         classpath(Versions.KOTLIN_GRADLE_PLUGIN)
         classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Android.NAVIGATION_VERSION}")
