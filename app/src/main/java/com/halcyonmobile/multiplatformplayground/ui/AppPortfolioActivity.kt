@@ -8,17 +8,17 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.halcyonmobile.multiplatformplayground.HomeBinding
 import com.halcyonmobile.multiplatformplayground.R
+import com.halcyonmobile.multiplatformplayground.util.applyEdgeToEdgeFlags
 
-class HomeActivity : AppCompatActivity() {
+class AppPortfolioActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<HomeBinding>(this, R.layout.activity_home)
 
+        //TODO: Use nested Fragments instead of having the bottom navigation in the Activity for smoother transitions.
         val navController = findNavController(R.id.main_host_fragment)
-
         binding.bottomNavigation.setupWithNavController(navController)
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.bottomNavigation.isVisible = destination.id in arrayOf(
                 R.id.homeFragment,
@@ -26,5 +26,10 @@ class HomeActivity : AppCompatActivity() {
                 R.id.settingsFragment
             )
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyEdgeToEdgeFlags()
     }
 }

@@ -1,106 +1,98 @@
 object Versions {
-    const val kotlinVersion = "1.3.70"
-    private const val ktorVersion = "1.3.2"
-    private const val coroutinesVersion = "1.3.4"
-    private const val serializationVersion = "0.20.0"
-    private const val kodeinVersion = "6.5.1"
-
-    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    const val kotlinSerializationPlugin = "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"
+    const val KOTLIN_VERSION = "1.3.70"
+    private const val KTOR_VERSION = "1.3.2"
+    private const val COROUTINES_VERSION = "1.3.4"
+    private const val SERIALIZATION_VERSION = "0.20.0"
+    private const val KODEIN_VERSION = "6.5.1"
+    const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
+    const val KOTLIN_SERIALIZATION_PLUGIN = "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
 
     object Shared {
-        const val kodeinCore = "org.kodein.di:kodein-di-core:$kodeinVersion"
-        const val kodeinErased = "org.kodein.di:kodein-di-erased:$kodeinVersion"
-
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib"
-        const val serializationRuntime =
-            "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
-        const val serialization =
-            "org.jetbrains.kotlinx:kotlinx-serialization:$serializationVersion"
-
-        const val coroutinesCore =
-            "org.jetbrains.kotlinx:kotlinx-coroutines-core$coroutinesVersion"
+        const val KODEIN_CORE = "org.kodein.di:kodein-di-core:$KODEIN_VERSION"
+        const val KODEIN_ERASED = "org.kodein.di:kodein-di-erased:$KODEIN_VERSION"
+        const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib"
+        const val SERIALIZATION_RUNTIME = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
+        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization:$SERIALIZATION_VERSION"
+        const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core$COROUTINES_VERSION"
     }
 
     object Common {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
-
-        const val ktorUtility = "io.ktor:ktor-utils-native:$ktorVersion"
-        const val ktorClientCore = "io.ktor:ktor-client-core:$ktorVersion"
-        const val ktorClientJson = "io.ktor:ktor-client-json:$ktorVersion"
-        const val ktorLogging = "io.ktor:ktor-client-logging:$ktorVersion"
-        const val ktorClientSerialization = "io.ktor:ktor-client-serialization:$ktorVersion"
-
-        const val coroutinesCore =
-            "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion"
-        const val serialization =
-            "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion"
+        const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-common:$KOTLIN_VERSION"
+        const val KTOR_UTILITY = "io.ktor:ktor-utils-native:$KTOR_VERSION"
+        const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
+        const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
+        const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
+        const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization:$KTOR_VERSION"
+        const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$COROUTINES_VERSION"
+        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$SERIALIZATION_VERSION"
     }
 
     object Jvm {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-        const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+        const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
+        const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
 
-        const val ktorAuth = "io.ktor:ktor-auth:$ktorVersion"
-        const val ktorWebSockets = "io.ktor:ktor-websockets:$ktorVersion"
-        const val ktorClientApache = "io.ktor:ktor-client-apache:$ktorVersion"
-        const val ktorClientCore = "io.ktor:ktor-client-core-jvm:$ktorVersion"
-        const val ktorClientJson = "io.ktor:ktor-client-json-jvm:$ktorVersion"
-        const val ktorLogging = "io.ktor:ktor-client-logging-jvm:$ktorVersion"
-        const val ktorClientSerialization = "io.ktor:ktor-client-serialization-jvm:$ktorVersion"
-        const val ktorServerNetty = "io.ktor:ktor-server-netty:$ktorVersion"
-        const val ktorSerialization = "io.ktor:ktor-serialization:$ktorVersion"
+        const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
+        const val KTOR_WEB_SOCKETS = "io.ktor:ktor-websockets:$KTOR_VERSION"
+        const val KTOR_CLIENT_APACHE = "io.ktor:ktor-client-apache:$KTOR_VERSION"
+        const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core-jvm:$KTOR_VERSION"
+        const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json-jvm:$KTOR_VERSION"
+        const val KTOR_LOGGING = "io.ktor:ktor-client-logging-jvm:$KTOR_VERSION"
+        const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization-jvm:$KTOR_VERSION"
+        const val KTOR_SERVER_NETTY = "io.ktor:ktor-server-netty:$KTOR_VERSION"
+        const val KTOR_SERIALIZATION = "io.ktor:ktor-serialization:$KTOR_VERSION"
 
-        const val kodeinGeneric = "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
-        const val kodeinKtorServer =
-            "org.kodein.di:kodein-di-framework-ktor-server-jvm:$kodeinVersion"
-        const val jetbrainsExposedCore = "org.jetbrains.exposed:exposed-core:0.23.1"
-        const val jetbrainsExposedDao = "org.jetbrains.exposed:exposed-dao:0.23.1"
-        const val jetbrainsExposedJdbc = "org.jetbrains.exposed:exposed-jdbc:0.23.1"
-        const val h2Database = "com.h2database:h2:1.4.200"
-        const val hikariConnectionPool = "com.zaxxer:HikariCP:3.4.5"
+        const val KODEIN_GENERIC = "org.kodein.di:kodein-di-generic-jvm:$KODEIN_VERSION"
+        const val KODEIN_KTOR_SERVER = "org.kodein.di:kodein-di-framework-ktor-server-jvm:$KODEIN_VERSION"
 
-        const val googleCloudStorage = "com.google.cloud:google-cloud-storage:1.102.0"
-        const val logback = "ch.qos.logback:logback-classic:1.2.3"
+        const val JETBRAINS_EXPOSED_CORE = "org.jetbrains.exposed:exposed-core:0.23.1"
+        const val JETBRAINS_EXPOSED_DAO = "org.jetbrains.exposed:exposed-dao:0.23.1"
+        const val JETBRAINS_EXPOSED_JDBC = "org.jetbrains.exposed:exposed-jdbc:0.23.1"
+
+        const val H2_DATABASE = "com.h2database:h2:1.4.200"
+        const val HIKARI_CONNECTION_POOL = "com.zaxxer:HikariCP:3.4.5"
+        const val GOOGLE_CLOUD_STORAGE = "com.google.cloud:google-cloud-storage:1.102.0"
+        const val LOGBACK = "ch.qos.logback:logback-classic:1.2.3"
     }
 
     object iOS {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib"
-        const val coroutines =
-            "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutinesVersion"
-        const val serialization =
-            "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationVersion"
+        const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib"
 
-        const val ktorClient = "io.ktor:ktor-client-ios:$ktorVersion"
-        const val ktorClientJson = "io.ktor:ktor-client-json-native:$ktorVersion"
-        const val ktorSerialization = "io.ktor:ktor-client-serialization-native:$ktorVersion"
-        const val ktorLogging = "io.ktor:ktor-client-logging-native:$ktorVersion"
+        const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$COROUTINES_VERSION"
+        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$SERIALIZATION_VERSION"
+
+        const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
+        const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json-native:$KTOR_VERSION"
+        const val KTOR_SERIALIZATION = "io.ktor:ktor-client-serialization-native:$KTOR_VERSION"
+        const val KTOR_LOGGING = "io.ktor:ktor-client-logging-native:$KTOR_VERSION"
     }
 
     object Android {
-        const val sdkVersion = 29
-        const val minSdkVersion = 21
-        const val buildToolsVersion = "29.0.1"
-
-        private const val lifecycleVersion = "2.2.0"
-        const val navigationVersion = "2.2.0"
-
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-        const val appCompat = "androidx.appcompat:appcompat:1.1.0"
-        const val ktx = "androidx.core:core-ktx:1.1.0"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
-        const val materialComponents = "com.google.android.material:material:1.2.0-alpha04"
-        const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-        const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
-        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-
-        const val kodeinGeneric = "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
-        const val kodeinAndroidX = "org.kodein.di:kodein-di-framework-android-x:$kodeinVersion"
-
-        const val navigationFragment =
-            "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-        const val navigationUi = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-
-        const val androidEngine = "io.ktor:ktor-client-android:$ktorVersion"
+        const val SDK_VERSION = 29
+        const val MINIMUM_SDK_VERSION = 23
+        const val BUILD_TOOLS_VERSION = "29.0.1"
+        
+        const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+        const val APP_COMPAT = "androidx.appcompat:appcompat:1.1.0"
+        const val KOTLIN_EXTENSIONS = "androidx.core:core-ktx:1.1.0"
+        const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:1.1.3"
+        const val MATERIAL_COMPONENTS = "com.google.android.material:material:1.2.0-alpha04"
+        
+        private const val LIFECYCLE_VERSION = "2.2.0"
+        const val LIFECYCLE_EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_VERSION"
+        const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:$LIFECYCLE_VERSION"
+        const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
+        
+        const val KODEIN_GENERIC = "org.kodein.di:kodein-di-generic-jvm:$KODEIN_VERSION"
+        const val KODEIN_ANDROID_X = "org.kodein.di:kodein-di-framework-android-x:$KODEIN_VERSION"
+        
+        const val NAVIGATION_VERSION = "2.2.0"
+        const val NAVIGATON_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
+        const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
+        
+        const val KTOR_CLIENT = "io.ktor:ktor-client-android:$KTOR_VERSION"
+        
+        private const val BEAGLE_VERSION = "2.0.0-beta06"
+        const val BEAGLE_DRAWER = "com.github.pandulapeter.beagle:ui-drawer:$BEAGLE_VERSION"
+        const val BEAGLE_NOOP = "com.github.pandulapeter.beagle:noop:$BEAGLE_VERSION"
     }
 }

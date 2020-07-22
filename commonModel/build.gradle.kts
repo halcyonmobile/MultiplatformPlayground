@@ -26,19 +26,19 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(Versions.Common.stdlib)
-                implementation(Versions.Common.serialization)
+                implementation(Versions.Common.STANDARD_LIBRARY)
+                implementation(Versions.Common.SERIALIZATION)
             }
         }
     }
 
     sourceSets["backendMain"].dependencies {
-        implementation(Versions.Shared.stdlib)
-        implementation(Versions.Shared.serializationRuntime)
+        implementation(Versions.Shared.STANDARD_LIBRARY)
+        implementation(Versions.Shared.SERIALIZATION_RUNTIME)
     }
 
     sourceSets["iosMain"].dependencies {
-        implementation(Versions.iOS.stdlib)
-        implementation(Versions.iOS.serialization)
+        implementation(Versions.iOS.STANDARD_LIBRARY)
+        implementation(Versions.iOS.SERIALIZATION)
     }
 }

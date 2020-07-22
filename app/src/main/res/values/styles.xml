@@ -1,11 +1,9 @@
 <resources>
 
     <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorSecondary">@color/secondary</item>
-        <item name="android:windowBackground">@color/white</item>
-
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="textAppearanceCaption">@style/Caption</item>
         <item name="textAppearanceBody1">@style/Body1</item>
         <item name="textAppearanceBody2">@style/Body2</item>
@@ -19,7 +17,6 @@
         <item name="textAppearanceHeadline1">@style/Headline1</item>
     </style>
 
-    <!-- Base application theme. -->
     <style name="BaseTheme.App" />
 
 </resources>

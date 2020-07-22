@@ -22,29 +22,29 @@ java {
 
 dependencies {
     implementation(project(":commonModel"))
-    implementation(Versions.Jvm.ktorClientApache)
-    implementation(Versions.Jvm.ktorClientJson)
-    implementation(Versions.Jvm.ktorSerialization)
+    implementation(Versions.Jvm.KTOR_CLIENT_APACHE)
+    implementation(Versions.Jvm.KTOR_CLIENT_JSON)
+    implementation(Versions.Jvm.KTOR_SERIALIZATION)
 
-    implementation(Versions.Jvm.stdlib)
-    implementation(Versions.Jvm.kotlinReflect)
-    implementation(Versions.Jvm.ktorServerNetty)
-    implementation(Versions.Jvm.ktorAuth)
-    implementation(Versions.Jvm.ktorWebSockets)
-    implementation(Versions.Jvm.ktorClientApache)
+    implementation(Versions.Jvm.STANDARD_LIBRARY)
+    implementation(Versions.Jvm.KOTLIN_REFLECT)
+    implementation(Versions.Jvm.KTOR_SERVER_NETTY)
+    implementation(Versions.Jvm.KTOR_AUTH)
+    implementation(Versions.Jvm.KTOR_WEB_SOCKETS)
+    implementation(Versions.Jvm.KTOR_CLIENT_APACHE)
 
     // DI
-    implementation(Versions.Jvm.kodeinGeneric)
-    implementation(Versions.Jvm.kodeinKtorServer)
+    implementation(Versions.Jvm.KODEIN_GENERIC)
+    implementation(Versions.Jvm.KODEIN_KTOR_SERVER)
 
-    implementation(Versions.Jvm.jetbrainsExposedCore)
-    implementation(Versions.Jvm.jetbrainsExposedDao)
-    implementation(Versions.Jvm.jetbrainsExposedJdbc)
-    implementation(Versions.Jvm.h2Database)
-    implementation(Versions.Jvm.hikariConnectionPool)
+    implementation(Versions.Jvm.JETBRAINS_EXPOSED_CORE)
+    implementation(Versions.Jvm.JETBRAINS_EXPOSED_DAO)
+    implementation(Versions.Jvm.JETBRAINS_EXPOSED_JDBC)
+    implementation(Versions.Jvm.H2_DATABASE)
+    implementation(Versions.Jvm.HIKARI_CONNECTION_POOL)
 
-    implementation(Versions.Jvm.googleCloudStorage)
-    implementation(Versions.Jvm.logback)
+    implementation(Versions.Jvm.GOOGLE_CLOUD_STORAGE)
+    implementation(Versions.Jvm.LOGBACK)
 }
 
 sourceSets.main {
