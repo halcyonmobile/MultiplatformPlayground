@@ -9,7 +9,6 @@ object Versions {
         "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
 
     object Common {
-        const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-common:$KOTLIN_VERSION"
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
@@ -30,10 +29,6 @@ object Versions {
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
         const val KTOR_WEB_SOCKETS = "io.ktor:ktor-websockets:$KTOR_VERSION"
         const val KTOR_CLIENT_APACHE = "io.ktor:ktor-client-apache:$KTOR_VERSION"
-        const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core-jvm:$KTOR_VERSION"
-        const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json-jvm:$KTOR_VERSION"
-        const val KTOR_LOGGING = "io.ktor:ktor-client-logging-jvm:$KTOR_VERSION"
-        const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization-jvm:$KTOR_VERSION"
         const val KTOR_SERVER_NETTY = "io.ktor:ktor-server-netty:$KTOR_VERSION"
         const val KTOR_SERIALIZATION = "io.ktor:ktor-serialization:$KTOR_VERSION"
 

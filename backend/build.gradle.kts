@@ -23,7 +23,6 @@ java {
 dependencies {
     implementation(project(":commonModel"))
     implementation(Versions.Jvm.KTOR_CLIENT_APACHE)
-    implementation(Versions.Jvm.KTOR_CLIENT_JSON)
     implementation(Versions.Jvm.KTOR_SERIALIZATION)
 
     implementation(Versions.Jvm.KOTLIN_REFLECT)
