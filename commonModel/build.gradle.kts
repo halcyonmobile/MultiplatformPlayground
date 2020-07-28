@@ -26,7 +26,6 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(Versions.Common.STANDARD_LIBRARY)
                 implementation(Versions.Common.SERIALIZATION)
             }
         }

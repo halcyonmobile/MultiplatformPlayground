@@ -79,11 +79,7 @@ kotlin {
             implementation(Versions.Android.VIEW_MODEL)
 
             // Ktor-client for network requests
-            implementation(Versions.Jvm.KTOR_CLIENT_SERIALIZATION)
-            implementation(Versions.Jvm.KTOR_CLIENT_CORE)
             implementation(Versions.Android.KTOR_CLIENT)
-            implementation(Versions.Jvm.KTOR_CLIENT_JSON)
-            implementation(Versions.Jvm.KTOR_LOGGING)
 
             implementation(Versions.Jvm.KODEIN_GENERIC)
             implementation(Versions.Android.KODEIN_ANDROID_X)
