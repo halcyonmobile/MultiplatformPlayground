@@ -13,7 +13,7 @@ import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.Routing
-import io.ktor.serialization.serialization
+import io.ktor.serialization.json
 import io.ktor.util.error
 import org.kodein.di.generic.instance
 import org.kodein.di.ktor.kodein
@@ -35,7 +35,7 @@ internal fun Application.main() {
     }
 
     install(ContentNegotiation) {
-        serialization()
+        json()
     }
     install(CallLogging) {
         level = Level.INFO
