@@ -13,6 +13,7 @@ import com.halcyonmobile.multiplatformplayground.util.applyEdgeToEdgeFlags
 class AppPortfolioActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.BaseTheme_App)
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<HomeBinding>(this, R.layout.activity_home)
 
