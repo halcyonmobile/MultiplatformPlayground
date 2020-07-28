@@ -19,7 +19,7 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    dataBinding.isEnabled = true
+    buildFeatures.dataBinding = true
 
     buildTypes {
         getByName("release") {

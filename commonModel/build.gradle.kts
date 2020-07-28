@@ -26,19 +26,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(Versions.Common.STANDARD_LIBRARY)
                 implementation(Versions.Common.SERIALIZATION)
             }
         }
-    }
-
-    sourceSets["backendMain"].dependencies {
-        implementation(Versions.Shared.STANDARD_LIBRARY)
-        implementation(Versions.Shared.SERIALIZATION_RUNTIME)
-    }
-
-    sourceSets["iosMain"].dependencies {
-        implementation(Versions.iOS.STANDARD_LIBRARY)
-        implementation(Versions.iOS.SERIALIZATION)
     }
 }
