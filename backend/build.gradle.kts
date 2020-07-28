@@ -26,7 +26,6 @@ dependencies {
     implementation(Versions.Jvm.KTOR_CLIENT_JSON)
     implementation(Versions.Jvm.KTOR_SERIALIZATION)
 
-    implementation(Versions.Jvm.STANDARD_LIBRARY)
     implementation(Versions.Jvm.KOTLIN_REFLECT)
     implementation(Versions.Jvm.KTOR_SERVER_NETTY)
     implementation(Versions.Jvm.KTOR_AUTH)

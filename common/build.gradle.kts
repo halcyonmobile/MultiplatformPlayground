@@ -60,14 +60,12 @@ kotlin {
                 implementation(Versions.Common.KTOR_LOGGING)
                 implementation(Versions.Common.KTOR_CLIENT_JSON)
                 implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
-                implementation(Versions.Common.KTOR_UTILITY)
 
-                implementation(Versions.Common.STANDARD_LIBRARY)
                 implementation(Versions.Common.COROUTINES_CORE)
                 implementation(Versions.Common.SERIALIZATION)
                 // DI
-                implementation(Versions.Shared.KODEIN_CORE)
-                implementation(Versions.Shared.KODEIN_ERASED)
+                implementation(Versions.Common.KODEIN_CORE)
+                implementation(Versions.Common.KODEIN_ERASED)
             }
         }
     }
@@ -76,7 +74,6 @@ kotlin {
     // region Android
     android.sourceSets.forEach { _ ->
         dependencies {
-            implementation(Versions.Shared.STANDARD_LIBRARY)
             implementation(Versions.Android.LIFECYCLE_EXTENSIONS)
             implementation(Versions.Android.LIVE_DATA)
             implementation(Versions.Android.VIEW_MODEL)
@@ -87,26 +84,12 @@ kotlin {
             implementation(Versions.Android.KTOR_CLIENT)
             implementation(Versions.Jvm.KTOR_CLIENT_JSON)
             implementation(Versions.Jvm.KTOR_LOGGING)
-            // Serialization
-            implementation(Versions.Shared.SERIALIZATION_RUNTIME)
 
             implementation(Versions.Jvm.KODEIN_GENERIC)
             implementation(Versions.Android.KODEIN_ANDROID_X)
         }
     }
     //endregion
-
-    // region iOS
-    sourceSets["iosMain"].dependencies {
-        implementation(Versions.iOS.STANDARD_LIBRARY)
-        implementation(Versions.iOS.COROUTINES)
-
-        implementation(Versions.iOS.KTOR_CLIENT)
-        implementation(Versions.iOS.KTOR_CLIENT_JSON)
-        implementation(Versions.iOS.KTOR_SERIALIZATION)
-        implementation(Versions.iOS.KTOR_LOGGING)
-    }
-    // endregion
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
