@@ -4,4 +4,5 @@ plugins {
 
 repositories {
     jcenter()
+    maven("https://dl.bintray.com/kotlin/kotlinx/")
 }

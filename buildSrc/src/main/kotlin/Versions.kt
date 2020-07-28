@@ -1,8 +1,7 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.3.70"
+    const val KOTLIN_VERSION = "1.4.0-rc"
     private const val KTOR_VERSION = "1.3.2"
     private const val COROUTINES_VERSION = "1.3.4"
-    private const val SERIALIZATION_VERSION = "0.20.0"
     private const val KODEIN_VERSION = "6.5.1"
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     const val KOTLIN_SERIALIZATION_PLUGIN = "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
@@ -11,8 +10,8 @@ object Versions {
         const val KODEIN_CORE = "org.kodein.di:kodein-di-core:$KODEIN_VERSION"
         const val KODEIN_ERASED = "org.kodein.di:kodein-di-erased:$KODEIN_VERSION"
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib"
-        const val SERIALIZATION_RUNTIME = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
-        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization:$SERIALIZATION_VERSION"
+        // TODO the serialization version should be unified
+        const val SERIALIZATION_RUNTIME = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:1.0-M1-1.4.0-rc"
         const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core$COROUTINES_VERSION"
     }
 
@@ -24,7 +23,8 @@ object Versions {
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
         const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization:$KTOR_VERSION"
         const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$COROUTINES_VERSION"
-        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$SERIALIZATION_VERSION"
+        // TODO the serialization version should be unified
+        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.20.0-1.4-M1"
     }
 
     object Jvm {
@@ -58,7 +58,8 @@ object Versions {
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib"
 
         const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$COROUTINES_VERSION"
-        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$SERIALIZATION_VERSION"
+        // TODO the serialization version should be unified
+        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.20.0-1.4-M1"
 
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json-native:$KTOR_VERSION"
@@ -69,28 +70,28 @@ object Versions {
     object Android {
         const val SDK_VERSION = 29
         const val MINIMUM_SDK_VERSION = 23
-        const val BUILD_TOOLS_VERSION = "29.0.1"
-        
+        const val BUILD_TOOLS_VERSION = "29.0.2"
+
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
         const val APP_COMPAT = "androidx.appcompat:appcompat:1.1.0"
         const val KOTLIN_EXTENSIONS = "androidx.core:core-ktx:1.1.0"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:1.1.3"
         const val MATERIAL_COMPONENTS = "com.google.android.material:material:1.2.0-alpha04"
-        
+
         private const val LIFECYCLE_VERSION = "2.2.0"
         const val LIFECYCLE_EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_VERSION"
         const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:$LIFECYCLE_VERSION"
         const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
-        
+
         const val KODEIN_GENERIC = "org.kodein.di:kodein-di-generic-jvm:$KODEIN_VERSION"
         const val KODEIN_ANDROID_X = "org.kodein.di:kodein-di-framework-android-x:$KODEIN_VERSION"
-        
+
         const val NAVIGATION_VERSION = "2.2.0"
         const val NAVIGATON_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
         const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
-        
+
         const val KTOR_CLIENT = "io.ktor:ktor-client-android:$KTOR_VERSION"
-        
+
         private const val BEAGLE_VERSION = "2.0.0-beta06"
         const val BEAGLE_DRAWER = "com.github.pandulapeter.beagle:ui-drawer:$BEAGLE_VERSION"
         const val BEAGLE_NOOP = "com.github.pandulapeter.beagle:noop:$BEAGLE_VERSION"
