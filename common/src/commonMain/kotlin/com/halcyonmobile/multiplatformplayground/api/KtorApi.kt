@@ -14,7 +14,7 @@ import kotlin.reflect.typeOf
 
 internal abstract class KtorApi {
     @OptIn(ExperimentalStdlibApi::class)
-    protected val client = HttpClient(engine) {
+    protected val client = HttpClient {
         install(Logging) {
             logger = Logger.SIMPLE
             level = LogLevel.ALL
@@ -28,7 +28,6 @@ internal abstract class KtorApi {
             }
         }
     }
-
 
     protected fun HttpRequestBuilder.apiUrl(path: String) {
 //        header(HttpHeaders.Authorization, "token $TOKEN")

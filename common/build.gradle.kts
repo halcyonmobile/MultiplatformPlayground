@@ -38,7 +38,7 @@ kotlin {
     iOSTarget("ios") {
         compilations {
             val main by getting {
-                kotlinOptions.freeCompilerArgs = listOf("-Xobjc-generics")
+                kotlinOptions.freeCompilerArgs = listOf("-Xobjc-generics", "-Xopt-in=kotlin.RequiresOptIn")
             }
         }
     }
