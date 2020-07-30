@@ -1,15 +1,19 @@
 package com.halcyonmobile.multiplatformplayground.api
 
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.*
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
+import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.takeFrom
-import kotlinx.serialization.list
 import kotlin.reflect.typeOf
 
 internal abstract class KtorApi {
@@ -17,6 +21,10 @@ internal abstract class KtorApi {
     protected val client = HttpClient(engine) {
         install(Logging) {
             logger = Logger.SIMPLE
+            level = LogLevel.ALL
+        }
+        install(Logging) {
+            //TODO: logger = BeagleKtorLogger
             level = LogLevel.ALL
         }
         install(JsonFeature) {

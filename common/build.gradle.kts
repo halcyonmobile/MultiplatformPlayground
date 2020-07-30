@@ -66,6 +66,9 @@ kotlin {
                 // DI
                 implementation(Versions.Common.KODEIN_CORE)
                 implementation(Versions.Common.KODEIN_ERASED)
+                // Debug menu
+                api(Versions.Common.BEAGLE_LOG)
+                api(Versions.Common.BEAGLE_LOG_KTOR)
             }
         }
     }
