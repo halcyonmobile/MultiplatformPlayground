@@ -21,6 +21,7 @@ class HomeViewModel internal constructor(
     val error = Observable<String>()
 
     init {
+        //TODO: BeagleLogger.log("We can log from shared code!")
         coroutineScope.launch {
             categoryRepository.stream
                 .collect {
