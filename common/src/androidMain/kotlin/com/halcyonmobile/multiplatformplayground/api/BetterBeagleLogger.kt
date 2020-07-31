@@ -48,9 +48,7 @@ class BetterBeagleLogger {
             isOutgoing = true,
             url = "[${request.method.value}] ${Url(request.url)}",
             payload = "TODO", //TODO
-            headers = mutableListOf<String>().apply {
-                logHeaders(request.headers.entries(), content.headers) //TODO
-            }
+            headers = logHeaders(request.headers.entries(), content.headers)
         )
         return logRequestBody(content)
     }
@@ -60,18 +58,15 @@ class BetterBeagleLogger {
             isOutgoing = false,
             url = "[${response.call.request.method.value}] ${response.status.value} ${response.call.request.url.fullPath}",
             payload = "TODO", //TODO
-            headers = mutableListOf<String>().apply {
-                logHeaders(response.headers.entries()) //TODO
-            }
+            headers = logHeaders(response.headers.entries())
         )
     }
 
     private fun logRequestException(context: HttpRequestBuilder, cause: Throwable) {
         BeagleKtorLogger.logNetworkEvent(
-            isOutgoing = true,
+            isOutgoing = false,
             url = "[${context.method.value}] FAIL ${Url(context.url)}",
-            payload = cause.message ?: "HTTP Failed",
-            headers = null //TODO
+            payload = cause.message ?: "HTTP Failed"
         )
     }
 
@@ -86,37 +81,29 @@ class BetterBeagleLogger {
     private fun logHeaders(
         requestHeaders: Set<Map.Entry<String, List<String>>>,
         contentHeaders: Headers? = null
-    ) {
-        log("HEADERS")
+    ): List<String> = mutableListOf<String>().apply {
         requestHeaders.forEach { (key, values) ->
-            log("-> $key: ${values.joinToString("; ")}")
+            add("[$key] ${values.joinToString("; ")}")
         }
         contentHeaders?.forEach { key, values ->
-            log("-> $key: ${values.joinToString("; ")}")
+            add("[$key] ${values.joinToString("; ")}")
         }
     }
 
     private suspend fun logResponseBody(contentType: ContentType?, content: ByteReadChannel) {
         log("BODY Content-Type: $contentType")
-        log("BODY START")
         val message = content.readText(contentType?.charset() ?: Charsets.UTF_8)
         log(message)
-        log("BODY END")
     }
 
     private suspend fun logRequestBody(content: OutgoingContent): OutgoingContent? {
         log("BODY Content-Type: ${content.contentType}")
-
         val charset = content.contentType?.charset() ?: Charsets.UTF_8
-
         val channel = ByteChannel()
-        GlobalScope.launch(Dispatchers.Unconfined) {
+        GlobalScope.launch(Dispatchers.IO) {
             val text = channel.readText(charset)
-            log("BODY START")
             log(text)
-            log("BODY END")
         }
-
         return content.observe(channel)
     }
 
@@ -180,7 +167,6 @@ class BetterBeagleLogger {
     internal class LoggingContent(private val channel: ByteReadChannel) : OutgoingContent.ReadChannelContent() {
         override fun readFrom(): ByteReadChannel = channel
     }
-
 
     companion object : HttpClientFeature<Nothing, BetterBeagleLogger> {
         private const val CHUNK_BUFFER_SIZE = 4096L
