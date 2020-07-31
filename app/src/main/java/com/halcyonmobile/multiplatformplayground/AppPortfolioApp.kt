@@ -1,6 +1,7 @@
 package com.halcyonmobile.multiplatformplayground
 
 import android.app.Application
+import com.halcyonmobile.multiplatformplayground.api.KtorApi
 import com.halcyonmobile.multiplatformplayground.di.bindCommonModule
 import com.halcyonmobile.multiplatformplayground.di.bindViewModelModule
 import com.pandulapeter.beagle.Beagle
@@ -55,7 +56,7 @@ class AppPortfolioApp : Application(), KodeinAware {
                 AnimationDurationSwitchModule(),
                 DividerModule(),
                 ScreenCaptureToolboxModule(),
-                NetworkLogListModule(), //TODO: Add baseUrl parameter
+                NetworkLogListModule(baseUrl = KtorApi.BASE_URL),
                 LogListModule(),
                 DeviceInfoModule()
             )

@@ -1,10 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.api
 
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.features.logging.Logger
 
 internal expect val engine: HttpClientEngine
 
-internal expect val networkLogger: Logger
+internal expect val installNetworkLogger: HttpClientConfig<*>.() -> Unit
 
 expect val log: (String) -> Unit
