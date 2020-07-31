@@ -20,11 +20,7 @@ internal abstract class KtorApi {
     @OptIn(ExperimentalStdlibApi::class)
     protected val client = HttpClient(engine) {
         install(Logging) {
-            logger = Logger.SIMPLE
-            level = LogLevel.ALL
-        }
-        install(Logging) {
-            //TODO: logger = BeagleKtorLogger
+            logger = networkLogger
             level = LogLevel.ALL
         }
         install(JsonFeature) {
