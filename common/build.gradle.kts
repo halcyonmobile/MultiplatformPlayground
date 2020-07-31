@@ -57,7 +57,7 @@ kotlin {
                 implementation(project(":commonModel"))
                 // Ktor-client for network requests
                 implementation(Versions.Common.KTOR_CLIENT_CORE)
-                implementation(Versions.Common.KTOR_LOGGING)
+                api(Versions.Common.KTOR_LOGGING)
                 implementation(Versions.Common.KTOR_CLIENT_JSON)
                 implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
 
