@@ -6,7 +6,7 @@ object Versions {
     private const val KODEIN_VERSION = "6.5.1"
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     const val KOTLIN_SERIALIZATION_PLUGIN = "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
-    private const val BEAGLE_VERSION = "2.0.0-beta12"
+    private const val BEAGLE_VERSION = "2.0.0-beta13"
 
     object Common {
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
