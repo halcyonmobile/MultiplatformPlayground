@@ -42,9 +42,6 @@ kotlin {
 
                 implementation(Versions.Common.COROUTINES_CORE)
                 implementation(Versions.Common.SERIALIZATION)
-                // DI
-                implementation(Versions.Common.KODEIN_CORE)
-                implementation(Versions.Common.KODEIN_ERASED)
             }
         }
         val androidMain by getting {
