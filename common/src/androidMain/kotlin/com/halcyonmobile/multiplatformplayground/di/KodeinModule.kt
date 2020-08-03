@@ -12,10 +12,10 @@ import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRem
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.usecase.*
 import org.kodein.di.Kodein
-import org.kodein.di.erased.bind
-import org.kodein.di.erased.instance
-import org.kodein.di.erased.provider
-import org.kodein.di.erased.singleton
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
+import org.kodein.di.generic.singleton
 
 private val apiModule = Kodein.Module("apiModule") {
     bind<ApplicationApi>() with provider { ApplicationApi() }
