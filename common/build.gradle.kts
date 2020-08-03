@@ -57,7 +57,7 @@ kotlin {
                 implementation(project(":commonModel"))
                 // Ktor-client for network requests
                 implementation(Versions.Common.KTOR_CLIENT_CORE)
-                implementation(Versions.Common.KTOR_LOGGING)
+                api(Versions.Common.KTOR_LOGGING)
                 implementation(Versions.Common.KTOR_CLIENT_JSON)
                 implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
 
@@ -66,6 +66,9 @@ kotlin {
                 // DI
                 implementation(Versions.Common.KODEIN_CORE)
                 implementation(Versions.Common.KODEIN_ERASED)
+                // Debug menu
+                api(Versions.Common.BEAGLE_LOG)
+                api(Versions.Common.BEAGLE_LOG_KTOR)
             }
         }
     }
