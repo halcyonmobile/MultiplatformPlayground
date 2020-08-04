@@ -1,6 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.viewmodel
 
-import com.halcyonmobile.multiplatformplayground.api.log
+import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel

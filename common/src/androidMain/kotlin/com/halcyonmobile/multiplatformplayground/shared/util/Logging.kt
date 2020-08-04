@@ -1,4 +1,4 @@
-package com.halcyonmobile.multiplatformplayground.api
+package com.halcyonmobile.multiplatformplayground.shared.util
 
 import android.util.Log
 import com.pandulapeter.beagle.log.BeagleLogger
