@@ -1,4 +1,4 @@
-package com.halcyonmobile.multiplatformplayground.api
+package com.halcyonmobile.multiplatformplayground.shared.util
 
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.features.logging.LogLevel
