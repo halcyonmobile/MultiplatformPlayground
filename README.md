@@ -3,15 +3,11 @@
 * Missing `struct` value types in *Kotlin* and *Obj-c* => No `copy-on_write` capability
 # Project set-up
 ##### BE
-1. Create a new Run Configuration using “Application” as a template
-2. For the main class use the following engine: `io.ktor.server.netty.EngineMain`
-3. Specify **backend** as a module
-4. Give a name and save the to the configuration
-
-See [Running the application from inside the IDE](https://ktor.io/servers/engine.html) for more information
+- Run `./gradlew backend:run` from terminal (Additionally you can set up a **Gradle** configuration for this command)
 ##### iOS
-- Run ./gradlew podspec
-- Add the generated dependency snippet in the Podfile
+1) Import the `iosApp` from Xcode
+2) Run `./gradlew common:podspec` to generate/update the **common.framework**
+3) Run the app from Xcode
 # Resources
 ##### Multiplatform
 - [Kotlin Multiplatform libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries)
