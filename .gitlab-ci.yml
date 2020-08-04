@@ -1,0 +1,49 @@
+image: circleci/android:api-29
+
+cache:
+  paths:
+    - .gradle/
+
+stages:
+#  - lint
+  - build
+
+# Default configuration inherited by other jobs.
+.default: &default
+  tags:
+    - docker, halcyon
+  # Before each
+  before_script:
+    - bundle install
+    - bundle update
+
+build:
+  <<: *default
+  stage: build
+  script:
+    - ./gradlew --build-cache assemble
+#    - ./gradlew --build-cache podspec
+  only:
+    - master
+    - /^release.*$/
+    - merge_requests
+  artifacts:
+    paths:
+      - app/build/outputs/apk/debug/
+    expire_in: 1 days
+
+#lint:
+#  <<: *default
+#  stage: lint
+#  before_script: []
+#  script:
+#    - ./gradlew lint
+#  only:
+#    - master
+#    - develop
+#    - /^release.*$/
+#    - merge_requests
+#  artifacts:
+#    paths:
+#      - /build/reports/lint-results.html
+#    expire_in: 5 days
