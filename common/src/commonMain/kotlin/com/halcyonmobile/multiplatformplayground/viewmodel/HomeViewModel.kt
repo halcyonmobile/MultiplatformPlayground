@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.viewmodel
 
+import com.halcyonmobile.multiplatformplayground.api.log
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
@@ -7,7 +8,6 @@ import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
 import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -21,6 +21,7 @@ class HomeViewModel internal constructor(
     val error = Observable<String>()
 
     init {
+        log("We can log from shared code!")
         coroutineScope.launch {
             categoryRepository.stream
                 .collect {
