@@ -36,12 +36,15 @@ kotlin {
                 implementation(project(":commonModel"))
                 // Ktor-client for network requests
                 implementation(Versions.Common.KTOR_CLIENT_CORE)
-                implementation(Versions.Common.KTOR_LOGGING)
+                api(Versions.Common.KTOR_LOGGING)
                 implementation(Versions.Common.KTOR_CLIENT_JSON)
                 implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
 
                 implementation(Versions.Common.COROUTINES_CORE)
                 implementation(Versions.Common.SERIALIZATION)
+                // Debug menu
+                api(Versions.Common.BEAGLE_LOG)
+                api(Versions.Common.BEAGLE_LOG_KTOR)
             }
         }
         val androidMain by getting {
