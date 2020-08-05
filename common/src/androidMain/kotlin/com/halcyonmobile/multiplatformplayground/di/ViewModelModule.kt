@@ -7,18 +7,14 @@ import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.SettingsViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.direct
-import org.kodein.di.erased.bind
-import org.kodein.di.erased.instance
-import org.kodein.di.erased.provider
-import org.kodein.di.erased.singleton
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
+import org.kodein.di.generic.singleton
 
 private val viewModelModule = Kodein.Module(name = "viewModelModule") {
     bindViewModel<HomeViewModel>() with provider {
-        HomeViewModel(
-            instance(),
-            instance(),
-            instance()
-        )
+        HomeViewModel(instance(), instance(), instance())
     }
     bindViewModel<FavouritesViewModel>() with provider { FavouritesViewModel(instance()) }
     bindViewModel<SettingsViewModel>() with provider { SettingsViewModel() }

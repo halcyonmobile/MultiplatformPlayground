@@ -3,6 +3,7 @@ package com.halcyonmobile.multiplatformplayground.api
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.shared.util.installNetworkLogger
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -14,7 +15,7 @@ import kotlin.reflect.typeOf
 
 abstract class KtorApi {
     @OptIn(ExperimentalStdlibApi::class)
-    protected val client = HttpClient(engine) {
+    protected val client = HttpClient {
         installNetworkLogger()
         install(JsonFeature) {
             serializer = KotlinxSerializer().apply {
@@ -25,7 +26,6 @@ abstract class KtorApi {
             }
         }
     }
-
 
     protected fun HttpRequestBuilder.apiUrl(path: String) {
 //        header(HttpHeaders.Authorization, "token $TOKEN")
