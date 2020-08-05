@@ -6,6 +6,8 @@ plugins {
 }
 
 kotlin {
+    jvm("backend")
+
     //select iOS target platform depending on the Xcode environment variables
     val iOSTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
         if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
@@ -20,11 +22,8 @@ kotlin {
             }
         }
     }
-
-    jvm("backend")
-
     sourceSets {
-        commonMain {
+        val commonMain by getting {
             dependencies {
                 implementation(Versions.Common.SERIALIZATION)
             }

@@ -1,7 +1,7 @@
 object Versions {
     const val KOTLIN_VERSION = "1.4.0-rc"
     private const val KTOR_VERSION = "1.3.2-1.4.0-rc"
-    private const val COROUTINES_VERSION = "1.3.8-1.4.0-rc"
+    private const val COROUTINES_VERSION = "1.3.8-native-mt-1.4.0-rc"
     private const val SERIALIZATION_VERSION = "1.0-M1-1.4.0-rc"
     private const val KODEIN_VERSION = "6.5.1"
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
@@ -13,11 +13,11 @@ object Versions {
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
         const val KTOR_CLIENT_SERIALIZATION = "io.ktor:ktor-client-serialization:$KTOR_VERSION"
-        const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_VERSION"
-        const val SERIALIZATION = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
+        const val COROUTINES_CORE =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_VERSION"
 
-        const val KODEIN_CORE = "org.kodein.di:kodein-di-core:$KODEIN_VERSION"
-        const val KODEIN_ERASED = "org.kodein.di:kodein-di-erased:$KODEIN_VERSION"
+        const val SERIALIZATION =
+            "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
         const val BEAGLE_LOG = "com.github.pandulapeter.beagle:log:$BEAGLE_VERSION"
         const val BEAGLE_LOG_KTOR = "com.github.pandulapeter.beagle:log-ktor:$BEAGLE_VERSION"
     }
