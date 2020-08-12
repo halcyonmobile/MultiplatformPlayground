@@ -41,7 +41,6 @@ dependencies {
     implementation(Versions.Jvm.H2_DATABASE)
     implementation(Versions.Jvm.HIKARI_CONNECTION_POOL)
 
-    implementation(Versions.Jvm.GOOGLE_CLOUD_STORAGE)
     implementation(Versions.Jvm.LOGBACK)
 }
 
