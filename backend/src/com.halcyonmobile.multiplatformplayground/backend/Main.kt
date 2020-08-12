@@ -23,7 +23,6 @@ import org.kodein.di.generic.instance
 import org.kodein.di.ktor.kodein
 import org.slf4j.event.Level
 
-
 internal fun Application.main() {
 
     install(StatusPages) {
@@ -46,7 +45,6 @@ internal fun Application.main() {
         level = Level.INFO
     }
     installKodeinFeature()
-
 
     val localSource by kodein().instance<LocalSource>()
     install(Routing) {
