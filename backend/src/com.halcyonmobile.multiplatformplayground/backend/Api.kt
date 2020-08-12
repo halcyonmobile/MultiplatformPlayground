@@ -1,8 +1,12 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
+import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
+import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
+import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
-import com.halcyonmobile.multiplatformplayground.storage.file.FileStorage
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
@@ -12,19 +16,16 @@ import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
 import io.ktor.util.InternalAPI
-import io.ktor.util.decodeBase64Bytes
-import java.lang.Exception
 
 // todo general error handling
-internal fun Routing.api(localSource: LocalSource, fileStorage: FileStorage) {
+internal fun Routing.api(localSource: LocalSource) {
     apiApplications(localSource)
-    apiCreateApplication(localSource, fileStorage)
+    apiCreateApplication(localSource)
     apiUpdateApplication(localSource)
     apiGetApplication(localSource)
     apiFilterApplications(localSource)
     apiGetCategories(localSource)
-    apiPostCategory(localSource, fileStorage)
-//    apiPostScreenshot(localSource, fileStorage)
+    apiPostCategory(localSource)
 }
 
 /**
@@ -43,33 +44,21 @@ private fun Routing.apiApplications(localSource: LocalSource) {
  */
 // todo handle lists
 @UseExperimental(InternalAPI::class)
-private fun Routing.apiCreateApplication(localSource: LocalSource, fileStorage: FileStorage) {
+private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
         val applicationRequest = call.receive<ApplicationRequest>()
-
-        val iconUrl = fileStorage.uploadIcon(
-            applicationRequest.encodedIcon.decodeBase64Bytes(),
-            applicationRequest.name
-        )
 
         val appId = localSource.getNextApplicationId()
         try {
             val screenshots = applicationRequest.screenshots.map {
-                val imageUrl = fileStorage.uploadScreenshot(it.image.decodeBase64Bytes(), it.name)
-                val savedScreenshot = it.copy(name = it.name, image = imageUrl)
+                val savedScreenshot = it.copy(name = it.name, image = it.image)
                 val id = localSource.saveScreenshot(savedScreenshot, appId)
-
                 savedScreenshot.copy(id = id)
             }
             val category = localSource.getCategory(applicationRequest.categoryId)
 
-            localSource.saveApplication(
-                applicationRequest.toApplication(
-                    iconUrl,
-                    category,
-                    screenshots
-                )
-            )
+            localSource.saveApplication(applicationRequest.toApplication(applicationRequest.encodedIcon, category, screenshots))
+
             call.respond(HttpStatusCode.Created)
         } catch (e: Exception) {
             call.respond(HttpStatusCode.Conflict)
@@ -136,11 +125,10 @@ private fun Routing.apiGetCategories(localSource: LocalSource) {
  * POST /api/v1/categories
  */
 @UseExperimental(InternalAPI::class)
-private fun Routing.apiPostCategory(localSource: LocalSource, fileStorage: FileStorage) {
+private fun Routing.apiPostCategory(localSource: LocalSource) {
     post("/category") {
         val category = call.receive<Category>()
-        val iconUrl = fileStorage.uploadCategory(category.icon.decodeBase64Bytes(), category.name)
-        val savedCategory = category.copy(icon = iconUrl)
+        val savedCategory = category.copy(icon = category.icon)
         val id = localSource.saveCategory(savedCategory)
 
         call.respond(savedCategory.copy(id))
@@ -150,11 +138,7 @@ private fun Routing.apiPostCategory(localSource: LocalSource, fileStorage: FileS
 private suspend fun LocalSource.getNextApplicationId() =
     getApplications().map { it.id }.max() ?: 0 + 1
 
-private fun ApplicationRequest.toApplication(
-    iconUrl: String,
-    category: Category,
-    screenshots: List<Screenshot>
-) =
+private fun ApplicationRequest.toApplication(icon: String, category: Category, screenshots: List<Screenshot>) =
     ApplicationWithDetail(
         application = Application(
             name = name,
@@ -163,7 +147,7 @@ private fun ApplicationRequest.toApplication(
             category = category
         ),
         applicationDetail = ApplicationDetail(
-            iconUrl,
+            icon,
             rating,
             ratingCount,
             storeUrl,
