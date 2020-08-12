@@ -1,9 +1,9 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
-import com.halcyonmobile.multiplatformplayground.*
+import com.halcyonmobile.multiplatformplayground.NotFound
+import com.halcyonmobile.multiplatformplayground.Unauthorized
 import com.halcyonmobile.multiplatformplayground.di.installKodeinFeature
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
-import com.halcyonmobile.multiplatformplayground.storage.file.FileStorage
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -44,9 +44,8 @@ internal fun Application.main() {
 
 
     val localSource by kodein().instance<LocalSource>()
-    val fileStorage by kodein().instance<FileStorage>()
     install(Routing) {
         // todo update uploadDir
-        api(localSource, fileStorage)
+        api(localSource)
     }
 }
