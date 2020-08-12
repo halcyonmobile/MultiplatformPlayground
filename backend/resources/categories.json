@@ -10,8 +10,33 @@
     "icon": "https://cdn.iconscout.com/icon/free/png-512/sports-car-bike-race-racing-flag-start-2-18625.png"
   },
   {
-    "id": 1,
+    "id": 3,
     "name": "Wear",
     "icon": "https://www.pinclipart.com/picdir/middle/249-2497617_little-black-dress-icon-clipart.png"
+  },
+  {
+    "id": 4,
+    "name": "Art",
+    "icon": "https://cdn.iconscout.com/icon/free/png-512/sports-car-bike-race-racing-flag-start-2-18625.png"
+  },
+  {
+    "id": 5,
+    "name": "Auto",
+    "icon": "https://cdn.iconscout.com/icon/free/png-512/sports-car-bike-race-racing-flag-start-2-18625.png"
+  },
+  {
+    "id": 6,
+    "name": "Books",
+    "icon": "https://cdn.iconscout.com/icon/free/png-512/sports-car-bike-race-racing-flag-start-2-18625.png"
+  },
+  {
+    "id": 7,
+    "name": "Communication",
+    "icon": "https://cdn.iconscout.com/icon/free/png-512/sports-car-bike-race-racing-flag-start-2-18625.png"
+  },
+  {
+    "id": 8,
+    "name": "Dating",
+    "icon": "https://cdn.iconscout.com/icon/free/png-512/sports-car-bike-race-racing-flag-start-2-18625.png"
   }
 ]
