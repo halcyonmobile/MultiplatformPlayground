@@ -40,7 +40,6 @@ object Versions {
 
         const val H2_DATABASE = "com.h2database:h2:1.4.200"
         const val HIKARI_CONNECTION_POOL = "com.zaxxer:HikariCP:3.4.5"
-        const val GOOGLE_CLOUD_STORAGE = "com.google.cloud:google-cloud-storage:1.102.0"
         const val LOGBACK = "ch.qos.logback:logback-classic:1.2.3"
     }
 
