@@ -7,7 +7,6 @@ import com.halcyonmobile.multiplatformplayground.repository.application.Applicat
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationMemorySource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
-import com.halcyonmobile.multiplatformplayground.repository.category.CategoryLocalSource
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.usecase.*
@@ -30,9 +29,8 @@ private val repositoryModule = Kodein.Module("repositoryModule") {
     bind<ApplicationRemoteSource>() with provider { ApplicationRemoteSource(instance()) }
     bind<ApplicationRepository>() with singleton { ApplicationRepository(instance(), instance()) }
 
-    bind<CategoryLocalSource>() with provider { CategoryLocalSource() }
     bind<CategoryRemoteSource>() with provider { CategoryRemoteSource(instance()) }
-    bind<CategoryRepository>() with singleton { CategoryRepository(instance(), instance()) }
+    bind<CategoryRepository>() with singleton { CategoryRepository(instance()) }
 }
 
 private val useCaseModule = Kodein.Module("useCaseModule") {
