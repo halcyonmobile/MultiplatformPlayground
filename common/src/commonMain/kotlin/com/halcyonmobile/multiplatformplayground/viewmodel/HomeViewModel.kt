@@ -21,13 +21,11 @@ class HomeViewModel internal constructor(
     val error = Observable<String>()
 
     init {
-        log("We can log from shared code!")
         coroutineScope.launch {
-            categoryRepository.stream
-                .collect {
-                    categories.value = it
-                    println(it)
-                }
+            categoryRepository.categories.collect {
+                categories.value = it
+                log("Categories stream: $it")
+            }
         }
         coroutineScope.launch {
             when (val result = getCategories()) {
@@ -36,17 +34,9 @@ class HomeViewModel internal constructor(
         }
     }
 
-    private fun fetch() = coroutineScope.launch {
+    fun fetch() = coroutineScope.launch {
         when (val result = fetchCategories()) {
             is Result.Error -> error.value = result.exception.message
         }
     }
-
-    fun login(): Boolean {
-        // for showcasing functionality
-        return true
-    }
-
-    fun validate(validationBlock: (String) -> Boolean) =
-        validationBlock("s")
 }
