@@ -23,8 +23,8 @@ class HomeViewModel internal constructor(
     init {
         coroutineScope.launch {
             categoryRepository.categories.collect {
-                categories.value = it
                 log("Categories stream: $it")
+                categories.value = it
             }
         }
         coroutineScope.launch {
@@ -39,4 +39,6 @@ class HomeViewModel internal constructor(
             is Result.Error -> error.value = result.exception.message
         }
     }
+
+
 }
