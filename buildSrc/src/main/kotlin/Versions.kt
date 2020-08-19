@@ -1,7 +1,7 @@
 object Versions {
     const val KOTLIN_VERSION = "1.4.0-rc"
     private const val KTOR_VERSION = "1.3.2-1.4.0-rc"
-    private const val COROUTINES_VERSION = "1.3.8-native-mt-1.4.0-rc"
+    const val COROUTINES_VERSION = "1.3.8-native-mt-1.4.0-rc"
     private const val SERIALIZATION_VERSION = "1.0-M1-1.4.0-rc"
     private const val KODEIN_VERSION = "6.5.1"
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"

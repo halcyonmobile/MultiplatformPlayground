@@ -63,6 +63,11 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation(Versions.iOS.KTOR_CLIENT)
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core"){
+                    version {
+                        strictly(Versions.COROUTINES_VERSION)
+                    }
+                }
             }
         }
     }
