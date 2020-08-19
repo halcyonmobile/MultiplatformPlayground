@@ -60,7 +60,11 @@ kotlin {
                 implementation(Versions.Android.KODEIN_ANDROID_X)
             }
         }
-        val iosMain by getting
+        val iosMain by getting {
+            dependencies {
+                implementation(Versions.iOS.KTOR_CLIENT)
+            }
+        }
     }
 }
 
