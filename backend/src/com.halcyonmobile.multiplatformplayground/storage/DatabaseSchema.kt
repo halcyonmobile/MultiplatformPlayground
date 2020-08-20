@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
+import com.halcyonmobile.multiplatformplayground.NotFound
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
 import com.halcyonmobile.multiplatformplayground.model.Category
@@ -8,7 +9,6 @@ import com.halcyonmobile.multiplatformplayground.shared.util.*
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
-import org.omg.CosNaming.NamingContextPackage.NotFound
 
 internal object ApplicationTable : Table("applications") {
     val id = long(APP_ID).autoIncrement().primaryKey()
