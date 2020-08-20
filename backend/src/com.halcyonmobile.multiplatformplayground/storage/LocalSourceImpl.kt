@@ -66,7 +66,7 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                         it[version] = applicationDetail.version
                         it[size] = applicationDetail.size
                         it[favourite] = application.favourite
-                        it[categoryId] = application.category?.id
+                        it[categoryId] = application.category.id
                         // todo add screenshots also
                     }
                 }
@@ -82,7 +82,7 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                     it[name] = application.name
                     it[developer] = application.developer
                     it[favourite] = application.favourite
-                    it[categoryId] = application.category?.id
+                    it[categoryId] = application.category.id
                     // todo update screenshots also
                 }
             }
