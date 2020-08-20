@@ -8,6 +8,7 @@ import com.halcyonmobile.multiplatformplayground.HomeFragmentBinding
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.shared.AppPortfolioFragment
 import com.halcyonmobile.multiplatformplayground.shared.observer.LiveDataObserver
+import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.shared.util.viewModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import org.kodein.di.KodeinAware
@@ -20,8 +21,11 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.error.observe(viewLifecycleOwner, Observer {
+        viewModel.categories.observe(viewLifecycleOwner) {
+            log("Categories observed on Android: $it")
+        }
+        viewModel.error.observe(viewLifecycleOwner) {
             showSnackBar(it)
-        })
+        }
     }
 }

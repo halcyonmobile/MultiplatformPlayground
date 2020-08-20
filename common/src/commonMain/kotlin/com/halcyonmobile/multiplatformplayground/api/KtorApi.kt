@@ -4,9 +4,10 @@ import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import com.halcyonmobile.multiplatformplayground.shared.util.installNetworkLogger
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
@@ -16,7 +17,11 @@ import kotlin.reflect.typeOf
 abstract class KtorApi {
     @OptIn(ExperimentalStdlibApi::class)
     protected val client = HttpClient {
-        installNetworkLogger()
+        installNetworkLogger()         // TODO investigate why this isn't working
+        install(Logging) {
+            logger = Logger.SIMPLE
+            level = LogLevel.ALL
+        }
         install(JsonFeature) {
             serializer = KotlinxSerializer().apply {
                 // TODO check out this, might not be needed anymore
@@ -41,6 +46,6 @@ abstract class KtorApi {
     }
 
     companion object {
-        const val BASE_URL = "http://localhost:8080/" //TODO: Move to Gradle
+        const val BASE_URL = "http://0.0.0.0:8080/" //TODO: Move to Gradle
     }
 }

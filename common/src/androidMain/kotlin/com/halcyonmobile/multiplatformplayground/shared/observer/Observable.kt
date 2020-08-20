@@ -6,7 +6,11 @@ import java.lang.IllegalArgumentException
 
 actual class Observable<T : Any> {
 
-    actual var value: T? = null
+    actual var value: T?
+        set(value) {
+            liveData.value = value
+        }
+        get() = liveData.value
 
     private val liveData = MutableLiveData<T>()
 
@@ -21,6 +25,7 @@ actual class Observable<T : Any> {
         observe(LiveDataObserver(lifecycleOwner, androidObserver))
     }
 
+    // TODO rethink this
     actual fun observe(doOnChange: (T?) -> Unit) =
         observe(object : Observer<T>() {
             override fun onChanged(value: T?) {
