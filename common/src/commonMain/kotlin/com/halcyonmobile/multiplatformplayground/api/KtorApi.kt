@@ -17,11 +17,11 @@ import kotlin.reflect.typeOf
 abstract class KtorApi {
     @OptIn(ExperimentalStdlibApi::class)
     protected val client = HttpClient {
-        installNetworkLogger()         // TODO investigate why this isn't working
-        install(Logging) {
-            logger = Logger.SIMPLE
-            level = LogLevel.ALL
-        }
+//        installNetworkLogger()         // TODO investigate why this isn't working
+//        install(Logging) {
+//            logger = Logger.SIMPLE
+//            level = LogLevel.ALL
+//        }
         install(JsonFeature) {
             serializer = KotlinxSerializer().apply {
                 // TODO check out this, might not be needed anymore
