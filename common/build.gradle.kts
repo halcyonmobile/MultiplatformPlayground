@@ -11,14 +11,7 @@ version = "1.0.0"
 
 kotlin {
     android()
-    // Select iOS target platform depending on the Xcode environment variables
-    val iOSTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-            ::iosArm64
-        else
-            ::iosX64
-
-    iOSTarget("ios") {
+    ios {
         compilations {
             val main by getting {
                 kotlinOptions.freeCompilerArgs =
@@ -63,7 +56,7 @@ kotlin {
         val iosMain by getting {
             dependencies {
                 implementation(Versions.iOS.KTOR_CLIENT)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core"){
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core") {
                     version {
                         strictly(Versions.COROUTINES_VERSION)
                     }
@@ -94,7 +87,9 @@ android {
 val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>("ios").binaries.getFramework(mode)
+    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
+    val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
+    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")
