@@ -10,6 +10,8 @@
 3) Run the app from Xcode
 # Resources
 ##### Multiplatform
+- [KMM documentation](https://kotlinlang.org/docs/mobile/home.html)
+- [IceRock KMP library finder](https://libs.kmp.icerock.dev/)
 - [Kotlin Multiplatform libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries)
 - [Jetbrains KMP project collection](https://www.jetbrains.com/lp/mobilecrossplatform/?_ga=2.202856727.765867490.1593685697-1840297874.1578984105)
 - [KaMPKit from Touchlab](https://github.com/touchlab/KaMPKit)
