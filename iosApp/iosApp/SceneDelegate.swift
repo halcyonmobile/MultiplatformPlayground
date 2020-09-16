@@ -15,12 +15,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
-        viewModel.categories.observe { (categories) in
+        ExtensionsKt.onEachHelper(viewModel.categories, callback: { (categories) in
             LoggingKt.log("Categories observed on iOS \(categories)")
-        }
-        viewModel.error.observe{ (error) in
+        })
+        ExtensionsKt.onEachHelper(viewModel.error, callback: { (error) in
             LoggingKt.log("Error \(error)")
-        }
+        })
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
