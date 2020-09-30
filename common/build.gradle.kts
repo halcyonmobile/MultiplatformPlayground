@@ -5,13 +5,19 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("com.squareup.sqldelight")
 }
 
 version = "1.0.0"
 
 kotlin {
     android()
-    ios {
+    // Set the target based on if it's real phone ore simulator
+    if (System.getenv("SDK_NAME").orEmpty().startsWith("iphoneos")) {
+        iosArm64("ios")
+    } else {
+        iosX64("ios")
+    }.apply {
         compilations {
             val main by getting {
                 kotlinOptions.freeCompilerArgs =
@@ -51,11 +57,14 @@ kotlin {
 
                 implementation(Versions.Jvm.KODEIN_GENERIC)
                 implementation(Versions.Android.KODEIN_ANDROID_X)
+
+                implementation(Versions.Android.SQL_DELIGHT_DRIVER)
             }
         }
         val iosMain by getting {
             dependencies {
                 implementation(Versions.iOS.KTOR_CLIENT)
+                implementation(Versions.iOS.SQL_DELIGHT_DRIVER)
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core") {
                     version {
                         strictly(Versions.COROUTINES_VERSION)
@@ -67,7 +76,6 @@ kotlin {
 }
 
 android {
-    // todo extract these
     compileSdkVersion(Versions.Android.SDK_VERSION)
     buildToolsVersion(Versions.Android.BUILD_TOOLS_VERSION)
     defaultConfig {
@@ -87,9 +95,8 @@ android {
 val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
-    val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+    val framework =
+        kotlin.targets.getByName<KotlinNativeTarget>("ios").binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")
@@ -102,5 +109,12 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     with(kotlinOptions) {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
+    }
+}
+
+sqldelight {
+    database("MultiplatformDatabase") { // This will be the name of the generated database class.
+        packageName = "com.halcyonmobile.multiplatformplayground.db"
+        sourceFolders = listOf("sqldelight")
     }
 }

@@ -1,13 +1,17 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.4.0"
+    const val KOTLIN_VERSION = "1.4.10"
     private const val KTOR_VERSION = "1.4.0"
     const val COROUTINES_VERSION = "1.3.9-native-mt"
     private const val SERIALIZATION_VERSION = "1.0.0-RC"
     private const val KODEIN_VERSION = "6.5.1"
+    private const val SQL_DELIGHT_VERSION = "1.4.3"
+    private const val BEAGLE_VERSION = "2.0.0-beta13"
+
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     const val KOTLIN_SERIALIZATION_PLUGIN =
         "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
-    private const val BEAGLE_VERSION = "2.0.0-beta13"
+    const val SQL_DELIGHT_GRADLE_PLUGIN =
+        "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
 
     object Common {
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
@@ -74,9 +78,12 @@ object Versions {
 
         const val BEAGLE_DRAWER = "com.github.pandulapeter.beagle:ui-drawer:$BEAGLE_VERSION"
         const val BEAGLE_NOOP = "com.github.pandulapeter.beagle:noop:$BEAGLE_VERSION"
+
+        const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:android-driver:$SQL_DELIGHT_VERSION"
     }
 
     object iOS {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
+        const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver:$SQL_DELIGHT_VERSION"
     }
 }
