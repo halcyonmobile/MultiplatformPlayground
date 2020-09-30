@@ -14,7 +14,7 @@ import org.kodein.di.generic.singleton
 
 private val viewModelModule = Kodein.Module(name = "viewModelModule") {
     bindViewModel<HomeViewModel>() with provider {
-        HomeViewModel(instance(), instance(), instance())
+        HomeViewModel(instance(), instance())
     }
     bindViewModel<FavouritesViewModel>() with provider { FavouritesViewModel(instance()) }
     bindViewModel<SettingsViewModel>() with provider { SettingsViewModel() }

@@ -2,19 +2,16 @@ package com.halcyonmobile.multiplatformplayground.viewmodel
 
 import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
 import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel internal constructor(
     private val getCategories: GetCategoriesUseCase,
-    private val fetchCategories: FetchCategoriesUseCase,
-    private val categoryRepository: CategoryRepository
+    private val fetchCategories: FetchCategoriesUseCase
 ) : CoroutineViewModel() {
 
     val categories = Observable<List<Category>>()
@@ -22,13 +19,11 @@ class HomeViewModel internal constructor(
 
     init {
         coroutineScope.launch {
-            categoryRepository.categories.collect {
-                log("Categories stream: $it")
-                categories.value = it
-            }
-        }
-        coroutineScope.launch {
             when (val result = getCategories()) {
+                is Result.Success -> {
+                    categories.value = result.value
+                    log("Categories: ${result.value}")
+                }
                 is Result.Error -> error.value = result.exception.message
             }
         }
@@ -39,6 +34,4 @@ class HomeViewModel internal constructor(
             is Result.Error -> error.value = result.exception.message
         }
     }
-
-
 }
