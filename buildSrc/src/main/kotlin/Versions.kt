@@ -1,5 +1,5 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.4.10"
+    const val KOTLIN_VERSION = "1.4.0"
     private const val KTOR_VERSION = "1.4.0"
     const val COROUTINES_VERSION = "1.3.9-native-mt"
     private const val SERIALIZATION_VERSION = "1.0.0-RC"

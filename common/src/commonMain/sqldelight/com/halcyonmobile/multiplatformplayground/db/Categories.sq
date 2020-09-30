@@ -4,11 +4,14 @@ CREATE TABLE categories(
   icon TEXT NOT NULL
 );
 
-insertItem:
+insert:
 INSERT OR REPLACE INTO categories (id, name, icon) VALUES (?, ?, ?);
 
 selectAll:
 SELECT * FROM categories;
+
+getById:
+SELECT * FROM categories WHERE id = ?;
 
 clear:
 DELETE FROM categories;
