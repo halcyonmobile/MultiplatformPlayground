@@ -1,0 +1,17 @@
+CREATE TABLE categories(
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name TEXT  NOT NULL,
+  icon TEXT NOT NULL
+);
+
+insert:
+INSERT OR REPLACE INTO categories (id, name, icon) VALUES (?, ?, ?);
+
+selectAll:
+SELECT * FROM categories;
+
+getById:
+SELECT * FROM categories WHERE id = ?;
+
+clear:
+DELETE FROM categories;

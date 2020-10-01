@@ -4,12 +4,21 @@ object Versions {
     const val COROUTINES_VERSION = "1.3.9-native-mt"
     private const val SERIALIZATION_VERSION = "1.0.0-RC"
     private const val KODEIN_VERSION = "6.5.1"
+    private const val SQL_DELIGHT_VERSION = "1.4.3"
+    private const val BEAGLE_VERSION = "2.0.0-beta13"
+
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     const val KOTLIN_SERIALIZATION_PLUGIN =
         "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
-    private const val BEAGLE_VERSION = "2.0.0-beta13"
+    const val SQL_DELIGHT_GRADLE_PLUGIN =
+        "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
 
     object Common {
+        private const val MOKO_RESOURCES_VERSION = "0.13.1"
+
+        const val MOKO_RESOURCES_GRADLE_PLUGIN =
+            "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
+
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:$KTOR_VERSION"
@@ -21,6 +30,7 @@ object Versions {
             "org.jetbrains.kotlinx:kotlinx-serialization-core:$SERIALIZATION_VERSION"
         const val BEAGLE_LOG = "com.github.pandulapeter.beagle:log:$BEAGLE_VERSION"
         const val BEAGLE_LOG_KTOR = "com.github.pandulapeter.beagle:log-ktor:$BEAGLE_VERSION"
+        const val MOKO_RESOURCES = "dev.icerock.moko:resources:$MOKO_RESOURCES_VERSION"
     }
 
     object Jvm {
@@ -49,6 +59,11 @@ object Versions {
         const val SDK_VERSION = 29
         const val MINIMUM_SDK_VERSION = 23
         const val BUILD_TOOLS_VERSION = "29.0.2"
+        private const val NAVIGATION_VERSION = "2.2.0"
+
+
+        const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN =
+            "androidx.navigation:navigation-safe-args-gradle-plugin:$NAVIGATION_VERSION"
 
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
         const val APP_COMPAT = "androidx.appcompat:appcompat:1.1.0"
@@ -65,7 +80,6 @@ object Versions {
         const val KODEIN_GENERIC = "org.kodein.di:kodein-di-generic-jvm:$KODEIN_VERSION"
         const val KODEIN_ANDROID_X = "org.kodein.di:kodein-di-framework-android-x:$KODEIN_VERSION"
 
-        const val NAVIGATION_VERSION = "2.2.0"
         const val NAVIGATON_FRAGMENT =
             "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
         const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
@@ -74,9 +88,12 @@ object Versions {
 
         const val BEAGLE_DRAWER = "com.github.pandulapeter.beagle:ui-drawer:$BEAGLE_VERSION"
         const val BEAGLE_NOOP = "com.github.pandulapeter.beagle:noop:$BEAGLE_VERSION"
+
+        const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:android-driver:$SQL_DELIGHT_VERSION"
     }
 
     object iOS {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
+        const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver:$SQL_DELIGHT_VERSION"
     }
 }

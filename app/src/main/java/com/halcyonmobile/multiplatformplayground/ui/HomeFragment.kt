@@ -19,6 +19,9 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        with(requireBinding()) {
+            textView.setText(this@HomeFragment.viewModel.title.stringRes.resourceId)
+        }
         with(viewModel) {
             categories.onEach {
                 log("Categories observed on Android: $it")
