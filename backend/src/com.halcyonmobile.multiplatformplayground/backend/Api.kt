@@ -1,11 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
-import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
-import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
-import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -137,27 +132,6 @@ private fun Routing.apiPostCategory(localSource: LocalSource) {
 
 private suspend fun LocalSource.getNextApplicationId() =
     getApplications().map { it.id }.max() ?: 0 + 1
-
-private fun ApplicationRequest.toApplication(icon: String, category: Category, screenshots: List<Screenshot>) =
-    ApplicationWithDetail(
-        application = Application(
-            name = name,
-            developer = developer,
-            favourite = favourite,
-            category = category
-        ),
-        applicationDetail = ApplicationDetail(
-            icon,
-            rating,
-            ratingCount,
-            storeUrl,
-            description,
-            downloads,
-            version,
-            size,
-            screenshots
-        )
-    )
 
 const val NAME_QUERY_KEY = "name"
 const val CATEGORY_QUERY_KEY = "category"
