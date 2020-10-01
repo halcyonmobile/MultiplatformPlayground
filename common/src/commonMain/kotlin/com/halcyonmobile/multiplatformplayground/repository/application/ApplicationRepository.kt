@@ -7,10 +7,10 @@ import com.halcyonmobile.multiplatformplayground.shared.util.File
 internal class ApplicationRepository(
     private val remoteSource: ApplicationRemoteSource
 ) {
-    suspend fun getDetailById(appId: Long) = remoteSource.getDetail(appId)
-
     suspend fun getByCategory(categoryId: Long, page: Int = 0, perPage: Int = DEFAULT_PER_PAGE) =
         remoteSource.get(categoryId, page, perPage)
+
+    suspend fun getDetailById(appId: Long) = remoteSource.getDetail(appId)
 
     suspend fun create(application: ApplicationWithDetail, icon: File, screenshots: List<File>) =
         remoteSource.create(application, icon, screenshots)
