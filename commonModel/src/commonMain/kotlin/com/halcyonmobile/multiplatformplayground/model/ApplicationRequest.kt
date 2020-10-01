@@ -6,8 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class ApplicationRequest(
-    @SerialName(APP_ID)
-    val id: Long,
     @SerialName(APP_NAME)
     val name: String,
     @SerialName(APP_DEVELOPER)
@@ -35,3 +33,28 @@ class ApplicationRequest(
     @SerialName(APP_SCREENSHOTS)
     var screenshots: List<Screenshot>
 )
+
+fun ApplicationRequest.toApplication(
+    icon: String,
+    category: Category,
+    screenshots: List<Screenshot>
+) =
+    ApplicationWithDetail(
+        application = Application(
+            name = name,
+            developer = developer,
+            favourite = favourite,
+            category = category
+        ),
+        applicationDetail = ApplicationDetail(
+            icon,
+            rating,
+            ratingCount,
+            storeUrl,
+            description,
+            downloads,
+            version,
+            size,
+            screenshots
+        )
+    )
