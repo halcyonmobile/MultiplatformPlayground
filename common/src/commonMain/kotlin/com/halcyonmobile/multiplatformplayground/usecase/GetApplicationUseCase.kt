@@ -1,12 +1,11 @@
 package com.halcyonmobile.multiplatformplayground.usecase
 
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
-import com.halcyonmobile.multiplatformplayground.shared.util.extension.merge
-import kotlinx.coroutines.flow.*
+import com.halcyonmobile.multiplatformplayground.shared.Result
 
 internal class GetApplicationUseCase(private val applicationRepository: ApplicationRepository) {
 
-    operator fun invoke(id: Long) =
+    suspend operator fun invoke(id: Long) = Result {
         applicationRepository.getDetailById(id)
-
+    }
 }

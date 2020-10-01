@@ -27,10 +27,9 @@ class ApplicationDetailViewModel internal constructor(
 
     init {
         coroutineScope.launch {
-            getApplication(applicationId).catch {
-                // todo handle error
-            }.collect {
-                _applicationWithDetail.value = it
+            when (val result = getApplication(applicationId)) {
+                is Result.Success -> _applicationWithDetail.value = result.value
+                is Result.Error -> _error.value = result.exception.message
             }
         }
     }
