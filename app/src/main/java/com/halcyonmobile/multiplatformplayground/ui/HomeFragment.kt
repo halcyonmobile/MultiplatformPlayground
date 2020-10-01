@@ -20,12 +20,16 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.categories.observe(viewLifecycleOwner) {
-            log("Categories observed on Android: $it")
+        with(requireBinding()) {
+            textView.text = this@HomeFragment.viewModel.title.toString(context = requireContext())
         }
-        viewModel.error.observe(viewLifecycleOwner) {
-            showSnackBar(it)
+        with(viewModel) {
+            categories.observe(viewLifecycleOwner) {
+                log("Categories observed on Android: $it")
+            }
+            error.observe(viewLifecycleOwner) {
+                showSnackBar(it)
+            }
         }
     }
 }
