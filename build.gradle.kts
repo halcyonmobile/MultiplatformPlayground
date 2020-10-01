@@ -5,13 +5,15 @@ buildscript {
         jcenter()
         maven("https://kotlin.bintray.com/kotlinx")
         maven("https://dl.bintray.com/jetbrains/kotlin-native-dependencies")
+        maven("https://dl.bintray.com/icerockdev/plugins")
         mavenCentral()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:4.0.1")
         classpath(Versions.KOTLIN_GRADLE_PLUGIN)
         classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Android.NAVIGATION_VERSION}")
+        classpath(Versions.Android.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
+        classpath(Versions.Common.MOKO_RESOURCES_GRADLE_PLUGIN)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -26,6 +28,7 @@ allprojects {
         maven("https://dl.bintray.com/kotlin/exposed")
         maven("https://jitpack.io")
         maven("https://dl.bintray.com/kodein-framework/Kodein-DI")
+        maven("https://dl.bintray.com/icerockdev/moko")
     }
 }
 

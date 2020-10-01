@@ -5,6 +5,7 @@ plugins {
     id("kotlinx-serialization")
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 version = "1.0.0"
@@ -38,6 +39,11 @@ kotlin {
                 // Debug menu
                 api(Versions.Common.BEAGLE_LOG)
                 api(Versions.Common.BEAGLE_LOG_KTOR)
+                // Multiplatform resources
+                api(Versions.Common.MOKO_RESOURCES)
+                // TODO remove this workaround after the 1.4.1 release
+                implementation("dev.icerock.moko:parcelize:0.4.0")
+                implementation("dev.icerock.moko:graphics:0.4.0")
             }
         }
         val androidMain by getting {
@@ -89,7 +95,8 @@ val packForXcode by tasks.creating(Sync::class) {
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
     val sdkName = System.getenv("SDK_NAME") ?: "iphonesimulator"
     val targetName = "ios" + if (sdkName.startsWith("iphoneos")) "Arm64" else "X64"
-    val framework = kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
+    val framework =
+        kotlin.targets.getByName<KotlinNativeTarget>(targetName).binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")
@@ -103,4 +110,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.halcyonmobile.multiplatformplayground" // required
 }
