@@ -26,7 +26,7 @@ import org.kodein.di.KodeinAware
 class AppPortfolioApp : Application(), KodeinAware {
 
     override val kodein = Kodein {
-        bindCommonModule()
+        bindCommonModule(this@AppPortfolioApp)
         bindViewModelModule()
     }
 

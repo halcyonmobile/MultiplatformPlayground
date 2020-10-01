@@ -14,6 +14,7 @@ buildscript {
         classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
         classpath(Versions.Android.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
         classpath(Versions.Common.MOKO_RESOURCES_GRADLE_PLUGIN)
+        classpath(Versions.SQL_DELIGHT_GRADLE_PLUGIN)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

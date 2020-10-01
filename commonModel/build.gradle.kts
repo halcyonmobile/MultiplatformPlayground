@@ -10,7 +10,11 @@ version = "1.0.0"
 kotlin {
     jvm("backend")
 
-    ios {
+    if (System.getenv("SDK_NAME").orEmpty().startsWith("iphoneos")) {
+        iosArm64("ios")
+    } else {
+        iosX64("ios")
+    }.apply {
         compilations {
             val main by getting {
                 kotlinOptions.freeCompilerArgs =
