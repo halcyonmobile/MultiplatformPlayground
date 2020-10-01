@@ -3,7 +3,9 @@ package com.halcyonmobile.multiplatformplayground.backend
 import com.halcyonmobile.multiplatformplayground.NotFound
 import com.halcyonmobile.multiplatformplayground.Unauthorized
 import com.halcyonmobile.multiplatformplayground.di.installKodeinFeature
+import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
 import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.toApplication
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -52,11 +54,32 @@ internal fun Application.main() {
         api(localSource)
     }
 
+    mock(localSource)
+}
+
+// TODO remove mocked data
+private fun Application.mock(localSource: LocalSource) = with(environment.classLoader) {
     // Init database with pre-defined categories located in resources/categories.json
-    environment.classLoader.getResourceAsStream("categories.json")?.bufferedReader()?.readText()?.let {
-        Json.decodeFromString<List<Category>>(it).forEach { category ->
+    getResourceAsStream("categories.json")?.bufferedReader()?.readText()
+        ?.let {
+            Json.decodeFromString<List<Category>>(it).forEach { category ->
+                launch {
+                    localSource.saveCategory(category)
+                }
+            }
+        }
+
+    getResourceAsStream("applications.json")?.bufferedReader()?.readText()?.let {
+        Json.decodeFromString<List<ApplicationRequest>>(it).forEach { applicationRequest ->
             launch {
-                localSource.saveCategory(category)
+                val category = localSource.getCategory(applicationRequest.categoryId)
+                localSource.saveApplication(
+                    applicationRequest.toApplication(
+                        applicationRequest.encodedIcon,
+                        category,
+                        emptyList()
+                    )
+                )
             }
         }
     }
