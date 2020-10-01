@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="app_name">AppPortfolio</string>
+    <string name="home">Főoldal</string>
+    <string name="favourites">Kedvencek</string>
+    <string name="settings">Beállítások</string>
+</resources>
