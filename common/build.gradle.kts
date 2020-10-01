@@ -6,6 +6,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
     id("com.squareup.sqldelight")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 version = "1.0.0"
@@ -44,6 +45,11 @@ kotlin {
                 // Debug menu
                 api(Versions.Common.BEAGLE_LOG)
                 api(Versions.Common.BEAGLE_LOG_KTOR)
+                // Multiplatform resources
+                api(Versions.Common.MOKO_RESOURCES)
+                // TODO remove this workaround after the 1.4.1 release
+                implementation("dev.icerock.moko:parcelize:0.4.0")
+                implementation("dev.icerock.moko:graphics:0.4.0")
             }
         }
         val androidMain by getting {
@@ -117,4 +123,8 @@ sqldelight {
         packageName = "com.halcyonmobile.multiplatformplayground.db"
         sourceFolders = listOf("sqldelight")
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.halcyonmobile.multiplatformplayground" // required
 }
