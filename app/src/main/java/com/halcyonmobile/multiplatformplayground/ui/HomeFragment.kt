@@ -2,16 +2,15 @@ package com.halcyonmobile.multiplatformplayground.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
-import com.google.android.material.snackbar.Snackbar
+import androidx.lifecycle.lifecycleScope
 import com.halcyonmobile.multiplatformplayground.HomeFragmentBinding
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.shared.AppPortfolioFragment
-import com.halcyonmobile.multiplatformplayground.shared.observer.LiveDataObserver
 import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.shared.util.viewModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
-import org.kodein.di.KodeinAware
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class HomeFragment :
     AppPortfolioFragment<HomeFragmentBinding, HomeViewModel>(R.layout.fragment_home) {
@@ -21,15 +20,17 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(requireBinding()) {
-            textView.text = this@HomeFragment.viewModel.title.toString(context = requireContext())
+            textView.setText(this@HomeFragment.viewModel.title.stringRes.resourceId)
         }
         with(viewModel) {
-            categories.observe(viewLifecycleOwner) {
+            categories.onEach {
                 log("Categories observed on Android: $it")
-            }
-            error.observe(viewLifecycleOwner) {
-                showSnackBar(it)
-            }
+            }.launchIn(lifecycleScope)
+            error.onEach {
+                if (it != null) {
+                    showSnackBar(it)
+                }
+            }.launchIn(lifecycleScope)
         }
     }
 }
