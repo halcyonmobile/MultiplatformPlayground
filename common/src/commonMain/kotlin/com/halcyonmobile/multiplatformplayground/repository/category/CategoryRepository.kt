@@ -4,13 +4,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
-class CategoryRepository internal constructor(
+internal class CategoryRepository (
     private val remoteSource: CategoryRemoteSource,
     private val localSource: CategoryLocalSource
 ) {
-    internal suspend fun get() = localSource.getCategories().also { if (it.isEmpty()) fetch() }
+    suspend fun get() = localSource.getCategories().also { if (it.isEmpty()) fetch() }
 
-    internal suspend fun fetch() = remoteSource.get(0, DEFAULT_PER_PAGE)
+    suspend fun fetch() = remoteSource.get(0, DEFAULT_PER_PAGE)
         .also { categories -> categories.forEach { localSource.insert(it) } }
 
     companion object {
