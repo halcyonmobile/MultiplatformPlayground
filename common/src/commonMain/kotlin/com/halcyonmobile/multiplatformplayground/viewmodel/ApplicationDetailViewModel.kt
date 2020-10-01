@@ -3,42 +3,34 @@ package com.halcyonmobile.multiplatformplayground.viewmodel
 import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
-import com.halcyonmobile.multiplatformplayground.shared.observer.Observable
-import com.halcyonmobile.multiplatformplayground.shared.observer.observableOf
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.UpdateFavouriteUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class ApplicationDetailViewModel internal constructor(
     private val getApplication: GetApplicationUseCase,
     private val updateFavourite: UpdateFavouriteUseCase,
     applicationId: Long
 ) : CoroutineViewModel() {
 
-    val applicationWithDetail = Observable<ApplicationWithDetail>()
-    val descLines = Observable<Int>()
+    private val _applicationWithDetail = MutableStateFlow<ApplicationWithDetail?>(null)
+    val applicationWithDetail: StateFlow<ApplicationWithDetail?> = _applicationWithDetail
 
-    //    TODO solve resources
-//    val toggleButtonText = Obsvable<Int>(R.string.desc_show_more)
-    val backdrop = observableOf("http://backdrops.io/images/screens/screen6.jpg")
-    val isFavourite: Boolean get() = applicationWithDetail.value?.application?.favourite ?: false
-    val error = Observable<String>()
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error
 
     init {
-        descLines.observe { desc ->
-            // todo handle resource
-            desc?.let {
-                //                toggleButtonText.set(if (it == LINES_COLLAPSED) R.string.desc_show_more else R.string.desc_show_less)
-            }
-        }
-
         coroutineScope.launch {
             getApplication(applicationId).catch {
                 // todo handle error
             }.collect {
-                applicationWithDetail.value = it
+                _applicationWithDetail.value = it
             }
         }
     }
@@ -47,7 +39,7 @@ class ApplicationDetailViewModel internal constructor(
         applicationWithDetail.value?.application?.let {
             coroutineScope.launch {
                 when (val result = updateFavourite(it.id, it.favourite)) {
-                    is Result.Error -> error.value = result.exception.message
+                    is Result.Error -> _error.value = result.exception.message
                 }
             }
         }
