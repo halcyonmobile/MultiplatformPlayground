@@ -6,8 +6,6 @@ import com.halcyonmobile.multiplatformplayground.api.CategoryApi
 import com.halcyonmobile.multiplatformplayground.api.ScreenshotApi
 import com.halcyonmobile.multiplatformplayground.api.db.DatabaseFactory
 import com.halcyonmobile.multiplatformplayground.db.MultiplatformDatabase
-import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationLocalSource
-import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationMemorySource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryLocalSource
@@ -31,9 +29,8 @@ private fun getApiModule(context: Context) = Kodein.Module("apiModule") {
 private fun getRepositoryModule(context: Context) = Kodein.Module("repositoryModule") {
     import(getApiModule(context))
 
-    bind<ApplicationLocalSource>() with provider { ApplicationMemorySource() }
     bind<ApplicationRemoteSource>() with provider { ApplicationRemoteSource(instance()) }
-    bind<ApplicationRepository>() with singleton { ApplicationRepository(instance(), instance()) }
+    bind<ApplicationRepository>() with singleton { ApplicationRepository(instance()) }
 
     bind<CategoryLocalSource>() with provider { CategoryLocalSource(instance()) }
     bind<CategoryRemoteSource>() with provider { CategoryRemoteSource(instance()) }

@@ -4,6 +4,6 @@ import com.halcyonmobile.multiplatformplayground.repository.application.Applicat
 
 internal class GetApplicationsUseCase(private val applicationRepository: ApplicationRepository) {
 
-    operator fun invoke(categoryId: Long, page: Int, perPage: Int) =
+    suspend operator fun invoke(categoryId: Long, page: Int, perPage: Int) =
         applicationRepository.getByCategory(categoryId, page, perPage)
 }
