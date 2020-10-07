@@ -1,6 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.shared.util
 
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.kodein.di.Kodein.Builder
@@ -13,6 +13,6 @@ inline fun <reified T : ViewModel> Builder.bindViewModel(overrides: Boolean? = n
     return bind<T>(T::class.java.simpleName, overrides)
 }
 
-inline fun <reified VM : ViewModel, T> T.viewModel(): Lazy<VM> where T : KodeinAware, T : Fragment {
+inline fun <reified VM : ViewModel, T> T.viewModel(): Lazy<VM> where T : KodeinAware, T : AppCompatActivity {
     return lazy { ViewModelProvider(this, direct.instance()).get(VM::class.java) }
 }

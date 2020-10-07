@@ -20,7 +20,6 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         compose = true
     }
 
@@ -46,8 +45,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     composeOptions {
-        kotlinCompilerVersion = Versions.KOTLIN_VERSION
-        kotlinCompilerExtensionVersion = Versions.KOTLIN_COMPILER_EXTENSION_VERSION
+        kotlinCompilerVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_VERSION
     }
 }
 
@@ -65,6 +64,7 @@ dependencies {
     implementation(Versions.Android.COMPOSE_MD_ICONS_EXTENDED)
     implementation(Versions.Android.COMPOSE_RUNTIME)
     implementation(Versions.Android.COMPOSE_THEME_ADAPTER)
+    implementation(Versions.Android.COIL_COMPOSE)
 
     implementation(Versions.Android.APP_COMPAT)
     implementation(Versions.Android.KOTLIN_EXTENSIONS)
