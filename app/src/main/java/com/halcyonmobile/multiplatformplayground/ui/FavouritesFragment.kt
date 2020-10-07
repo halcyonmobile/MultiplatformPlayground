@@ -1,12 +1,14 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import com.halcyonmobile.multiplatformplayground.FavouritesFragmentBinding
-import com.halcyonmobile.multiplatformplayground.R
-import com.halcyonmobile.multiplatformplayground.shared.AppPortfolioFragment
+import androidx.fragment.app.Fragment
 import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
 import com.halcyonmobile.multiplatformplayground.shared.util.viewModel
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
 
-class FavouritesFragment : AppPortfolioFragment<FavouritesFragmentBinding, FavouritesViewModel>(R.layout.fragment_favourites) {
+class FavouritesFragment : Fragment(), KodeinAware {
 
-    override val viewModel: FavouritesViewModel by viewModel()
+    override val kodein: Kodein by closestKodein()
+    val viewModel: FavouritesViewModel by viewModel()
 }

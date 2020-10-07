@@ -64,6 +64,7 @@ dependencies {
     implementation(Versions.Android.COMPOSE_MD_ICONS_CORE)
     implementation(Versions.Android.COMPOSE_MD_ICONS_EXTENDED)
     implementation(Versions.Android.COMPOSE_RUNTIME)
+    implementation(Versions.Android.COMPOSE_THEME_ADAPTER)
 
     implementation(Versions.Android.APP_COMPAT)
     implementation(Versions.Android.KOTLIN_EXTENSIONS)
