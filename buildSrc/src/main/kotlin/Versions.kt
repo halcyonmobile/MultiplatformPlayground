@@ -73,6 +73,9 @@ object Versions {
         const val COMPOSE_MD_ICONS_EXTENDED =
             "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
         const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:$COMPOSE_VERSION"
+        const val COMPOSE_THEME_ADAPTER =
+            "com.google.android.material:compose-theme-adapter:$COMPOSE_VERSION"
+
         // endregion
         const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN =
             "androidx.navigation:navigation-safe-args-gradle-plugin:$NAVIGATION_VERSION"
