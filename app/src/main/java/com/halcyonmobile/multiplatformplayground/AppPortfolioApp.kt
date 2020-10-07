@@ -32,34 +32,35 @@ class AppPortfolioApp : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        @Suppress("ConstantConditionIf")
-        if (BuildConfig.BUILD_TYPE != "release") {
-            Beagle.initialize(
-                application = this,
-                appearance = Appearance(
-                    themeResourceId = R.style.BaseTheme_App
-                ),
-                behavior = Behavior(
-                    logger = BeagleLogger,
-                    networkLoggers = listOf(BeagleKtorLogger)
-                )
-            )
-            Beagle.set(
-                HeaderModule(
-                    title = getString(R.string.app_name),
-                    subtitle = BuildConfig.APPLICATION_ID,
-                    text = "${BuildConfig.BUILD_TYPE} v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-                ),
-                AppInfoButtonModule(),
-                DeveloperOptionsButtonModule(),
-                KeylineOverlaySwitchModule(),
-                AnimationDurationSwitchModule(),
-                DividerModule(),
-                ScreenCaptureToolboxModule(),
-                NetworkLogListModule(baseUrl = KtorApi.BASE_URL),
-                LogListModule(),
-                DeviceInfoModule()
-            )
-        }
+//        TODO probably conflicting Coil dependencies, temporarily disabled
+//        @Suppress("ConstantConditionIf")
+//        if (BuildConfig.BUILD_TYPE != "release") {
+//            Beagle.initialize(
+//                application = this,
+//                appearance = Appearance(
+//                    themeResourceId = R.style.BaseTheme
+//                ),
+//                behavior = Behavior(
+//                    logger = BeagleLogger,
+//                    networkLoggers = listOf(BeagleKtorLogger)
+//                )
+//            )
+//            Beagle.set(
+//                HeaderModule(
+//                    title = getString(R.string.app_name),
+//                    subtitle = BuildConfig.APPLICATION_ID,
+//                    text = "${BuildConfig.BUILD_TYPE} v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+//                ),
+//                AppInfoButtonModule(),
+//                DeveloperOptionsButtonModule(),
+//                KeylineOverlaySwitchModule(),
+//                AnimationDurationSwitchModule(),
+//                DividerModule(),
+//                ScreenCaptureToolboxModule(),
+//                NetworkLogListModule(baseUrl = KtorApi.BASE_URL),
+//                LogListModule(),
+//                DeviceInfoModule()
+//            )
+//        }
     }
 }

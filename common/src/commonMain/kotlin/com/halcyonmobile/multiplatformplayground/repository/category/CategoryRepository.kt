@@ -8,7 +8,8 @@ class CategoryRepository internal constructor(
     private val remoteSource: CategoryRemoteSource,
     private val localSource: CategoryLocalSource
 ) {
-    internal suspend fun get() = localSource.getCategories().also { if (it.isEmpty()) fetch() }
+    internal suspend fun get() =
+        localSource.getCategories().let { if (it.isEmpty()) fetch() else it }
 
     internal suspend fun fetch() = remoteSource.get(0, DEFAULT_PER_PAGE)
         .also { categories -> categories.forEach { localSource.insert(it) } }
