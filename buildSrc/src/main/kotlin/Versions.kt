@@ -1,5 +1,6 @@
 object Versions {
     const val KOTLIN_VERSION = "1.4.0"
+    const val KOTLIN_COMPILER_EXTENSION_VERSION = "1.0.0-alpha01"
     private const val KTOR_VERSION = "1.4.0"
     const val COROUTINES_VERSION = "1.3.9-native-mt"
     private const val SERIALIZATION_VERSION = "1.0.0-RC"
@@ -60,8 +61,19 @@ object Versions {
         const val MINIMUM_SDK_VERSION = 23
         const val BUILD_TOOLS_VERSION = "29.0.2"
         private const val NAVIGATION_VERSION = "2.2.0"
+        private const val COMPOSE_VERSION = "1.0.0-alpha04"
 
-
+        // region Compose
+        const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
+        const val COMPOSE_TOOLING = "androidx.ui:ui-tooling:$COMPOSE_VERSION"
+        const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation:$COMPOSE_VERSION"
+        const val COMPOSE_MATERIAL_DESIGN = "androidx.compose.material:material:$COMPOSE_VERSION"
+        const val COMPOSE_MD_ICONS_CORE =
+            "androidx.compose.material:material-icons-core:$COMPOSE_VERSION"
+        const val COMPOSE_MD_ICONS_EXTENDED =
+            "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
+        const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:$COMPOSE_VERSION"
+        // endregion
         const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN =
             "androidx.navigation:navigation-safe-args-gradle-plugin:$NAVIGATION_VERSION"
 
