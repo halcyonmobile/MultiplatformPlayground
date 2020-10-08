@@ -98,6 +98,9 @@ android {
             res.srcDirs("src/androidMain/res")
         }
     }
+    lintOptions {
+        disable("InvalidFragmentVersionForActivityResult")
+    }
 }
 
 val packForXcode by tasks.creating(Sync::class) {
