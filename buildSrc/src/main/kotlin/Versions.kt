@@ -5,7 +5,7 @@ object Versions {
     private const val SERIALIZATION_VERSION = "1.0.0-RC"
     private const val KODEIN_VERSION = "6.5.1"
     private const val SQL_DELIGHT_VERSION = "1.4.3"
-    private const val BEAGLE_VERSION = "2.0.0-beta13"
+    private const val BEAGLE_VERSION = "2.0.5"
     const val COMPOSE_VERSION = "1.0.0-alpha04"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
