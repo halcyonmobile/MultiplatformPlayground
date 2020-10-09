@@ -2,7 +2,7 @@ object Versions {
     const val KOTLIN_VERSION = "1.4.10"
     private const val KTOR_VERSION = "1.4.0"
     const val COROUTINES_VERSION = "1.3.9-native-mt"
-    private const val SERIALIZATION_VERSION = "1.0.0-RC"
+    private const val SERIALIZATION_VERSION = "1.0.0"
     private const val KODEIN_VERSION = "6.5.1"
     private const val SQL_DELIGHT_VERSION = "1.4.3"
     private const val BEAGLE_VERSION = "2.0.5"
@@ -28,7 +28,7 @@ object Versions {
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_VERSION"
 
         const val SERIALIZATION =
-            "org.jetbrains.kotlinx:kotlinx-serialization-core:$SERIALIZATION_VERSION"
+            "org.jetbrains.kotlinx:kotlinx-serialization-json:$SERIALIZATION_VERSION"
         const val BEAGLE_LOG = "com.github.pandulapeter.beagle:log:$BEAGLE_VERSION"
         const val BEAGLE_LOG_KTOR = "com.github.pandulapeter.beagle:log-ktor:$BEAGLE_VERSION"
         const val MOKO_RESOURCES = "dev.icerock.moko:resources:$MOKO_RESOURCES_VERSION"
