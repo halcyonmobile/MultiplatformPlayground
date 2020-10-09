@@ -48,6 +48,9 @@ android {
         kotlinCompilerVersion = "1.4.0"
         kotlinCompilerExtensionVersion = Versions.COMPOSE_VERSION
     }
+    lintOptions {
+        disable("InvalidFragmentVersionForActivityResult")
+    }
 }
 
 dependencies {

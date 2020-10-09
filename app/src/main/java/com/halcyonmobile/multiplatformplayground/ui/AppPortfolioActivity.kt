@@ -3,20 +3,23 @@ package com.halcyonmobile.multiplatformplayground.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Icon
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.MainViewModel
+import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.shared.util.viewModel
 import com.halcyonmobile.multiplatformplayground.ui.theme.MultiplatformPlaygroundTheme
-import com.halcyonmobile.multiplatformplayground.util.applyEdgeToEdgeFlags
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -31,6 +34,7 @@ class AppPortfolioActivity : AppCompatActivity(), KodeinAware {
     private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.BaseTheme_App)
         super.onCreate(savedInstanceState)
         setContent {
             MultiplatformPlaygroundTheme {

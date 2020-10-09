@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground
 
+import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,23 +31,15 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    sealed class NavigationItem {
-        abstract val iconRes: Int
+    sealed class NavigationItem(@DrawableRes open val iconRes: Int) {
         abstract val isSelected: Boolean
 
-        data class Home(
-            override val iconRes: Int = R.drawable.ic_home,
-            override val isSelected: Boolean
-        ) : NavigationItem()
+        data class Home(override val isSelected: Boolean) : NavigationItem(R.drawable.ic_home)
 
-        data class Favourites(
-            override val iconRes: Int = R.drawable.ic_favourites,
-            override val isSelected: Boolean
-        ) : NavigationItem()
+        data class Favourites(override val isSelected: Boolean) :
+            NavigationItem(R.drawable.ic_favourites)
 
-        data class Settings(
-            override val iconRes: Int = R.drawable.ic_settings,
-            override val isSelected: Boolean
-        ) : NavigationItem()
+        data class Settings(override val isSelected: Boolean) :
+            NavigationItem(R.drawable.ic_settings)
     }
 }
