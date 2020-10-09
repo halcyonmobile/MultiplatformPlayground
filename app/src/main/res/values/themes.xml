@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">@color/purple_500</item>
     </style>
 
+    <style name="BaseTheme.App" />
+
+    <style name="BaseTheme.Splash">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
 </resources>
