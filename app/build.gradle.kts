@@ -19,7 +19,9 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    buildFeatures.dataBinding = true
+    buildFeatures {
+        compose = true
+    }
 
     buildTypes {
         getByName("release") {
@@ -34,12 +36,21 @@ android {
         exclude("META-INF/*.kotlin_module")
     }
 
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions {
+        jvmTarget = "1.8"
+        useIR = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
+    composeOptions {
+        kotlinCompilerVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_VERSION
+    }
+    lintOptions {
+        disable("InvalidFragmentVersionForActivityResult")
+    }
 }
 
 dependencies {
@@ -47,6 +58,16 @@ dependencies {
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(Versions.Android.STANDARD_LIBRARY)
+
+    implementation(Versions.Android.COMPOSE_UI)
+    implementation(Versions.Android.COMPOSE_TOOLING)
+    implementation(Versions.Android.COMPOSE_FOUNDATION)
+    implementation(Versions.Android.COMPOSE_MATERIAL_DESIGN)
+    implementation(Versions.Android.COMPOSE_MD_ICONS_CORE)
+    implementation(Versions.Android.COMPOSE_MD_ICONS_EXTENDED)
+    implementation(Versions.Android.COMPOSE_RUNTIME)
+    implementation(Versions.Android.COMPOSE_THEME_ADAPTER)
+    implementation(Versions.Android.COIL_COMPOSE)
 
     implementation(Versions.Android.APP_COMPAT)
     implementation(Versions.Android.KOTLIN_EXTENSIONS)

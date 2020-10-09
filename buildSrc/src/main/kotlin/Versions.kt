@@ -1,11 +1,12 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.4.0"
+    const val KOTLIN_VERSION = "1.4.10"
     private const val KTOR_VERSION = "1.4.0"
     const val COROUTINES_VERSION = "1.3.9-native-mt"
     private const val SERIALIZATION_VERSION = "1.0.0-RC"
     private const val KODEIN_VERSION = "6.5.1"
     private const val SQL_DELIGHT_VERSION = "1.4.3"
-    private const val BEAGLE_VERSION = "2.0.0-beta13"
+    private const val BEAGLE_VERSION = "2.0.5"
+    const val COMPOSE_VERSION = "1.0.0-alpha04"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     const val KOTLIN_SERIALIZATION_PLUGIN =
@@ -60,14 +61,30 @@ object Versions {
         const val MINIMUM_SDK_VERSION = 23
         const val BUILD_TOOLS_VERSION = "29.0.2"
         private const val NAVIGATION_VERSION = "2.2.0"
+        private const val COMPOSE_VERSION = "1.0.0-alpha04"
+        private const val COIL_COMPOSE_VERSION = "0.3.0"
 
+        // region Compose
+        const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
+        const val COMPOSE_TOOLING = "androidx.ui:ui-tooling:$COMPOSE_VERSION"
+        const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation:$COMPOSE_VERSION"
+        const val COMPOSE_MATERIAL_DESIGN = "androidx.compose.material:material:$COMPOSE_VERSION"
+        const val COMPOSE_MD_ICONS_CORE =
+            "androidx.compose.material:material-icons-core:$COMPOSE_VERSION"
+        const val COMPOSE_MD_ICONS_EXTENDED =
+            "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
+        const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:$COMPOSE_VERSION"
+        const val COMPOSE_THEME_ADAPTER =
+            "com.google.android.material:compose-theme-adapter:$COMPOSE_VERSION"
+        const val COIL_COMPOSE = "dev.chrisbanes.accompanist:accompanist-coil:$COIL_COMPOSE_VERSION"
 
+        // endregion
         const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN =
             "androidx.navigation:navigation-safe-args-gradle-plugin:$NAVIGATION_VERSION"
 
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
-        const val APP_COMPAT = "androidx.appcompat:appcompat:1.1.0"
-        const val KOTLIN_EXTENSIONS = "androidx.core:core-ktx:1.1.0"
+        const val APP_COMPAT = "androidx.appcompat:appcompat:1.3.0-alpha02"
+        const val KOTLIN_EXTENSIONS = "androidx.core:core-ktx:1.5.0-alpha03"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:1.1.3"
         const val MATERIAL_COMPONENTS = "com.google.android.material:material:1.2.0-alpha04"
 
