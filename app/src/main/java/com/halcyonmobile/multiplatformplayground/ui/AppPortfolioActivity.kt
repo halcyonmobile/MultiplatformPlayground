@@ -15,23 +15,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.vectorResource
-import androidx.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.MainViewModel
 import com.halcyonmobile.multiplatformplayground.R
-import com.halcyonmobile.multiplatformplayground.shared.util.viewModel
 import com.halcyonmobile.multiplatformplayground.ui.theme.MultiplatformPlaygroundTheme
-import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
+import org.koin.androidx.compose.getViewModel
 
-class AppPortfolioActivity : AppCompatActivity(), KodeinAware {
-
-    override val kodein: Kodein by closestKodein()
-
-    // TODO Come up with a solution properly provide these to composable functions
-    private val viewModel: MainViewModel by viewModel()
-    private val homeViewModel: HomeViewModel by viewModel()
+class AppPortfolioActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.BaseTheme_App)
@@ -39,7 +28,7 @@ class AppPortfolioActivity : AppCompatActivity(), KodeinAware {
         setContent {
             MultiplatformPlaygroundTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    Navigation(viewModel)
+                    Navigation()
                 }
             }
         }
@@ -50,14 +39,9 @@ class AppPortfolioActivity : AppCompatActivity(), KodeinAware {
 //        applyEdgeToEdgeFlags()
     }
 
-    @Preview(showBackground = true)
     @Composable
-    fun MainPreview() {
-        Navigation(viewModel)
-    }
-
-    @Composable
-    private fun Navigation(viewModel: MainViewModel) {
+    private fun Navigation() {
+        val viewModel = getViewModel<MainViewModel>()
         val navigationItems by viewModel.navigationItems.collectAsState(emptyList())
         val selectedItem by viewModel.selectedNavigationItem.collectAsState(
             MainViewModel.NavigationItem.Home(isSelected = true)
@@ -66,7 +50,7 @@ class AppPortfolioActivity : AppCompatActivity(), KodeinAware {
         Column(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.weight(1f)) {
                 when (selectedItem) {
-                    is MainViewModel.NavigationItem.Home -> HomeScreen(viewModel = homeViewModel)
+                    is MainViewModel.NavigationItem.Home -> HomeScreen()
                     is MainViewModel.NavigationItem.Favourites -> {
                     }
                     is MainViewModel.NavigationItem.Settings -> {
