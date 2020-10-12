@@ -2,7 +2,7 @@ package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.NotFound
 import com.halcyonmobile.multiplatformplayground.Unauthorized
-import com.halcyonmobile.multiplatformplayground.di.installKodeinFeature
+import com.halcyonmobile.multiplatformplayground.di.getKoinModule
 import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
 import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.model.toApplication
@@ -21,8 +21,9 @@ import io.ktor.util.error
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import org.kodein.di.generic.instance
-import org.kodein.di.ktor.kodein
+import org.koin.ktor.ext.Koin
+import org.koin.ktor.ext.inject
+import org.koin.ktor.ext.modules
 import org.slf4j.event.Level
 
 internal fun Application.main() {
@@ -46,9 +47,10 @@ internal fun Application.main() {
     install(CallLogging) {
         level = Level.INFO
     }
-    installKodeinFeature()
-
-    val localSource by kodein().instance<LocalSource>()
+    install(Koin){
+        modules(getKoinModule())
+    }
+    val localSource by inject<LocalSource>()
     install(Routing) {
         // todo update uploadDir
         api(localSource)
