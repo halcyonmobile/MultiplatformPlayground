@@ -34,6 +34,7 @@ dependencies {
     // DI
     implementation(Versions.Jvm.KODEIN_GENERIC)
     implementation(Versions.Jvm.KODEIN_KTOR_SERVER)
+//    implementation(Versions.Jvm.KOIN_KTOR)
 
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_CORE)
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_DAO)

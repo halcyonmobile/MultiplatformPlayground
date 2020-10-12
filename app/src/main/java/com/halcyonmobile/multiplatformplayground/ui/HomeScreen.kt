@@ -20,9 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
 import model.CategoryTabUiModel
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel) {
+fun HomeScreen() {
+    val viewModel = getViewModel<HomeViewModel>()
     val categoryTabs by viewModel.categoryTabs.collectAsState(emptyList())
     val error by viewModel.error.collectAsState(null)
 
