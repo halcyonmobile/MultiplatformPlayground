@@ -1,12 +1,12 @@
 object Versions {
     const val KOTLIN_VERSION = "1.4.10"
-    private const val KTOR_VERSION = "1.4.0"
     const val COROUTINES_VERSION = "1.3.9-native-mt"
-    private const val SERIALIZATION_VERSION = "1.0.0-RC"
-    private const val KODEIN_VERSION = "6.5.1"
+    const val COMPOSE_VERSION = "1.0.0-alpha04"
+    private const val KTOR_VERSION = "1.4.0"
+    private const val SERIALIZATION_VERSION = "1.0.0"
+    private const val KOIN_VERSION = "2.2.0-rc-2"
     private const val SQL_DELIGHT_VERSION = "1.4.3"
     private const val BEAGLE_VERSION = "2.0.5"
-    const val COMPOSE_VERSION = "1.0.0-alpha04"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
     const val KOTLIN_SERIALIZATION_PLUGIN =
@@ -28,10 +28,11 @@ object Versions {
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_VERSION"
 
         const val SERIALIZATION =
-            "org.jetbrains.kotlinx:kotlinx-serialization-core:$SERIALIZATION_VERSION"
+            "org.jetbrains.kotlinx:kotlinx-serialization-json:$SERIALIZATION_VERSION"
         const val BEAGLE_LOG = "com.github.pandulapeter.beagle:log:$BEAGLE_VERSION"
         const val BEAGLE_LOG_KTOR = "com.github.pandulapeter.beagle:log-ktor:$BEAGLE_VERSION"
         const val MOKO_RESOURCES = "dev.icerock.moko:resources:$MOKO_RESOURCES_VERSION"
+
     }
 
     object Jvm {
@@ -44,9 +45,7 @@ object Versions {
         const val KTOR_SERVER_NETTY = "io.ktor:ktor-server-netty:$KTOR_VERSION"
         const val KTOR_SERIALIZATION = "io.ktor:ktor-serialization:$KTOR_VERSION"
 
-        const val KODEIN_GENERIC = "org.kodein.di:kodein-di-generic-jvm:$KODEIN_VERSION"
-        const val KODEIN_KTOR_SERVER =
-            "org.kodein.di:kodein-di-framework-ktor-server-jvm:$KODEIN_VERSION"
+        const val KOIN_KTOR = "org.koin:koin-ktor:$KOIN_VERSION"
 
         const val JETBRAINS_EXPOSED_CORE = "org.jetbrains.exposed:exposed-core:$EXPOSED_VERSION"
         const val JETBRAINS_EXPOSED_DAO = "org.jetbrains.exposed:exposed-dao:$EXPOSED_VERSION"
@@ -95,8 +94,8 @@ object Versions {
         const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:$LIFECYCLE_VERSION"
         const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
 
-        const val KODEIN_GENERIC = "org.kodein.di:kodein-di-generic-jvm:$KODEIN_VERSION"
-        const val KODEIN_ANDROID_X = "org.kodein.di:kodein-di-framework-android-x:$KODEIN_VERSION"
+        const val KOIN_ANDROID_VIEWMODEL = "org.koin:koin-android-viewmodel:$KOIN_VERSION"
+        const val KOIN_COMPOSE = "org.koin:koin-androidx-compose:$KOIN_VERSION"
 
         const val NAVIGATON_FRAGMENT =
             "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
