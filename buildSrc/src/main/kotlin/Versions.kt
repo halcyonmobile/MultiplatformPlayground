@@ -5,7 +5,6 @@ object Versions {
     private const val KTOR_VERSION = "1.4.0"
     private const val SERIALIZATION_VERSION = "1.0.0"
     private const val KOIN_VERSION = "2.2.0-rc-2"
-    private const val KODEIN_VERSION = "6.5.1"
     private const val SQL_DELIGHT_VERSION = "1.4.3"
     private const val BEAGLE_VERSION = "2.0.5"
 
@@ -45,10 +44,7 @@ object Versions {
         const val KTOR_SERVER_NETTY = "io.ktor:ktor-server-netty:$KTOR_VERSION"
         const val KTOR_SERIALIZATION = "io.ktor:ktor-serialization:$KTOR_VERSION"
 
-        const val KODEIN_GENERIC = "org.kodein.di:kodein-di-generic-jvm:$KODEIN_VERSION"
-        const val KODEIN_KTOR_SERVER =
-            "org.kodein.di:kodein-di-framework-ktor-server-jvm:$KODEIN_VERSION"
-//        const val KOIN_KTOR = "org.koin:koin-ktor:$KOIN_VERSION"
+        const val KOIN_KTOR = "org.koin:koin-ktor:$KOIN_VERSION"
 
         const val JETBRAINS_EXPOSED_CORE = "org.jetbrains.exposed:exposed-core:0.23.1"
         const val JETBRAINS_EXPOSED_DAO = "org.jetbrains.exposed:exposed-dao:0.23.1"
