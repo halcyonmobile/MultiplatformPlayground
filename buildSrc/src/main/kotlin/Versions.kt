@@ -35,6 +35,7 @@ object Versions {
     }
 
     object Jvm {
+        private const val EXPOSED_VERSION = "0.27.1"
         const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
 
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
@@ -47,9 +48,9 @@ object Versions {
         const val KODEIN_KTOR_SERVER =
             "org.kodein.di:kodein-di-framework-ktor-server-jvm:$KODEIN_VERSION"
 
-        const val JETBRAINS_EXPOSED_CORE = "org.jetbrains.exposed:exposed-core:0.23.1"
-        const val JETBRAINS_EXPOSED_DAO = "org.jetbrains.exposed:exposed-dao:0.23.1"
-        const val JETBRAINS_EXPOSED_JDBC = "org.jetbrains.exposed:exposed-jdbc:0.23.1"
+        const val JETBRAINS_EXPOSED_CORE = "org.jetbrains.exposed:exposed-core:$EXPOSED_VERSION"
+        const val JETBRAINS_EXPOSED_DAO = "org.jetbrains.exposed:exposed-dao:$EXPOSED_VERSION"
+        const val JETBRAINS_EXPOSED_JDBC = "org.jetbrains.exposed:exposed-jdbc:$EXPOSED_VERSION"
 
         const val H2_DATABASE = "com.h2database:h2:1.4.200"
         const val HIKARI_CONNECTION_POOL = "com.zaxxer:HikariCP:3.4.5"
