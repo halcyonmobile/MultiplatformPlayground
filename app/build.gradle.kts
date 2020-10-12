@@ -74,8 +74,7 @@ dependencies {
     implementation(Versions.Android.CONSTRAINT_LAYOUT)
     implementation(Versions.Android.MATERIAL_COMPONENTS)
 
-    implementation(Versions.Android.KODEIN_GENERIC)
-    implementation(Versions.Android.KODEIN_ANDROID_X)
+    implementation(Versions.Android.KOIN_COMPOSE)
 
     implementation(Versions.Android.NAVIGATON_FRAGMENT)
     implementation(Versions.Android.NAVIGATION_UI)

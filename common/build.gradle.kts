@@ -63,10 +63,9 @@ kotlin {
                 // Ktor-client for network requests
                 implementation(Versions.Android.KTOR_CLIENT)
 
-                implementation(Versions.Jvm.KODEIN_GENERIC)
-                implementation(Versions.Android.KODEIN_ANDROID_X)
-
                 implementation(Versions.Android.SQL_DELIGHT_DRIVER)
+                // Koin DI
+                implementation(Versions.Android.KOIN_ANDROID_VIEWMODEL)
             }
         }
         val iosMain by getting {
