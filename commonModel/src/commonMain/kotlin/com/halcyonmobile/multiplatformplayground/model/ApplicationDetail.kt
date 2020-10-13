@@ -6,8 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ApplicationDetail(
-    @SerialName(APP_ICON)
-    val icon: String,
     @SerialName(APP_RATING)
     val rating: Float,
     @SerialName(APP_RATING_COUNT)
