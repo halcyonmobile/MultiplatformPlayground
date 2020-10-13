@@ -9,6 +9,7 @@ import com.halcyonmobile.multiplatformplayground.storage.model.category.toCatego
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotEntity
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotTable
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.toScreenshot
+import com.halcyonmobile.multiplatformplayground.util.getPage
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.log
@@ -51,6 +52,9 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
             ApplicationEntity.all().map { it.toApplication() }
         }
     }
+
+    override suspend fun getApplications(page: Int, perPage: Int): List<Application> =
+        getApplications().getPage(page, perPage)
 
     override suspend fun saveApplication(applicationRequest: ApplicationRequest) {
         withContext(dispatcher) {
