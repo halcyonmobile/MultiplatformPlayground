@@ -53,8 +53,12 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
-    override suspend fun getApplications(page: Int, perPage: Int): List<Application> =
-        getApplications().getPage(page, perPage)
+    override suspend fun getApplications(
+        page: Int,
+        perPage: Int,
+        categoryId: Long
+    ): List<Application> =
+        getApplications().filter { it.categoryId == categoryId }.getPage(page, perPage)
 
     override suspend fun saveApplication(applicationRequest: ApplicationRequest) {
         withContext(dispatcher) {

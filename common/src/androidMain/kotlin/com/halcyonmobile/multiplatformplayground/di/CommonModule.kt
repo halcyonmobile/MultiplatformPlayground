@@ -5,7 +5,6 @@ import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
 import com.halcyonmobile.multiplatformplayground.api.CategoryApi
 import com.halcyonmobile.multiplatformplayground.api.ScreenshotApi
 import com.halcyonmobile.multiplatformplayground.api.db.DatabaseFactory
-import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationMemorySource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryLocalSource
