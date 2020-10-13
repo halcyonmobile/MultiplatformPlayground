@@ -2,6 +2,8 @@ package com.halcyonmobile.multiplatformplayground.backend
 
 import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
+import com.halcyonmobile.multiplatformplayground.util.requirePage
+import com.halcyonmobile.multiplatformplayground.util.requirePerPage
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
@@ -12,7 +14,6 @@ import io.ktor.routing.post
 import io.ktor.routing.put
 import io.ktor.util.InternalAPI
 
-// todo general error handling
 internal fun Routing.api(localSource: LocalSource) {
     apiApplications(localSource)
     apiCreateApplication(localSource)
@@ -28,7 +29,7 @@ internal fun Routing.api(localSource: LocalSource) {
  */
 private fun Routing.apiApplications(localSource: LocalSource) {
     get("/applications") {
-        localSource.getApplications().let {
+        localSource.getApplications(requirePage(), requirePerPage()).let {
             call.respond(it)
         }
     }
@@ -37,22 +38,19 @@ private fun Routing.apiApplications(localSource: LocalSource) {
 /**
  *  POST /api/v1/applications
  */
-// todo handle lists
 @UseExperimental(InternalAPI::class)
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
         val applicationRequest = call.receive<ApplicationRequest>()
 
-        val appId = localSource.getNextApplicationId()
+        val appId = localSource.getNextApplicationId().toLong()
         try {
             val screenshots = applicationRequest.screenshots.map {
                 val savedScreenshot = it.copy(name = it.name, image = it.image)
                 val id = localSource.saveScreenshot(savedScreenshot, appId)
                 savedScreenshot.copy(id = id)
             }
-            val category = localSource.getCategory(applicationRequest.categoryId)
-
-            localSource.saveApplication(applicationRequest.toApplication(applicationRequest.encodedIcon, category, screenshots))
+            localSource.saveApplication(applicationRequest)
 
             call.respond(HttpStatusCode.Created)
         } catch (e: Exception) {

@@ -3,15 +3,16 @@ package com.halcyonmobile.multiplatformplayground.repository.application
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
 import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
-import com.halcyonmobile.multiplatformplayground.repository.NoCacheFoundException
 import com.halcyonmobile.multiplatformplayground.shared.util.extension.safeSubList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import kotlin.math.min
 
 @UseExperimental(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class ApplicationMemorySource : ApplicationLocalSource {
@@ -51,7 +52,7 @@ class ApplicationMemorySource : ApplicationLocalSource {
 
     override fun getByCategory(categoryId: Long, page: Int, limit: Int) =
         applications.map { applications ->
-            applications.filter { it.application.category?.id == categoryId }.safeSubList(
+            applications.filter { it.application.categoryId == categoryId }.safeSubList(
                 page * limit,
                 (page + 1) * limit
             ).map { it.application }
