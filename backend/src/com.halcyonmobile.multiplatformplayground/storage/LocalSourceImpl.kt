@@ -1,7 +1,15 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
-import com.halcyonmobile.multiplatformplayground.NotFound
 import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.storage.model.application.*
+import com.halcyonmobile.multiplatformplayground.storage.model.application.ApplicationTable
+import com.halcyonmobile.multiplatformplayground.storage.model.category.CategoryEntity
+import com.halcyonmobile.multiplatformplayground.storage.model.category.CategoryTable
+import com.halcyonmobile.multiplatformplayground.storage.model.category.toCategory
+import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotEntity
+import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotTable
+import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.toScreenshot
+import com.halcyonmobile.multiplatformplayground.util.getPage
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.log
@@ -41,34 +49,31 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
 
     override suspend fun getApplications(): List<Application> = withContext(dispatcher) {
         transaction {
-            ApplicationTable.leftJoin(CategoryTable)
-                .selectAll()
-                .map {
-                    // todo implement screenshots
-                    it.mapRowToApplication(it.mapRowToCategory(), emptyList())
-                }
+            ApplicationEntity.all().map { it.toApplication() }
         }
     }
 
-    override suspend fun saveApplication(applicationWithDetail: ApplicationWithDetail) {
+    override suspend fun getApplications(page: Int, perPage: Int): List<Application> =
+        getApplications().getPage(page, perPage)
+
+    override suspend fun saveApplication(applicationRequest: ApplicationRequest) {
         withContext(dispatcher) {
             transaction {
-                with(applicationWithDetail) {
-                    ApplicationTable.insert {
-                        it[name] = application.name
-                        it[developer] = application.developer
-                        it[icon] = applicationDetail.icon
-                        it[rating] = applicationDetail.rating.toBigDecimal()
-                        it[ratingCount] = applicationDetail.ratingCount
-                        it[storeUrl] = applicationDetail.storeUrl
-                        it[description] = applicationDetail.description
-                        it[downloads] = applicationDetail.downloads
-                        it[version] = applicationDetail.version
-                        it[size] = applicationDetail.size
-                        it[favourite] = application.favourite
-                        it[categoryId] = application.category.id
-                        // todo add screenshots also
-                    }
+                val category = CategoryEntity[applicationRequest.categoryId.toInt()]
+                ApplicationEntity.new {
+                    name = applicationRequest.name
+                    developer = applicationRequest.developer
+                    icon = applicationRequest.encodedIcon
+                    rating = applicationRequest.rating.toBigDecimal()
+                    ratingCount = applicationRequest.ratingCount
+                    storeUrl = applicationRequest.storeUrl
+                    description = applicationRequest.description
+                    downloads = applicationRequest.downloads
+                    version = applicationRequest.version
+                    size = applicationRequest.size
+                    favourite = applicationRequest.favourite
+                    this.category = category
+                    // todo add screenshots also
                 }
             }
         }
@@ -77,12 +82,10 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
     override suspend fun updateApplication(application: Application) {
         withContext(dispatcher) {
             transaction {
-                ApplicationTable.update({ ApplicationTable.id eq application.id }) {
-                    it[id] = application.id
-                    it[name] = application.name
-                    it[developer] = application.developer
-                    it[favourite] = application.favourite
-                    it[categoryId] = application.category.id
+                ApplicationEntity[application.id.toInt()].let {
+                    it.name = application.name
+                    it.developer = application.developer
+                    it.favourite = application.favourite
                     // todo update screenshots also
                 }
             }
@@ -91,72 +94,63 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
 
     override suspend fun getApplication(id: Long): Application = withContext(dispatcher) {
         transaction {
-            // todo implement screenshots
-            ApplicationTable.leftJoin(CategoryTable)
-                .select { ApplicationTable.id eq id }
-                .singleOrNull()?.let {
-                    it.mapRowToApplication(it.mapRowToCategory(), emptyList())
-                } ?: throw NotFound()
+            ApplicationEntity[id.toInt()].toApplication()
         }
     }
 
     override suspend fun getApplicationWithDetail(id: Long): ApplicationDetailResponse =
         withContext(dispatcher) {
             transaction {
-                // todo implement screenshots
-                ApplicationTable.leftJoin(CategoryTable)
-                    .select { ApplicationTable.id eq id }
-                    .singleOrNull()?.let {
-                        it.mapRowToApplicationDetailResponse(it.mapRowToCategory(), emptyList())
-                    } ?: throw NotFound()
+                ApplicationEntity[id.toInt()].toApplicationDetailResponse()
             }
         }
 
     override suspend fun saveCategory(category: Category) = withContext(dispatcher) {
         transaction {
-            CategoryTable.insert {
-                it[name] = category.name
-                it[icon] = category.icon
-            }[CategoryTable.id]
+            CategoryEntity.new {
+                name = category.name
+                icon = category.icon
+            }.id.value.toLong()
         }
     }
 
     override suspend fun getApplications(name: String, categoryId: Long): List<Application> =
         withContext(dispatcher) {
             transaction {
-                //todo add screenshots
-                ApplicationTable.select { (ApplicationTable.name eq name) and (ApplicationTable.categoryId eq categoryId) }
-                    .map { it.mapRowToApplication(it.mapRowToCategory(), emptyList()) }
+                ApplicationEntity.find { ApplicationTable.name eq name }
+                    .filter { it.category.id.value.toLong() == categoryId }
+                    .map { it.toApplication() }
             }
         }
 
     override suspend fun getCategories(): List<Category> = withContext(dispatcher) {
         transaction {
-            CategoryTable.selectAll().map { it.mapRowToCategory() }.toList()
+            CategoryEntity.all().map { it.toCategory() }
         }
     }
 
     override suspend fun getCategory(id: Long): Category = withContext(dispatcher) {
         transaction {
-            CategoryTable.select { (CategoryTable.id eq id) }.first().mapRowToCategory()
+            CategoryEntity[id.toInt()].toCategory()
         }
     }
 
     override suspend fun saveScreenshot(screenshot: Screenshot, appId: Long) =
         withContext(dispatcher) {
             transaction {
-                ScreenshotTable.insert {
-                    it[name] = screenshot.name
-                    it[image] = screenshot.image
-                    it[applicationId] = appId
-                }[ScreenshotTable.id]
+                val application = ApplicationEntity[appId.toInt()]
+                ScreenshotEntity.new {
+                    name = screenshot.name
+                    image = screenshot.image
+                    this.application = application
+                }.id.value.toLong()
             }
         }
 
     override suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot> =
         withContext(dispatcher) {
             transaction {
-                ScreenshotTable.selectAll().map { it.mapRowToScreenshot() }.toList()
+                ScreenshotEntity.all().map { it.toScreenshot() }
             }
         }
 }

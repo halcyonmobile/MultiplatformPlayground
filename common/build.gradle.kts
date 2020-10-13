@@ -57,14 +57,15 @@ kotlin {
                 implementation(Versions.Android.LIFECYCLE_EXTENSIONS)
                 implementation(Versions.Android.LIVE_DATA)
                 implementation(Versions.Android.VIEW_MODEL)
+                implementation(Versions.Android.APP_COMPAT)
+                implementation(Versions.Android.KOTLIN_EXTENSIONS)
 
                 // Ktor-client for network requests
                 implementation(Versions.Android.KTOR_CLIENT)
 
-                implementation(Versions.Jvm.KODEIN_GENERIC)
-                implementation(Versions.Android.KODEIN_ANDROID_X)
-
                 implementation(Versions.Android.SQL_DELIGHT_DRIVER)
+                // Koin DI
+                implementation(Versions.Android.KOIN_ANDROID_VIEWMODEL)
             }
         }
         val iosMain by getting {
@@ -95,6 +96,9 @@ android {
             java.srcDirs("src/androidMain/kotlin")
             res.srcDirs("src/androidMain/res")
         }
+    }
+    lintOptions {
+        disable("InvalidFragmentVersionForActivityResult")
     }
 }
 

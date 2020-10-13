@@ -9,7 +9,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.0.1")
+        classpath("com.android.tools.build:gradle:4.2.0-alpha13")
         classpath(Versions.KOTLIN_GRADLE_PLUGIN)
         classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
         classpath(Versions.Android.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
@@ -30,6 +30,7 @@ allprojects {
         maven("https://jitpack.io")
         maven("https://dl.bintray.com/kodein-framework/Kodein-DI")
         maven("https://dl.bintray.com/icerockdev/moko")
+        maven("https://dl.bintray.com/ekito/koin") // Needed for some of the koin-mp metadata
     }
 }
 

@@ -30,7 +30,6 @@ internal class ApplicationRemoteSource internal constructor(private val applicat
 @UseExperimental(InternalAPI::class)
 fun ApplicationWithDetail.toApplicationRequest(icon: File, screenshots: List<File>) =
     ApplicationRequest(
-        id = application.id,
         name = application.name,
         developer = application.developer,
         encodedIcon = icon.toByteArray().encodeBase64(),
@@ -42,7 +41,7 @@ fun ApplicationWithDetail.toApplicationRequest(icon: File, screenshots: List<Fil
         version = applicationDetail.version,
         size = applicationDetail.size,
         favourite = application.favourite,
-        categoryId = application.category.id,
+        categoryId = application.categoryId,
         screenshots = applicationDetail.screenshots.zip(screenshots) { screenshot, file ->
             screenshot.copy(image = file.toByteArray().encodeBase64())
         }
