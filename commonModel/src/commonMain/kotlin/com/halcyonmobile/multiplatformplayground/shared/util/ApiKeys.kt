@@ -32,7 +32,7 @@ const val SCREENSHOT_APP_ID = "application_id"
 
 // region common
 const val PAGE = "page"
-const val PER_PAGE = "per_page"
+const val PER_PAGE = "perPage"
 // endregion
 
 
