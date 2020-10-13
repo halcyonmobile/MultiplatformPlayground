@@ -13,9 +13,7 @@ const val APP_DOWNLOADS = "downloads"
 const val APP_VERSION = "version"
 const val APP_SIZE = "size"
 const val APP_FAVOURITE = "favourite"
-const val APP_CATEGORY = "category"
 const val APP_SCREENSHOTS = "screenshots"
-
 const val APP_CATEGORY_ID = "category_id"
 // endregion
 
@@ -34,7 +32,7 @@ const val SCREENSHOT_APP_ID = "application_id"
 
 // region common
 const val PAGE = "page"
-const val PER_PAGE = "per_page"
+const val PER_PAGE = "perPage"
 // endregion
 
 

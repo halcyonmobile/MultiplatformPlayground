@@ -2,42 +2,37 @@ package com.halcyonmobile.multiplatformplayground
 
 import android.app.Application
 import com.halcyonmobile.multiplatformplayground.api.KtorApi
-import com.halcyonmobile.multiplatformplayground.di.bindCommonModule
-import com.halcyonmobile.multiplatformplayground.di.bindViewModelModule
+import com.halcyonmobile.multiplatformplayground.di.appModule
+import com.halcyonmobile.multiplatformplayground.di.getCommonModules
+import com.halcyonmobile.multiplatformplayground.di.viewModelModule
 import com.pandulapeter.beagle.Beagle
 import com.pandulapeter.beagle.common.configuration.Appearance
 import com.pandulapeter.beagle.common.configuration.Behavior
 import com.pandulapeter.beagle.log.BeagleLogger
 import com.pandulapeter.beagle.logKtor.BeagleKtorLogger
-import com.pandulapeter.beagle.modules.AnimationDurationSwitchModule
-import com.pandulapeter.beagle.modules.AppInfoButtonModule
-import com.pandulapeter.beagle.modules.DeveloperOptionsButtonModule
-import com.pandulapeter.beagle.modules.DeviceInfoModule
-import com.pandulapeter.beagle.modules.DividerModule
-import com.pandulapeter.beagle.modules.HeaderModule
-import com.pandulapeter.beagle.modules.KeylineOverlaySwitchModule
-import com.pandulapeter.beagle.modules.LogListModule
-import com.pandulapeter.beagle.modules.NetworkLogListModule
-import com.pandulapeter.beagle.modules.ScreenCaptureToolboxModule
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
+import com.pandulapeter.beagle.modules.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 @Suppress("unused")
-class AppPortfolioApp : Application(), KodeinAware {
-
-    override val kodein = Kodein {
-        bindCommonModule(this@AppPortfolioApp)
-        bindViewModelModule()
-    }
+class AppPortfolioApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        setupDebugMenu()
+        startKoin {
+            androidContext(this@AppPortfolioApp)
+            modules(getCommonModules(this@AppPortfolioApp) + viewModelModule + appModule)
+        }
+    }
+
+    private fun setupDebugMenu() {
         @Suppress("ConstantConditionIf")
         if (BuildConfig.BUILD_TYPE != "release") {
             Beagle.initialize(
                 application = this,
                 appearance = Appearance(
-                    themeResourceId = R.style.BaseTheme_App
+                    themeResourceId = R.style.BaseTheme
                 ),
                 behavior = Behavior(
                     logger = BeagleLogger,
@@ -52,12 +47,17 @@ class AppPortfolioApp : Application(), KodeinAware {
                 ),
                 AppInfoButtonModule(),
                 DeveloperOptionsButtonModule(),
+                PaddingModule(),
+                SectionHeaderModule("General"),
                 KeylineOverlaySwitchModule(),
-                AnimationDurationSwitchModule(),
-                DividerModule(),
                 ScreenCaptureToolboxModule(),
+                DividerModule(),
+                SectionHeaderModule("Logs"),
                 NetworkLogListModule(baseUrl = KtorApi.BASE_URL),
                 LogListModule(),
+                LifecycleLogListModule(),
+                DividerModule(),
+                SectionHeaderModule("Other"),
                 DeviceInfoModule()
             )
         }

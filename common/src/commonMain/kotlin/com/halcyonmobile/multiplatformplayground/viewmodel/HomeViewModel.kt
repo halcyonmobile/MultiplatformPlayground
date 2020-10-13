@@ -8,11 +8,12 @@ import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
+import kotlinx.coroutines.flow.*
+import model.CategoryTabUiModel
+import model.toCategoryTabUiModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModel internal constructor(
@@ -21,28 +22,47 @@ class HomeViewModel internal constructor(
 ) : CoroutineViewModel() {
 
     private val _categories = MutableStateFlow(emptyList<Category>())
-    val categories: StateFlow<List<Category>> = _categories
+    private val selectedTabIndex = MutableStateFlow(0)
+    val categoryTabs = _categories.combine(selectedTabIndex) { categories, selectedTabIndex ->
+        categories.mapIndexed { index, category ->
+            category.toCategoryTabUiModel(index == selectedTabIndex)
+        }
+    }
 
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
+
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading
 
     val title = StringDesc.Resource(MR.strings.home)
 
     init {
         coroutineScope.launch {
+            _isLoading.value = true
             when (val result = getCategories()) {
                 is Result.Success -> {
                     _categories.value = result.value
                     log("Categories: ${result.value}")
                 }
-                is Result.Error -> _error.value = result.exception.message
+                is Result.Error -> {
+                    _error.value = result.exception.message
+                    log("Error: $error")
+                }
             }
+            _isLoading.value = false
         }
     }
 
     fun fetch() = coroutineScope.launch {
+        _isLoading.value = true
         when (val result = fetchCategories()) {
             is Result.Error -> _error.value = result.exception.message
         }
+        _isLoading.value = false
+    }
+
+    fun onTabClicked(index: Int) {
+        selectedTabIndex.value = index
     }
 }

@@ -1,12 +1,9 @@
 package com.halcyonmobile.multiplatformplayground.backend
 
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
-import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
-import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
-import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
+import com.halcyonmobile.multiplatformplayground.util.requirePage
+import com.halcyonmobile.multiplatformplayground.util.requirePerPage
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
@@ -17,7 +14,6 @@ import io.ktor.routing.post
 import io.ktor.routing.put
 import io.ktor.util.InternalAPI
 
-// todo general error handling
 internal fun Routing.api(localSource: LocalSource) {
     apiApplications(localSource)
     apiCreateApplication(localSource)
@@ -33,7 +29,7 @@ internal fun Routing.api(localSource: LocalSource) {
  */
 private fun Routing.apiApplications(localSource: LocalSource) {
     get("/applications") {
-        localSource.getApplications().let {
+        localSource.getApplications(requirePage(), requirePerPage()).let {
             call.respond(it)
         }
     }
@@ -42,22 +38,19 @@ private fun Routing.apiApplications(localSource: LocalSource) {
 /**
  *  POST /api/v1/applications
  */
-// todo handle lists
 @UseExperimental(InternalAPI::class)
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
         val applicationRequest = call.receive<ApplicationRequest>()
 
-        val appId = localSource.getNextApplicationId()
+        val appId = localSource.getNextApplicationId().toLong()
         try {
             val screenshots = applicationRequest.screenshots.map {
                 val savedScreenshot = it.copy(name = it.name, image = it.image)
                 val id = localSource.saveScreenshot(savedScreenshot, appId)
                 savedScreenshot.copy(id = id)
             }
-            val category = localSource.getCategory(applicationRequest.categoryId)
-
-            localSource.saveApplication(applicationRequest.toApplication(applicationRequest.encodedIcon, category, screenshots))
+            localSource.saveApplication(applicationRequest)
 
             call.respond(HttpStatusCode.Created)
         } catch (e: Exception) {
@@ -137,27 +130,6 @@ private fun Routing.apiPostCategory(localSource: LocalSource) {
 
 private suspend fun LocalSource.getNextApplicationId() =
     getApplications().map { it.id }.max() ?: 0 + 1
-
-private fun ApplicationRequest.toApplication(icon: String, category: Category, screenshots: List<Screenshot>) =
-    ApplicationWithDetail(
-        application = Application(
-            name = name,
-            developer = developer,
-            favourite = favourite,
-            category = category
-        ),
-        applicationDetail = ApplicationDetail(
-            icon,
-            rating,
-            ratingCount,
-            storeUrl,
-            description,
-            downloads,
-            version,
-            size,
-            screenshots
-        )
-    )
 
 const val NAME_QUERY_KEY = "name"
 const val CATEGORY_QUERY_KEY = "category"
