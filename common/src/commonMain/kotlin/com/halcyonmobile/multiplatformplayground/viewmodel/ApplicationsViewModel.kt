@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CategoryViewModel internal constructor(
+class ApplicationsViewModel internal constructor(
     private val categoryId: Long,
     private val getApplications: GetApplicationsUseCase
 ) : CoroutineViewModel() {

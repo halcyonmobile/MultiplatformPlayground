@@ -16,10 +16,10 @@ internal class ApplicationApi : KtorApi() {
         perPage: Int,
         categoryId: Long
     ): List<Application> = client.get {
-        apiUrl("applications/filter")
+        apiUrl("applications")
         parameter(PAGE, page)
         parameter(PER_PAGE, perPage)
-        parameter(APP_CATEGORY_ID, categoryId)
+        parameter(CATEGORY_ID_QUERY, categoryId)
     }
 
     suspend fun getApplicationDetails(id: Long): ApplicationDetailResponse = client.get {

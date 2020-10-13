@@ -12,10 +12,10 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
-import io.ktor.util.InternalAPI
+import io.ktor.util.*
 
 internal fun Routing.api(localSource: LocalSource) {
-    apiApplications(localSource)
+    apiGetApplications(localSource)
     apiCreateApplication(localSource)
     apiUpdateApplication(localSource)
     apiGetApplication(localSource)
@@ -27,9 +27,11 @@ internal fun Routing.api(localSource: LocalSource) {
 /**
  * GET /api/v1/applications
  */
-private fun Routing.apiApplications(localSource: LocalSource) {
+@OptIn(KtorExperimentalAPI::class)
+private fun Routing.apiGetApplications(localSource: LocalSource) {
     get("/applications") {
-        localSource.getApplications(requirePage(), requirePerPage()).let {
+        val categoryId = call.request.queryParameters.getOrFail<Long>(CATEGORY_QUERY_KEY)
+        localSource.getApplications(requirePage(), requirePerPage(), categoryId).let {
             call.respond(it)
         }
     }
@@ -132,4 +134,4 @@ private suspend fun LocalSource.getNextApplicationId() =
     getApplications().map { it.id }.max() ?: 0 + 1
 
 const val NAME_QUERY_KEY = "name"
-const val CATEGORY_QUERY_KEY = "category"
+const val CATEGORY_QUERY_KEY = "categoryId"
