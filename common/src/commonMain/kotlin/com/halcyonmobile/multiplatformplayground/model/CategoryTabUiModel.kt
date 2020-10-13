@@ -1,7 +1,11 @@
-package model
+package com.halcyonmobile.multiplatformplayground.model
 
-import com.halcyonmobile.multiplatformplayground.model.Category
+data class CategoryTabUiModel(
+    val id: Long,
+    val name: String,
+    val icon: String,
+    val isSelected: Boolean
+)
 
-data class CategoryTabUiModel(val name: String, val icon: String, val isSelected: Boolean)
-
-fun Category.toCategoryTabUiModel(isSelected: Boolean) = CategoryTabUiModel(name, icon, isSelected)
+fun Category.toCategoryTabUiModel(isSelected: Boolean) =
+    CategoryTabUiModel(id, name, icon, isSelected)

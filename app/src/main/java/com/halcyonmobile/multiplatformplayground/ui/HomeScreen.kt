@@ -12,25 +12,29 @@ import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Tab
 import androidx.compose.runtime.Composable
-import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.accompanist.coil.CoilImage
-import model.CategoryTabUiModel
+import com.halcyonmobile.multiplatformplayground.model.CategoryTabUiModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen() {
     val viewModel = getViewModel<HomeViewModel>()
     val categoryTabs by viewModel.categoryTabs.collectAsState(emptyList())
+    val selectedCategory by viewModel.selectedCategory.collectAsState(null)
     val error by viewModel.error.collectAsState(null)
 
     Column(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize().weight(1f)) {
             Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
+            selectedCategory?.let {
+                Applications(categoryId = it.id)
+            }
         }
         error?.let { Snackbar(text = { Text(text = it) }, modifier = Modifier.padding(16.dp)) }
     }
@@ -52,7 +56,6 @@ fun Tabs(categoryTabs: List<CategoryTabUiModel>, onClick: (Int) -> Unit) {
                         )
                     }
                 }
-
             }
         }
     }
