@@ -10,6 +10,8 @@ data class Application(
     val id: Long = 0,
     @SerialName(APP_NAME)
     val name: String,
+    @SerialName(APP_ICON)
+    val icon: String,
     @SerialName(APP_DEVELOPER)
     val developer: String,
     @SerialName(APP_FAVOURITE)
