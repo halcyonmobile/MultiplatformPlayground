@@ -52,7 +52,7 @@ private fun Routing.apiCreateApplication(localSource: LocalSource) {
             }
             val category = localSource.getCategory(applicationRequest.categoryId)
 
-            localSource.saveApplication(applicationRequest.toApplication(applicationRequest.encodedIcon, category, screenshots))
+            localSource.saveApplication(applicationRequest)
 
             call.respond(HttpStatusCode.Created)
         } catch (e: Exception) {

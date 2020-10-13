@@ -52,26 +52,24 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
-    override suspend fun saveApplication(applicationWithDetail: ApplicationWithDetail) {
+    override suspend fun saveApplication(applicationRequest: ApplicationRequest) {
         withContext(dispatcher) {
             transaction {
-                with(applicationWithDetail) {
-                    val category = CategoryEntity[application.category.id.toInt()]
-                    ApplicationEntity.new {
-                        name = application.name
-                        developer = application.developer
-                        icon = applicationDetail.icon
-                        rating = applicationDetail.rating.toBigDecimal()
-                        ratingCount = applicationDetail.ratingCount
-                        storeUrl = applicationDetail.storeUrl
-                        description = applicationDetail.description
-                        downloads = applicationDetail.downloads
-                        version = applicationDetail.version
-                        size = applicationDetail.size
-                        favourite = application.favourite
-                        this.category = category
-                        // todo add screenshots also
-                    }
+                val category = CategoryEntity[applicationRequest.categoryId.toInt()]
+                ApplicationEntity.new {
+                    name = applicationRequest.name
+                    developer = applicationRequest.developer
+                    icon = applicationRequest.encodedIcon
+                    rating = applicationRequest.rating.toBigDecimal()
+                    ratingCount = applicationRequest.ratingCount
+                    storeUrl = applicationRequest.storeUrl
+                    description = applicationRequest.description
+                    downloads = applicationRequest.downloads
+                    version = applicationRequest.version
+                    size = applicationRequest.size
+                    favourite = applicationRequest.favourite
+                    this.category = category
+                    // todo add screenshots also
                 }
             }
         }

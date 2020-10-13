@@ -3,7 +3,6 @@ package com.halcyonmobile.multiplatformplayground.storage.model.application
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
 import com.halcyonmobile.multiplatformplayground.storage.model.category.CategoryEntity
-import com.halcyonmobile.multiplatformplayground.storage.model.category.toCategory
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotEntity
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotTable
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.toScreenshot
@@ -42,10 +41,10 @@ fun ApplicationEntity.toApplicationDetailResponse() = ApplicationDetailResponse(
     version,
     size,
     favourite,
-    category.toCategory(),
+    category.id.value.toLong(),
     screenshots.map { it.toScreenshot() }
 )
 
 
 fun ApplicationEntity.toApplication() =
-    Application(id.value.toLong(), name, developer, favourite, category.toCategory())
+    Application(id.value.toLong(), name, developer, favourite, category.id.value.toLong())

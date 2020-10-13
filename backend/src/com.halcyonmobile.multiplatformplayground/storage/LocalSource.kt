@@ -7,7 +7,7 @@ internal interface LocalSource {
 
     suspend fun getApplications(): List<Application>
 
-    suspend fun saveApplication(applicationWithDetail: ApplicationWithDetail)
+    suspend fun saveApplication(applicationRequest: ApplicationRequest)
 
     suspend fun updateApplication(application: Application)
 

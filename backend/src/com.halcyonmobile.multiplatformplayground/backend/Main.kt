@@ -5,7 +5,6 @@ import com.halcyonmobile.multiplatformplayground.Unauthorized
 import com.halcyonmobile.multiplatformplayground.di.getKoinModule
 import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
 import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.model.toApplication
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -47,7 +46,7 @@ internal fun Application.main() {
     install(CallLogging) {
         level = Level.INFO
     }
-    install(Koin){
+    install(Koin) {
         modules(getKoinModule())
     }
     val localSource by inject<LocalSource>()
@@ -74,14 +73,7 @@ private fun Application.mock(localSource: LocalSource) = with(environment.classL
     getResourceAsStream("applications.json")?.bufferedReader()?.readText()?.let {
         Json.decodeFromString<List<ApplicationRequest>>(it).forEach { applicationRequest ->
             launch {
-                val category = localSource.getCategory(applicationRequest.categoryId)
-                localSource.saveApplication(
-                    applicationRequest.toApplication(
-                        applicationRequest.encodedIcon,
-                        category,
-                        emptyList()
-                    )
-                )
+                localSource.saveApplication(applicationRequest)
             }
         }
     }
