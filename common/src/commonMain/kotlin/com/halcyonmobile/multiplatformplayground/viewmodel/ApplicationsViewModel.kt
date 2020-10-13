@@ -4,6 +4,7 @@ import com.halcyonmobile.multiplatformplayground.model.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.toApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
+import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,9 +34,11 @@ class ApplicationsViewModel internal constructor(
                 is Result.Success -> {
                     _applications.value = result.value.map { it.toApplicationUiModel() }
                     pageOffset++
+                    log("Applications ${result.value}")
                 }
                 is Result.Error -> {
                     // TODO handle error
+                    log("Applications error ${result.exception}")
                 }
             }
             setLoading(false)
