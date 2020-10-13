@@ -6,6 +6,6 @@ import com.halcyonmobile.multiplatformplayground.shared.Result
 internal class UpdateFavouriteUseCase(private val applicationRepository: ApplicationRepository) {
 
     suspend operator fun invoke(id: Long, isFavourite: Boolean) = Result {
-        applicationRepository.updateFavourites(id, isFavourite)
+//        applicationRepository.updateFavourites(id, isFavourite)
     }
 }

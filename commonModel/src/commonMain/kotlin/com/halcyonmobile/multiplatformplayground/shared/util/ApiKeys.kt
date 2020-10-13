@@ -35,4 +35,6 @@ const val PAGE = "page"
 const val PER_PAGE = "perPage"
 // endregion
 
+const val CATEGORY_ID_QUERY = "categoryId"
+
 
