@@ -5,13 +5,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class ApplicationRequest(
-    @SerialName(APP_NAME)
-    val name: String,
-    @SerialName(APP_DEVELOPER)
-    val developer: String,
+data class ApplicationDetail(
     @SerialName(APP_ICON)
-    val encodedIcon: String,
+    val icon: String,
     @SerialName(APP_RATING)
     val rating: Float,
     @SerialName(APP_RATING_COUNT)
@@ -26,10 +22,6 @@ class ApplicationRequest(
     val version: String,
     @SerialName(APP_SIZE)
     val size: String,
-    @SerialName(APP_FAVOURITE)
-    val favourite: Boolean = false,
-    @SerialName(APP_CATEGORY_ID)
-    val categoryId: Long,
     @SerialName(APP_SCREENSHOTS)
     val screenshots: List<Screenshot>
 )

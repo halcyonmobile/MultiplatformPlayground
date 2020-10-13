@@ -13,7 +13,7 @@ data class ApplicationDetailResponse(
     @SerialName(APP_DEVELOPER)
     val developer: String,
     @SerialName(APP_ICON)
-    val icon: String ,
+    val icon: String,
     @SerialName(APP_RATING)
     val rating: Float,
     @SerialName(APP_RATING_COUNT)
@@ -30,8 +30,8 @@ data class ApplicationDetailResponse(
     val size: String,
     @SerialName(APP_FAVOURITE)
     val favourite: Boolean = false,
-    @SerialName(APP_CATEGORY)
-    var category: Category,
+    @SerialName(APP_CATEGORY_ID)
+    val categoryId: Long,
     @SerialName(APP_SCREENSHOTS)
-    var screenshots: List<Screenshot>
+    val screenshots: List<Screenshot>
 )
