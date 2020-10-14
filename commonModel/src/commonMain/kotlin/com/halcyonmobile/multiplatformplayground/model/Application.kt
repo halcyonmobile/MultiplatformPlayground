@@ -14,6 +14,8 @@ data class Application(
     val icon: String,
     @SerialName(APP_DEVELOPER)
     val developer: String,
+    @SerialName(APP_RATING)
+    val rating: Float,
     @SerialName(APP_FAVOURITE)
     val favourite: Boolean = false,
     @SerialName(APP_CATEGORY_ID)

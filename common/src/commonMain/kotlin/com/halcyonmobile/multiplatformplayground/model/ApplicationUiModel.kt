@@ -7,6 +7,7 @@ sealed class ApplicationUiModel {
         val name: String,
         val icon: String,
         val developer: String,
+        val rating: Float,
         val favourite: Boolean = false,
         val categoryId: Long
     ) : ApplicationUiModel()
@@ -15,4 +16,4 @@ sealed class ApplicationUiModel {
 }
 
 fun Application.toApplicationUiModel() =
-    ApplicationUiModel.App(id, name, icon, developer, favourite, categoryId)
+    ApplicationUiModel.App(id, name, icon, developer, rating, favourite, categoryId)
