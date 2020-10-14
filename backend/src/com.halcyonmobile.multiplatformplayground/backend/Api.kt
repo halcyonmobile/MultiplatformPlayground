@@ -84,10 +84,7 @@ private fun Routing.apiUpdateApplication(localSource: LocalSource) {
 private fun Routing.apiGetApplication(localSource: LocalSource) {
     get("/applications/{id}") {
         val id = call.parameters["id"].toString().toLong()
-        localSource.getApplication(id).let {
-            call.respond(it)
-        }
-        // return application
+        call.respond(localSource.getApplicationWithDetail(id))
     }
 }
 
