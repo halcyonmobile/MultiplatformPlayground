@@ -33,7 +33,7 @@ fun ApplicationWithDetail.toApplicationRequest(icon: File, screenshots: List<Fil
         name = application.name,
         developer = application.developer,
         encodedIcon = icon.toByteArray().encodeBase64(),
-        rating = applicationDetail.rating,
+        rating = application.rating,
         ratingCount = applicationDetail.ratingCount,
         storeUrl = applicationDetail.storeUrl,
         description = applicationDetail.description,

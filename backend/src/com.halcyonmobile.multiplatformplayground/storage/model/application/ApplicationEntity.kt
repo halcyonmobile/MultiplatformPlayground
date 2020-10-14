@@ -47,4 +47,12 @@ fun ApplicationEntity.toApplicationDetailResponse() = ApplicationDetailResponse(
 
 
 fun ApplicationEntity.toApplication() =
-    Application(id.value.toLong(), name, icon, developer, favourite, category.id.value.toLong())
+    Application(
+        id.value.toLong(),
+        name,
+        icon,
+        developer,
+        rating.toFloat(),
+        favourite,
+        category.id.value.toLong()
+    )
