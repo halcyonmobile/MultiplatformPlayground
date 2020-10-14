@@ -11,9 +11,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
+import com.halcyonmobile.multiplatformplayground.model.toCategoryTabUiModel
 import kotlinx.coroutines.flow.*
-import model.CategoryTabUiModel
-import model.toCategoryTabUiModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModel internal constructor(
@@ -28,6 +27,8 @@ class HomeViewModel internal constructor(
             category.toCategoryTabUiModel(index == selectedTabIndex)
         }
     }
+    val selectedCategory =
+        categoryTabs.map { categoryTabs -> categoryTabs.firstOrNull { it.isSelected } }
 
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error

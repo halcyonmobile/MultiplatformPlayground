@@ -2,8 +2,18 @@ package com.halcyonmobile.multiplatformplayground.model
 
 sealed class ApplicationUiModel {
 
-    class App(val data: Application) : ApplicationUiModel()
+    class App(
+        val id: Long,
+        val name: String,
+        val icon: String,
+        val developer: String,
+        val rating: Float,
+        val favourite: Boolean = false,
+        val categoryId: Long
+    ) : ApplicationUiModel()
+
     object Loading : ApplicationUiModel()
 }
 
-fun Application.toApplicationUiModel() = ApplicationUiModel.App(this)
+fun Application.toApplicationUiModel() =
+    ApplicationUiModel.App(id, name, icon, developer, rating, favourite, categoryId)

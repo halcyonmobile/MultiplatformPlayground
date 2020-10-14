@@ -10,8 +10,12 @@ data class Application(
     val id: Long = 0,
     @SerialName(APP_NAME)
     val name: String,
+    @SerialName(APP_ICON)
+    val icon: String,
     @SerialName(APP_DEVELOPER)
     val developer: String,
+    @SerialName(APP_RATING)
+    val rating: Float,
     @SerialName(APP_FAVOURITE)
     val favourite: Boolean = false,
     @SerialName(APP_CATEGORY_ID)

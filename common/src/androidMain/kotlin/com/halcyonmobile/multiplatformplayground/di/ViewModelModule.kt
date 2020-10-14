@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.di
 
+import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.SettingsViewModel
@@ -10,4 +11,5 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get(), get()) }
     viewModel { FavouritesViewModel(get()) }
     viewModel { SettingsViewModel() }
+    viewModel { (categoryId: Long) -> ApplicationsViewModel(categoryId, get()) }
 }
