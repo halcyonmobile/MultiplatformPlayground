@@ -6,10 +6,8 @@ data class ApplicationWithDetail(
 )
 
 fun ApplicationDetailResponse.toApplicationWithDetail() = ApplicationWithDetail(
-    application = Application(id, name, developer, favourite, categoryId),
+    application = Application(id, name, developer, icon, rating, favourite, categoryId),
     applicationDetail = ApplicationDetail(
-        icon,
-        rating,
         ratingCount,
         storeUrl,
         description,
