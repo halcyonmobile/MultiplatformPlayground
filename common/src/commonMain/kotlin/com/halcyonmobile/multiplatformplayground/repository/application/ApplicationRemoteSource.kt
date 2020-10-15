@@ -24,7 +24,7 @@ internal class ApplicationRemoteSource internal constructor(private val applicat
     )
 
     suspend fun getDetail(id: Long) =
-        applicationApi.getApplicationDetails(id).toApplicationWithDetail()
+        applicationApi.getApplicationDetail(id).toApplicationWithDetail()
 }
 
 @UseExperimental(InternalAPI::class)
