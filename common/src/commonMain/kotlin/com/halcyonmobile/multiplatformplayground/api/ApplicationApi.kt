@@ -22,7 +22,7 @@ internal class ApplicationApi : KtorApi() {
         parameter(CATEGORY_ID_QUERY, categoryId)
     }
 
-    suspend fun getApplicationDetails(id: Long): ApplicationDetailResponse = client.get {
+    suspend fun getApplicationDetail(id: Long): ApplicationDetailResponse = client.get {
         apiUrl("applications/$id")
     }
 

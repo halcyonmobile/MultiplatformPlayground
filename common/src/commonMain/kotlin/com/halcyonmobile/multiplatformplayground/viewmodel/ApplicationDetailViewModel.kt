@@ -3,18 +3,16 @@ package com.halcyonmobile.multiplatformplayground.viewmodel
 import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
-import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationDetailUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.UpdateFavouriteUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ApplicationDetailViewModel internal constructor(
-    private val getApplication: GetApplicationUseCase,
+    private val getApplicationDetail: GetApplicationDetailUseCase,
     private val updateFavourite: UpdateFavouriteUseCase,
     applicationId: Long
 ) : CoroutineViewModel() {
@@ -27,7 +25,7 @@ class ApplicationDetailViewModel internal constructor(
 
     init {
         coroutineScope.launch {
-            when (val result = getApplication(applicationId)) {
+            when (val result = getApplicationDetail(applicationId)) {
                 is Result.Success -> _applicationWithDetail.value = result.value
                 is Result.Error -> _error.value = result.exception.message
             }
