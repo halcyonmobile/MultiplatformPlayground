@@ -46,24 +46,29 @@ class AppPortfolioActivity : AppCompatActivity() {
         val selectedItem by viewModel.selectedNavigationItem.collectAsState(
             MainViewModel.NavigationItem.Home(isSelected = true)
         )
+        val showDetail by viewModel.showDetail.collectAsState(null)
 
-        Column(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.weight(1f)) {
-                when (selectedItem) {
-                    is MainViewModel.NavigationItem.Home -> HomeScreen()
-                    is MainViewModel.NavigationItem.Favourites -> {
-                    }
-                    is MainViewModel.NavigationItem.Settings -> {
+        if (showDetail != null) {
+            ApplicationDetail(applicationId = showDetail!!)
+        } else {
+            Column(modifier = Modifier.fillMaxSize()) {
+                Column(modifier = Modifier.weight(1f)) {
+                    when (selectedItem) {
+                        is MainViewModel.NavigationItem.Home -> HomeScreen(viewModel::onApplicationClicked)
+                        is MainViewModel.NavigationItem.Favourites -> {
+                        }
+                        is MainViewModel.NavigationItem.Settings -> {
+                        }
                     }
                 }
-            }
-            BottomNavigation {
-                navigationItems.forEach {
-                    BottomNavigationItem(
-                        icon = { Icon(asset = vectorResource(id = it.iconRes)) },
-                        selected = it.isSelected,
-                        onClick = { viewModel.onNavigationItemSelected(it) }
-                    )
+                BottomNavigation {
+                    navigationItems.forEach {
+                        BottomNavigationItem(
+                            icon = { Icon(asset = vectorResource(id = it.iconRes)) },
+                            selected = it.isSelected,
+                            onClick = { viewModel.onNavigationItemSelected(it) }
+                        )
+                    }
                 }
             }
         }

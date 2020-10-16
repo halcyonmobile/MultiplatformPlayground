@@ -46,6 +46,6 @@ abstract class KtorApi {
     }
 
     companion object {
-        const val BASE_URL = "http://0.0.0.0:8080/" //TODO: Move to Gradle
+        const val BASE_URL = "https://halcyon-multiplatform-backend.herokuapp.com/" //TODO: Move to Gradle
     }
 }
