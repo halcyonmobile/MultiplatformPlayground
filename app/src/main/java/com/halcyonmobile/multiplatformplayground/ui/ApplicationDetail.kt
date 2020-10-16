@@ -1,14 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,36 +20,50 @@ import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun ApplicationDetail(applicationId: Long) {
+fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
     val viewModel = getViewModel<ApplicationDetailViewModel> { parametersOf(applicationId) }
     val applicationWithDetail by viewModel.applicationDetailUiModel.collectAsState(null)
 
-    applicationWithDetail?.let {
-        ScrollableColumn(modifier = Modifier.padding(16.dp)) {
-            Header(
-                imageUrl = it.icon,
-                name = it.name,
-                developer = it.developer
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {},
+                navigationIcon = {
+                    Icon(
+                        asset = vectorResource(id = R.drawable.ic_back),
+                        modifier = Modifier.clickable(onClick = upPress)
+                    )
+                },
             )
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(top = 16.dp)
-            ) {
-                Property(
-                    name = stringResource(id = R.string.rating),
-                    value = it.rating.toString(),
-                    iconRes = R.drawable.ic_rating
-                )
-                Property(
-                    name = stringResource(id = R.string.downloads),
-                    value = it.downloads,
-                    iconRes = R.drawable.ic_downloads
-                )
+        },
+        bodyContent = {
+            applicationWithDetail?.let {
+                ScrollableColumn(modifier = Modifier.padding(16.dp)) {
+                    Header(
+                        imageUrl = it.icon,
+                        name = it.name,
+                        developer = it.developer
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(top = 16.dp)
+                    ) {
+                        Property(
+                            name = stringResource(id = R.string.rating),
+                            value = it.rating.toString(),
+                            iconRes = R.drawable.ic_rating
+                        )
+                        Property(
+                            name = stringResource(id = R.string.downloads),
+                            value = it.downloads,
+                            iconRes = R.drawable.ic_downloads
+                        )
+                    }
+                    Description(it.description)
+                    // TODO add screenshots
+                }
             }
-            Description(it.description)
-            // TODO add screenshots
-        }
-    }
+        })
 }
 
 @Composable

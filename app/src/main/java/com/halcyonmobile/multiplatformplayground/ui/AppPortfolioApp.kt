@@ -25,7 +25,10 @@ fun AppPortfolioApp(backDispatcher: OnBackPressedDispatcher) {
         Crossfade(navigator.current) { destination ->
             when (destination) {
                 Destination.Main -> MainScreen(actions.openApplicationDetail)
-                is Destination.ApplicationDetail -> ApplicationDetail(applicationId = destination.applicationId)
+                is Destination.ApplicationDetail -> ApplicationDetail(
+                    applicationId = destination.applicationId,
+                    actions.upPress
+                )
             }
         }
     }
