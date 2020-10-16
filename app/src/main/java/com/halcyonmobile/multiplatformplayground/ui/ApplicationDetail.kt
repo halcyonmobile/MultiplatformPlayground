@@ -50,10 +50,7 @@ fun ApplicationDetail(applicationId: Long) {
                     iconRes = R.drawable.ic_downloads
                 )
             }
-            Description(
-                "Your next job is only one download away. \n" +
-                        "From registration to employment, the RightStaff app helps you through the entire hiring process. We’ll guide you to a new medical job in just a few simple taps. All you will need to do is download the app, register your skills, fill in your availability, choose your area of work, update your location and you’re halfway to reciving your first shift."
-            )
+            Description(it.description)
             // TODO add screenshots
         }
     }
@@ -87,11 +84,7 @@ private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
         )
         Column {
             Text(text = value, style = MaterialTheme.typography.h5)
-            Text(
-                text = name,
-                style = MaterialTheme.typography.caption,
-                modifier = Modifier.padding(top = 4.dp)
-            )
+            Text(text = name, style = MaterialTheme.typography.caption)
         }
     }
 }
@@ -99,7 +92,7 @@ private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
 @Composable
 private fun Description(description: String) {
     val (showMore, updateShowMore) = remember { mutableStateOf(false) }
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    Column(modifier = Modifier.padding(top = 16.dp).fillMaxWidth()) {
         Text(style = MaterialTheme.typography.h6, text = stringResource(id = R.string.description))
         Text(
             modifier = Modifier.padding(top = 8.dp),
