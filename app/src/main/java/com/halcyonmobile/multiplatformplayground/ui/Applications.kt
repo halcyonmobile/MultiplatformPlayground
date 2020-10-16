@@ -62,9 +62,8 @@ private fun Application(
     onClick: (ApplicationUiModel.App) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().clickable(
-            onClick = { onClick(uiModel) }
-        ).padding(horizontal = 16.dp, vertical = 8.dp)
+        modifier = Modifier.fillMaxWidth().clickable(onClick = { onClick(uiModel) })
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Surface(shape = RoundedCornerShape(8.dp)) {
             CoilImage(data = uiModel.icon, modifier = Modifier.size(64.dp))
