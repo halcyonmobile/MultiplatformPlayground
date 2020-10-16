@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground
 
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +22,10 @@ class MainViewModel : ViewModel() {
     val selectedNavigationItem =
         navigationItems.map { it.first { navigationItem -> navigationItem.isSelected } }
 
+    // TODO just debugging
+    private val _showDetail = MutableStateFlow<Long?>(null)
+    val showDetail: StateFlow<Long?> = _showDetail
+
     fun onNavigationItemSelected(navigationItem: NavigationItem) {
         _navigationItems.value = _navigationItems.value.map {
             when (it) {
@@ -29,6 +34,10 @@ class MainViewModel : ViewModel() {
                 is NavigationItem.Settings -> it.copy(isSelected = it.javaClass == navigationItem.javaClass)
             }
         }
+    }
+
+    fun onApplicationClicked(app: ApplicationUiModel.App) {
+        _showDetail.value = app.id
     }
 
     sealed class NavigationItem(@DrawableRes open val iconRes: Int) {

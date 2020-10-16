@@ -1,6 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
-import com.halcyonmobile.multiplatformplayground.model.ApplicationWithDetail
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
 import com.halcyonmobile.multiplatformplayground.shared.util.File
 
 
@@ -12,7 +12,7 @@ internal class ApplicationRepository(
 
     suspend fun getDetailById(appId: Long) = remoteSource.getDetail(appId)
 
-    suspend fun create(application: ApplicationWithDetail, icon: File, screenshots: List<File>) =
+    suspend fun create(application: ApplicationDetail, icon: File, screenshots: List<File>) =
         remoteSource.create(application, icon, screenshots)
 
     companion object {

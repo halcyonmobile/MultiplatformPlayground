@@ -18,12 +18,13 @@ import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import dev.chrisbanes.accompanist.coil.CoilImage
-import com.halcyonmobile.multiplatformplayground.model.CategoryTabUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
     val viewModel = getViewModel<HomeViewModel>()
     val categoryTabs by viewModel.categoryTabs.collectAsState(emptyList())
     val selectedCategory by viewModel.selectedCategory.collectAsState(null)
@@ -33,7 +34,7 @@ fun HomeScreen() {
         Column(modifier = Modifier.fillMaxSize().weight(1f)) {
             Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
             selectedCategory?.let {
-                Applications(categoryId = it.id)
+                Applications(categoryId = it.id, onApplicationClicked = onApplicationClicked)
             }
         }
         error?.let { Snackbar(text = { Text(text = it) }, modifier = Modifier.padding(16.dp)) }

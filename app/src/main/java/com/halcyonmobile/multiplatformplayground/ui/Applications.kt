@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
+import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -19,7 +21,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import androidx.ui.tooling.preview.Preview
-import com.halcyonmobile.multiplatformplayground.model.ApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,23 +30,29 @@ import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun Applications(categoryId: Long) {
+fun Applications(categoryId: Long, onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
     // TODO fix same viewModel instance issue https://github.com/InsertKoinIO/koin/issues/924
     val viewModel = getViewModel<ApplicationsViewModel> { parametersOf(categoryId) }
     val applications by viewModel.applications.collectAsState()
 
     // TODO add load more
-    LazyColumnFor(
-        items = applications,
-        modifier = Modifier.fillMaxWidth().wrapContentHeight()
-    ) { item ->
-        when (item) {
-            is ApplicationUiModel.App -> Application(uiModel = item) {}
-            ApplicationUiModel.Loading -> CircularProgressIndicator(
-                Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
-            )
+    Box(modifier = Modifier.fillMaxSize()) {
+        LazyColumnFor(
+            items = applications,
+            modifier = Modifier.fillMaxWidth().wrapContentHeight()
+        ) { item ->
+            when (item) {
+                is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
+                ApplicationUiModel.Loading -> CircularProgressIndicator(
+                    Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
+                )
+            }
         }
-
+        FloatingActionButton(
+            onClick = {},
+            icon = { Icon(asset = vectorResource(id = R.drawable.ic_add)) },
+            modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)
+        )
     }
 }
 
@@ -83,5 +91,5 @@ private fun Application(
 @Preview(name = "Applications")
 @Composable
 fun ApplicationsPreview() {
-    Applications(categoryId = 0)
+    Applications(categoryId = 0) {}
 }
