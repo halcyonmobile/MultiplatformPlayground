@@ -1,7 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.viewmodel
 
-import com.halcyonmobile.multiplatformplayground.model.ApplicationUiModel
-import com.halcyonmobile.multiplatformplayground.model.toApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.toApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.util.log

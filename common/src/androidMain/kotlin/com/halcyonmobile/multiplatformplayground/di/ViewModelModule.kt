@@ -1,9 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.di
 
-import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
-import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
-import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
-import com.halcyonmobile.multiplatformplayground.viewmodel.SettingsViewModel
+import com.halcyonmobile.multiplatformplayground.viewmodel.*
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,4 +9,5 @@ val viewModelModule = module {
     viewModel { FavouritesViewModel(get()) }
     viewModel { SettingsViewModel() }
     viewModel { (categoryId: Long) -> ApplicationsViewModel(categoryId, get()) }
+    viewModel { (applicationId: Long) -> ApplicationDetailViewModel(applicationId, get(), get()) }
 }

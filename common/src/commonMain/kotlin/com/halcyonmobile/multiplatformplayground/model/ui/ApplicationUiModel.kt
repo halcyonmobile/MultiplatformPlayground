@@ -1,4 +1,6 @@
-package com.halcyonmobile.multiplatformplayground.model
+package com.halcyonmobile.multiplatformplayground.model.ui
+
+import com.halcyonmobile.multiplatformplayground.model.Application
 
 sealed class ApplicationUiModel {
 
