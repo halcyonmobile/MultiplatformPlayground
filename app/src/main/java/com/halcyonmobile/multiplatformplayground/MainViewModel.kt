@@ -22,10 +22,6 @@ class MainViewModel : ViewModel() {
     val selectedNavigationItem =
         navigationItems.map { it.first { navigationItem -> navigationItem.isSelected } }
 
-    // TODO just debugging
-    private val _showDetail = MutableStateFlow<Long?>(null)
-    val showDetail: StateFlow<Long?> = _showDetail
-
     fun onNavigationItemSelected(navigationItem: NavigationItem) {
         _navigationItems.value = _navigationItems.value.map {
             when (it) {
@@ -34,10 +30,6 @@ class MainViewModel : ViewModel() {
                 is NavigationItem.Settings -> it.copy(isSelected = it.javaClass == navigationItem.javaClass)
             }
         }
-    }
-
-    fun onApplicationClicked(app: ApplicationUiModel.App) {
-        _showDetail.value = app.id
     }
 
     sealed class NavigationItem(@DrawableRes open val iconRes: Int) {
