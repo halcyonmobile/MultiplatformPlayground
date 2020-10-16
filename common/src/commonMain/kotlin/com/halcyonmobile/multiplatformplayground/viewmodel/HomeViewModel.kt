@@ -11,7 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
-import com.halcyonmobile.multiplatformplayground.model.toCategoryTabUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.toCategoryTabUiModel
 import kotlinx.coroutines.flow.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
