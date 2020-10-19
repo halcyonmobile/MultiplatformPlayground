@@ -32,11 +32,13 @@ private fun getRepositoryModule() = module {
 
 private fun getUseCaseModule() = module {
     factory { GetCategoriesUseCase(get()) }
+    factory { GetCategoryUseCase(get()) }
     factory { FetchCategoriesUseCase(get()) }
     factory { GetFavouritesUseCase(get()) }
     factory { GetApplicationDetailUseCase(get()) }
     factory { GetApplicationsUseCase(get()) }
     factory { UpdateFavouriteUseCase(get()) }
+    factory { CreateApplicationUseCase(get()) }
 }
 
 fun getCommonModules(context: Context) =
