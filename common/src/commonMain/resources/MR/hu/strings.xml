@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <!--  General  -->
     <string name="app_name">AppPortfolio</string>
+    <string name="retry">Próbálja újra</string>
+    <!--  Bottom Navigation  -->
     <string name="home">Főoldal</string>
     <string name="favourites">Kedvencek</string>
     <string name="settings">Beállítások</string>
-    <string name="retry">Próbálja újra</string>
+    <!-- Application   -->
+    <string name="description">Leírás</string>
     <string name="show_more">Mutass többet</string>
     <string name="show_less">Mutass kevesebbet</string>
-    <string name="description">Leírás</string>
     <string name="rating">Értékelés</string>
     <string name="downloads">Letöltések</string>
+    <string name="screenshots">Képernyőképek</string>
+    <!-- Upload Application   -->
+    <string name="category">Kategória</string>
+    <string name="application_name">Alkalmazás neve</string>
+    <string name="developer">Fejlesztő</string>
 </resources>
