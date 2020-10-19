@@ -1,14 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,39 +20,50 @@ import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun ApplicationDetail(applicationId: Long) {
+fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
     val viewModel = getViewModel<ApplicationDetailViewModel> { parametersOf(applicationId) }
     val applicationWithDetail by viewModel.applicationDetailUiModel.collectAsState(null)
 
-    applicationWithDetail?.let {
-        ScrollableColumn(modifier = Modifier.padding(16.dp)) {
-            Header(
-                imageUrl = it.icon,
-                name = it.name,
-                developer = it.developer
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {},
+                navigationIcon = {
+                    Icon(
+                        asset = vectorResource(id = R.drawable.ic_back),
+                        modifier = Modifier.clickable(onClick = upPress)
+                    )
+                },
             )
-            Row(
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(top = 16.dp)
-            ) {
-                Property(
-                    name = stringResource(id = R.string.rating),
-                    value = it.rating.toString(),
-                    iconRes = R.drawable.ic_rating
-                )
-                Property(
-                    name = stringResource(id = R.string.downloads),
-                    value = it.downloads,
-                    iconRes = R.drawable.ic_downloads
-                )
+        },
+        bodyContent = {
+            applicationWithDetail?.let {
+                ScrollableColumn(modifier = Modifier.padding(16.dp)) {
+                    Header(
+                        imageUrl = it.icon,
+                        name = it.name,
+                        developer = it.developer
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(top = 16.dp)
+                    ) {
+                        Property(
+                            name = stringResource(id = R.string.rating),
+                            value = it.rating.toString(),
+                            iconRes = R.drawable.ic_rating
+                        )
+                        Property(
+                            name = stringResource(id = R.string.downloads),
+                            value = it.downloads,
+                            iconRes = R.drawable.ic_downloads
+                        )
+                    }
+                    Description(it.description)
+                    // TODO add screenshots
+                }
             }
-            Description(
-                "Your next job is only one download away. \n" +
-                        "From registration to employment, the RightStaff app helps you through the entire hiring process. We’ll guide you to a new medical job in just a few simple taps. All you will need to do is download the app, register your skills, fill in your availability, choose your area of work, update your location and you’re halfway to reciving your first shift."
-            )
-            // TODO add screenshots
-        }
-    }
+        })
 }
 
 @Composable
@@ -87,11 +94,7 @@ private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
         )
         Column {
             Text(text = value, style = MaterialTheme.typography.h5)
-            Text(
-                text = name,
-                style = MaterialTheme.typography.caption,
-                modifier = Modifier.padding(top = 4.dp)
-            )
+            Text(text = name, style = MaterialTheme.typography.caption)
         }
     }
 }
@@ -99,7 +102,7 @@ private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
 @Composable
 private fun Description(description: String) {
     val (showMore, updateShowMore) = remember { mutableStateOf(false) }
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    Column(modifier = Modifier.padding(top = 16.dp).fillMaxWidth()) {
         Text(style = MaterialTheme.typography.h6, text = stringResource(id = R.string.description))
         Text(
             modifier = Modifier.padding(top = 8.dp),
