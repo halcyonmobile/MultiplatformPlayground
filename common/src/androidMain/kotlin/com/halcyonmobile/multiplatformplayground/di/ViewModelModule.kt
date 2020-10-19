@@ -10,4 +10,11 @@ val viewModelModule = module {
     viewModel { SettingsViewModel() }
     viewModel { (categoryId: Long) -> ApplicationsViewModel(categoryId, get()) }
     viewModel { (applicationId: Long) -> ApplicationDetailViewModel(applicationId, get(), get()) }
+    viewModel { (initialCategoryId: Long) ->
+        UploadApplicationViewModel(
+            initialCategoryId,
+            get(),
+            get()
+        )
+    }
 }
