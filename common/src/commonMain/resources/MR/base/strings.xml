@@ -15,6 +15,7 @@
     <string name="downloads">Downloads</string>
     <string name="screenshots">Screenshots</string>
     <!-- Upload Application   -->
+    <string name="application_details">Application details</string>
     <string name="category">Category</string>
     <string name="application_name">Application Name</string>
     <string name="developer">Developer</string>

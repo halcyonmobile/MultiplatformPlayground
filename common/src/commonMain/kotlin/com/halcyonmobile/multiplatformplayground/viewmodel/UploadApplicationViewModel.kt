@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.viewmodel
 
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationDetailUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.toCategoryUiModel
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel

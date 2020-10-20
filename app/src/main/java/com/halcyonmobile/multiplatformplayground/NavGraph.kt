@@ -15,6 +15,10 @@ sealed class Destination : Parcelable {
     @Immutable
     @Parcelize
     data class ApplicationDetail(val applicationId: Long) : Destination()
+
+    @Immutable
+    @Parcelize
+    data class UploadApplication(val initialCategoryId: Long) : Destination()
 }
 
 /**
@@ -24,6 +28,10 @@ class Actions(navigator: Navigator<Destination>) {
 
     val openApplicationDetail: (applicationId: Long) -> Unit = {
         navigator.navigate(Destination.ApplicationDetail(it))
+    }
+
+    val openUploadApplication: (initialCategoryId: Long) -> Unit = {
+        navigator.navigate(Destination.UploadApplication(it))
     }
 
     val upPress: () -> Unit = {
