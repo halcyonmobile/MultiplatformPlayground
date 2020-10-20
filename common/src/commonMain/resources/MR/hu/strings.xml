@@ -15,6 +15,7 @@
     <string name="downloads">Letöltések</string>
     <string name="screenshots">Képernyőképek</string>
     <!-- Upload Application   -->
+    <string name="application_details">Alkalmazás részletek</string>
     <string name="category">Kategória</string>
     <string name="application_name">Alkalmazás neve</string>
     <string name="developer">Fejlesztő</string>

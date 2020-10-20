@@ -1,6 +1,5 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -36,23 +34,16 @@ fun Applications(categoryId: Long, onApplicationClicked: (ApplicationUiModel.App
     val applications by viewModel.applications.collectAsState()
 
     // TODO add load more
-    Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumnFor(
-            items = applications,
-            modifier = Modifier.fillMaxWidth().wrapContentHeight()
-        ) { item ->
-            when (item) {
-                is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
-                ApplicationUiModel.Loading -> CircularProgressIndicator(
-                    Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
-                )
-            }
+    LazyColumnFor(
+        items = applications,
+        modifier = Modifier.fillMaxSize()
+    ) { item ->
+        when (item) {
+            is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
+            ApplicationUiModel.Loading -> CircularProgressIndicator(
+                Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
+            )
         }
-        FloatingActionButton(
-            onClick = {},
-            icon = { Icon(asset = vectorResource(id = R.drawable.ic_add)) },
-            modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)
-        )
     }
 }
 
