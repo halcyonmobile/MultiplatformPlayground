@@ -1,11 +1,11 @@
 package com.halcyonmobile.multiplatformplayground.usecase
 
-import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
-import kotlinx.coroutines.flow.emptyFlow
+import com.halcyonmobile.multiplatformplayground.repository.FavouritesRemoteSource
+import com.halcyonmobile.multiplatformplayground.shared.Result
 
-internal class GetFavouritesUseCase(private val applicationRepository: ApplicationRepository) {
+internal class GetFavouritesUseCase(private val remoteSource: FavouritesRemoteSource) {
 
-    //    TODO
-    operator fun invoke() = emptyFlow<List<Application>>()
+    suspend operator fun invoke() = Result {
+        remoteSource.get()
+    }
 }

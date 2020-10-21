@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.vectorResource
 import com.halcyonmobile.multiplatformplayground.MainViewModel
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -26,14 +27,16 @@ fun MainScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.weight(1f)) {
+            val onApplicationClicked: (ApplicationUiModel.App) -> Unit = {
+                openApplicationDetail(it.id)
+            }
+
             when (selectedItem) {
-                is MainViewModel.NavigationItem.Home -> HomeScreen(onApplicationClicked = {
-                    openApplicationDetail(
-                        it.id
-                    )
-                }, onUploadApplication = onUploadApplication)
-                is MainViewModel.NavigationItem.Favourites -> {
-                }
+                is MainViewModel.NavigationItem.Home -> HomeScreen(
+                    onApplicationClicked = onApplicationClicked,
+                    onUploadApplication = onUploadApplication
+                )
+                is MainViewModel.NavigationItem.Favourites -> FavouriteScreen(onApplicationClicked = onApplicationClicked)
                 is MainViewModel.NavigationItem.Settings -> {
                 }
             }
