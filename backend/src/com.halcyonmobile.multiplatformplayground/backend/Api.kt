@@ -26,7 +26,7 @@ internal fun Routing.api(localSource: LocalSource) {
 }
 
 /**
- * GET /api/v1/applications
+ * GET /applications?categoryId={categoryId}&page={page}&perPage={perPage}
  */
 @OptIn(KtorExperimentalAPI::class)
 private fun Routing.apiGetApplications(localSource: LocalSource) {
@@ -39,7 +39,7 @@ private fun Routing.apiGetApplications(localSource: LocalSource) {
 }
 
 /**
- *  POST /applications?categoryId={categoryId}&page={page}&perPage={perPage}
+ *  POST /applications
  */
 @UseExperimental(InternalAPI::class)
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
