@@ -24,10 +24,17 @@ fun AppPortfolioApp(backDispatcher: OnBackPressedDispatcher) {
     Providers(AmbientBackDispatcher provides backDispatcher) {
         Crossfade(navigator.current) { destination ->
             when (destination) {
-                Destination.Main -> MainScreen(actions.openApplicationDetail)
+                Destination.Main -> MainScreen(
+                    actions.openApplicationDetail,
+                    actions.openUploadApplication
+                )
                 is Destination.ApplicationDetail -> ApplicationDetail(
                     applicationId = destination.applicationId,
                     actions.upPress
+                )
+                is Destination.UploadApplication -> UploadApplication(
+                    initialCategoryId = destination.initialCategoryId,
+                    upPress = actions.upPress
                 )
             }
         }

@@ -14,7 +14,10 @@ import com.halcyonmobile.multiplatformplayground.MainViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun MainScreen(openApplicationDetail: (Long) -> Unit) {
+fun MainScreen(
+    openApplicationDetail: (Long) -> Unit,
+    onUploadApplication: (categoryId: Long) -> Unit
+) {
     val viewModel = getViewModel<MainViewModel>()
     val navigationItems by viewModel.navigationItems.collectAsState(emptyList())
     val selectedItem by viewModel.selectedNavigationItem.collectAsState(
@@ -24,7 +27,11 @@ fun MainScreen(openApplicationDetail: (Long) -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.weight(1f)) {
             when (selectedItem) {
-                is MainViewModel.NavigationItem.Home -> HomeScreen { openApplicationDetail(it.id) }
+                is MainViewModel.NavigationItem.Home -> HomeScreen(onApplicationClicked = {
+                    openApplicationDetail(
+                        it.id
+                    )
+                }, onUploadApplication = onUploadApplication)
                 is MainViewModel.NavigationItem.Favourites -> {
                 }
                 is MainViewModel.NavigationItem.Settings -> {

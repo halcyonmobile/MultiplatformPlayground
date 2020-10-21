@@ -2,7 +2,6 @@ package com.halcyonmobile.multiplatformplayground.repository.application
 
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
 import com.halcyonmobile.multiplatformplayground.model.*
-import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationDetailUiModel
 import com.halcyonmobile.multiplatformplayground.shared.util.File
 import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
 import io.ktor.util.InternalAPI
@@ -13,38 +12,29 @@ internal class ApplicationRemoteSource internal constructor(private val applicat
     suspend fun get(categoryId: Long, offset: Int, perPage: Int) =
         applicationApi.getApplicationsByCategory(offset, perPage, categoryId)
 
-    // TODO replace uiModel with data layer model
-    suspend fun create(
-        applicationDetail: ApplicationDetail,
-        icon: File,
-        screenshots: List<File>
-    ) = applicationApi.createApplication(
-        applicationDetail.toApplicationRequest(
-            icon,
-            screenshots
-        )
-    )
+    suspend fun create(uploadApplicationModel: UploadApplicationModel) =
+        applicationApi.createApplication(uploadApplicationModel.toApplicationRequest())
 
     suspend fun getDetail(id: Long) =
         applicationApi.getApplicationDetail(id).toApplicationDetail()
 }
 
-@UseExperimental(InternalAPI::class)
-fun ApplicationDetail.toApplicationRequest(icon: File, screenshotsFiles: List<File>) =
+@OptIn(InternalAPI::class)
+fun UploadApplicationModel.toApplicationRequest() =
     ApplicationRequest(
         name = name,
         developer = developer,
         encodedIcon = icon.toByteArray().encodeBase64(),
         rating = rating,
-        ratingCount = ratingCount,
-        storeUrl = storeUrl,
+        ratingCount = 0,
+        storeUrl = "",
         description = description,
         downloads = downloads,
-        version = version,
-        size = size,
-        favourite = favourite,
+        version = "",
+        size = "",
+        favourite = false,
         categoryId = categoryId,
-        screenshots = screenshots.zip(screenshotsFiles) { screenshot, file ->
-            screenshot.copy(image = file.toByteArray().encodeBase64())
+        screenshots = screenshots.map {
+            Screenshot(image = it.toByteArray().encodeBase64(), name = "")
         }
     )

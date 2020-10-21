@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <!--  General  -->
     <string name="app_name">AppPortfolio</string>
+    <string name="retry">Retry</string>
+    <!--  Bottom Navigation  -->
     <string name="home">Home</string>
     <string name="favourites">Favourites</string>
     <string name="settings">Settings</string>
-    <string name="retry">Retry</string>
+    <!-- Application   -->
     <string name="description">Description</string>
     <string name="show_more">Show More</string>
     <string name="show_less">Show Less</string>
     <string name="rating">Rating</string>
     <string name="downloads">Downloads</string>
+    <string name="screenshots">Screenshots</string>
+    <!-- Upload Application   -->
+    <string name="application_details">Application details</string>
+    <string name="category">Category</string>
+    <string name="application_name">Application Name</string>
+    <string name="developer">Developer</string>
 </resources>

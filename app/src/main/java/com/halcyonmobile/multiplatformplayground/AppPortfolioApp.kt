@@ -22,7 +22,7 @@ class AppPortfolioApp : Application() {
         setupDebugMenu()
         startKoin {
             androidContext(this@AppPortfolioApp)
-            modules(getCommonModules(this@AppPortfolioApp) + viewModelModule + appModule)
+            modules(getCommonModules(this@AppPortfolioApp) + appModule + viewModelModule)
         }
     }
 

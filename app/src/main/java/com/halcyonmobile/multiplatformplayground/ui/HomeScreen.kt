@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
+import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,37 +9,48 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Snackbar
-import androidx.compose.material.Tab
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun HomeScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
+fun HomeScreen(
+    onApplicationClicked: (ApplicationUiModel.App) -> Unit,
+    onUploadApplication: (categoryId: Long) -> Unit
+) {
     val viewModel = getViewModel<HomeViewModel>()
     val categoryTabs by viewModel.categoryTabs.collectAsState(emptyList())
     val selectedCategory by viewModel.selectedCategory.collectAsState(null)
     val error by viewModel.error.collectAsState(null)
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize().weight(1f)) {
-            Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
-            selectedCategory?.let {
-                Applications(categoryId = it.id, onApplicationClicked = onApplicationClicked)
+    Scaffold(floatingActionButton = {
+        FloatingActionButton(
+            onClick = { onUploadApplication(selectedCategory!!.id) },
+            icon = { Icon(asset = vectorResource(id = R.drawable.ic_add)) },
+            modifier = Modifier.padding(16.dp)
+        )
+    }, bodyContent = {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Column(modifier = Modifier.fillMaxSize().weight(1f)) {
+                Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
+                selectedCategory?.let {
+                    Applications(categoryId = it.id, onApplicationClicked = onApplicationClicked)
+                }
             }
+            error?.let { Snackbar(text = { Text(text = it) }, modifier = Modifier.padding(16.dp)) }
         }
-        error?.let { Snackbar(text = { Text(text = it) }, modifier = Modifier.padding(16.dp)) }
-    }
+    })
 }
 
 @Composable
