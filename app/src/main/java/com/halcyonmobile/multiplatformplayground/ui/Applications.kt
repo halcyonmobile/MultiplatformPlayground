@@ -10,29 +10,18 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
-import androidx.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
-import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
-fun Applications(categoryId: Long, onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
-    // TODO fix same viewModel instance issue https://github.com/InsertKoinIO/koin/issues/924
-    val viewModel = getViewModel<ApplicationsViewModel> { parametersOf(categoryId) }
-    val applications by viewModel.applications.collectAsState()
-
+fun Applications(applications: List<ApplicationUiModel>, onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
     // TODO add load more
     LazyColumnFor(
         items = applications,
@@ -76,10 +65,4 @@ private fun Application(
             }
         }
     }
-}
-
-@Preview(name = "Applications")
-@Composable
-fun ApplicationsPreview() {
-    Applications(categoryId = 0) {}
 }
