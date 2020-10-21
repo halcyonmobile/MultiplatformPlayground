@@ -7,17 +7,20 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.R
+import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
 import com.halcyonmobile.multiplatformplayground.ui.theme.lightGray
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
 import org.koin.androidx.compose.getViewModel
@@ -26,7 +29,10 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
     val viewModel = getViewModel<UploadApplicationViewModel> { parametersOf(initialCategoryId) }
-    val category = viewModel.category.collectAsState(null)
+    val uploadApplicationUiModel by viewModel.uploadApplicationUiModel.collectAsState(
+        UploadApplicationUiModel(categoryId = initialCategoryId)
+    )
+    val category by viewModel.category.collectAsState(null)
 
     Scaffold(
         topBar = {
@@ -54,7 +60,7 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
                     )
                 }
                 Screenshots(screenshots = emptyList()) // TODO update screenshot list
-                ApplicationDetails()
+                ApplicationDetails(uploadApplicationUiModel, viewModel)
             }
         }
     )
@@ -85,16 +91,19 @@ private fun Screenshots(screenshots: List<Uri>) {
 }
 
 @Composable
-private fun ApplicationDetails() {
+private fun ApplicationDetails(
+    uploadApplicationUiModel: UploadApplicationUiModel,
+    changeListener: UploadApplicationUiModelChangeListener
+) {
     Column(modifier = Modifier.padding(top = 16.dp)) {
         Text(
             text = stringResource(id = R.string.application_details),
             style = MaterialTheme.typography.h6
         )
-        // TODO handle state
+        // TODO add category
         TextField(
-            value = "",
-            onValueChange = {},
+            value = uploadApplicationUiModel.name,
+            onValueChange = changeListener::onNameChanged,
             modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
             placeholder = { Text(text = stringResource(id = R.string.application_name)) },
             leadingIcon = {
@@ -104,8 +113,8 @@ private fun ApplicationDetails() {
                 )
             })
         TextField(
-            value = "",
-            onValueChange = {},
+            value = uploadApplicationUiModel.developer,
+            onValueChange = changeListener::onDeveloperChanged,
             modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
             placeholder = { Text(text = stringResource(id = R.string.developer)) },
             leadingIcon = {
@@ -115,8 +124,8 @@ private fun ApplicationDetails() {
                 )
             })
         TextField(
-            value = "",
-            onValueChange = {},
+            value = uploadApplicationUiModel.description,
+            onValueChange = changeListener::onDescriptionChanged,
             modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
             placeholder = { Text(text = stringResource(id = R.string.description)) },
             leadingIcon = {
@@ -127,8 +136,8 @@ private fun ApplicationDetails() {
             })
         Row(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
             TextField(
-                value = "",
-                onValueChange = {},
+                value = uploadApplicationUiModel.downloads,
+                onValueChange = changeListener::onDownloadsChanged,
                 modifier = Modifier.weight(1f).padding(end = 4.dp),
                 placeholder = { Text(text = stringResource(id = R.string.downloads)) },
                 leadingIcon = {
@@ -138,10 +147,11 @@ private fun ApplicationDetails() {
                     )
                 })
             TextField(
-                value = "",
-                onValueChange = {},
+                value = uploadApplicationUiModel.rating?.toString() ?: "",
+                onValueChange = changeListener::onRatingChanged,
                 modifier = Modifier.weight(1f).padding(start = 4.dp),
                 placeholder = { Text(text = stringResource(id = R.string.rating)) },
+                keyboardType = KeyboardType.Number,
                 leadingIcon = {
                     Image(
                         asset = vectorResource(id = R.drawable.ic_rating),
