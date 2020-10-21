@@ -28,4 +28,6 @@ internal interface LocalSource {
     suspend fun saveScreenshot(screenshot: Screenshot, appId: Long): Long
 
     suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot>
+
+    suspend fun getFavourites(): List<Application>
 }
