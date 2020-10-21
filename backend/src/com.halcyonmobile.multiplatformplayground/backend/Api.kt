@@ -22,6 +22,7 @@ internal fun Routing.api(localSource: LocalSource) {
     apiFilterApplications(localSource)
     apiGetCategories(localSource)
     apiPostCategory(localSource)
+    apiGetFavourites(localSource)
 }
 
 /**
@@ -38,7 +39,7 @@ private fun Routing.apiGetApplications(localSource: LocalSource) {
 }
 
 /**
- *  POST /api/v1/applications
+ *  POST /applications?categoryId={categoryId}&page={page}&perPage={perPage}
  */
 @UseExperimental(InternalAPI::class)
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
@@ -63,7 +64,7 @@ private fun Routing.apiCreateApplication(localSource: LocalSource) {
 
 
 /**
- * PUT /api/v1/applications
+ * PUT /applications
  */
 private fun Routing.apiUpdateApplication(localSource: LocalSource) {
     put("/applications") {
@@ -79,7 +80,7 @@ private fun Routing.apiUpdateApplication(localSource: LocalSource) {
 }
 
 /**
- * GET /api/v1/applications/:id
+ * GET /applications/:id
  */
 private fun Routing.apiGetApplication(localSource: LocalSource) {
     get("/applications/{id}") {
@@ -124,6 +125,17 @@ private fun Routing.apiPostCategory(localSource: LocalSource) {
         val id = localSource.saveCategory(savedCategory)
 
         call.respond(savedCategory.copy(id))
+    }
+}
+
+/**
+ * GET /favourites
+ */
+private fun Routing.apiGetFavourites(localSource: LocalSource) {
+    get("/favourites") {
+        localSource.getFavourites().let {
+            call.respond(it)
+        }
     }
 }
 
