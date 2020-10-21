@@ -1,7 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
-import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
-import com.halcyonmobile.multiplatformplayground.shared.util.File
+import com.halcyonmobile.multiplatformplayground.model.UploadApplicationModel
 
 
 internal class ApplicationRepository(
@@ -12,8 +11,8 @@ internal class ApplicationRepository(
 
     suspend fun getDetailById(appId: Long) = remoteSource.getDetail(appId)
 
-    suspend fun create(application: ApplicationDetail, icon: File, screenshots: List<File>) =
-        remoteSource.create(application, icon, screenshots)
+    suspend fun create(uploadApplicationModel: UploadApplicationModel) =
+        remoteSource.create(uploadApplicationModel)
 
     companion object {
         const val DEFAULT_PER_PAGE = 10
