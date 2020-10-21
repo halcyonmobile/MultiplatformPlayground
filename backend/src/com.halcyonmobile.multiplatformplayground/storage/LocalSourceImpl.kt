@@ -157,4 +157,10 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                 ScreenshotEntity.all().map { it.toScreenshot() }
             }
         }
+
+    override suspend fun getFavourites(): List<Application> = withContext(dispatcher) {
+        transaction {
+            ApplicationEntity.all().filter { it.favourite }.map { it.toApplication() }
+        }
+    }
 }
