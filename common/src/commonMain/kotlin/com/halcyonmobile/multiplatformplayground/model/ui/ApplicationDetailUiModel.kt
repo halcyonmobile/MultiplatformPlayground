@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.model.ui
 
+import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
 import com.halcyonmobile.multiplatformplayground.model.Screenshot
 
@@ -37,19 +38,12 @@ fun ApplicationDetail.toApplicationDetailUiModel() = ApplicationDetailUiModel(
     screenshots
 )
 
-fun ApplicationDetailUiModel.toApplicationDetail() = ApplicationDetail(
+fun ApplicationDetailUiModel.toApplication() = Application(
     id,
     name,
     developer,
     icon,
     rating,
-    ratingCount,
-    storeUrl,
-    description,
-    downloads,
-    version,
-    size,
     favourite,
-    categoryId,
-    screenshots
+    categoryId
 )

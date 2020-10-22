@@ -3,11 +3,7 @@ package com.halcyonmobile.multiplatformplayground.api
 import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
 import com.halcyonmobile.multiplatformplayground.shared.util.*
-import io.ktor.client.request.forms.MultiPartFormDataContent
-import io.ktor.client.request.forms.formData
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.request.post
+import io.ktor.client.request.*
 
 internal class ApplicationApi : KtorApi() {
 
@@ -16,7 +12,7 @@ internal class ApplicationApi : KtorApi() {
         perPage: Int,
         categoryId: Long
     ): List<Application> = client.get {
-        apiUrl("applications")
+        apiUrl(APPLICATIONS_BASE_URL)
         parameter(PAGE, page)
         parameter(PER_PAGE, perPage)
         parameter(CATEGORY_ID_QUERY, categoryId)
@@ -30,7 +26,17 @@ internal class ApplicationApi : KtorApi() {
         applicationRequest: ApplicationRequest
     ): Unit = client.post {
         json()
-        apiUrl("applications")
+        apiUrl(APPLICATIONS_BASE_URL)
         body = applicationRequest
+    }
+
+    suspend fun update(application: Application): Unit = client.put {
+        json()
+        apiUrl(APPLICATIONS_BASE_URL)
+        body = application
+    }
+
+    companion object {
+        private const val APPLICATIONS_BASE_URL = "applications"
     }
 }
