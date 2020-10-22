@@ -42,7 +42,7 @@ private fun getUseCaseModule() = module {
     factory { GetFavouritesUseCase(get()) }
     factory { GetApplicationDetailUseCase(get()) }
     factory { GetApplicationsUseCase(get()) }
-    factory { UpdateFavouriteUseCase(get()) }
+    factory { UpdateApplicationUseCase(get()) }
     factory { CreateApplicationUseCase(get()) }
 }
 

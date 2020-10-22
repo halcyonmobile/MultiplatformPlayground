@@ -17,6 +17,8 @@ internal class ApplicationRemoteSource internal constructor(private val applicat
 
     suspend fun getDetail(id: Long) =
         applicationApi.getApplicationDetail(id).toApplicationDetail()
+
+    suspend fun update(application: Application) = applicationApi.update(application)
 }
 
 @OptIn(InternalAPI::class)
