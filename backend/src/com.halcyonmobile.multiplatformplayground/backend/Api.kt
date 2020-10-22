@@ -69,12 +69,8 @@ private fun Routing.apiCreateApplication(localSource: LocalSource) {
 private fun Routing.apiUpdateApplication(localSource: LocalSource) {
     put("/applications") {
         call.receive<Application>().let {
-            try {
-                localSource.updateApplication(it)
-                call.respond(HttpStatusCode.OK)
-            } catch (e: Exception) {
-                call.respond(HttpStatusCode.Conflict)
-            }
+            localSource.updateApplication(it)
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

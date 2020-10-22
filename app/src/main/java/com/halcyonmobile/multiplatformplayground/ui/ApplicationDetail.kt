@@ -63,6 +63,14 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                     // TODO add screenshots
                 }
             }
+        }, floatingActionButton = {
+            val iconRes = if (applicationWithDetail?.favourite == true)
+                R.drawable.ic_favourites else R.drawable.ic_favourites_empty
+            FloatingActionButton(
+                onClick = viewModel::updateFavourite,
+                icon = { Icon(asset = vectorResource(id = iconRes)) },
+                modifier = Modifier.padding(16.dp)
+            )
         })
 }
 

@@ -3,8 +3,10 @@ package com.halcyonmobile.multiplatformplayground.di
 import android.content.Context
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
 import com.halcyonmobile.multiplatformplayground.api.CategoryApi
+import com.halcyonmobile.multiplatformplayground.api.FavouritesApi
 import com.halcyonmobile.multiplatformplayground.api.ScreenshotApi
 import com.halcyonmobile.multiplatformplayground.api.db.DatabaseFactory
+import com.halcyonmobile.multiplatformplayground.repository.FavouritesRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryLocalSource
@@ -17,6 +19,7 @@ private fun getApiModule(context: Context) = module {
     factory { ApplicationApi() }
     factory { CategoryApi() }
     factory { ScreenshotApi() }
+    factory { FavouritesApi() }
 
     single { DatabaseFactory.getInstance(context).create() }
 }
@@ -28,6 +31,8 @@ private fun getRepositoryModule() = module {
     factory { CategoryLocalSource(get()) }
     factory { CategoryRemoteSource(get()) }
     single { CategoryRepository(get(), get()) }
+
+    factory { FavouritesRemoteSource(get()) }
 }
 
 private fun getUseCaseModule() = module {
@@ -37,7 +42,7 @@ private fun getUseCaseModule() = module {
     factory { GetFavouritesUseCase(get()) }
     factory { GetApplicationDetailUseCase(get()) }
     factory { GetApplicationsUseCase(get()) }
-    factory { UpdateFavouriteUseCase(get()) }
+    factory { UpdateApplicationUseCase(get()) }
     factory { CreateApplicationUseCase(get()) }
 }
 
