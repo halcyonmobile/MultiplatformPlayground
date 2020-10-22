@@ -22,7 +22,10 @@ import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
+import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun HomeScreen(
@@ -45,12 +48,28 @@ fun HomeScreen(
             Column(modifier = Modifier.fillMaxSize().weight(1f)) {
                 Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
                 selectedCategory?.let {
-                    Applications(categoryId = it.id, onApplicationClicked = onApplicationClicked)
+                    ApplicationsPerCategory(
+                        categoryId = it.id,
+                        onApplicationClicked = onApplicationClicked
+                    )
                 }
             }
             error?.let { Snackbar(text = { Text(text = it) }, modifier = Modifier.padding(16.dp)) }
         }
     })
+}
+
+@OptIn(ExperimentalCoroutinesApi::class)
+@Composable
+private fun ApplicationsPerCategory(
+    categoryId: Long,
+    onApplicationClicked: (ApplicationUiModel.App) -> Unit
+) {
+    // TODO fix same viewModel instance issue https://github.com/InsertKoinIO/koin/issues/924
+    val viewModel = getViewModel<ApplicationsViewModel> { parametersOf(categoryId) }
+    val applications by viewModel.applications.collectAsState()
+
+    Applications(applications = applications, onApplicationClicked = onApplicationClicked)
 }
 
 @Composable

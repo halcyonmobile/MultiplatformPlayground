@@ -1,5 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
+import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.UploadApplicationModel
 
 
@@ -13,6 +14,8 @@ internal class ApplicationRepository(
 
     suspend fun create(uploadApplicationModel: UploadApplicationModel) =
         remoteSource.create(uploadApplicationModel)
+
+    suspend fun update(application: Application) = remoteSource.update(application)
 
     companion object {
         const val DEFAULT_PER_PAGE = 10

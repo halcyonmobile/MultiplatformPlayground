@@ -89,6 +89,7 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                 ApplicationEntity[application.id.toInt()].let {
                     it.name = application.name
                     it.developer = application.developer
+                    it.rating = application.rating.toBigDecimal()
                     it.favourite = application.favourite
                     // todo update screenshots also
                 }
