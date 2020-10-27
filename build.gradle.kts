@@ -9,7 +9,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.2.0-alpha13")
+        classpath("com.android.tools.build:gradle:4.2.0-alpha14")
         classpath(Versions.KOTLIN_GRADLE_PLUGIN)
         classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
         classpath(Versions.Android.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
