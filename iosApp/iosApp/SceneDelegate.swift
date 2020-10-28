@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
-        ExtensionsKt.onEachHelper(viewModel.categories, callback: { (categories) in
+        ExtensionsKt.onEachHelper(viewModel.categoryTabs, callback: { (categories) in
             LoggingKt.log("Categories observed on iOS \(categories)")
         })
         ExtensionsKt.onEachHelper(viewModel.error, callback: { (error) in
