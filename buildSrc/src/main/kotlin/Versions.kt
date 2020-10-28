@@ -2,7 +2,7 @@ object Versions {
     const val KOTLIN_VERSION = "1.4.10"
     const val COROUTINES_VERSION = "1.3.9-native-mt"
     const val COMPOSE_VERSION = "1.0.0-alpha04"
-    private const val KTOR_VERSION = "1.4.0"
+    private const val KTOR_VERSION = "1.4.1"
     private const val SERIALIZATION_VERSION = "1.0.0"
     private const val KOIN_VERSION = "2.2.0-rc-2"
     private const val SQL_DELIGHT_VERSION = "1.4.3"
