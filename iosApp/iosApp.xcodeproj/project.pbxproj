@@ -17,6 +17,9 @@
 		7555FFA1242A565B00829871 /* iosAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FFA0242A565B00829871 /* iosAppUITests.swift */; };
 		7555FFB2242A642300829871 /* common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7555FFB1242A642300829871 /* common.framework */; };
 		7555FFB3242A642300829871 /* common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7555FFB1242A642300829871 /* common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B67B8CF250A2153005FDEAD /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8CE250A2153005FDEAD /* FavoritesView.swift */; };
+		7B67B8D1250A2162005FDEAD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8D0250A2162005FDEAD /* SettingsView.swift */; };
+		7B67B8D3250A217C005FDEAD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8D2250A217C005FDEAD /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		7555FFA0242A565B00829871 /* iosAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppUITests.swift; sourceTree = "<group>"; };
 		7555FFA2242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7555FFB1242A642300829871 /* common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = common.framework; path = "../common/build/xcode-frameworks/common.framework"; sourceTree = SOURCE_ROOT; };
+		7B67B8CE250A2153005FDEAD /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		7B67B8D0250A2162005FDEAD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7B67B8D2250A217C005FDEAD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,9 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				7B0C0B4A25499EE900AED8CB /* Settings */,
+				7B0C0B4925499EE000AED8CB /* Favorites */,
+				7B0C0B4825499EDA00AED8CB /* Home */,
 				7555FF7E242A565900829871 /* AppDelegate.swift */,
 				7555FF80242A565900829871 /* SceneDelegate.swift */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -162,6 +171,30 @@
 			);
 			name = Frameworks;
 			sourceTree = SOURCE_ROOT;
+		};
+		7B0C0B4825499EDA00AED8CB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7B67B8D2250A217C005FDEAD /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		7B0C0B4925499EE000AED8CB /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				7B67B8CE250A2153005FDEAD /* FavoritesView.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		7B0C0B4A25499EE900AED8CB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7B67B8D0250A2162005FDEAD /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -316,8 +349,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B67B8D1250A2162005FDEAD /* SettingsView.swift in Sources */,
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
+				7B67B8CF250A2153005FDEAD /* FavoritesView.swift in Sources */,
+				7B67B8D3250A217C005FDEAD /* HomeView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,8 +528,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-l\"sqlite3\"";
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.multiplatformplayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -513,8 +550,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-l\"sqlite3\"";
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.halcyonmobile.multiplatformplayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
