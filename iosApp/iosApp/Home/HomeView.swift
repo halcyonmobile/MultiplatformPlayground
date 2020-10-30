@@ -8,18 +8,33 @@
 
 import SwiftUI
 import common
+import SlidingTabView
 
 struct HomeView: View {
     
-    let homeViewModel = ServiceLocator().getHomeViewModel()
+    @ObservedObject var homeObservable = HomeObservable()
+    @State private var selectedTab: Int = 0
     
     var body: some View {
-        Text(homeViewModel.title.localized())
+        VStack {
+            let tabs = homeObservable.categoryTabs.map { categoryTabs in
+                categoryTabs.name
+            }
+            if(tabs.count >= 2){
+                ScrollView(.horizontal){
+                    SlidingTabView(selection: self.$selectedTab, tabs: tabs)
+                }
+            }else{
+                ProgressView().frame(alignment: .center)
+            }
+            Text("\(selectedTab)")
+            Spacer()
+        }
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//    }
+//}
