@@ -9,7 +9,7 @@
 import Foundation
 import common
 
-class HomeObservable: ObservableObject{
+class HomeState: ObservableObject {
     
     let homeViewModel = ServiceLocator().getHomeViewModel()
     @Published private(set) var categoryTabs: Array<CategoryTabUiModel> = [CategoryTabUiModel]()

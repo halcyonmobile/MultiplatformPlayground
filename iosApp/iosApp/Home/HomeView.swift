@@ -12,12 +12,12 @@ import SlidingTabView
 
 struct HomeView: View {
     
-    @ObservedObject var homeObservable = HomeObservable()
+    @ObservedObject var homeState = HomeState()
     @State private var selectedTab: Int = 0
     
     var body: some View {
         VStack(alignment: .trailing) {
-            let tabs = homeObservable.categoryTabs.map { categoryTabs in
+            let tabs = homeState.categoryTabs.map { categoryTabs in
                 categoryTabs.name
             }
             if(tabs.count >= 2){
