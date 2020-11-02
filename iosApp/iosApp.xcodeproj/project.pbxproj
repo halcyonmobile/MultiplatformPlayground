@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		032E32FEF17BFCEE4ACD991B /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A040ACBFA77798B9CF4CD33 /* Pods_iosApp.framework */; };
-		172C7409254C133B008B9580 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 172C7408254C133B008B9580 /* SwiftPackageProductDependency */; };
+		172C7409254C133B008B9580 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 172C7408254C133B008B9580 /* SlidingTabView */; };
 		17353AC62550378B001F2131 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
-		17EDC8AA254ACA7C0019C88F /* HomeObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDC8A9254ACA7C0019C88F /* HomeObservable.swift */; };
+		17353B1125504036001F2131 /* UploadApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B1025504036001F2131 /* UploadApplicationState.swift */; };
+		17EDC8AA254ACA7C0019C88F /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDC8A9254ACA7C0019C88F /* HomeState.swift */; };
 		7555FF7F242A565900829871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF7E242A565900829871 /* AppDelegate.swift */; };
 		7555FF81242A565900829871 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF80242A565900829871 /* SceneDelegate.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
@@ -43,7 +44,8 @@
 
 /* Begin PBXFileReference section */
 		17353AC52550378B001F2131 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
-		17EDC8A9254ACA7C0019C88F /* HomeObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeObservable.swift; sourceTree = "<group>"; };
+		17353B1025504036001F2131 /* UploadApplicationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadApplicationState.swift; sourceTree = "<group>"; };
+		17EDC8A9254ACA7C0019C88F /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
 		2A040ACBFA77798B9CF4CD33 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74A6347258A169D347F7609F /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				172C7409254C133B008B9580 /* BuildFile in Frameworks */,
+				172C7409254C133B008B9580 /* SlidingTabView in Frameworks */,
 				032E32FEF17BFCEE4ACD991B /* Pods_iosApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +101,14 @@
 				17353AC52550378B001F2131 /* FloatingActionButton.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		17353B0F2550401F001F2131 /* Upload Application */ = {
+			isa = PBXGroup;
+			children = (
+				17353B1025504036001F2131 /* UploadApplicationState.swift */,
+			);
+			path = "Upload Application";
 			sourceTree = "<group>";
 		};
 		17EDC8A8254AC70D0019C88F /* Categories */ = {
@@ -150,6 +160,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				17353B0F2550401F001F2131 /* Upload Application */,
 				17353AC42550374E001F2131 /* Shared */,
 				17EDC8A8254AC70D0019C88F /* Categories */,
 				7B0C0B4A25499EE900AED8CB /* Settings */,
@@ -196,7 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				7B67B8D2250A217C005FDEAD /* HomeView.swift */,
-				17EDC8A9254ACA7C0019C88F /* HomeObservable.swift */,
+				17EDC8A9254ACA7C0019C88F /* HomeState.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -237,7 +248,7 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
-				172C7408254C133B008B9580 /* SwiftPackageProductDependency */,
+				172C7408254C133B008B9580 /* SlidingTabView */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -312,7 +323,7 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				172C7407254C133B008B9580 /* RemoteSwiftPackageReference */,
+				172C7407254C133B008B9580 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -421,8 +432,9 @@
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
 				17353AC62550378B001F2131 /* FloatingActionButton.swift in Sources */,
 				7B67B8CF250A2153005FDEAD /* FavoritesView.swift in Sources */,
-				17EDC8AA254ACA7C0019C88F /* HomeObservable.swift in Sources */,
+				17EDC8AA254ACA7C0019C88F /* HomeState.swift in Sources */,
 				7B67B8D3250A217C005FDEAD /* HomeView.swift in Sources */,
+				17353B1125504036001F2131 /* UploadApplicationState.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,7 +766,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		172C7407254C133B008B9580 /* RemoteSwiftPackageReference */ = {
+		172C7407254C133B008B9580 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView";
 			requirement = {
@@ -765,9 +777,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		172C7408254C133B008B9580 /* SwiftPackageProductDependency */ = {
+		172C7408254C133B008B9580 /* SlidingTabView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 172C7407254C133B008B9580 /* RemoteSwiftPackageReference */;
+			package = 172C7407254C133B008B9580 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
 			productName = SlidingTabView;
 		};
 /* End XCSwiftPackageProductDependency section */
