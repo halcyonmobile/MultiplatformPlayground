@@ -16,7 +16,7 @@ struct HomeView: View {
     @State private var selectedTab: Int = 0
     
     var body: some View {
-        VStack {
+        VStack(alignment: .trailing) {
             let tabs = homeObservable.categoryTabs.map { categoryTabs in
                 categoryTabs.name
             }
@@ -27,8 +27,9 @@ struct HomeView: View {
             }else{
                 ProgressView().frame(alignment: .center)
             }
-            Text("\(selectedTab)")
             Spacer()
+            FloatingActionButton(icon: "plus.circle.fill", action: {})
+                .padding(16)
         }
     }
 }
