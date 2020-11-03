@@ -7,6 +7,6 @@ target 'iosApp' do
 
   # Pods for iosApp
   pod 'common', :path => '../common/'
-  pod 'Kingfisher/SwiftUI'
+  pod 'Kingfisher/SwiftUI', '~> 5.15.7'
 
 end
