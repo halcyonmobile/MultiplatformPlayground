@@ -14,23 +14,28 @@ struct HomeView: View {
     
     @ObservedObject var homeState = HomeState()
     @State private var selectedTab: Int = 0
+    @State private var openApplicationDetail = false
     
     var body: some View {
-        VStack(alignment: .trailing) {
-            let tabs = homeState.categoryTabs.map { categoryTabs in
-                categoryTabs.name
-            }
-            if(tabs.count >= 2){
-                ScrollView(.horizontal){
-                    SlidingTabView(selection: self.$selectedTab, tabs: tabs)
+            VStack(alignment: .trailing) {
+                let tabs = homeState.categoryTabs.map { categoryTabs in
+                    categoryTabs.name
                 }
-            }else{
-                ProgressView().frame(alignment: .center)
-            }
-            Spacer()
-            FloatingActionButton(icon: "plus.circle.fill", action: {})
-                .padding(16)
-        }
+                if(tabs.count >= 2){
+                    ScrollView(.horizontal){
+                        SlidingTabView(selection: self.$selectedTab, tabs: tabs)
+                    }
+                }else{
+                    ProgressView().frame(alignment: .center)
+                }
+                Spacer()
+                NavigationLink(destination: UploadApplicationView(), isActive: $openApplicationDetail){
+                    FloatingActionButton(icon: "plus.circle.fill", action: {
+                        openApplicationDetail = true
+                    }).padding(16)
+                }
+            }.navigationBarTitle("")
+            .navigationBarHidden(true)
     }
 }
 

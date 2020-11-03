@@ -13,7 +13,7 @@ val favourites = StringDesc.Resource(MR.strings.favourites)
 val settings = StringDesc.Resource(MR.strings.settings)
 
 //    Application
-val description = StringDesc.Resource(MR.strings.description)
+val appDescription = StringDesc.Resource(MR.strings.description)
 val showMore = StringDesc.Resource(MR.strings.show_more)
 val showLess = StringDesc.Resource(MR.strings.show_less)
 val rating = StringDesc.Resource(MR.strings.rating)
@@ -21,5 +21,6 @@ val downloads = StringDesc.Resource(MR.strings.downloads)
 val screenshots = StringDesc.Resource(MR.strings.screenshots)
 val applicationDetails = StringDesc.Resource(MR.strings.application_details)
 val category = StringDesc.Resource(MR.strings.category)
+val applicationName = StringDesc.Resource(MR.strings.application_name)
 val developer = StringDesc.Resource(MR.strings.developer)
-
+val uploadTitle = StringDesc.Resource(MR.strings.upload_title)
