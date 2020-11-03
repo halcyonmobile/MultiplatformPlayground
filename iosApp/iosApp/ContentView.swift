@@ -8,17 +8,17 @@ struct ContentView: View {
                 HomeView()
                     .tabItem {
                         Image("ic_home_outline")
-                        Text("Home")
+                        Text(LocalizationsKt.home.localized())
                     }
                 FavoritesView()
                     .tabItem{
                         Image("ic_favorite_outline")
-                        Text("Favorites")
+                        Text(LocalizationsKt.favourites.localized())
                     }
                 SettingsView()
                     .tabItem {
                         Image("ic_settings_outline")
-                        Text("Settings")
+                        Text(LocalizationsKt.settings.localized())
                     }
             }
         }
