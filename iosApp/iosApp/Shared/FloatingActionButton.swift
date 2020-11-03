@@ -17,7 +17,7 @@ struct FloatingActionButton: View {
             Image(systemName: icon)
                 .resizable()
                 .frame(width: 48, height: 48)
-                .foregroundColor(Color(red: 255/255, green: 66/255, blue: 66/255))
+                .foregroundColor(Color(ApplicationColors.accentColor))
                 .shadow(color: .gray, radius: 0.2, x: 1, y: 1)
         }
     }
