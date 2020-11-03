@@ -6,7 +6,7 @@ PODS:
 
 DEPENDENCIES:
   - common (from `../common/`)
-  - Kingfisher/SwiftUI
+  - Kingfisher/SwiftUI (~> 5.15.7)
 
 SPEC REPOS:
   trunk:
@@ -20,6 +20,6 @@ SPEC CHECKSUMS:
   common: 657653be3063afd276daf6f040300b5010d7d5fc
   Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
 
-PODFILE CHECKSUM: acca0be94ef85e34652a078bcf84bbca9fb7c3e6
+PODFILE CHECKSUM: 3fb092234c1a3e9376413d74944eb1485f63b631
 
 COCOAPODS: 1.10.0
