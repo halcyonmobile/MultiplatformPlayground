@@ -34,14 +34,18 @@ struct UploadApplicationView: View {
             HStack{
                 Image(systemName: "bookmark.fill")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.applicationName.localized(), text: $applicationName)
-                    .padding(.leading, 8)
+                TextField(LocalizationsKt.applicationName.localized(), text: $applicationName, onCommit: {
+                    viewModel.onNameChanged(name: applicationName)
+                })
+                .padding(.leading, 8)
             }.padding(8)
             HStack{
                 Image(systemName: "person.2.fill")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.developer.localized(), text: $developer)
-                    .padding(2)
+                TextField(LocalizationsKt.developer.localized(), text: $developer, onCommit: {
+                    viewModel.onDeveloperChanged(developer: developer)
+                })
+                .padding(2)
             }.padding(.leading, 4)
             .padding(.top, 8)
             .padding(.bottom, 8)
@@ -49,18 +53,25 @@ struct UploadApplicationView: View {
             HStack{
                 Image(systemName: "pencil")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.appDescription.localized(), text: $description)
-                    .padding(.leading, 6)
+                TextField(LocalizationsKt.appDescription.localized(), text: $description, onCommit: {
+                    viewModel.onDescriptionChanged(description: description)
+                })
+                .padding(.leading, 6)
             }.padding(8)
             HStack{
                 Image(systemName: "square.and.arrow.down")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.downloads.localized(), text: $downloads)
-                    .padding(.leading, 6)
+                TextField(LocalizationsKt.downloads.localized(), text: $downloads, onCommit: {
+                    viewModel.onDownloadsChanged(downloads: downloads)
+                })
+                .padding(.leading, 6)
                 
                 Image(systemName: "star.fill")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.rating.localized(), text: $rating)
+                TextField(LocalizationsKt.rating.localized(), text: $rating, onCommit: {
+                    viewModel.onRatingChanged(rating: rating)
+                })
+                .keyboardType(.decimalPad)
             }.padding(8)
             
             Spacer()
