@@ -1,0 +1,25 @@
+PODS:
+  - common (1.0.0)
+  - Kingfisher/Core (5.15.7)
+  - Kingfisher/SwiftUI (5.15.7):
+    - Kingfisher/Core
+
+DEPENDENCIES:
+  - common (from `../common/`)
+  - Kingfisher/SwiftUI (~> 5.15.7)
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+
+EXTERNAL SOURCES:
+  common:
+    :path: "../common/"
+
+SPEC CHECKSUMS:
+  common: 657653be3063afd276daf6f040300b5010d7d5fc
+  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
+
+PODFILE CHECKSUM: 3fb092234c1a3e9376413d74944eb1485f63b631
+
+COCOAPODS: 1.10.0

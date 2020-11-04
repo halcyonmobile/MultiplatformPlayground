@@ -20,6 +20,7 @@ struct ContentView: View {
                 Text("Settings")
             }
         }
+        .frame(alignment: .top)
     }
 }
 
