@@ -11,6 +11,15 @@ import common
 
 struct UploadApplicationView: View {
     
+    let categoryId: Int64
+    private let viewModel: UploadApplicationViewModel
+    
+    
+    init(categoryId: Int64) {
+        self.categoryId = categoryId
+        viewModel = ServiceLocator().getUploadApplicationViewModel(categoryId: categoryId)
+    }
+    
     @State private var applicationName = ""
     @State private var developer = ""
     @State private var description = ""
@@ -57,13 +66,5 @@ struct UploadApplicationView: View {
             Spacer()
         }.padding(16)
         .navigationTitle(LocalizationsKt.uploadTitle.localized())
-    }
-}
-
-
-
-struct UploadApplicationView_Previews: PreviewProvider {
-    static var previews: some View {
-        UploadApplicationView()
     }
 }
