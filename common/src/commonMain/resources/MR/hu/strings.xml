@@ -19,4 +19,5 @@
     <string name="category">Kategória</string>
     <string name="application_name">Alkalmazás neve</string>
     <string name="developer">Fejlesztő</string>
+    <string name="upload_title">Feltöltés</string>
 </resources>
