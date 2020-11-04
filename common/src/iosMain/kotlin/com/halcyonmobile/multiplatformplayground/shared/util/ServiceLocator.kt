@@ -9,8 +9,10 @@ import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoryUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.CreateApplicationUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
+import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
@@ -35,5 +37,10 @@ class ServiceLocator {
         categoryId,
         GetCategoryUseCase(categoryRepository),
         CreateApplicationUseCase(applicationRepository)
+    )
+
+    fun getApplicationsViewModel(categoryId: Long): ApplicationsViewModel = ApplicationsViewModel(
+        categoryId,
+        GetApplicationsUseCase(applicationRepository)
     )
 }
