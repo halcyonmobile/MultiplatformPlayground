@@ -9,6 +9,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        classpath("xml-apis:xml-apis:1.4.01") // TODO workaround for newest AS Canary related issue
         classpath("com.android.tools.build:gradle:4.2.0-alpha15")
         classpath(Versions.KOTLIN_GRADLE_PLUGIN)
         classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
