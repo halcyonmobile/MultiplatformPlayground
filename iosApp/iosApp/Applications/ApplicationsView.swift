@@ -21,11 +21,22 @@ struct ApplicationsView: View {
     
     var body: some View {
         if(state.isLoading){
-            ProgressView()
-                .frame(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-        }
-        List(state.applications, id: \.id){ application in
-            ApplicationView(application: application)
+            VStack{
+                Spacer()
+                ProgressView()
+                Spacer()
+            }
+        }else if state.applications.count > 0 {
+            List(state.applications, id: \.id){ application in
+                ApplicationView(application: application)
+            }
+        }else{
+            VStack{
+                Spacer()
+                Text(LocalizationsKt.applicationsEmptyMessage.localized())
+                    .multilineTextAlignment(.center)
+                Spacer()
+            }
         }
     }
 }
