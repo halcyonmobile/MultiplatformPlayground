@@ -20,4 +20,7 @@
     <string name="application_name">Application Name</string>
     <string name="developer">Developer</string>
     <string name="upload_title">Upload</string>
+    <!--  Applications  -->
+    <string name="applications_empty_message">Oops. There are no applications in this category
+    </string>
 </resources>
