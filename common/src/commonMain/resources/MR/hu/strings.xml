@@ -20,4 +20,7 @@
     <string name="application_name">Alkalmazás neve</string>
     <string name="developer">Fejlesztő</string>
     <string name="upload_title">Feltöltés</string>
+    <!--  Applications  -->
+    <string name="applications_empty_message">Hoppácska. Nincsenek alkalmazások ebben a kategóriában
+    </string>
 </resources>

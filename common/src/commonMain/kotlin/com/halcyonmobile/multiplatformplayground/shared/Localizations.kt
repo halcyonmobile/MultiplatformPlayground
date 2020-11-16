@@ -24,3 +24,6 @@ val category = StringDesc.Resource(MR.strings.category)
 val applicationName = StringDesc.Resource(MR.strings.application_name)
 val developer = StringDesc.Resource(MR.strings.developer)
 val uploadTitle = StringDesc.Resource(MR.strings.upload_title)
+
+// Applications
+val applicationsEmptyMessage = StringDesc.Resource(MR.strings.applications_empty_message)
