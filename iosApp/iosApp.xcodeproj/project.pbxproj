@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1717E5B42552D17A0064239B /* ApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1717E5B32552D17A0064239B /* ApplicationView.swift */; };
+		1717E5B92552D6BB0064239B /* ApplicationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1717E5B82552D6BB0064239B /* ApplicationsView.swift */; };
+		1717E5BE2552D6DD0064239B /* ApplicationsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1717E5BD2552D6DD0064239B /* ApplicationsState.swift */; };
 		172C7409254C133B008B9580 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 172C7408254C133B008B9580 /* SlidingTabView */; };
 		17353AC62550378B001F2131 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
 		17353B2225512EAA001F2131 /* UploadApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B2125512EAA001F2131 /* UploadApplicationView.swift */; };
@@ -44,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1717E5B32552D17A0064239B /* ApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationView.swift; sourceTree = "<group>"; };
+		1717E5B82552D6BB0064239B /* ApplicationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsView.swift; sourceTree = "<group>"; };
+		1717E5BD2552D6DD0064239B /* ApplicationsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsState.swift; sourceTree = "<group>"; };
 		17353AC52550378B001F2131 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		17353B2125512EAA001F2131 /* UploadApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadApplicationView.swift; sourceTree = "<group>"; };
 		17353B6525513E70001F2131 /* ApplicationColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationColors.swift; sourceTree = "<group>"; };
@@ -97,6 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1717E5B22552D1630064239B /* Applications */ = {
+			isa = PBXGroup;
+			children = (
+				1717E5B32552D17A0064239B /* ApplicationView.swift */,
+				1717E5B82552D6BB0064239B /* ApplicationsView.swift */,
+				1717E5BD2552D6DD0064239B /* ApplicationsState.swift */,
+			);
+			path = Applications;
+			sourceTree = "<group>";
+		};
 		17353AC42550374E001F2131 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +172,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				1717E5B22552D1630064239B /* Applications */,
 				17353B0F2550401F001F2131 /* Upload Application */,
 				17353AC42550374E001F2131 /* Shared */,
 				7B0C0B4A25499EE900AED8CB /* Settings */,
@@ -425,11 +442,14 @@
 				7B67B8D1250A2162005FDEAD /* SettingsView.swift in Sources */,
 				17353B6625513E70001F2131 /* ApplicationColors.swift in Sources */,
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
+				1717E5B92552D6BB0064239B /* ApplicationsView.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
 				17353AC62550378B001F2131 /* FloatingActionButton.swift in Sources */,
 				7B67B8CF250A2153005FDEAD /* FavoritesView.swift in Sources */,
 				17EDC8AA254ACA7C0019C88F /* HomeState.swift in Sources */,
 				7B67B8D3250A217C005FDEAD /* HomeView.swift in Sources */,
+				1717E5BE2552D6DD0064239B /* ApplicationsState.swift in Sources */,
+				1717E5B42552D17A0064239B /* ApplicationView.swift in Sources */,
 				17353B2225512EAA001F2131 /* UploadApplicationView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
