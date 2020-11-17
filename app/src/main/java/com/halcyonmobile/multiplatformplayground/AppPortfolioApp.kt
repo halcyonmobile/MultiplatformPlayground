@@ -1,7 +1,7 @@
 package com.halcyonmobile.multiplatformplayground
 
 import android.app.Application
-import com.halcyonmobile.multiplatformplayground.api.KtorApi
+import com.halcyonmobile.multiplatformplayground.api.KtorApiImpl
 import com.halcyonmobile.multiplatformplayground.di.appModule
 import com.halcyonmobile.multiplatformplayground.di.getCommonModules
 import com.halcyonmobile.multiplatformplayground.di.viewModelModule
@@ -53,7 +53,7 @@ class AppPortfolioApp : Application() {
                 ScreenCaptureToolboxModule(),
                 DividerModule(),
                 SectionHeaderModule("Logs"),
-                NetworkLogListModule(baseUrl = KtorApi.BASE_URL),
+                NetworkLogListModule(baseUrl = KtorApiImpl.BASE_URL),
                 LogListModule(),
                 LifecycleLogListModule(),
                 DividerModule(),

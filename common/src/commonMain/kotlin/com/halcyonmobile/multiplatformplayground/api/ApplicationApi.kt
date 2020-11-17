@@ -5,7 +5,7 @@ import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
 import com.halcyonmobile.multiplatformplayground.shared.util.*
 import io.ktor.client.request.*
 
-internal class ApplicationApi : KtorApi() {
+internal class ApplicationApi(private val ktorApi: KtorApi) : KtorApi by ktorApi {
 
     suspend fun getApplicationsByCategory(
         page: Int,

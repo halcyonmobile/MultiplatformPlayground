@@ -2,23 +2,31 @@ package com.halcyonmobile.multiplatformplayground.repository.application
 
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
 import com.halcyonmobile.multiplatformplayground.model.*
-import com.halcyonmobile.multiplatformplayground.shared.util.File
 import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
 import io.ktor.util.InternalAPI
 import io.ktor.util.encodeBase64
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 internal class ApplicationRemoteSource internal constructor(private val applicationApi: ApplicationApi) {
 
     suspend fun get(categoryId: Long, offset: Int, perPage: Int) =
-        applicationApi.getApplicationsByCategory(offset, perPage, categoryId)
+        withContext(Dispatchers.Default) {
+            applicationApi.getApplicationsByCategory(offset, perPage, categoryId)
+        }
 
     suspend fun create(uploadApplicationModel: UploadApplicationModel) =
-        applicationApi.createApplication(uploadApplicationModel.toApplicationRequest())
+        withContext(Dispatchers.Default) {
+            applicationApi.createApplication(uploadApplicationModel.toApplicationRequest())
+        }
 
-    suspend fun getDetail(id: Long) =
+    suspend fun getDetail(id: Long) = withContext(Dispatchers.Default) {
         applicationApi.getApplicationDetail(id).toApplicationDetail()
+    }
 
-    suspend fun update(application: Application) = applicationApi.update(application)
+    suspend fun update(application: Application) = withContext(Dispatchers.Default) {
+        applicationApi.update(application)
+    }
 }
 
 @OptIn(InternalAPI::class)
