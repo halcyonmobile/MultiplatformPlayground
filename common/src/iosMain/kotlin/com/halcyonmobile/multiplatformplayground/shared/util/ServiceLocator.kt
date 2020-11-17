@@ -16,15 +16,20 @@ import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
+import com.halcyonmobile.multiplatformplayground.api.KtorApi
+import com.halcyonmobile.multiplatformplayground.api.KtorApiImpl
+
 // TODO create a proper solution
 class ServiceLocator {
 
+    private val ktorApi: KtorApi = KtorApiImpl
+
     private val database = DatabaseFactory.getInstance().create()
     private val categoryRepository = CategoryRepository(
-        CategoryRemoteSource(CategoryApi()),
+        CategoryRemoteSource(CategoryApi(ktorApi)),
         CategoryLocalSource(database)
     )
-    private val applicationRepository = ApplicationRepository(ApplicationRemoteSource(ApplicationApi()))
+    private val applicationRepository = ApplicationRepository(ApplicationRemoteSource(ApplicationApi(ktorApi)))
 
     // 🤢🤮
     fun getHomeViewModel(): HomeViewModel =
