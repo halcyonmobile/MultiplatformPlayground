@@ -3,7 +3,7 @@ package com.halcyonmobile.multiplatformplayground.api
 import com.halcyonmobile.multiplatformplayground.model.Application
 import io.ktor.client.request.*
 
-internal class FavouritesApi : KtorApi() {
+internal class FavouritesApi(private val ktorApi: KtorApi) : KtorApi by ktorApi {
 
     suspend fun getFavourites(): List<Application> = client.get {
         apiUrl("favourites")
