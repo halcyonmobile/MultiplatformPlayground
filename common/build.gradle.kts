@@ -31,6 +31,11 @@ kotlin {
         homepage = "AppPortfolio home page"
     }
     sourceSets {
+        all {
+            languageSettings.apply {
+                useExperimentalAnnotation("kotlin.RequiresOptIn")
+            }
+        }
         val commonMain by getting {
             dependencies {
                 implementation(project(":commonModel"))
