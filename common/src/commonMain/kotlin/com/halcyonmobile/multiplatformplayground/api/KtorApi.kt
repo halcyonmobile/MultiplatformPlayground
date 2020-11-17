@@ -11,6 +11,7 @@ import io.ktor.http.takeFrom
 
 abstract class KtorApi {
 
+    // TODO we should have only one HttpClient instance
     @OptIn(ExperimentalStdlibApi::class)
     protected val client = HttpClient {
         installNetworkLogger()

@@ -2,7 +2,6 @@ package com.halcyonmobile.multiplatformplayground.repository.category
 
 import com.halcyonmobile.multiplatformplayground.db.MultiplatformDatabase
 import com.halcyonmobile.multiplatformplayground.model.Category
-import com.halcyonmobile.multiplatformplayground.shared.util.log
 
 val categoryMapper: (id: Long, name: String, icon: String) -> Category =
     { id, name, icon -> Category(id, name, icon) }
@@ -10,10 +9,7 @@ val categoryMapper: (id: Long, name: String, icon: String) -> Category =
 class CategoryLocalSource internal constructor(database: MultiplatformDatabase) {
     private val queries = database.categoriesQueries
 
-    // TODO remove showcase log
-    fun getCategories() = queries.selectAll(categoryMapper).executeAsList().also {
-        log("Categories from localsource: $it")
-    }
+    fun getCategories() = queries.selectAll(categoryMapper).executeAsList()
 
     fun get(id: Long) = queries.getById(id, categoryMapper).executeAsOneOrNull()
 
