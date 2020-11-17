@@ -1,10 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.di
 
 import android.content.Context
-import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
-import com.halcyonmobile.multiplatformplayground.api.CategoryApi
-import com.halcyonmobile.multiplatformplayground.api.FavouritesApi
-import com.halcyonmobile.multiplatformplayground.api.ScreenshotApi
+import com.halcyonmobile.multiplatformplayground.api.*
 import com.halcyonmobile.multiplatformplayground.api.db.DatabaseFactory
 import com.halcyonmobile.multiplatformplayground.repository.FavouritesRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
@@ -16,10 +13,12 @@ import com.halcyonmobile.multiplatformplayground.usecase.*
 import org.koin.dsl.module
 
 private fun getApiModule(context: Context) = module {
-    factory { ApplicationApi() }
-    factory { CategoryApi() }
-    factory { ScreenshotApi() }
-    factory { FavouritesApi() }
+    single<KtorApi> { KtorApiImpl }
+
+    factory { ApplicationApi(get()) }
+    factory { CategoryApi(get()) }
+    factory { ScreenshotApi(get()) }
+    factory { FavouritesApi(get()) }
 
     single { DatabaseFactory.getInstance(context).create() }
 }
