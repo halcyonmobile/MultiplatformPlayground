@@ -1,9 +1,13 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import android.net.Uri
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -151,7 +155,7 @@ private fun ApplicationDetails(
                 onValueChange = changeListener::onRatingChanged,
                 modifier = Modifier.weight(1f).padding(start = 4.dp),
                 placeholder = { Text(text = stringResource(id = R.string.rating)) },
-                keyboardType = KeyboardType.Number,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 leadingIcon = {
                     Image(
                         asset = vectorResource(id = R.drawable.ic_rating),
