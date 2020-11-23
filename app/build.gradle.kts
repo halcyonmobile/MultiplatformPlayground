@@ -46,7 +46,7 @@ android {
     }
     composeOptions {
         kotlinCompilerVersion = "1.4.0"
-        kotlinCompilerExtensionVersion = Versions.COMPOSE_VERSION
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER_VERSION
     }
     lintOptions {
         disable("InvalidFragmentVersionForActivityResult")
@@ -67,6 +67,7 @@ dependencies {
     implementation(Versions.Android.COMPOSE_MD_ICONS_EXTENDED)
     implementation(Versions.Android.COMPOSE_RUNTIME)
     implementation(Versions.Android.COMPOSE_THEME_ADAPTER)
+    implementation(Versions.Android.NAVIGATION_COMPOSE)
     implementation(Versions.Android.COIL_COMPOSE)
 
     implementation(Versions.Android.APP_COMPAT)

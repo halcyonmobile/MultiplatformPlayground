@@ -1,7 +1,5 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.foundation.Icon
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,9 +39,9 @@ fun HomeScreen(
         FloatingActionButton(
             onClick = { onUploadApplication(selectedCategory!!.id) },
             icon = { Icon(asset = vectorResource(id = R.drawable.ic_add)) },
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(bottom = 48.dp)
         )
-    }, bodyContent = {
+    }) {
         Column(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize().weight(1f)) {
                 Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
@@ -56,7 +54,7 @@ fun HomeScreen(
             }
             error?.let { Snackbar(text = { Text(text = it) }, modifier = Modifier.padding(16.dp)) }
         }
-    })
+    }
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -82,10 +80,10 @@ fun Tabs(categoryTabs: List<CategoryTabUiModel>, onClick: (Int) -> Unit) {
                     Row(Modifier.padding(8.dp)) {
                         Text(text = categoryTab.name, maxLines = 1)
                         Spacer(modifier = Modifier.size(8.dp))
-                        CoilImage(
-                            data = categoryTab.icon,
-                            modifier = Modifier.size(16.dp).align(Alignment.CenterVertically)
-                        )
+//                        CoilImage(
+//                            data = categoryTab.icon,
+//                            modifier = Modifier.size(16.dp).align(Alignment.CenterVertically),
+//                        )
                     }
                 }
             }

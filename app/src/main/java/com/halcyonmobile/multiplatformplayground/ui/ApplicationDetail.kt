@@ -1,7 +1,9 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -78,7 +80,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
 fun Header(imageUrl: String, name: String, developer: String, category: String = "Update this") {
     Row {
         Surface(shape = RoundedCornerShape(8.dp)) {
-            CoilImage(data = imageUrl, modifier = Modifier.size(80.dp))
+//            CoilImage(data = imageUrl, modifier = Modifier.size(80.dp))
         }
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(text = name, style = MaterialTheme.typography.h6)

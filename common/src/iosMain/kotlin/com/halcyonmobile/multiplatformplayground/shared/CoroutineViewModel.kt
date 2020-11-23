@@ -5,6 +5,7 @@ import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
 import kotlin.coroutines.CoroutineContext
 
+// TODO revisit this implementation (IosMainDispatcher can also be replaced with Dispatchers.Main
 actual open class CoroutineViewModel {
     private val viewModelJob = SupervisorJob()
     actual val coroutineScope = CoroutineScope(IosMainDispatcher + viewModelJob)
