@@ -2,7 +2,6 @@ package com.halcyonmobile.multiplatformplayground
 
 import android.app.Application
 import com.halcyonmobile.multiplatformplayground.api.KtorApiImpl
-import com.halcyonmobile.multiplatformplayground.di.appModule
 import com.halcyonmobile.multiplatformplayground.di.getCommonModules
 import com.halcyonmobile.multiplatformplayground.di.viewModelModule
 import com.pandulapeter.beagle.Beagle
@@ -22,7 +21,7 @@ class AppPortfolioApp : Application() {
         setupDebugMenu()
         startKoin {
             androidContext(this@AppPortfolioApp)
-            modules(getCommonModules(this@AppPortfolioApp) + appModule + viewModelModule)
+            modules(getCommonModules(this@AppPortfolioApp) + viewModelModule)
         }
     }
 

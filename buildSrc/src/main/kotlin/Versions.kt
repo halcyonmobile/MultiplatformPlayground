@@ -1,10 +1,10 @@
 object Versions {
     const val KOTLIN_VERSION = "1.4.10"
-    const val COROUTINES_VERSION = "1.3.9-native-mt-2"
-    const val COMPOSE_VERSION = "1.0.0-alpha04"
+    const val COROUTINES_VERSION = "1.4.1-native-mt"
+    const val COMPOSE_COMPILER_VERSION = "1.0.0-alpha04"
     private const val KTOR_VERSION = "1.4.2"
     private const val SERIALIZATION_VERSION = "1.0.1"
-    private const val KOIN_VERSION = "2.2.0-rc-2"
+    private const val KOIN_VERSION = "2.2.1"
     private const val SQL_DELIGHT_VERSION = "1.4.3"
     private const val BEAGLE_VERSION = "2.0.5"
 
@@ -61,8 +61,9 @@ object Versions {
         const val MINIMUM_SDK_VERSION = 23
         const val BUILD_TOOLS_VERSION = "29.0.2"
         private const val NAVIGATION_VERSION = "2.2.0"
-        private const val COMPOSE_VERSION = "1.0.0-alpha04"
-        private const val COIL_COMPOSE_VERSION = "0.3.0"
+        private const val COMPOSE_VERSION = "1.0.0-alpha07"
+        private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha02"
+        private const val COIL_COMPOSE_VERSION = "0.3.3.1"
 
         // region Compose
         const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
@@ -76,6 +77,8 @@ object Versions {
         const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:$COMPOSE_VERSION"
         const val COMPOSE_THEME_ADAPTER =
             "com.google.android.material:compose-theme-adapter:$COMPOSE_VERSION"
+        const val NAVIGATION_COMPOSE =
+            "androidx.navigation:navigation-compose:$NAVIGATION_COMPOSE_VERSION"
         const val COIL_COMPOSE = "dev.chrisbanes.accompanist:accompanist-coil:$COIL_COMPOSE_VERSION"
 
         // endregion

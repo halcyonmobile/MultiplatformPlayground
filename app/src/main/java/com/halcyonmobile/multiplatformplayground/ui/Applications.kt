@@ -1,7 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
@@ -9,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import dev.chrisbanes.accompanist.coil.CoilImage
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
 fun Applications(applications: List<ApplicationUiModel>, onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
@@ -46,7 +45,7 @@ private fun Application(
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Surface(shape = RoundedCornerShape(8.dp)) {
-            CoilImage(data = uiModel.icon, modifier = Modifier.size(64.dp))
+//            CoilImage(data = uiModel.icon, modifier = Modifier.size(64.dp))
         }
         Column(modifier = Modifier.fillMaxSize().align(Alignment.Top).padding(start = 16.dp)) {
             Text(text = uiModel.name, style = MaterialTheme.typography.body1)
