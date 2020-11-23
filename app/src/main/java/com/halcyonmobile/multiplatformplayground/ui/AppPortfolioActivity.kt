@@ -16,7 +16,7 @@ class AppPortfolioActivity : AppCompatActivity() {
         setContent {
             MultiplatformPlaygroundTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    AppPortfolioApp(backDispatcher = onBackPressedDispatcher)
+                    MainScreen()
                 }
             }
         }
