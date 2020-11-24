@@ -45,7 +45,11 @@ kotlin {
                 implementation(Versions.Common.KTOR_CLIENT_JSON)
                 implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
 
-                implementation(Versions.Common.COROUTINES_CORE)
+                implementation(Versions.Common.COROUTINES_CORE){
+                    // Using strictly causes an issue, didn't investigate it yet
+                    // https://kotlinlang.slack.com/archives/C1CFAFJSK/p1603044902445900
+                    isForce = true
+                }
                 implementation(Versions.Common.SERIALIZATION)
                 // Debug menu
                 api(Versions.Common.BEAGLE_LOG)
@@ -77,11 +81,6 @@ kotlin {
             dependencies {
                 implementation(Versions.iOS.KTOR_CLIENT)
                 implementation(Versions.iOS.SQL_DELIGHT_DRIVER)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core") {
-                    version {
-                        strictly(Versions.COROUTINES_VERSION)
-                    }
-                }
             }
         }
     }
