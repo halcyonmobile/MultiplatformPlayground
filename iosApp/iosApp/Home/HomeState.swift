@@ -16,15 +16,19 @@ class HomeState: ObservableObject {
     @Published private(set) var selectedCategoryId: Int64 = 0
     
     init() {
-        ExtensionsKt.onEachHelper(homeViewModel.categoryTabs) { items in
-            if let categories = items as? Array<CategoryTabUiModel>{
-                self.categoryTabs = categories
-            }
-        }
-        ExtensionsKt.onEachHelper(homeViewModel.selectedCategory) { selectedCategory in
-            if let category = selectedCategory as? CategoryTabUiModel {
-                self.selectedCategoryId = category.id
+        homeViewModel.observeCategories{ items in
+            self.categoryTabs = items
+            
+            if let categoryId = items.first(where: { tab in
+                tab.isSelected
+            })?.id {
+                self.selectedCategoryId = categoryId
             }
         }
     }
+    
+    deinit {
+        homeViewModel.dispose()
+    }
 }
+

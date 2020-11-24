@@ -10,6 +10,8 @@ import com.halcyonmobile.multiplatformplayground.usecase.UpdateApplicationUseCas
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -33,6 +35,18 @@ class ApplicationDetailViewModel internal constructor(
                 is Result.Error -> _error.value = result.exception.message
             }
         }
+    }
+
+    /**
+     * Convenience method for iOS observing the [applicationDetailUiModel]
+     */
+    @Suppress("unused")
+    fun observeApplicationDetail(onChange: (ApplicationDetailUiModel) -> Unit) {
+        applicationDetailUiModel.onEach {
+            if (it != null) {
+                onChange(it)
+            }
+        }.launchIn(coroutineScope)
     }
 
     fun updateFavourite() {

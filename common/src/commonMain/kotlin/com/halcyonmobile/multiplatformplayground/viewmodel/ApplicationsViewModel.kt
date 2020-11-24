@@ -9,6 +9,8 @@ import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -34,7 +36,6 @@ class ApplicationsViewModel internal constructor(
                 is Result.Success -> {
                     _applications.value = result.value.map { it.toApplicationUiModel() }
                     pageOffset++
-                    log("Applications ${result.value}")
                 }
                 is Result.Error -> {
                     // TODO handle error
@@ -43,6 +44,16 @@ class ApplicationsViewModel internal constructor(
             }
             setLoading(false)
         }
+    }
+
+    /**
+     * Convenience method for iOS observing the [applications]
+     */
+    @Suppress("unused")
+    fun observeApplications(onChange: (List<ApplicationUiModel>) -> Unit) {
+        applications.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
     }
 
     private fun setLoading(isLoading: Boolean) {
