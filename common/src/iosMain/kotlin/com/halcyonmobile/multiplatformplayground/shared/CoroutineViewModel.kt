@@ -1,22 +1,29 @@
 package com.halcyonmobile.multiplatformplayground.shared
 
-import kotlinx.coroutines.*
-import platform.darwin.dispatch_async
-import platform.darwin.dispatch_get_main_queue
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
-// TODO revisit this implementation (IosMainDispatcher can also be replaced with Dispatchers.Main
-actual open class CoroutineViewModel {
-    private val viewModelJob = SupervisorJob()
-    actual val coroutineScope = CoroutineScope(IosMainDispatcher + viewModelJob)
 
-    protected actual open fun onCleared() {
-        viewModelJob.cancelChildren()
+actual abstract class CoroutineViewModel {
+    actual val coroutineScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
+    /**
+     * Dispose all running operations under the coroutineScope
+     */
+    actual fun dispose() {
+        coroutineScope.cancel()
+        onCleared()
     }
 
-    object IosMainDispatcher : CoroutineDispatcher() {
-        override fun dispatch(context: CoroutineContext, block: Runnable) {
-            dispatch_async(dispatch_get_main_queue()) { block.run() }
-        }
+    /**
+     * (Same as the Android Arch onCleared)
+     * This method will be called when this ViewModel is no longer used and will be destroyed.
+     * <p>
+     * It is useful when ViewModel observes some data and you need to clear this subscription to
+     * prevent a leak of this ViewModel.
+     */
+    protected actual open fun onCleared() {
     }
 }
