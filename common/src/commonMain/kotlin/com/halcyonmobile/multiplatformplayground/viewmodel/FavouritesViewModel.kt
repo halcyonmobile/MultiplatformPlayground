@@ -8,6 +8,8 @@ import com.halcyonmobile.multiplatformplayground.usecase.GetFavouritesUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -16,6 +18,16 @@ class FavouritesViewModel internal constructor(private val getFavourites: GetFav
 
     private val _favourites = MutableStateFlow(emptyList<ApplicationUiModel>())
     val favourites: StateFlow<List<ApplicationUiModel>> = _favourites
+
+    /**
+     * Convenience method for iOS observing the [favourites]
+     */
+    @Suppress("unused")
+    fun observeFavourites(onChange: (List<ApplicationUiModel>) -> Unit) {
+        favourites.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
 
     init {
         coroutineScope.launch {

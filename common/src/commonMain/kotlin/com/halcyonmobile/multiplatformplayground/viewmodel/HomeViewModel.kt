@@ -1,8 +1,8 @@
 package com.halcyonmobile.multiplatformplayground.viewmodel
 
 import com.halcyonmobile.multiplatformplayground.MR
-import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
@@ -44,15 +44,23 @@ class HomeViewModel internal constructor(
             when (val result = getCategories()) {
                 is Result.Success -> {
                     _categories.value = result.value
-                    log("Categories: ${result.value}")
                 }
                 is Result.Error -> {
                     _error.value = result.exception.message
-                    log("Error: $error")
                 }
             }
             _isLoading.value = false
         }
+    }
+
+    /**
+     * Convenience method for iOS observing the [categoryTabs]
+     */
+    @Suppress("unused")
+    fun observeCategories(onChange: (List<CategoryTabUiModel>) -> Unit) {
+        categoryTabs.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
     }
 
     fun fetch() = coroutineScope.launch {

@@ -2,7 +2,9 @@ package com.halcyonmobile.multiplatformplayground.shared
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.halcyonmobile.multiplatformplayground.shared.util.log
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.isActive
 
 actual abstract class CoroutineViewModel : ViewModel() {
 
