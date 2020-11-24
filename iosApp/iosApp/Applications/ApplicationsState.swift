@@ -22,11 +22,13 @@ class ApplicationsState: ObservableObject{
         viewModel = ServiceLocator().getApplicationsViewModel(categoryId: categoryId)
         
         // TODO handle other types like loading
-        ExtensionsKt.onEachHelper(viewModel.applications) { uiItems in
-            if let items = uiItems as? Array<ApplicationUiModel>{
-                self.applications = items.filter { $0 is ApplicationUiModel.App}.map { $0 as! ApplicationUiModel.App}
-                self.isLoading = items.contains{ $0 is ApplicationUiModel.Loading}
-            }
+        viewModel.observeApplications { items in
+            self.applications = items.filter { $0 is ApplicationUiModel.App}.map { $0 as! ApplicationUiModel.App}
+            self.isLoading = items.contains{ $0 is ApplicationUiModel.Loading}
         }
+    }
+    
+    deinit {
+        viewModel.dispose()
     }
 }
