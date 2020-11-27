@@ -7,14 +7,12 @@ import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 import com.halcyonmobile.multiplatformplayground.model.ui.toCategoryTabUiModel
 import kotlinx.coroutines.flow.*
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModel internal constructor(
     private val getCategories: GetCategoriesUseCase,
     private val fetchCategories: FetchCategoriesUseCase
