@@ -6,22 +6,35 @@ import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ApplicationsViewModel internal constructor(
     private val categoryId: Long,
     private val getApplications: GetApplicationsUseCase
 ) : CoroutineViewModel() {
 
-    private val _applications =
+    private val _items =
         MutableStateFlow<List<ApplicationUiModel>>(listOf(ApplicationUiModel.Loading))
-    val applications: StateFlow<List<ApplicationUiModel>> = _applications
+    private val _state = MutableStateFlow(State.NORMAL)
+    private val _event = MutableSharedFlow<Event>()
+
+    /**
+     * Represents all the UI items that should be presented
+     */
+    val items: StateFlow<List<ApplicationUiModel>> = _items
+
+    /**
+     * Represents the current state of the view
+     */
+    val state: StateFlow<State>
+        get() = _state
+
+    /**
+     * Emits the possible events, that can happen during data retrieval
+     */
+    val event: SharedFlow<Event>
+        get() = _event
 
     private var pageOffset = 0
 
@@ -29,17 +42,23 @@ class ApplicationsViewModel internal constructor(
         load()
     }
 
+    /**
+     * Load the next page of items
+     */
     fun load() {
         coroutineScope.launch {
             setLoading(true)
-            when (val result = getApplications(categoryId, pageOffset, PER_PAGE)) {
+            val result = getApplications(categoryId, pageOffset, PER_PAGE)
+            setLoading(false)
+            _state.value = when (result) {
                 is Result.Success -> {
-                    _applications.value = result.value.map { it.toApplicationUiModel() }
+                    _items.value = _items.value + result.value.map { it.toApplicationUiModel() }
                     pageOffset++
+                    if (_items.value.isEmpty()) State.EMPTY else State.NORMAL
                 }
                 is Result.Error -> {
-                    // TODO handle error
-                    log("Applications error ${result.exception}")
+                    _event.emit(Event.ERROR)
+                    if (_items.value.isEmpty()) State.ERROR else State.NORMAL
                 }
             }
             setLoading(false)
@@ -47,24 +66,63 @@ class ApplicationsViewModel internal constructor(
     }
 
     /**
-     * Convenience method for iOS observing the [applications]
+     * Refresh the current list of items
+     */
+    fun refresh() {
+        pageOffset = 0
+        _items.value = emptyList()
+        load()
+    }
+
+    /**
+     * Convenience method for iOS observing the [items]
      */
     @Suppress("unused")
-    fun observeApplications(onChange: (List<ApplicationUiModel>) -> Unit) {
-        applications.onEach {
+    fun observeItems(onChange: (List<ApplicationUiModel>) -> Unit) {
+        items.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
+
+    /**
+     * Convenience method for iOS observing the [state]
+     */
+    @Suppress("unused")
+    fun observeState(onChange: (State) -> Unit) {
+        state.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
+
+    /**
+     * Convenience method for iOS observing the [event]
+     */
+    @Suppress("unused")
+    fun observeEvent(onChange: (Event) -> Unit) {
+        event.onEach {
             onChange(it)
         }.launchIn(coroutineScope)
     }
 
     private fun setLoading(isLoading: Boolean) {
-        _applications.value = if (isLoading) {
-            _applications.value + ApplicationUiModel.Loading
+        _items.value = if (isLoading) {
+            _items.value + ApplicationUiModel.Loading
         } else {
-            _applications.value - ApplicationUiModel.Loading
+            _items.value.filterIsInstance<ApplicationUiModel.App>()
         }
     }
 
     companion object {
         const val PER_PAGE = 10
+    }
+
+    enum class State {
+        EMPTY,
+        ERROR,
+        NORMAL
+    }
+
+    enum class Event {
+        ERROR
     }
 }

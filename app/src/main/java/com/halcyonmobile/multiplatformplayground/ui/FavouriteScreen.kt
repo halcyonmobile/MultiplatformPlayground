@@ -1,9 +1,9 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,6 +29,6 @@ fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
             style = MaterialTheme.typography.h4.copy(fontWeight = FontWeight.SemiBold),
             modifier = Modifier.padding(16.dp)
         )
-        Applications(applications = favourites, onApplicationClicked = onApplicationClicked)
+        Applications(items = favourites, onApplicationClicked = onApplicationClicked)
     }
 }
