@@ -1,12 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,7 +8,9 @@ import androidx.compose.runtime.getValue
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
@@ -65,9 +61,32 @@ private fun ApplicationsPerCategory(
 ) {
     // TODO fix same viewModel instance issue https://github.com/InsertKoinIO/koin/issues/924
     val viewModel = getViewModel<ApplicationsViewModel> { parametersOf(categoryId) }
-    val applications by viewModel.applications.collectAsState()
+    val items by viewModel.items.collectAsState()
+    val state by viewModel.state.collectAsState()
 
-    Applications(applications = applications, onApplicationClicked = onApplicationClicked)
+    when (state) {
+        ApplicationsViewModel.State.EMPTY -> Box(Modifier.fillMaxSize().padding(16.dp)) {
+            Text(
+                text = stringResource(id = R.string.applications_empty_message),
+                modifier = Modifier.align(Alignment.Center),
+                style = MaterialTheme.typography.h6,
+                textAlign = TextAlign.Center
+            )
+        }
+        ApplicationsViewModel.State.ERROR -> Box(Modifier.fillMaxSize().padding(16.dp)) {
+            Text(
+                text = stringResource(id = R.string.general_error),
+                modifier = Modifier.align(Alignment.Center),
+                style = MaterialTheme.typography.h6,
+                textAlign = TextAlign.Center
+            )
+        }
+        ApplicationsViewModel.State.NORMAL -> Applications(
+            items = items,
+            onApplicationClicked = onApplicationClicked
+        )
+
+    }
 }
 
 @Composable

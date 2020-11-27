@@ -5,19 +5,28 @@ import com.halcyonmobile.multiplatformplayground.model.ui.toApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.usecase.GetFavouritesUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class FavouritesViewModel internal constructor(private val getFavourites: GetFavouritesUseCase) :
     CoroutineViewModel() {
 
     private val _favourites = MutableStateFlow(emptyList<ApplicationUiModel>())
+    private val _state = MutableStateFlow(State.LOADING)
+
+    /**
+     * Represents the favorite items
+     */
     val favourites: StateFlow<List<ApplicationUiModel>> = _favourites
+
+    /**
+     * Represents the current state of the view
+     */
+    val state: StateFlow<State>
+        get() = _state
 
     /**
      * Convenience method for iOS observing the [favourites]
@@ -29,15 +38,40 @@ class FavouritesViewModel internal constructor(private val getFavourites: GetFav
         }.launchIn(coroutineScope)
     }
 
+    /**
+     * Convenience method for iOS observing the [state]
+     */
+    @Suppress("unused")
+    fun observeState(onChange: (State) -> Unit) {
+        state.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
+
     init {
+        loadFavourites()
+    }
+
+    /**
+     * Load the favourite applications
+     */
+    fun loadFavourites() {
+        _state.value = State.LOADING
+
         coroutineScope.launch {
-            when (val result = getFavourites()) {
-                is Result.Success -> _favourites.value =
-                    result.value.map { it.toApplicationUiModel() }
-                is Result.Error -> {
-                    // TODO error handling
+            _state.value = when (val result = getFavourites()) {
+                is Result.Success -> {
+                    _favourites.value = result.value.map { it.toApplicationUiModel() }
+                    State.NORMAL
                 }
+                is Result.Error -> State.ERROR
             }
         }
+    }
+
+    enum class State {
+        LOADING,
+        NORMAL,
+        ERROR
     }
 }

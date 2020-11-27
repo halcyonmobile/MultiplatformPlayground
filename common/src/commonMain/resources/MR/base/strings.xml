@@ -3,6 +3,7 @@
     <!--  General  -->
     <string name="app_name">AppPortfolio</string>
     <string name="retry">Retry</string>
+    <string name="general_error">Oops something went wrong..</string>
     <!--  Bottom Navigation  -->
     <string name="home">Home</string>
     <string name="favourites">Favourites</string>
