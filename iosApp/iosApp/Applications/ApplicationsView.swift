@@ -20,23 +20,35 @@ struct ApplicationsView: View {
     }
     
     var body: some View {
+        // TODO add loading to last item of applications
         if(state.isLoading){
             VStack{
                 Spacer()
                 ProgressView()
                 Spacer()
             }
-        }else if state.applications.count > 0 {
-            List(state.applications, id: \.id){ application in
-                ApplicationView(application: application)
+        }else {
+            switch state.state {
+            case ApplicationsViewModel.State.error:
+                VStack{
+                    Spacer()
+                    Text(LocalizationsKt.generalError.localized())
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+            case ApplicationsViewModel.State.empty:
+                VStack{
+                    Spacer()
+                    Text(LocalizationsKt.applicationsEmptyMessage.localized())
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+            default:
+                List(state.applications, id: \.id){ application in
+                    ApplicationView(application: application)
+                }
             }
-        }else{
-            VStack{
-                Spacer()
-                Text(LocalizationsKt.applicationsEmptyMessage.localized())
-                    .multilineTextAlignment(.center)
-                Spacer()
-            }
+           
         }
     }
 }

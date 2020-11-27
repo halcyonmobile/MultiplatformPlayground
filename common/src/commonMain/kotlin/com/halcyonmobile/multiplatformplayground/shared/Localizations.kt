@@ -6,6 +6,7 @@ import com.halcyonmobile.multiplatformplayground.MR
 
 val appName = StringDesc.Resource(MR.strings.app_name)
 val retry = StringDesc.Resource(MR.strings.retry)
+val generalError = StringDesc.Resource(MR.strings.general_error)
 
 //    Bottom Navigation
 val home = StringDesc.Resource(MR.strings.home)
