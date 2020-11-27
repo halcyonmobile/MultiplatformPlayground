@@ -18,13 +18,16 @@ import androidx.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationDetailViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
     val viewModel = getViewModel<ApplicationDetailViewModel> { parametersOf(applicationId) }
-    val applicationWithDetail by viewModel.applicationDetailUiModel.collectAsState(null)
+    val applicationWithDetail by viewModel.applicationDetailUiModel.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     Scaffold(
         topBar = {
@@ -37,9 +40,25 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                     )
                 },
             )
-        },
-        bodyContent = {
-            applicationWithDetail?.let {
+        }, floatingActionButton = {
+            val iconRes = if (applicationWithDetail?.favourite == true)
+                R.drawable.ic_favourites else R.drawable.ic_favourites_empty
+
+            if (state == ApplicationDetailViewModel.State.NORMAL) {
+                FloatingActionButton(
+                    onClick = viewModel::updateFavourite,
+                    icon = { Icon(asset = vectorResource(id = iconRes)) },
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }) {
+        when (state) {
+            ApplicationDetailViewModel.State.LOADING -> Box(
+                Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
+            ) {
+                CircularProgressIndicator()
+            }
+            ApplicationDetailViewModel.State.NORMAL -> applicationWithDetail?.let {
                 ScrollableColumn(modifier = Modifier.padding(16.dp)) {
                     Header(
                         imageUrl = it.icon,
@@ -48,7 +67,8 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                     )
                     Row(
                         horizontalArrangement = Arrangement.SpaceEvenly,
-                        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(top = 16.dp)
+                        modifier = Modifier.fillMaxWidth().wrapContentHeight()
+                            .padding(top = 16.dp)
                     ) {
                         Property(
                             name = stringResource(id = R.string.rating),
@@ -65,15 +85,20 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                     // TODO add screenshots
                 }
             }
-        }, floatingActionButton = {
-            val iconRes = if (applicationWithDetail?.favourite == true)
-                R.drawable.ic_favourites else R.drawable.ic_favourites_empty
-            FloatingActionButton(
-                onClick = viewModel::updateFavourite,
-                icon = { Icon(asset = vectorResource(id = iconRes)) },
-                modifier = Modifier.padding(16.dp)
-            )
-        })
+            ApplicationDetailViewModel.State.ERROR -> Column(
+                Modifier.wrapContentSize(Alignment.Center).padding(16.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.general_error),
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    style = MaterialTheme.typography.h6
+                )
+                Button(onClick = { viewModel.loadDetail() }) {
+                    Text(text = stringResource(id = R.string.retry))
+                }
+            }
+        }
+    }
 }
 
 @Composable
