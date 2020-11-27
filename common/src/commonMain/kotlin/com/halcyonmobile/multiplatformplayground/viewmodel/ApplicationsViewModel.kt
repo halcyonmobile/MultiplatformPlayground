@@ -20,7 +20,7 @@ class ApplicationsViewModel internal constructor(
     private val _event = MutableSharedFlow<Event>()
 
     /**
-     * Represents all the UI items that should be presented
+     * Represents all the UI items
      */
     val items: StateFlow<List<ApplicationUiModel>> = _items
 
