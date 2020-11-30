@@ -14,13 +14,13 @@ import kotlinx.coroutines.launch
 class FavouritesViewModel internal constructor(private val getFavourites: GetFavouritesUseCase) :
     CoroutineViewModel() {
 
-    private val _favourites = MutableStateFlow(emptyList<ApplicationUiModel>())
+    private val _favourites = MutableStateFlow(emptyList<ApplicationUiModel.App>())
     private val _state = MutableStateFlow(State.LOADING)
 
     /**
      * Represents the favorite items
      */
-    val favourites: StateFlow<List<ApplicationUiModel>> = _favourites
+    val favourites: StateFlow<List<ApplicationUiModel.App>> = _favourites
 
     /**
      * Represents the current state of the view
@@ -32,7 +32,7 @@ class FavouritesViewModel internal constructor(private val getFavourites: GetFav
      * Convenience method for iOS observing the [favourites]
      */
     @Suppress("unused")
-    fun observeFavourites(onChange: (List<ApplicationUiModel>) -> Unit) {
+    fun observeFavourites(onChange: (List<ApplicationUiModel.App>) -> Unit) {
         favourites.onEach {
             onChange(it)
         }.launchIn(coroutineScope)
@@ -61,7 +61,7 @@ class FavouritesViewModel internal constructor(private val getFavourites: GetFav
         coroutineScope.launch {
             _state.value = when (val result = getFavourites()) {
                 is Result.Success -> {
-                    _favourites.value = result.value.map { it.toApplicationUiModel() }
+                    _favourites.value = result.value.mapNotNull { it.toApplicationUiModel() as? ApplicationUiModel.App }
                     State.NORMAL
                 }
                 is Result.Error -> State.ERROR
