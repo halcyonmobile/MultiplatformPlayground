@@ -10,11 +10,13 @@ struct ContentView: View {
                         Image("ic_home_outline")
                         Text(LocalizationsKt.home.localized())
                     }
-                FavoritesView()
-                    .tabItem{
-                        Image("ic_favorite_outline")
-                        Text(LocalizationsKt.favourites.localized())
-                    }
+                NavigationView{
+                    FavoritesView()
+                }
+                .tabItem{
+                    Image("ic_favorite_outline")
+                    Text(LocalizationsKt.favourites.localized())
+                }
                 SettingsView()
                     .tabItem {
                         Image("ic_settings_outline")
