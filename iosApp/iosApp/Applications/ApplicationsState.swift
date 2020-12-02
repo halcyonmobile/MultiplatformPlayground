@@ -20,7 +20,7 @@ class ApplicationsState: ObservableObject{
     
     init(categoryId: Int64) {
         self.categoryId = categoryId
-        viewModel = ServiceLocator().getApplicationsViewModel(categoryId: categoryId)
+        viewModel = ApplicationsViewModel(categoryId: categoryId)
         
         // TODO handle other types like loading
         viewModel.observeItems { items in

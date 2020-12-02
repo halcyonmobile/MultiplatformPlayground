@@ -12,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,12 +28,13 @@ import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiMod
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
 import com.halcyonmobile.multiplatformplayground.ui.theme.lightGray
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
-import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
 fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
-    val viewModel = getViewModel<UploadApplicationViewModel> { parametersOf(initialCategoryId) }
+    val viewModel = remember(initialCategoryId) {
+        UploadApplicationViewModel(initialCategoryId)
+    }
     val uploadApplicationUiModel by viewModel.uploadApplicationUiModel.collectAsState(
         UploadApplicationUiModel(categoryId = initialCategoryId)
     )

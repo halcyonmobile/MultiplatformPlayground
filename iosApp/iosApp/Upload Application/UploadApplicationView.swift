@@ -17,7 +17,7 @@ struct UploadApplicationView: View {
     
     init(categoryId: Int64) {
         self.categoryId = categoryId
-        viewModel = ServiceLocator().getUploadApplicationViewModel(categoryId: categoryId)
+        viewModel = UploadApplicationViewModel(initialCategoryId: categoryId)
     }
     
     @State private var applicationName = ""
