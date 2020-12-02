@@ -12,11 +12,13 @@ import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 import com.halcyonmobile.multiplatformplayground.model.ui.toCategoryTabUiModel
 import kotlinx.coroutines.flow.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class HomeViewModel internal constructor(
-    private val getCategories: GetCategoriesUseCase,
-    private val fetchCategories: FetchCategoriesUseCase
-) : CoroutineViewModel() {
+class HomeViewModel : CoroutineViewModel(), KoinComponent {
+
+    private val getCategories: GetCategoriesUseCase by inject()
+    private val fetchCategories: FetchCategoriesUseCase by inject()
 
     private val _categories = MutableStateFlow(emptyList<Category>())
     private val selectedTabIndex = MutableStateFlow(0)

@@ -5,6 +5,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,15 +19,15 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun HomeScreen(
     onApplicationClicked: (ApplicationUiModel.App) -> Unit,
     onUploadApplication: (categoryId: Long) -> Unit
 ) {
-    val viewModel = getViewModel<HomeViewModel>()
+    val viewModel = remember {
+        HomeViewModel()
+    }
     val categoryTabs by viewModel.categoryTabs.collectAsState(emptyList())
     val selectedCategory by viewModel.selectedCategory.collectAsState(null)
     val error by viewModel.error.collectAsState(null)
@@ -60,7 +61,9 @@ private fun ApplicationsPerCategory(
     onApplicationClicked: (ApplicationUiModel.App) -> Unit
 ) {
     // TODO fix same viewModel instance issue https://github.com/InsertKoinIO/koin/issues/924
-    val viewModel = getViewModel<ApplicationsViewModel> { parametersOf(categoryId) }
+    val viewModel = remember(categoryId) {
+        ApplicationsViewModel(categoryId)
+    }
     val items by viewModel.items.collectAsState()
     val state by viewModel.state.collectAsState()
 

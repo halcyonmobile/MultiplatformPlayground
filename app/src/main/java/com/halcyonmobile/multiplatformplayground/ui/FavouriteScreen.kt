@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,12 +21,13 @@ import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
-    val viewModel = getViewModel<FavouritesViewModel>()
+    val viewModel = remember {
+        FavouritesViewModel()
+    }
     val favourites by viewModel.favourites.collectAsState()
     val state by viewModel.state.collectAsState()
 

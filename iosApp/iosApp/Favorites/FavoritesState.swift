@@ -11,7 +11,7 @@ import common
 
 class FavoritesState: ObservableObject{
     
-    let viewModel = ServiceLocator().getFavouritesViewModel()
+    let viewModel = FavouritesViewModel()
     @Published private(set) var favourites = [ApplicationUiModel.App]()
     @Published private(set) var state: FavouritesViewModel.State = FavouritesViewModel.State.normal
     

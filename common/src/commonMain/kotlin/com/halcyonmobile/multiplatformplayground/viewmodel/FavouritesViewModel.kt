@@ -10,9 +10,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class FavouritesViewModel internal constructor(private val getFavourites: GetFavouritesUseCase) :
-    CoroutineViewModel() {
+class FavouritesViewModel :
+    CoroutineViewModel(), KoinComponent {
+
+    private val getFavourites: GetFavouritesUseCase by inject()
 
     private val _favourites = MutableStateFlow(emptyList<ApplicationUiModel.App>())
     private val _state = MutableStateFlow(State.LOADING)
@@ -61,7 +65,8 @@ class FavouritesViewModel internal constructor(private val getFavourites: GetFav
         coroutineScope.launch {
             _state.value = when (val result = getFavourites()) {
                 is Result.Success -> {
-                    _favourites.value = result.value.mapNotNull { it.toApplicationUiModel() as? ApplicationUiModel.App }
+                    _favourites.value =
+                        result.value.mapNotNull { it.toApplicationUiModel() as? ApplicationUiModel.App }
                     State.NORMAL
                 }
                 is Result.Error -> State.ERROR

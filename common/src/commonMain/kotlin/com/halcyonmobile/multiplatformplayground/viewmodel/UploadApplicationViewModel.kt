@@ -13,13 +13,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-@OptIn(ExperimentalCoroutinesApi::class)
-class UploadApplicationViewModel internal constructor(
+class UploadApplicationViewModel(
     initialCategoryId: Long,
-    private val getCategory: GetCategoryUseCase,
-    private val createApplication: CreateApplicationUseCase
-) : CoroutineViewModel(), UploadApplicationUiModelChangeListener {
+) : CoroutineViewModel(), KoinComponent, UploadApplicationUiModelChangeListener {
+
+    private val getCategory: GetCategoryUseCase by inject()
+    private val createApplication: CreateApplicationUseCase by inject()
 
     private val selectedCategoryId = MutableStateFlow(initialCategoryId)
 
@@ -51,7 +53,6 @@ class UploadApplicationViewModel internal constructor(
 
     override fun onNameChanged(name: String) {
         _uploadApplicationUiModel.value = _uploadApplicationUiModel.value.copy(name = name)
-        log("nrobi $name")
     }
 
     override fun onDeveloperChanged(developer: String) {

@@ -11,7 +11,7 @@ import common
 
 class HomeState: ObservableObject {
     
-    let homeViewModel = ServiceLocator().getHomeViewModel()
+    let homeViewModel = HomeViewModel()
     @Published private(set) var categoryTabs = [CategoryTabUiModel]()
     @Published private(set) var selectedCategoryId: Int64 = 0
     

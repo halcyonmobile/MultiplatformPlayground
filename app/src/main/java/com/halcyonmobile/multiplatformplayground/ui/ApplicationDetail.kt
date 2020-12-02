@@ -14,18 +14,18 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.remember
 import androidx.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationDetailViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.koin.androidx.compose.getViewModel
-import org.koin.core.parameter.parametersOf
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
-    val viewModel = getViewModel<ApplicationDetailViewModel> { parametersOf(applicationId) }
+    val viewModel =
+        remember(applicationId) { ApplicationDetailViewModel(applicationId) }
     val applicationWithDetail by viewModel.applicationDetailUiModel.collectAsState()
     val state by viewModel.state.collectAsState()
 

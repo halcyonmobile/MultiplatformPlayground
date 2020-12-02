@@ -9,12 +9,15 @@ import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationDetailUse
 import com.halcyonmobile.multiplatformplayground.usecase.UpdateApplicationUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class ApplicationDetailViewModel internal constructor(
+class ApplicationDetailViewModel(
     private val applicationId: Long,
-    private val getApplicationDetail: GetApplicationDetailUseCase,
-    private val updateApplication: UpdateApplicationUseCase
-) : CoroutineViewModel() {
+) : CoroutineViewModel(), KoinComponent {
+
+    private val getApplicationDetail: GetApplicationDetailUseCase by inject()
+    private val updateApplication: UpdateApplicationUseCase by inject()
 
     private val _applicationDetailUiModel = MutableStateFlow<ApplicationDetailUiModel?>(null)
     private val _state = MutableStateFlow(State.LOADING)
