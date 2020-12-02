@@ -8,11 +8,14 @@ import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class ApplicationsViewModel internal constructor(
+class ApplicationsViewModel(
     private val categoryId: Long,
-    private val getApplications: GetApplicationsUseCase
-) : CoroutineViewModel() {
+) : CoroutineViewModel(), KoinComponent {
+
+    private val getApplications: GetApplicationsUseCase by inject()
 
     private val _items =
         MutableStateFlow<List<ApplicationUiModel>>(listOf(ApplicationUiModel.Loading))

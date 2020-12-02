@@ -1,9 +1,9 @@
 package com.halcyonmobile.multiplatformplayground
 
 import android.app.Application
+import android.content.Context
 import com.halcyonmobile.multiplatformplayground.api.KtorApiImpl
-import com.halcyonmobile.multiplatformplayground.di.getCommonModules
-import com.halcyonmobile.multiplatformplayground.di.viewModelModule
+import com.halcyonmobile.multiplatformplayground.di.initKoin
 import com.pandulapeter.beagle.Beagle
 import com.pandulapeter.beagle.common.configuration.Appearance
 import com.pandulapeter.beagle.common.configuration.Behavior
@@ -11,7 +11,7 @@ import com.pandulapeter.beagle.log.BeagleLogger
 import com.pandulapeter.beagle.logKtor.BeagleKtorLogger
 import com.pandulapeter.beagle.modules.*
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import org.koin.dsl.module
 
 @Suppress("unused")
 class AppPortfolioApp : Application() {
@@ -19,9 +19,8 @@ class AppPortfolioApp : Application() {
     override fun onCreate() {
         super.onCreate()
         setupDebugMenu()
-        startKoin {
+        initKoin {
             androidContext(this@AppPortfolioApp)
-            modules(getCommonModules(this@AppPortfolioApp) + viewModelModule)
         }
     }
 

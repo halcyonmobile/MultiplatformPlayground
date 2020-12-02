@@ -1,11 +1,11 @@
 object Versions {
     const val KOTLIN_VERSION = "1.4.10"
-    const val COROUTINES_VERSION = "1.4.1-native-mt"
+    const val COROUTINES_VERSION = "1.4.2-native-mt"
     const val COMPOSE_COMPILER_VERSION = "1.0.0-alpha04"
     private const val KTOR_VERSION = "1.4.2"
     private const val SERIALIZATION_VERSION = "1.0.1"
-    private const val KOIN_VERSION = "2.2.1"
-    private const val SQL_DELIGHT_VERSION = "1.4.3"
+    private const val KOIN_VERSION = "3.0.0-alpha-4"
+    private const val SQL_DELIGHT_VERSION = "1.4.4"
     private const val BEAGLE_VERSION = "2.0.5"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
@@ -33,6 +33,7 @@ object Versions {
         const val BEAGLE_LOG_KTOR = "com.github.pandulapeter.beagle:log-ktor:$BEAGLE_VERSION"
         const val MOKO_RESOURCES = "dev.icerock.moko:resources:$MOKO_RESOURCES_VERSION"
 
+        const val KOIN_CORE = "org.koin:koin-core:$KOIN_VERSION"
     }
 
     object Jvm {
@@ -98,7 +99,6 @@ object Versions {
         const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
 
         const val KOIN_ANDROID_VIEWMODEL = "org.koin:koin-android-viewmodel:$KOIN_VERSION"
-        const val KOIN_COMPOSE = "org.koin:koin-androidx-compose:$KOIN_VERSION"
 
         const val NAVIGATON_FRAGMENT =
             "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"

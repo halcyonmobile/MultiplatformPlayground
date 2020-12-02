@@ -1,8 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.di
 
-import android.content.Context
 import com.halcyonmobile.multiplatformplayground.api.*
-import com.halcyonmobile.multiplatformplayground.api.db.DatabaseFactory
+import com.halcyonmobile.multiplatformplayground.db.MultiplatformDatabase
 import com.halcyonmobile.multiplatformplayground.repository.FavouritesRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
@@ -10,9 +9,12 @@ import com.halcyonmobile.multiplatformplayground.repository.category.CategoryLoc
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.usecase.*
+import org.koin.core.context.startKoin
+import org.koin.core.module.Module
+import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-private fun getApiModule(context: Context) = module {
+private val apiModule = module {
     single<KtorApi> { KtorApiImpl }
 
     factory { ApplicationApi(get()) }
@@ -20,10 +22,10 @@ private fun getApiModule(context: Context) = module {
     factory { ScreenshotApi(get()) }
     factory { FavouritesApi(get()) }
 
-    single { DatabaseFactory.getInstance(context).create() }
+    single { MultiplatformDatabase(get()) }
 }
 
-private fun getRepositoryModule() = module {
+private val repositoryModule = module {
     factory { ApplicationRemoteSource(get()) }
     single { ApplicationRepository(get()) }
 
@@ -34,7 +36,7 @@ private fun getRepositoryModule() = module {
     factory { FavouritesRemoteSource(get()) }
 }
 
-private fun getUseCaseModule() = module {
+private val useCaseModule = module {
     factory { GetCategoriesUseCase(get()) }
     factory { GetCategoryUseCase(get()) }
     factory { FetchCategoriesUseCase(get()) }
@@ -45,5 +47,12 @@ private fun getUseCaseModule() = module {
     factory { CreateApplicationUseCase(get()) }
 }
 
-fun getCommonModules(context: Context) =
-    listOf(getApiModule(context), getRepositoryModule(), getUseCaseModule())
+private val commonModules =
+    listOf(apiModule, repositoryModule, useCaseModule)
+
+fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
+    appDeclaration()
+    modules(commonModules + platformModule)
+}
+
+fun initKoin() = initKoin{}
