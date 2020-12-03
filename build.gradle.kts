@@ -13,7 +13,6 @@ buildscript {
         classpath("com.android.tools.build:gradle:4.2.0-alpha16")
         classpath(Versions.KOTLIN_GRADLE_PLUGIN)
         classpath(Versions.KOTLIN_SERIALIZATION_PLUGIN)
-        classpath(Versions.Android.NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN)
         classpath(Versions.Common.MOKO_RESOURCES_GRADLE_PLUGIN)
         classpath(Versions.SQL_DELIGHT_GRADLE_PLUGIN)
         // NOTE: Do not place your application dependencies here; they belong
