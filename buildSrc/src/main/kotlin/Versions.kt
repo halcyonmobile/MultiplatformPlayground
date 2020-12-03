@@ -1,7 +1,7 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.4.10"
+    const val KOTLIN_VERSION = "1.4.20"
     const val COROUTINES_VERSION = "1.4.2-native-mt"
-    const val COMPOSE_COMPILER_VERSION = "1.0.0-alpha04"
+    const val COMPOSE_COMPILER_VERSION = "1.0.0-alpha08"
     private const val KTOR_VERSION = "1.4.2"
     private const val SERIALIZATION_VERSION = "1.0.1"
     private const val KOIN_VERSION = "3.0.0-alpha-4"
@@ -61,14 +61,13 @@ object Versions {
         const val SDK_VERSION = 29
         const val MINIMUM_SDK_VERSION = 23
         const val BUILD_TOOLS_VERSION = "29.0.2"
-        private const val NAVIGATION_VERSION = "2.2.0"
-        private const val COMPOSE_VERSION = "1.0.0-alpha07"
-        private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha02"
-        private const val COIL_COMPOSE_VERSION = "0.3.3.1"
+        private const val COMPOSE_VERSION = "1.0.0-alpha08"
+        private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha03"
+        private const val COIL_COMPOSE_VERSION = "0.4.0"
 
         // region Compose
         const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
-        const val COMPOSE_TOOLING = "androidx.ui:ui-tooling:$COMPOSE_VERSION"
+        const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
         const val COMPOSE_FOUNDATION = "androidx.compose.foundation:foundation:$COMPOSE_VERSION"
         const val COMPOSE_MATERIAL_DESIGN = "androidx.compose.material:material:$COMPOSE_VERSION"
         const val COMPOSE_MD_ICONS_CORE =
@@ -83,9 +82,6 @@ object Versions {
         const val COIL_COMPOSE = "dev.chrisbanes.accompanist:accompanist-coil:$COIL_COMPOSE_VERSION"
 
         // endregion
-        const val NAVIGATION_SAFE_ARGS_GRADLE_PLUGIN =
-            "androidx.navigation:navigation-safe-args-gradle-plugin:$NAVIGATION_VERSION"
-
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
         const val APP_COMPAT = "androidx.appcompat:appcompat:1.3.0-alpha02"
         const val KOTLIN_EXTENSIONS = "androidx.core:core-ktx:1.5.0-alpha03"
@@ -99,10 +95,6 @@ object Versions {
         const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
 
         const val KOIN_ANDROID_VIEWMODEL = "org.koin:koin-android-viewmodel:$KOIN_VERSION"
-
-        const val NAVIGATON_FRAGMENT =
-            "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
-        const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
 
         const val KTOR_CLIENT = "io.ktor:ktor-client-android:$KTOR_VERSION"
 

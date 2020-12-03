@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
@@ -46,7 +45,7 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
                 title = {},
                 navigationIcon = {
                     Icon(
-                        asset = vectorResource(id = R.drawable.ic_back),
+                        imageVector = vectorResource(id = R.drawable.ic_back),
                         modifier = Modifier.clickable(onClick = upPress)
                     )
                 },
@@ -60,7 +59,7 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
                     backgroundColor = lightGray
                 ) {
                     Image(
-                        asset = vectorResource(id = R.drawable.ic_add_image),
+                        imageVector = vectorResource(id = R.drawable.ic_add_image),
                         colorFilter = ColorFilter.tint(Color.DarkGray),
                         modifier = Modifier.wrapContentSize()
                     )
@@ -87,7 +86,7 @@ private fun Screenshots(screenshots: List<Uri>) {
                 border = BorderStroke(1.dp, Color.LightGray)
             ) {
                 Image(
-                    asset = vectorResource(id = R.drawable.ic_add_image),
+                    imageVector = vectorResource(id = R.drawable.ic_add_image),
                     colorFilter = ColorFilter.tint(Color.DarkGray),
                     modifier = Modifier.wrapContentSize()
                 )
@@ -114,7 +113,7 @@ private fun ApplicationDetails(
             placeholder = { Text(text = stringResource(id = R.string.application_name)) },
             leadingIcon = {
                 Image(
-                    asset = vectorResource(id = R.drawable.ic_label),
+                    imageVector = vectorResource(id = R.drawable.ic_label),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                 )
             })
@@ -125,7 +124,7 @@ private fun ApplicationDetails(
             placeholder = { Text(text = stringResource(id = R.string.developer)) },
             leadingIcon = {
                 Image(
-                    asset = vectorResource(id = R.drawable.ic_developer),
+                    imageVector = vectorResource(id = R.drawable.ic_developer),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                 )
             })
@@ -136,7 +135,7 @@ private fun ApplicationDetails(
             placeholder = { Text(text = stringResource(id = R.string.description)) },
             leadingIcon = {
                 Image(
-                    asset = vectorResource(id = R.drawable.ic_description),
+                    imageVector = vectorResource(id = R.drawable.ic_description),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                 )
             })
@@ -148,7 +147,7 @@ private fun ApplicationDetails(
                 placeholder = { Text(text = stringResource(id = R.string.downloads)) },
                 leadingIcon = {
                     Image(
-                        asset = vectorResource(id = R.drawable.ic_downloads),
+                        imageVector = vectorResource(id = R.drawable.ic_downloads),
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                     )
                 })
@@ -160,7 +159,7 @@ private fun ApplicationDetails(
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 leadingIcon = {
                     Image(
-                        asset = vectorResource(id = R.drawable.ic_rating),
+                        imageVector = vectorResource(id = R.drawable.ic_rating),
                         colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                     )
                 })
@@ -168,7 +167,6 @@ private fun ApplicationDetails(
     }
 }
 
-@Preview("UploadApplication")
 @Composable
 fun UploadApplicationPreview() {
     Surface(Modifier.fillMaxSize()) {
