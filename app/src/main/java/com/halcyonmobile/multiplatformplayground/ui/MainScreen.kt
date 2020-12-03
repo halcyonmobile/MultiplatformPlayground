@@ -25,7 +25,7 @@ fun MainScreen() {
                 BottomNavigation {
                     bottomNavigationScreens.forEach {
                         BottomNavigationItem(
-                            icon = { Icon(asset = vectorResource(id = it.iconRes)) },
+                            icon = { Icon(imageVector = vectorResource(id = it.iconRes)) },
                             selected = currentRoute == it.route,
                             onClick = {
                                 if (currentRoute != it.route) {

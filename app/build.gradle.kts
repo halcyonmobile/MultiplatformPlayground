@@ -3,7 +3,6 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -45,7 +44,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     composeOptions {
-        kotlinCompilerVersion = "1.4.0"
+        kotlinCompilerVersion = "1.4.20"
         kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER_VERSION
     }
     lintOptions {
@@ -76,9 +75,6 @@ dependencies {
     implementation(Versions.Android.MATERIAL_COMPONENTS)
 
     implementation(Versions.Android.KOIN_ANDROID_VIEWMODEL)
-
-    implementation(Versions.Android.NAVIGATON_FRAGMENT)
-    implementation(Versions.Android.NAVIGATION_UI)
 
     implementation(Versions.Android.LIFECYCLE_EXTENSIONS)
     implementation(Versions.Android.LIVE_DATA)

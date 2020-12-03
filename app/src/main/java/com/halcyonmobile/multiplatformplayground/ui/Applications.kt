@@ -45,7 +45,7 @@ private fun Application(
             .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Surface(shape = RoundedCornerShape(8.dp)) {
-//            CoilImage(data = uiModel.icon, modifier = Modifier.size(64.dp))
+            CoilImage(data = uiModel.icon, modifier = Modifier.size(64.dp))
         }
         Column(modifier = Modifier.fillMaxSize().align(Alignment.Top).padding(start = 16.dp)) {
             Text(text = uiModel.name, style = MaterialTheme.typography.body1)
@@ -57,7 +57,7 @@ private fun Application(
                     style = MaterialTheme.typography.caption
                 )
                 Image(
-                    asset = vectorResource(id = R.drawable.ic_rating),
+                    imageVector = vectorResource(id = R.drawable.ic_rating),
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
                     modifier = Modifier.size(16.dp).padding(start = 4.dp)
                 )

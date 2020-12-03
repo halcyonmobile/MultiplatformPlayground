@@ -35,9 +35,8 @@ fun HomeScreen(
     Scaffold(floatingActionButton = {
         FloatingActionButton(
             onClick = { onUploadApplication(selectedCategory!!.id) },
-            icon = { Icon(asset = vectorResource(id = R.drawable.ic_add)) },
             modifier = Modifier.padding(bottom = 48.dp)
-        )
+        ) { Icon(imageVector = vectorResource(id = R.drawable.ic_add)) }
     }) {
         Column(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize().weight(1f)) {
@@ -102,10 +101,10 @@ fun Tabs(categoryTabs: List<CategoryTabUiModel>, onClick: (Int) -> Unit) {
                     Row(Modifier.padding(8.dp)) {
                         Text(text = categoryTab.name, maxLines = 1)
                         Spacer(modifier = Modifier.size(8.dp))
-//                        CoilImage(
-//                            data = categoryTab.icon,
-//                            modifier = Modifier.size(16.dp).align(Alignment.CenterVertically),
-//                        )
+                        CoilImage(
+                            data = categoryTab.icon,
+                            modifier = Modifier.size(16.dp).align(Alignment.CenterVertically),
+                        )
                     }
                 }
             }
