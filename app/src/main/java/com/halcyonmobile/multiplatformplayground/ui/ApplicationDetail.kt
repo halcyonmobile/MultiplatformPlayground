@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.remember
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationDetailViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -35,7 +35,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                 title = {},
                 navigationIcon = {
                     Icon(
-                        asset = vectorResource(id = R.drawable.ic_back),
+                        imageVector = vectorResource(id = R.drawable.ic_back),
                         modifier = Modifier.clickable(onClick = upPress)
                     )
                 },
@@ -47,9 +47,8 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
             if (state == ApplicationDetailViewModel.State.NORMAL) {
                 FloatingActionButton(
                     onClick = viewModel::updateFavourite,
-                    icon = { Icon(asset = vectorResource(id = iconRes)) },
                     modifier = Modifier.padding(16.dp)
-                )
+                ) { Icon(imageVector = vectorResource(id = iconRes)) }
             }
         }) {
         when (state) {
@@ -105,7 +104,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
 fun Header(imageUrl: String, name: String, developer: String, category: String = "Update this") {
     Row {
         Surface(shape = RoundedCornerShape(8.dp)) {
-//            CoilImage(data = imageUrl, modifier = Modifier.size(80.dp))
+            CoilImage(data = imageUrl, modifier = Modifier.size(80.dp))
         }
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(text = name, style = MaterialTheme.typography.h6)
@@ -123,7 +122,7 @@ fun Header(imageUrl: String, name: String, developer: String, category: String =
 private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
     Row {
         Image(
-            asset = vectorResource(id = iconRes),
+            imageVector = vectorResource(id = iconRes),
             colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
             modifier = Modifier.align(Alignment.CenterVertically).padding(end = 8.dp)
         )
