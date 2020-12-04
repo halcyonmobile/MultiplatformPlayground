@@ -4,14 +4,9 @@ import com.halcyonmobile.multiplatformplayground.model.ui.*
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.util.File
-import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.CreateApplicationUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoryUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -37,7 +32,6 @@ class UploadApplicationViewModel(
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean>
         get() = _isLoading
-
 
     init {
         selectedCategoryId.onEach {
@@ -83,7 +77,11 @@ class UploadApplicationViewModel(
         selectedCategoryId.value = categoryId
     }
 
-    // TODO handle screenshots
+    override fun onAddScreenShot(screenshot: File) {
+        val screenshots = _uploadApplicationUiModel.value.screenshots
+        _uploadApplicationUiModel.value =
+            _uploadApplicationUiModel.value.copy(screenshots = screenshots + screenshot)
+    }
 
     fun submit() {
         // TODO validate
