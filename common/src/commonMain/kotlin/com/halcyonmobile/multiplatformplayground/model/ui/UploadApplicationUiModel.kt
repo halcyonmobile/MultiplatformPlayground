@@ -39,4 +39,6 @@ interface UploadApplicationUiModelChangeListener {
     fun onDownloadsChanged(downloads: String)
 
     fun onCategoryChanged(categoryId: Long)
+
+    fun onAddScreenShot(screenshot: File)
 }

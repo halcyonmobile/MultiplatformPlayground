@@ -1,6 +1,9 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
+import android.graphics.BitmapFactory
 import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
@@ -9,10 +12,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,12 +22,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toFile
+import androidx.core.net.toUri
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
+import com.halcyonmobile.multiplatformplayground.shared.util.File
 import com.halcyonmobile.multiplatformplayground.ui.theme.lightGray
+import com.halcyonmobile.multiplatformplayground.util.registerForActivityResult
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
-import org.koin.core.parameter.parametersOf
+import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
@@ -37,7 +41,9 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
     val uploadApplicationUiModel by viewModel.uploadApplicationUiModel.collectAsState(
         UploadApplicationUiModel(categoryId = initialCategoryId)
     )
-    val category by viewModel.category.collectAsState(null)
+
+    val getIcon = registerForGalleryResult(viewModel::onIconChanged)
+    val getScreenshot = registerForGalleryResult(viewModel::onAddScreenShot)
 
     Scaffold(
         topBar = {
@@ -58,21 +64,41 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
                     shape = CircleShape,
                     backgroundColor = lightGray
                 ) {
-                    Image(
-                        imageVector = vectorResource(id = R.drawable.ic_add_image),
-                        colorFilter = ColorFilter.tint(Color.DarkGray),
-                        modifier = Modifier.wrapContentSize()
-                    )
+                    Box(Modifier.clickable { getIcon.launchAsImageResult() }) {
+                        if (uploadApplicationUiModel.icon == null) {
+                            Image(
+                                imageVector = vectorResource(id = R.drawable.ic_add_image),
+                                colorFilter = ColorFilter.tint(Color.DarkGray),
+                                modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                            )
+                        } else {
+                            CoilImage(
+                                data = BitmapFactory.decodeFile(uploadApplicationUiModel.icon!!.path),
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
+                    }
                 }
-                Screenshots(screenshots = emptyList()) // TODO update screenshot list
+                Screenshots(
+                    screenshots = uploadApplicationUiModel.screenshots.map { it.toUri() },
+                    onAddScreenshot = { getScreenshot.launchAsImageResult() }
+                )
                 ApplicationDetails(uploadApplicationUiModel, viewModel)
             }
         }
     )
 }
 
+private fun ActivityResultLauncher<String>.launchAsImageResult() = launch("image/*")
+
 @Composable
-private fun Screenshots(screenshots: List<Uri>) {
+private fun registerForGalleryResult(callback: (File) -> Unit) =
+    registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.toFile()?.let(callback)
+    }
+
+@Composable
+private fun Screenshots(screenshots: List<Uri>, onAddScreenshot: () -> Unit) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = stringResource(id = R.string.screenshots),
@@ -85,11 +111,13 @@ private fun Screenshots(screenshots: List<Uri>) {
                 backgroundColor = lightGray,
                 border = BorderStroke(1.dp, Color.LightGray)
             ) {
-                Image(
-                    imageVector = vectorResource(id = R.drawable.ic_add_image),
-                    colorFilter = ColorFilter.tint(Color.DarkGray),
-                    modifier = Modifier.wrapContentSize()
-                )
+                Box(Modifier.clickable(onClick = onAddScreenshot)) {
+                    Image(
+                        imageVector = vectorResource(id = R.drawable.ic_add_image),
+                        colorFilter = ColorFilter.tint(Color.DarkGray),
+                        modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                    )
+                }
             }
         }
     }
