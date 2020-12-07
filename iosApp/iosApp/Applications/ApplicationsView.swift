@@ -32,14 +32,14 @@ struct ApplicationsView: View {
             case ApplicationsViewModel.State.error:
                 VStack{
                     Spacer()
-                    Text(LocalizationsKt.generalError.localized())
+                    Text(MR.strings().general_error.localize())
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
             case ApplicationsViewModel.State.empty:
                 VStack{
                     Spacer()
-                    Text(LocalizationsKt.applicationsEmptyMessage.localized())
+                    Text(MR.strings().applications_empty_message.localize())
                         .multilineTextAlignment(.center)
                     Spacer()
                 }

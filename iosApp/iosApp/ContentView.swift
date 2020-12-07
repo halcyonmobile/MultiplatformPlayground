@@ -8,19 +8,19 @@ struct ContentView: View {
                 HomeView()
                     .tabItem {
                         Image("ic_home_outline")
-                        Text(LocalizationsKt.home.localized())
+                        Text(MR.strings().home.localize())
                     }
                 NavigationView{
                     FavoritesView()
                 }
                 .tabItem{
                     Image("ic_favorite_outline")
-                    Text(LocalizationsKt.favourites.localized())
+                    Text(MR.strings().favourites.localize())
                 }
                 SettingsView()
                     .tabItem {
                         Image("ic_settings_outline")
-                        Text(LocalizationsKt.settings.localized())
+                        Text(MR.strings().settings.localize())
                     }
             }
         }
