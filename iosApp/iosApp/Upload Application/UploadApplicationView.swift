@@ -29,12 +29,12 @@ struct UploadApplicationView: View {
     var body: some View {
         VStack(alignment:.leading){
             //            TODO implement screenshots
-            Text(LocalizationsKt.applicationDetails.localized())
+            Text(MR.strings().application_details.localize())
                 .font(.headline)
             HStack{
                 Image(systemName: "bookmark.fill")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.applicationName.localized(), text: $applicationName, onCommit: {
+                TextField(MR.strings().app_name.localize(), text: $applicationName, onCommit: {
                     viewModel.onNameChanged(name: applicationName)
                 })
                 .padding(.leading, 8)
@@ -42,7 +42,7 @@ struct UploadApplicationView: View {
             HStack{
                 Image(systemName: "person.2.fill")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.developer.localized(), text: $developer, onCommit: {
+                TextField(MR.strings().developer.localize(), text: $developer, onCommit: {
                     viewModel.onDeveloperChanged(developer: developer)
                 })
                 .padding(2)
@@ -53,7 +53,7 @@ struct UploadApplicationView: View {
             HStack{
                 Image(systemName: "pencil")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.appDescription.localized(), text: $description, onCommit: {
+                TextField(MR.strings().description_.localize(), text: $description, onCommit: {
                     viewModel.onDescriptionChanged(description: description)
                 })
                 .padding(.leading, 6)
@@ -61,14 +61,14 @@ struct UploadApplicationView: View {
             HStack{
                 Image(systemName: "square.and.arrow.down")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.downloads.localized(), text: $downloads, onCommit: {
+                TextField(MR.strings().downloads.localize(), text: $downloads, onCommit: {
                     viewModel.onDownloadsChanged(downloads: downloads)
                 })
                 .padding(.leading, 6)
                 
                 Image(systemName: "star.fill")
                     .foregroundColor(Color(ApplicationColors.accentColor))
-                TextField(LocalizationsKt.rating.localized(), text: $rating, onCommit: {
+                TextField(MR.strings().rating.localize(), text: $rating, onCommit: {
                     viewModel.onRatingChanged(rating: rating)
                 })
                 .keyboardType(.decimalPad)
@@ -76,6 +76,6 @@ struct UploadApplicationView: View {
             
             Spacer()
         }.padding(16)
-        .navigationTitle(LocalizationsKt.uploadTitle.localized())
+        .navigationTitle(MR.strings().upload_title.localize())
     }
 }
