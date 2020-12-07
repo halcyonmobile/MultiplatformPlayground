@@ -29,9 +29,9 @@ struct FavoritesView: View {
             case FavouritesViewModel.State.error:
                 VStack{
                     Spacer()
-                    Text(LocalizationsKt.generalError.localized())
+                    Text(MR.strings().general_error.localize())
                         .multilineTextAlignment(.center)
-                    Button(LocalizationsKt.retry.localized(), action: {
+                    Button(MR.strings().retry.localize(), action: {
                         state.viewModel.loadFavourites()
                     }).padding(.top, 8)
                     Spacer()
@@ -41,7 +41,7 @@ struct FavoritesView: View {
                     ApplicationView(application: favourite)
                 }
             }
-        }.navigationBarTitle(LocalizationsKt.favourites.localized())
+        }.navigationBarTitle(MR.strings().favourites.localize())
     }
 }
 
