@@ -44,11 +44,12 @@ struct ApplicationsView: View {
                     Spacer()
                 }
             default:
-                List(state.applications, id: \.id){ application in
-                    ApplicationView(application: application)
-                }
+                    List(state.applications, id: \.id){ application in
+                        NavigationLink(destination: ApplicationDetailView(applicationId: application.id)){
+                                ApplicationView(application: application)  
+                        }
+                    }
             }
-           
         }
     }
 }

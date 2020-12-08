@@ -10,9 +10,7 @@ struct ContentView: View {
                         Image("ic_home_outline")
                         Text(MR.strings().home.localize())
                     }
-                NavigationView{
-                    FavoritesView()
-                }
+             FavoritesView()
                 .tabItem{
                     Image("ic_favorite_outline")
                     Text(MR.strings().favourites.localize())
