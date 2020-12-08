@@ -102,6 +102,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
 
 @Composable
 fun Header(imageUrl: String, name: String, developer: String, category: String = "Update this") {
+    // TODO update category
     Row {
         Surface(shape = RoundedCornerShape(8.dp)) {
             CoilImage(data = imageUrl, modifier = Modifier.size(80.dp))

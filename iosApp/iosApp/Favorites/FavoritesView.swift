@@ -38,10 +38,13 @@ struct FavoritesView: View {
                 }
             default:
                 List(state.favourites, id: \.id){ favourite in
-                    ApplicationView(application: favourite)
+                    NavigationLink(destination: ApplicationDetailView(applicationId: favourite.id)){
+                            ApplicationView(application: favourite)
+                    }
                 }
             }
         }.navigationBarTitle(MR.strings().favourites.localize())
+        .navigationBarHidden(false)
     }
 }
 
