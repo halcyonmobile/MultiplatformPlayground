@@ -68,7 +68,7 @@ dependencies {
     implementation(Versions.Android.NAVIGATION_COMPOSE)
     implementation(Versions.Android.COIL_COMPOSE)
 
-    implementation(Versions.Android.APP_COMPAT)
+    implementation(Versions.Android.ACTIVITY)
     implementation(Versions.Android.KOTLIN_EXTENSIONS)
     implementation(Versions.Android.CONSTRAINT_LAYOUT)
     implementation(Versions.Android.MATERIAL_COMPONENTS)
