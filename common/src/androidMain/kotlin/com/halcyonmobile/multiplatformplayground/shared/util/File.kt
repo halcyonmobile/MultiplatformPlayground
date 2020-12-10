@@ -1,5 +1,5 @@
 package com.halcyonmobile.multiplatformplayground.shared.util
 
-actual typealias File = java.io.File
+actual typealias ImageFile = java.io.File
 
-actual fun File.toByteArray() = readBytes()
+actual fun ImageFile.toByteArray() = readBytes()
