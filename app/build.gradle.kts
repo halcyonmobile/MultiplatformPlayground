@@ -31,9 +31,6 @@ android {
             )
         }
     }
-    packagingOptions {
-        exclude("META-INF/*.kotlin_module")
-    }
 
     kotlinOptions {
         jvmTarget = "1.8"
