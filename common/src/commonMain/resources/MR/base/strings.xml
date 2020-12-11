@@ -15,6 +15,8 @@
     <string name="rating">Rating</string>
     <string name="downloads">Downloads</string>
     <string name="screenshots">Screenshots</string>
+    <string name="add_to_favourites">Add to favourites</string>
+    <string name="remove_from_favourites">Remove from favourites</string>
     <!-- Upload Application   -->
     <string name="application_details">Application details</string>
     <string name="category">Category</string>
