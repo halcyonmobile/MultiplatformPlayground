@@ -15,6 +15,7 @@
 		17353AC62550378B001F2131 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
 		17353B2225512EAA001F2131 /* UploadApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B2125512EAA001F2131 /* UploadApplicationView.swift */; };
 		17353B6625513E70001F2131 /* ApplicationColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B6525513E70001F2131 /* ApplicationColors.swift */; };
+		173DA3122583575500CB9E75 /* PrimaryActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */; };
 		179DD554258203A700080769 /* ScreenshotUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD553258203A700080769 /* ScreenshotUploadButton.swift */; };
 		179DD5592582051D00080769 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD5582582051D00080769 /* IconView.swift */; };
 		179DD55E258205A800080769 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD55D258205A800080769 /* ImagePicker.swift */; };
@@ -63,6 +64,7 @@
 		17353AC52550378B001F2131 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		17353B2125512EAA001F2131 /* UploadApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadApplicationView.swift; sourceTree = "<group>"; };
 		17353B6525513E70001F2131 /* ApplicationColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationColors.swift; sourceTree = "<group>"; };
+		173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryActionButtonStyle.swift; sourceTree = "<group>"; };
 		179DD553258203A700080769 /* ScreenshotUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotUploadButton.swift; sourceTree = "<group>"; };
 		179DD5582582051D00080769 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		179DD55D258205A800080769 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				17353AC52550378B001F2131 /* FloatingActionButton.swift */,
 				17353B6525513E70001F2131 /* ApplicationColors.swift */,
 				179DD55D258205A800080769 /* ImagePicker.swift */,
+				173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				1717E5BE2552D6DD0064239B /* ApplicationsState.swift in Sources */,
 				17CD286B257F585500889ED6 /* ApplicationDetailView.swift in Sources */,
 				179DD5592582051D00080769 /* IconView.swift in Sources */,
+				173DA3122583575500CB9E75 /* PrimaryActionButtonStyle.swift in Sources */,
 				1717E5B42552D17A0064239B /* ApplicationView.swift in Sources */,
 				17353B2225512EAA001F2131 /* UploadApplicationView.swift in Sources */,
 				17ED221F257E5720003BE46D /* MokoResourceExtensions.swift in Sources */,

@@ -15,6 +15,8 @@
     <string name="rating">Értékelés</string>
     <string name="downloads">Letöltések</string>
     <string name="screenshots">Képernyőképek</string>
+    <string name="add_to_favourites">Hozzáad a kedvencekhez</string>
+    <string name="remove_from_favourites">Eltávolít kedvencek közül</string>
     <!-- Upload Application   -->
     <string name="application_details">Alkalmazás részletek</string>
     <string name="category">Kategória</string>
