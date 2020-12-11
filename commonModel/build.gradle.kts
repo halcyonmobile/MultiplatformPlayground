@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
-    id("kotlinx-serialization")
+    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
 }
 
 version = "1.0.0"

@@ -9,8 +9,6 @@ object Versions {
     private const val BEAGLE_VERSION = "2.0.5"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
-    const val KOTLIN_SERIALIZATION_PLUGIN =
-        "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
     const val SQL_DELIGHT_GRADLE_PLUGIN =
         "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
 
