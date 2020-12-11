@@ -43,7 +43,7 @@ struct FavoritesView: View {
                     }
                 }
             }
-        }.navigationBarTitle(MR.strings().favourites.localize())
+        }.navigationTitle(MR.strings().favourites.localize())
         .navigationBarHidden(false)
     }
 }

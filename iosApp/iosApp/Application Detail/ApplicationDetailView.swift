@@ -40,18 +40,25 @@ struct ApplicationDetailView: View {
             }
         default:
             ScrollView{
-                VStack{
-                    Header(imageUrl: state.applicationDetail!.icon, name: state.applicationDetail!.name, developer: state.applicationDetail!.developer)
-                    HStack{
-                        Property(name: MR.strings().rating.localize(), value: String(state.applicationDetail!.rating), icon: "star.fill")
-                        Spacer()
-                        Property(name: MR.strings().downloads.localize(), value: String(state.applicationDetail!.downloads), icon: "icloud.and.arrow.down")
-                    }.padding(.top, 32)
-                    Description(description: state.applicationDetail!.description_)
-                        .padding(.top, 8)
-                    // TODO add screenshots
-                }.frame(alignment: .topLeading)
-                .padding(16)
+                ZStack(alignment: .bottom){
+                    VStack{
+                        Header(imageUrl: state.applicationDetail!.icon, name: state.applicationDetail!.name, developer: state.applicationDetail!.developer)
+                        HStack{
+                            Property(name: MR.strings().rating.localize(), value: String(state.applicationDetail!.rating), icon: "star.fill")
+                            Spacer()
+                            Property(name: MR.strings().downloads.localize(), value: String(state.applicationDetail!.downloads), icon: "icloud.and.arrow.down")
+                        }.padding(.top, 32)
+                        Description(description: state.applicationDetail!.description_)
+                            .padding(.top, 8)
+                        
+                        // TODO add screenshots
+                    }.frame(alignment: .topLeading)
+                    .padding(16)
+                    Button((state.applicationDetail?.favourite ?? false) ? MR.strings().remove_from_favourites.localize() : MR.strings().add_to_favourites.localize(), action: {
+                        state.viewModel.updateFavourite()
+                    }).buttonStyle(PrimaryActionButtonStyle())
+                    .alignmentGuide(.bottom) { d in d[.bottom] - 64 }
+                }
             }
         }
     }
