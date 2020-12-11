@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
-    id("kotlinx-serialization")
+    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
     id("com.squareup.sqldelight")

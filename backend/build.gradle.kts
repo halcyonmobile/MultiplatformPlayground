@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
-    id("kotlinx-serialization")
+    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
     application
 }
 
