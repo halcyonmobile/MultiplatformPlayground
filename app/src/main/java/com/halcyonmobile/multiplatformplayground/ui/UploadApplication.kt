@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -26,8 +25,9 @@ import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
 import com.halcyonmobile.multiplatformplayground.ui.theme.lightGray
+import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
-import org.koin.core.parameter.parametersOf
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
 @Composable
 fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
@@ -40,19 +40,9 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
     val category by viewModel.category.collectAsState(null)
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {},
-                navigationIcon = {
-                    Icon(
-                        imageVector = vectorResource(id = R.drawable.ic_back),
-                        modifier = Modifier.clickable(onClick = upPress)
-                    )
-                },
-            )
-        },
+        topBar = { BackBar(upPress = upPress) },
         bodyContent = {
-            ScrollableColumn(modifier = Modifier.padding(16.dp)) {
+            ScrollableColumn(contentPadding = PaddingValues(16.dp)) {
                 Card(
                     modifier = Modifier.preferredSize(88.dp).align(Alignment.CenterHorizontally),
                     shape = CircleShape,
@@ -139,7 +129,7 @@ private fun ApplicationDetails(
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                 )
             })
-        Row(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
+        Row(modifier = Modifier.navigationBarsPadding().fillMaxWidth().padding(top = 8.dp)) {
             TextField(
                 value = uploadApplicationUiModel.downloads,
                 onValueChange = changeListener::onDownloadsChanged,
