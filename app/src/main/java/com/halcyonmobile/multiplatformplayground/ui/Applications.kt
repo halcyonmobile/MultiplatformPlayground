@@ -20,11 +20,16 @@ import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun Applications(items: List<ApplicationUiModel>, onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
+fun Applications(
+    items: List<ApplicationUiModel>,
+    onApplicationClicked: (ApplicationUiModel.App) -> Unit,
+    contentPadding: PaddingValues = PaddingValues()
+) {
     // TODO add load more
     LazyColumnFor(
         items = items,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = contentPadding
     ) { item ->
         when (item) {
             is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)

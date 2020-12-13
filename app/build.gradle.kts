@@ -65,6 +65,7 @@ dependencies {
     implementation(Versions.Android.COMPOSE_THEME_ADAPTER)
     implementation(Versions.Android.NAVIGATION_COMPOSE)
     implementation(Versions.Android.COIL_COMPOSE)
+    implementation(Versions.Android.INSETS_COMPOSE)
 
     implementation(Versions.Android.APP_COMPAT)
     implementation(Versions.Android.KOTLIN_EXTENSIONS)
