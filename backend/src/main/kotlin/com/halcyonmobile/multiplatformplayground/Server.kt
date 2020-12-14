@@ -1,4 +1,4 @@
-package com.halcyonmobile.multiplatformplayground.backend
+package com.halcyonmobile.multiplatformplayground
 
 import io.ktor.server.engine.commandLineEnvironment
 import io.ktor.server.engine.embeddedServer

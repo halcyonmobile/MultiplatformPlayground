@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
+    kotlin("android")
+    id("kotlin-parcelize")
     id("kotlin-kapt")
 }
 
