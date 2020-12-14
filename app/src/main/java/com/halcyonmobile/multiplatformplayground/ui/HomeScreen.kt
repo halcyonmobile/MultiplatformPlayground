@@ -102,7 +102,8 @@ private fun ApplicationsPerCategory(
         ApplicationsViewModel.State.NORMAL -> Applications(
             items = items,
             onApplicationClicked = onApplicationClicked,
-            contentPadding = contentPadding
+            contentPadding = contentPadding,
+            viewModel::load
         )
 
     }
