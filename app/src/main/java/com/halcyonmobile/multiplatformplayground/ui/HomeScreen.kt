@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
@@ -20,7 +21,6 @@ import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
-import com.halcyonmobile.multiplatformplayground.util.composables.toDp
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
@@ -54,10 +54,12 @@ fun HomeScreen(
                     ApplicationsPerCategory(
                         categoryId = it.id,
                         onApplicationClicked = onApplicationClicked,
-                        contentPadding = PaddingValues(
-                            bottom = AppTheme.dimens.bottomNavHeight +
-                                    AmbientWindowInsets.current.navigationBars.bottom.toDp()
-                        )
+                        contentPadding = with(AmbientDensity.current) {
+                            PaddingValues(
+                                bottom = AppTheme.dimens.bottomNavHeight +
+                                        AmbientWindowInsets.current.navigationBars.bottom.toDp()
+                            )
+                        }
                     )
                 }
             }
