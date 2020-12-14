@@ -61,7 +61,7 @@ object Versions {
         const val BUILD_TOOLS_VERSION = "29.0.2"
         private const val COMPOSE_VERSION = "1.0.0-alpha08"
         private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha03"
-        private const val COIL_COMPOSE_VERSION = "0.4.0"
+        private const val ACCOMPANIST_COMPOSE_VERSION = "0.4.0"
 
         // region Compose
         const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
@@ -74,10 +74,14 @@ object Versions {
             "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
         const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:$COMPOSE_VERSION"
         const val COMPOSE_THEME_ADAPTER =
-            "com.google.android.material:compose-theme-adapter:$COMPOSE_VERSION"
+            "com.google.android.materi" +
+                    "al:compose-theme-adapter:$COMPOSE_VERSION"
         const val NAVIGATION_COMPOSE =
             "androidx.navigation:navigation-compose:$NAVIGATION_COMPOSE_VERSION"
-        const val COIL_COMPOSE = "dev.chrisbanes.accompanist:accompanist-coil:$COIL_COMPOSE_VERSION"
+        const val COIL_COMPOSE =
+            "dev.chrisbanes.accompanist:accompanist-coil:$ACCOMPANIST_COMPOSE_VERSION"
+        const val INSETS_COMPOSE =
+            "dev.chrisbanes.accompanist:accompanist-insets:$ACCOMPANIST_COMPOSE_VERSION"
 
         // endregion
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"

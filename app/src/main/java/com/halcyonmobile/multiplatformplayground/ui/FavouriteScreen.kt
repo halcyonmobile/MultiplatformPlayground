@@ -1,9 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -20,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
+import dev.chrisbanes.accompanist.insets.statusBarsPadding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -35,7 +33,7 @@ fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
         Text(
             text = stringResource(id = R.string.favourites),
             style = MaterialTheme.typography.h4.copy(fontWeight = FontWeight.SemiBold),
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.statusBarsPadding().padding(horizontal = 16.dp, vertical = 8.dp)
         )
         when (state) {
             FavouritesViewModel.State.LOADING -> Box(
