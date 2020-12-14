@@ -1,4 +1,4 @@
-package com.halcyonmobile.multiplatformplayground.backend
+package com.halcyonmobile.multiplatformplayground
 
 import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
@@ -41,7 +41,7 @@ private fun Routing.apiGetApplications(localSource: LocalSource) {
 /**
  *  POST /applications
  */
-@UseExperimental(InternalAPI::class)
+@OptIn(InternalAPI::class)
 private fun Routing.apiCreateApplication(localSource: LocalSource) {
     post("/applications") {
         val applicationRequest = call.receive<ApplicationRequest>()
@@ -113,7 +113,7 @@ private fun Routing.apiGetCategories(localSource: LocalSource) {
 /**
  * POST /api/v1/categories
  */
-@UseExperimental(InternalAPI::class)
+@OptIn(InternalAPI::class)
 private fun Routing.apiPostCategory(localSource: LocalSource) {
     post("/category") {
         val category = call.receive<Category>()

@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
-    id("kotlinx-serialization")
+    kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
     id("com.squareup.sqldelight")
@@ -58,9 +58,6 @@ kotlin {
                 api(Versions.Common.BEAGLE_LOG_KTOR)
                 // Multiplatform resources
                 api(Versions.Common.MOKO_RESOURCES)
-                // TODO remove this workaround after the 1.4.1 release
-                implementation("dev.icerock.moko:parcelize:0.4.0")
-                implementation("dev.icerock.moko:graphics:0.4.0")
             }
         }
         val androidMain by getting {
