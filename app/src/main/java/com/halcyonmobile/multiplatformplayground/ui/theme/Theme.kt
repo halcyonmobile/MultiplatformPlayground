@@ -1,10 +1,11 @@
 package com.halcyonmobile.multiplatformplayground.ui.theme
 
+import AmbientDimens
+import Dimens
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposableContract
 
 private val DarkColorPalette = darkColors(
     primary = purple200,
@@ -26,6 +27,13 @@ onBackground = Color.Black,
 onSurface = Color.Black,
 */
 )
+
+object AppTheme {
+    @Composable
+    @ComposableContract(readonly = true)
+    val dimens: Dimens
+        get() = AmbientDimens.current
+}
 
 @Composable
 fun MultiplatformPlaygroundTheme(
