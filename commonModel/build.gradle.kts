@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
@@ -8,7 +6,7 @@ plugins {
 version = "1.0.0"
 
 kotlin {
-    jvm("backend")
+    jvm()
 
     if (System.getenv("SDK_NAME").orEmpty().startsWith("iphoneos")) {
         iosArm64("ios")
