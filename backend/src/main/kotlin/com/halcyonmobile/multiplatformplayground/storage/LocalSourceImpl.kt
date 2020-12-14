@@ -21,7 +21,9 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.coroutines.CoroutineContext
 
-@UseExperimental(KtorExperimentalAPI::class, ObsoleteCoroutinesApi::class)
+@OptIn(
+    KtorExperimentalAPI::class, ObsoleteCoroutinesApi::class
+)
 internal class LocalSourceImpl(application: io.ktor.application.Application) : LocalSource {
     private val dispatcher: CoroutineContext
 

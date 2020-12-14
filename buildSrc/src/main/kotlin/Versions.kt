@@ -35,7 +35,7 @@ object Versions {
     }
 
     object Jvm {
-        private const val EXPOSED_VERSION = "0.27.1"
+        private const val EXPOSED_VERSION = "0.28.1"
         const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
 
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
