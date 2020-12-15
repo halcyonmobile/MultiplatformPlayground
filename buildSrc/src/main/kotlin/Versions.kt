@@ -105,6 +105,10 @@ object Versions {
         const val BEAGLE_NOOP = "com.github.pandulapeter.beagle:noop:$BEAGLE_VERSION"
 
         const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:android-driver:$SQL_DELIGHT_VERSION"
+
+        // Tests
+        const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
+        const val MOCKK = "io.mockk:mockk:1.10.3"
     }
 
     object iOS {
