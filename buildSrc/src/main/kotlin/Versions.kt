@@ -9,14 +9,15 @@ object Versions {
     private const val BEAGLE_VERSION = "2.0.5"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
-    const val SQL_DELIGHT_GRADLE_PLUGIN =
-        "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
 
     object Common {
         private const val MOKO_RESOURCES_VERSION = "0.13.1"
 
         const val MOKO_RESOURCES_GRADLE_PLUGIN =
             "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
+        const val SQL_DELIGHT_GRADLE_PLUGIN =
+            "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
+        const val BUILD_KONFIG_GRADLE_PLUGIN = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.7.0"
 
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
