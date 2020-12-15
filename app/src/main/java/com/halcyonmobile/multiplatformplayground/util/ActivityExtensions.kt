@@ -41,30 +41,27 @@ fun <I, O> registerForActivityResult(
     // until we register(), we build a layer of indirection so we can
     // immediately return an ActivityResultLauncher
     // (this is the same approach that Fragment.registerForActivityResult uses)
-    val realLauncher = mutableStateOf<ActivityResultLauncher<I>?>(null)
+    val realLauncher = remember<ActivityResultLauncher<I>> {
+        activityResultRegistry.register(key, contract) {
+            currentOnResult.value(it)
+        }
+    }
     val returnedLauncher = remember {
         object : ActivityResultLauncher<I>() {
             override fun launch(input: I, options: ActivityOptionsCompat?) {
-                realLauncher.value?.launch(input, options)
+                realLauncher.launch(input, options)
             }
 
             override fun unregister() {
-                realLauncher.value?.unregister()
+                realLauncher.unregister()
             }
 
             override fun getContract() = contract
         }
     }
 
-    // DisposableEffect ensures that we only register once
-    // and that we unregister when the composable is disposed
-    DisposableEffect(activityResultRegistry, key, contract) {
-        realLauncher.value = activityResultRegistry.register(key, contract) {
-            currentOnResult.value(it)
-        }
-        onDispose {
-            realLauncher.value?.unregister()
-        }
+    onDispose {
+        realLauncher.unregister()
     }
     return returnedLauncher
 }
