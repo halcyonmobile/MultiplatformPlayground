@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
 
 plugins {
     kotlin("multiplatform")
@@ -7,6 +8,7 @@ plugins {
     id("org.jetbrains.kotlin.native.cocoapods")
     id("com.squareup.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
+    id("com.codingfeline.buildkonfig")
 }
 
 version = "1.0.0"
@@ -45,7 +47,7 @@ kotlin {
                 implementation(Versions.Common.KTOR_CLIENT_JSON)
                 implementation(Versions.Common.KTOR_CLIENT_SERIALIZATION)
 
-                implementation(Versions.Common.COROUTINES_CORE){
+                implementation(Versions.Common.COROUTINES_CORE) {
                     // Using strictly causes an issue, didn't investigate it yet
                     // https://kotlinlang.slack.com/archives/C1CFAFJSK/p1603044902445900
                     isForce = true
@@ -132,4 +134,19 @@ sqldelight {
 
 multiplatformResources {
     multiplatformResourcesPackage = "com.halcyonmobile.multiplatformplayground" // required
+}
+
+buildkonfig {
+    packageName = "com.halcyonmobile.multiplatformplayground"
+    val baseUrl = "baseUrl"
+    defaultConfigs {
+        buildConfigField(
+            Type.STRING,
+            baseUrl,
+            "https://halcyon-multiplatform-backend.herokuapp.com/"
+        )
+    }
+    defaultConfigs("dev") {
+        buildConfigField(Type.STRING, baseUrl, "http://0.0.0.0:8080/")
+    }
 }
