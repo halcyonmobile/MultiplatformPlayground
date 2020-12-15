@@ -40,12 +40,14 @@ fun HomeScreen(
     val error by viewModel.error.collectAsState(null)
 
     Scaffold(floatingActionButton = {
-        FloatingActionButton(
-            onClick = { onUploadApplication(selectedCategory!!.id) },
-            modifier = Modifier
-                .padding(bottom = AppTheme.dimens.bottomNavHeight)
-                .navigationBarsPadding()
-        ) { Icon(imageVector = vectorResource(id = R.drawable.ic_add)) }
+        selectedCategory?.let {
+            FloatingActionButton(
+                onClick = { onUploadApplication(it.id) },
+                modifier = Modifier
+                    .padding(bottom = AppTheme.dimens.bottomNavHeight)
+                    .navigationBarsPadding()
+            ) { Icon(imageVector = vectorResource(id = R.drawable.ic_add)) }
+        }
     }) {
         Column(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.fillMaxSize().weight(1f)) {
