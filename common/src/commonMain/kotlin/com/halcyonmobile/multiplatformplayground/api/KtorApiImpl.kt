@@ -8,8 +8,11 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.takeFrom
+import com.halcyonmobile.multiplatformplayground.BuildKonfig
 
 object KtorApiImpl : KtorApi {
+
+    val baseUrl = BuildKonfig.baseUrl
 
     @OptIn(ExperimentalStdlibApi::class)
     override val client = HttpClient {
@@ -21,7 +24,7 @@ object KtorApiImpl : KtorApi {
 
     override fun HttpRequestBuilder.apiUrl(path: String) {
         url {
-            takeFrom(BASE_URL)
+            takeFrom(baseUrl)
             encodedPath = path
         }
     }
@@ -29,7 +32,4 @@ object KtorApiImpl : KtorApi {
     override fun HttpRequestBuilder.json() {
         contentType(ContentType.Application.Json)
     }
-
-    const val BASE_URL =
-        "https://halcyon-multiplatform-backend.herokuapp.com/" //TODO: Move to Gradle
 }
