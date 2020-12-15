@@ -73,6 +73,14 @@ kotlin {
                 implementation(Versions.Android.SQL_DELIGHT_DRIVER)
             }
         }
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.13.1")
+                implementation(Versions.Android.COROUTINES_TEST)
+                implementation(Versions.Android.MOCKK)
+            }
+        }
         val iosMain by getting {
             dependencies {
                 implementation(Versions.iOS.KTOR_CLIENT)
