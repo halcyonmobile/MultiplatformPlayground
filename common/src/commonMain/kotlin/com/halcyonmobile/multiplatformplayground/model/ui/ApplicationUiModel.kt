@@ -4,8 +4,10 @@ import com.halcyonmobile.multiplatformplayground.model.Application
 
 sealed class ApplicationUiModel {
 
+    abstract val id: Long // Added for easier List construction in SwiftUI
+
     class App(
-        val id: Long,
+        override val id: Long,
         val name: String,
         val icon: String,
         val developer: String,
@@ -14,7 +16,9 @@ sealed class ApplicationUiModel {
         val categoryId: Long
     ) : ApplicationUiModel()
 
-    object Loading : ApplicationUiModel()
+    object Loading : ApplicationUiModel(){
+        override val id = 0L
+    }
 }
 
 fun Application.toApplicationUiModel() =

@@ -29,19 +29,22 @@ struct FavoritesView: View {
             case FavouritesViewModel.State.error:
                 VStack{
                     Spacer()
-                    Text(LocalizationsKt.generalError.localized())
+                    Text(MR.strings().general_error.localize())
                         .multilineTextAlignment(.center)
-                    Button(LocalizationsKt.retry.localized(), action: {
+                    Button(MR.strings().retry.localize(), action: {
                         state.viewModel.loadFavourites()
                     }).padding(.top, 8)
                     Spacer()
                 }
             default:
                 List(state.favourites, id: \.id){ favourite in
-                    ApplicationView(application: favourite)
+                    NavigationLink(destination: ApplicationDetailView(applicationId: favourite.id)){
+                            ApplicationView(application: favourite)
+                    }
                 }
             }
-        }.navigationBarTitle(LocalizationsKt.favourites.localized())
+        }.navigationTitle(MR.strings().favourites.localize())
+        .navigationBarHidden(false)
     }
 }
 

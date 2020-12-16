@@ -20,35 +20,40 @@ struct ApplicationsView: View {
     }
     
     var body: some View {
-        // TODO add loading to last item of applications
-        if(state.isLoading){
+        switch state.state {
+        case ApplicationsViewModel.State.error:
             VStack{
                 Spacer()
-                ProgressView()
+                Text(MR.strings().general_error.localize())
+                    .multilineTextAlignment(.center)
                 Spacer()
             }
-        }else {
-            switch state.state {
-            case ApplicationsViewModel.State.error:
-                VStack{
-                    Spacer()
-                    Text(LocalizationsKt.generalError.localized())
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-            case ApplicationsViewModel.State.empty:
-                VStack{
-                    Spacer()
-                    Text(LocalizationsKt.applicationsEmptyMessage.localized())
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-            default:
-                List(state.applications, id: \.id){ application in
-                    ApplicationView(application: application)
+        case ApplicationsViewModel.State.empty:
+            VStack{
+                Spacer()
+                Text(MR.strings().applications_empty_message.localize())
+                    .multilineTextAlignment(.center)
+                Spacer()
+            }
+        default:
+            List(state.items, id: \.id){ item in
+                switch item {
+                case let app as ApplicationUiModel.App:
+                    NavigationLink(destination: ApplicationDetailView(applicationId: app.id)){
+                        ApplicationView(application: app)
+                    }.onAppear{
+                        if(app.id == state.items.last?.id){
+                            state.viewModel.load()
+                        }
+                    }
+                default:
+                    HStack{
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
                 }
             }
-           
         }
     }
 }

@@ -4,12 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.onActive
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -17,15 +19,26 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.shared.util.log
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun Applications(items: List<ApplicationUiModel>, onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
-    // TODO add load more
-    LazyColumnFor(
+fun Applications(
+    items: List<ApplicationUiModel>,
+    onApplicationClicked: (ApplicationUiModel.App) -> Unit,
+    contentPadding: PaddingValues = PaddingValues(),
+    onBottomReached: () -> Unit = {}
+) {
+    LazyColumnForIndexed(
         items = items,
-        modifier = Modifier.fillMaxSize()
-    ) { item ->
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = contentPadding
+    ) { index, item ->
+        if (items.lastIndex == index) {
+            onActive {
+                onBottomReached()
+            }
+        }
         when (item) {
             is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
             ApplicationUiModel.Loading -> CircularProgressIndicator(
