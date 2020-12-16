@@ -13,7 +13,7 @@ import SlidingTabView
 struct HomeView: View {
     
     @ObservedObject var homeState = HomeState()
-    @State private var openApplicationDetail = false
+    @State private var openUploadApplication = false
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -36,9 +36,9 @@ struct HomeView: View {
             }.navigationBarTitle("")
             .navigationBarHidden(true)
             
-            NavigationLink(destination: UploadApplicationView(categoryId: homeState.selectedCategoryId), isActive: $openApplicationDetail){
+            NavigationLink(destination: UploadApplicationView(categoryId: homeState.selectedCategoryId), isActive: $openUploadApplication){
                 FloatingActionButton(icon: "plus.circle.fill", action: {
-                    openApplicationDetail = true
+                    openUploadApplication = true
                 }).padding(16)
             }
         }

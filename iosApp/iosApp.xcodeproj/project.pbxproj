@@ -15,6 +15,15 @@
 		17353AC62550378B001F2131 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
 		17353B2225512EAA001F2131 /* UploadApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B2125512EAA001F2131 /* UploadApplicationView.swift */; };
 		17353B6625513E70001F2131 /* ApplicationColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B6525513E70001F2131 /* ApplicationColors.swift */; };
+		173DA3122583575500CB9E75 /* PrimaryActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */; };
+		179DD554258203A700080769 /* ScreenshotUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD553258203A700080769 /* ScreenshotUploadButton.swift */; };
+		179DD5592582051D00080769 /* IconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD5582582051D00080769 /* IconView.swift */; };
+		179DD55E258205A800080769 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD55D258205A800080769 /* ImagePicker.swift */; };
+		179DD5632582062100080769 /* ScreenshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD5622582062100080769 /* ScreenshotView.swift */; };
+		179DD5682582079300080769 /* UploadApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD5672582079300080769 /* UploadApplicationState.swift */; };
+		17CD2866257F4E3200889ED6 /* ApplicationDetailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD2865257F4E3200889ED6 /* ApplicationDetailState.swift */; };
+		17CD286B257F585500889ED6 /* ApplicationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD286A257F585500889ED6 /* ApplicationDetailView.swift */; };
+		17ED221F257E5720003BE46D /* MokoResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */; };
 		17EDC8AA254ACA7C0019C88F /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EDC8A9254ACA7C0019C88F /* HomeState.swift */; };
 		5E0A261105C37E3FEEC1FFA8 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A928F7B1A6289D9B3CB8D30 /* Pods_iosApp.framework */; };
 		7555FF7F242A565900829871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF7E242A565900829871 /* AppDelegate.swift */; };
@@ -55,6 +64,15 @@
 		17353AC52550378B001F2131 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		17353B2125512EAA001F2131 /* UploadApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadApplicationView.swift; sourceTree = "<group>"; };
 		17353B6525513E70001F2131 /* ApplicationColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationColors.swift; sourceTree = "<group>"; };
+		173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryActionButtonStyle.swift; sourceTree = "<group>"; };
+		179DD553258203A700080769 /* ScreenshotUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotUploadButton.swift; sourceTree = "<group>"; };
+		179DD5582582051D00080769 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
+		179DD55D258205A800080769 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		179DD5622582062100080769 /* ScreenshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotView.swift; sourceTree = "<group>"; };
+		179DD5672582079300080769 /* UploadApplicationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadApplicationState.swift; sourceTree = "<group>"; };
+		17CD2865257F4E3200889ED6 /* ApplicationDetailState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailState.swift; sourceTree = "<group>"; };
+		17CD286A257F585500889ED6 /* ApplicationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationDetailView.swift; sourceTree = "<group>"; };
+		17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MokoResourceExtensions.swift; sourceTree = "<group>"; };
 		17EDC8A9254ACA7C0019C88F /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
 		2A928F7B1A6289D9B3CB8D30 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6176BDB804C7F484A7AF3616 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,8 +136,11 @@
 		17353AC42550374E001F2131 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				17ED221D257E56F6003BE46D /* Util */,
 				17353AC52550378B001F2131 /* FloatingActionButton.swift */,
 				17353B6525513E70001F2131 /* ApplicationColors.swift */,
+				179DD55D258205A800080769 /* ImagePicker.swift */,
+				173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -128,8 +149,29 @@
 			isa = PBXGroup;
 			children = (
 				17353B2125512EAA001F2131 /* UploadApplicationView.swift */,
+				179DD553258203A700080769 /* ScreenshotUploadButton.swift */,
+				179DD5582582051D00080769 /* IconView.swift */,
+				179DD5622582062100080769 /* ScreenshotView.swift */,
+				179DD5672582079300080769 /* UploadApplicationState.swift */,
 			);
 			path = "Upload Application";
+			sourceTree = "<group>";
+		};
+		17CD2861257F4DFB00889ED6 /* Application Detail */ = {
+			isa = PBXGroup;
+			children = (
+				17CD2865257F4E3200889ED6 /* ApplicationDetailState.swift */,
+				17CD286A257F585500889ED6 /* ApplicationDetailView.swift */,
+			);
+			path = "Application Detail";
+			sourceTree = "<group>";
+		};
+		17ED221D257E56F6003BE46D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		25EF3ECCA77C57C6AE20F9EB /* Pods */ = {
@@ -174,6 +216,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				17CD2861257F4DFB00889ED6 /* Application Detail */,
 				1717E5B22552D1630064239B /* Applications */,
 				17353B0F2550401F001F2131 /* Upload Application */,
 				17353AC42550374E001F2131 /* Shared */,
@@ -447,15 +490,24 @@
 				17353B6625513E70001F2131 /* ApplicationColors.swift in Sources */,
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
 				1717E5B92552D6BB0064239B /* ApplicationsView.swift in Sources */,
+				179DD5682582079300080769 /* UploadApplicationState.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
 				17353AC62550378B001F2131 /* FloatingActionButton.swift in Sources */,
 				7B67B8CF250A2153005FDEAD /* FavoritesView.swift in Sources */,
 				17EDC8AA254ACA7C0019C88F /* HomeState.swift in Sources */,
 				7B67B8D3250A217C005FDEAD /* HomeView.swift in Sources */,
 				1717E5BE2552D6DD0064239B /* ApplicationsState.swift in Sources */,
+				17CD286B257F585500889ED6 /* ApplicationDetailView.swift in Sources */,
+				179DD5592582051D00080769 /* IconView.swift in Sources */,
+				173DA3122583575500CB9E75 /* PrimaryActionButtonStyle.swift in Sources */,
 				1717E5B42552D17A0064239B /* ApplicationView.swift in Sources */,
 				17353B2225512EAA001F2131 /* UploadApplicationView.swift in Sources */,
+				17ED221F257E5720003BE46D /* MokoResourceExtensions.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				179DD55E258205A800080769 /* ImagePicker.swift in Sources */,
+				179DD5632582062100080769 /* ScreenshotView.swift in Sources */,
+				179DD554258203A700080769 /* ScreenshotUploadButton.swift in Sources */,
+				17CD2866257F4E3200889ED6 /* ApplicationDetailState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

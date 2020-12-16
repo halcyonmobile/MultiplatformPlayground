@@ -1,17 +1,17 @@
 package com.halcyonmobile.multiplatformplayground.model.ui
 
 import com.halcyonmobile.multiplatformplayground.model.UploadApplicationModel
-import com.halcyonmobile.multiplatformplayground.shared.util.File
+import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
 
 data class UploadApplicationUiModel(
     val name: String = "",
     val developer: String = "",
-    val icon: File? = null,
+    val icon: ImageFile? = null,
     val rating: Float? = null,
     val description: String = "",
     val downloads: String = "",
     val categoryId: Long,
-    val screenshots: List<File> = emptyList()
+    val screenshots: List<ImageFile> = emptyList()
 )
 
 fun UploadApplicationUiModel.toUploadApplicationModel() = UploadApplicationModel(
@@ -30,7 +30,7 @@ interface UploadApplicationUiModelChangeListener {
 
     fun onDeveloperChanged(developer: String)
 
-    fun onIconChanged(icon: File)
+    fun onIconChanged(icon: ImageFile)
 
     fun onRatingChanged(rating: String)
 
@@ -40,5 +40,5 @@ interface UploadApplicationUiModelChangeListener {
 
     fun onCategoryChanged(categoryId: Long)
 
-    fun onAddScreenShot(screenshot: File)
+    fun onAddScreenshot(screenshot: ImageFile)
 }

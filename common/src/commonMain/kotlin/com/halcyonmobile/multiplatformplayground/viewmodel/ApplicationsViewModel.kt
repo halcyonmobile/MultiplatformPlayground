@@ -17,11 +17,12 @@ class ApplicationsViewModel(
 
     private val getApplications: GetApplicationsUseCase by inject()
 
-    private val _items =
-        MutableStateFlow<List<ApplicationUiModel>>(listOf(ApplicationUiModel.Loading))
+    private val _items = MutableStateFlow<List<ApplicationUiModel>>(emptyList())
     private val _state = MutableStateFlow(State.NORMAL)
     private val _event = MutableSharedFlow<Event>()
 
+    private val isLoading get() = items.value.contains(ApplicationUiModel.Loading)
+    var isLastPage = false
     /**
      * Represents all the UI items
      */
@@ -49,6 +50,8 @@ class ApplicationsViewModel(
      * Load the next page of items
      */
     fun load() {
+        if (isLoading || isLastPage) return
+
         coroutineScope.launch {
             setLoading(true)
             val result = getApplications(categoryId, pageOffset, PER_PAGE)
@@ -57,6 +60,9 @@ class ApplicationsViewModel(
                 is Result.Success -> {
                     _items.value = _items.value + result.value.map { it.toApplicationUiModel() }
                     pageOffset++
+                    if (result.value.size < PER_PAGE) {
+                        isLastPage = true
+                    }
                     if (_items.value.isEmpty()) State.EMPTY else State.NORMAL
                 }
                 is Result.Error -> {

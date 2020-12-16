@@ -1,18 +1,19 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,16 +23,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toFile
-import androidx.core.net.toUri
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
-import com.halcyonmobile.multiplatformplayground.shared.util.File
 import com.halcyonmobile.multiplatformplayground.ui.theme.lightGray
 import com.halcyonmobile.multiplatformplayground.util.registerForActivityResult
+import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
 @Composable
 fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
@@ -46,19 +46,9 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
     val getScreenshot = registerForGalleryResult(viewModel::onAddScreenShot)
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {},
-                navigationIcon = {
-                    Icon(
-                        imageVector = vectorResource(id = R.drawable.ic_back),
-                        modifier = Modifier.clickable(onClick = upPress)
-                    )
-                },
-            )
-        },
+        topBar = { BackBar(upPress = upPress) },
         bodyContent = {
-            ScrollableColumn(modifier = Modifier.padding(16.dp)) {
+            ScrollableColumn(contentPadding = PaddingValues(16.dp)) {
                 Card(
                     modifier = Modifier.preferredSize(88.dp).align(Alignment.CenterHorizontally),
                     shape = CircleShape,
@@ -167,7 +157,7 @@ private fun ApplicationDetails(
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                 )
             })
-        Row(modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
+        Row(modifier = Modifier.navigationBarsPadding().fillMaxWidth().padding(top = 8.dp)) {
             TextField(
                 value = uploadApplicationUiModel.downloads,
                 onValueChange = changeListener::onDownloadsChanged,

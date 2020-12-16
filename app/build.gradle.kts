@@ -30,9 +30,6 @@ android {
             )
         }
     }
-    packagingOptions {
-        exclude("META-INF/*.kotlin_module")
-    }
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -67,6 +64,7 @@ dependencies {
     implementation(Versions.Android.COMPOSE_THEME_ADAPTER)
     implementation(Versions.Android.NAVIGATION_COMPOSE)
     implementation(Versions.Android.COIL_COMPOSE)
+    implementation(Versions.Android.INSETS_COMPOSE)
 
     implementation(Versions.Android.ACTIVITY)
     implementation(Versions.Android.KOTLIN_EXTENSIONS)

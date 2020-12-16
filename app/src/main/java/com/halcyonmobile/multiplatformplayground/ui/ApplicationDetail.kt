@@ -3,7 +3,6 @@ package com.halcyonmobile.multiplatformplayground.ui
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -17,8 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.R
+import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationDetailViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -30,24 +31,15 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
     val state by viewModel.state.collectAsState()
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {},
-                navigationIcon = {
-                    Icon(
-                        imageVector = vectorResource(id = R.drawable.ic_back),
-                        modifier = Modifier.clickable(onClick = upPress)
-                    )
-                },
-            )
-        }, floatingActionButton = {
+        topBar = { BackBar(upPress = upPress) },
+        floatingActionButton = {
             val iconRes = if (applicationWithDetail?.favourite == true)
                 R.drawable.ic_favourites else R.drawable.ic_favourites_empty
 
             if (state == ApplicationDetailViewModel.State.NORMAL) {
                 FloatingActionButton(
                     onClick = viewModel::updateFavourite,
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.navigationBarsPadding().padding(16.dp)
                 ) { Icon(imageVector = vectorResource(id = iconRes)) }
             }
         }) {
@@ -58,7 +50,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                 CircularProgressIndicator()
             }
             ApplicationDetailViewModel.State.NORMAL -> applicationWithDetail?.let {
-                ScrollableColumn(modifier = Modifier.padding(16.dp)) {
+                ScrollableColumn(contentPadding = PaddingValues(16.dp)) {
                     Header(
                         imageUrl = it.icon,
                         name = it.name,
@@ -102,6 +94,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
 
 @Composable
 fun Header(imageUrl: String, name: String, developer: String, category: String = "Update this") {
+    // TODO update category
     Row {
         Surface(shape = RoundedCornerShape(8.dp)) {
             CoilImage(data = imageUrl, modifier = Modifier.size(80.dp))
@@ -149,6 +142,7 @@ private fun Description(description: String) {
             onClick = { updateShowMore(!showMore) }) {
             Text(stringResource(id = if (!showMore) R.string.show_more else R.string.show_less))
         }
+        Spacer(modifier = Modifier.navigationBarsPadding())
     }
 }
 

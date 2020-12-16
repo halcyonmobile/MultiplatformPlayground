@@ -1,5 +1,5 @@
 package com.halcyonmobile.multiplatformplayground.shared.util
 
-expect class File
+expect class ImageFile
 
-expect fun File.toByteArray(): ByteArray
+expect fun ImageFile.toByteArray(): ByteArray

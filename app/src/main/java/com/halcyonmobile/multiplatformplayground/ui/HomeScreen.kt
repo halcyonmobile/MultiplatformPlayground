@@ -1,7 +1,9 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.TabConstants.defaultTabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -9,6 +11,7 @@ import androidx.compose.runtime.remember
 import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
@@ -17,7 +20,11 @@ import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
+import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
+import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
+import dev.chrisbanes.accompanist.insets.navigationBarsPadding
+import dev.chrisbanes.accompanist.insets.statusBarsPadding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
@@ -35,7 +42,9 @@ fun HomeScreen(
     Scaffold(floatingActionButton = {
         FloatingActionButton(
             onClick = { onUploadApplication(selectedCategory!!.id) },
-            modifier = Modifier.padding(bottom = 48.dp)
+            modifier = Modifier
+                .padding(bottom = AppTheme.dimens.bottomNavHeight)
+                .navigationBarsPadding()
         ) { Icon(imageVector = vectorResource(id = R.drawable.ic_add)) }
     }) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -44,7 +53,13 @@ fun HomeScreen(
                 selectedCategory?.let {
                     ApplicationsPerCategory(
                         categoryId = it.id,
-                        onApplicationClicked = onApplicationClicked
+                        onApplicationClicked = onApplicationClicked,
+                        contentPadding = with(AmbientDensity.current) {
+                            PaddingValues(
+                                bottom = AppTheme.dimens.bottomNavHeight +
+                                        AmbientWindowInsets.current.navigationBars.bottom.toDp()
+                            )
+                        }
                     )
                 }
             }
@@ -57,7 +72,8 @@ fun HomeScreen(
 @Composable
 private fun ApplicationsPerCategory(
     categoryId: Long,
-    onApplicationClicked: (ApplicationUiModel.App) -> Unit
+    onApplicationClicked: (ApplicationUiModel.App) -> Unit,
+    contentPadding: PaddingValues = PaddingValues()
 ) {
     // TODO fix same viewModel instance issue https://github.com/InsertKoinIO/koin/issues/924
     val viewModel = remember(categoryId) {
@@ -85,7 +101,9 @@ private fun ApplicationsPerCategory(
         }
         ApplicationsViewModel.State.NORMAL -> Applications(
             items = items,
-            onApplicationClicked = onApplicationClicked
+            onApplicationClicked = onApplicationClicked,
+            contentPadding = contentPadding,
+            viewModel::load
         )
 
     }
@@ -95,19 +113,37 @@ private fun ApplicationsPerCategory(
 fun Tabs(categoryTabs: List<CategoryTabUiModel>, onClick: (Int) -> Unit) {
     val selectedTabIndex = categoryTabs.indexOfFirst { it.isSelected }
     if (selectedTabIndex >= 0) {
-        ScrollableTabRow(selectedTabIndex, modifier = Modifier.wrapContentWidth()) {
-            categoryTabs.forEachIndexed { index, categoryTab ->
-                Tab(selected = categoryTab.isSelected, onClick = { onClick(index) }) {
-                    Row(Modifier.padding(8.dp)) {
-                        Text(text = categoryTab.name, maxLines = 1)
-                        Spacer(modifier = Modifier.size(8.dp))
-                        CoilImage(
-                            data = categoryTab.icon,
-                            modifier = Modifier.size(16.dp).align(Alignment.CenterVertically),
-                        )
-                    }
+        Surface(elevation = 8.dp) {
+            ScrollableTabRow(
+                selectedTabIndex,
+                modifier = Modifier.statusBarsPadding().wrapContentWidth(),
+                backgroundColor = MaterialTheme.colors.surface,
+                indicator = { tabPositions ->
+                    TabConstants.DefaultIndicator(
+                        color = if (isSystemInDarkTheme()) MaterialTheme.colors.onSurface else MaterialTheme.colors.primary,
+                        modifier = Modifier.defaultTabIndicatorOffset(tabPositions[selectedTabIndex])
+                    )
+                }
+            ) {
+                categoryTabs.forEachIndexed { index, categoryTab ->
+                    CategoryTab(categoryTab) { onClick(index) }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun CategoryTab(categoryTab: CategoryTabUiModel, onClick: () -> Unit) {
+    Tab(selected = categoryTab.isSelected, onClick = onClick) {
+        Row(Modifier.padding(12.dp)) {
+            CoilImage(
+                data = categoryTab.icon,
+                modifier = Modifier.size(16.dp)
+                    .align(Alignment.CenterVertically),
+            )
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(text = categoryTab.name, maxLines = 1)
         }
     }
 }

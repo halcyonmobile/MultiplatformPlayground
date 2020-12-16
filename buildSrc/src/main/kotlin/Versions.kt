@@ -9,16 +9,15 @@ object Versions {
     private const val BEAGLE_VERSION = "2.0.5"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
-    const val KOTLIN_SERIALIZATION_PLUGIN =
-        "org.jetbrains.kotlin:kotlin-serialization:$KOTLIN_VERSION"
-    const val SQL_DELIGHT_GRADLE_PLUGIN =
-        "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
 
     object Common {
         private const val MOKO_RESOURCES_VERSION = "0.13.1"
 
         const val MOKO_RESOURCES_GRADLE_PLUGIN =
             "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
+        const val SQL_DELIGHT_GRADLE_PLUGIN =
+            "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
+        const val BUILD_KONFIG_GRADLE_PLUGIN = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.7.0"
 
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
@@ -37,7 +36,7 @@ object Versions {
     }
 
     object Jvm {
-        private const val EXPOSED_VERSION = "0.27.1"
+        private const val EXPOSED_VERSION = "0.28.1"
         const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
 
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
@@ -63,7 +62,7 @@ object Versions {
         const val BUILD_TOOLS_VERSION = "29.0.2"
         private const val COMPOSE_VERSION = "1.0.0-alpha08"
         private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha03"
-        private const val COIL_COMPOSE_VERSION = "0.4.0"
+        private const val ACCOMPANIST_COMPOSE_VERSION = "0.4.0"
 
         // region Compose
         const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
@@ -76,10 +75,14 @@ object Versions {
             "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
         const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:$COMPOSE_VERSION"
         const val COMPOSE_THEME_ADAPTER =
-            "com.google.android.material:compose-theme-adapter:$COMPOSE_VERSION"
+            "com.google.android.materi" +
+                    "al:compose-theme-adapter:$COMPOSE_VERSION"
         const val NAVIGATION_COMPOSE =
             "androidx.navigation:navigation-compose:$NAVIGATION_COMPOSE_VERSION"
-        const val COIL_COMPOSE = "dev.chrisbanes.accompanist:accompanist-coil:$COIL_COMPOSE_VERSION"
+        const val COIL_COMPOSE =
+            "dev.chrisbanes.accompanist:accompanist-coil:$ACCOMPANIST_COMPOSE_VERSION"
+        const val INSETS_COMPOSE =
+            "dev.chrisbanes.accompanist:accompanist-insets:$ACCOMPANIST_COMPOSE_VERSION"
 
         // endregion
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"

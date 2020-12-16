@@ -3,7 +3,8 @@ package com.halcyonmobile.multiplatformplayground.viewmodel
 import com.halcyonmobile.multiplatformplayground.model.ui.*
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
-import com.halcyonmobile.multiplatformplayground.shared.util.File
+import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
+import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.CreateApplicationUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoryUseCase
 import kotlinx.coroutines.flow.*
@@ -29,9 +30,13 @@ class UploadApplicationViewModel(
     val uploadApplicationUiModel: StateFlow<UploadApplicationUiModel>
         get() = _uploadApplicationUiModel
 
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean>
-        get() = _isLoading
+    private val _state = MutableStateFlow(State.NORMAL)
+    val state: StateFlow<State>
+        get() = _state
+
+    private val _event = MutableSharedFlow<Event>()
+    val event: SharedFlow<Event>
+        get() = _event
 
     init {
         selectedCategoryId.onEach {
@@ -45,6 +50,36 @@ class UploadApplicationViewModel(
         }.launchIn(coroutineScope)
     }
 
+    /**
+     * Convenience method for iOS observing the [uploadApplicationUiModel]
+     */
+    @Suppress("unused")
+    fun observeApplication(onChange: (UploadApplicationUiModel) -> Unit) {
+        uploadApplicationUiModel.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
+
+    /**
+     * Convenience method for iOS observing the [state]
+     */
+    @Suppress("unused")
+    fun observeState(onChange: (State) -> Unit) {
+        state.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
+
+    /**
+     * Convenience method for iOS observing [event]
+     */
+    @Suppress("unused")
+    fun observeEvent(onChange: (Event) -> Unit) {
+        event.onEach {
+            onChange(it)
+        }.launchIn(coroutineScope)
+    }
+
     override fun onNameChanged(name: String) {
         _uploadApplicationUiModel.value = _uploadApplicationUiModel.value.copy(name = name)
     }
@@ -54,7 +89,7 @@ class UploadApplicationViewModel(
             _uploadApplicationUiModel.value.copy(developer = developer)
     }
 
-    override fun onIconChanged(icon: File) {
+    override fun onIconChanged(icon: ImageFile) {
         _uploadApplicationUiModel.value = _uploadApplicationUiModel.value.copy(icon = icon)
     }
 
@@ -77,24 +112,35 @@ class UploadApplicationViewModel(
         selectedCategoryId.value = categoryId
     }
 
-    override fun onAddScreenShot(screenshot: File) {
-        val screenshots = _uploadApplicationUiModel.value.screenshots
+    override fun onAddScreenshot(screenshot: ImageFile) {
+        val uploadApplicationUiModel = _uploadApplicationUiModel.value
         _uploadApplicationUiModel.value =
-            _uploadApplicationUiModel.value.copy(screenshots = screenshots + screenshot)
+            uploadApplicationUiModel.copy(screenshots = uploadApplicationUiModel.screenshots + screenshot)
     }
 
     fun submit() {
         // TODO validate
         coroutineScope.launch {
-            when (val result =
-                createApplication(uploadApplicationUiModel.value.toUploadApplicationModel())) {
-                is Result.Success -> {
-                    // TODO handle success
+            _state.value = State.LOADING
+            _event.emit(
+                when (createApplication(uploadApplicationUiModel.value.toUploadApplicationModel())) {
+                    is Result.Success -> Event.SUCCESSFUL_UPLOAD
+                    is Result.Error -> {
+                        _state.value = State.NORMAL
+                        Event.ERROR
+                    }
                 }
-                is Result.Error -> {
-                    // TODO handle error
-                }
-            }
+            )
         }
+    }
+
+    enum class State {
+        NORMAL,
+        LOADING
+    }
+
+    enum class Event {
+        ERROR,
+        SUCCESSFUL_UPLOAD
     }
 }

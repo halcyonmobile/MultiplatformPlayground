@@ -1,7 +1,6 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -12,6 +11,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import com.halcyonmobile.multiplatformplayground.BottomNavigationScreen
 import com.halcyonmobile.multiplatformplayground.bottomNavigationScreens
+import com.halcyonmobile.multiplatformplayground.util.composables.BottomNavigation
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
