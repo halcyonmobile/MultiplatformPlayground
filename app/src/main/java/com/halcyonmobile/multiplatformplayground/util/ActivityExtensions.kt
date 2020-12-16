@@ -37,31 +37,16 @@ fun <I, O> registerForActivityResult(
     // and consistent across configuration changes
     val key = rememberSavedInstanceState { UUID.randomUUID().toString() }
 
-    // Since we don't have a reference to the real ActivityResultLauncher
-    // until we register(), we build a layer of indirection so we can
-    // immediately return an ActivityResultLauncher
-    // (this is the same approach that Fragment.registerForActivityResult uses)
+    // TODO a working layer of indirection would be great
     val realLauncher = remember<ActivityResultLauncher<I>> {
         activityResultRegistry.register(key, contract) {
             currentOnResult.value(it)
-        }
-    }
-    val returnedLauncher = remember {
-        object : ActivityResultLauncher<I>() {
-            override fun launch(input: I, options: ActivityOptionsCompat?) {
-                realLauncher.launch(input, options)
-            }
-
-            override fun unregister() {
-                realLauncher.unregister()
-            }
-
-            override fun getContract() = contract
         }
     }
 
     onDispose {
         realLauncher.unregister()
     }
-    return returnedLauncher
+
+    return realLauncher
 }
