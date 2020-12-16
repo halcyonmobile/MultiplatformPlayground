@@ -6,6 +6,7 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("koin")
     id("com.squareup.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.codingfeline.buildkonfig")
@@ -60,6 +61,14 @@ kotlin {
                 api(Versions.Common.BEAGLE_LOG_KTOR)
                 // Multiplatform resources
                 api(Versions.Common.MOKO_RESOURCES)
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+                // Koin tests
+                implementation(Versions.Common.KOIN_TEST)
             }
         }
         val androidMain by getting {
