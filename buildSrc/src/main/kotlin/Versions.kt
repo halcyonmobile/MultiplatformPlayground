@@ -86,7 +86,7 @@ object Versions {
 
         // endregion
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
-        const val APP_COMPAT = "androidx.appcompat:appcompat:1.3.0-alpha02"
+        const val ACTIVITY = "androidx.activity:activity:1.2.0-beta02"
         const val KOTLIN_EXTENSIONS = "androidx.core:core-ktx:1.5.0-alpha03"
         const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:1.1.3"
         const val MATERIAL_COMPONENTS = "com.google.android.material:material:1.2.0-alpha04"

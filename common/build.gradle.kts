@@ -64,10 +64,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(Versions.Android.LIFECYCLE_EXTENSIONS)
-                implementation(Versions.Android.LIVE_DATA)
                 implementation(Versions.Android.VIEW_MODEL)
-                implementation(Versions.Android.APP_COMPAT)
                 implementation(Versions.Android.KOTLIN_EXTENSIONS)
 
                 // Ktor-client for network requests
