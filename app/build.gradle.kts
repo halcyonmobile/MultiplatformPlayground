@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
-    id("kotlin-parcelize")
+    id("kotlin-android")
     id("kotlin-kapt")
 }
 
@@ -67,7 +66,7 @@ dependencies {
     implementation(Versions.Android.COIL_COMPOSE)
     implementation(Versions.Android.INSETS_COMPOSE)
 
-    implementation(Versions.Android.APP_COMPAT)
+    implementation(Versions.Android.ACTIVITY)
     implementation(Versions.Android.KOTLIN_EXTENSIONS)
     implementation(Versions.Android.CONSTRAINT_LAYOUT)
     implementation(Versions.Android.MATERIAL_COMPONENTS)
