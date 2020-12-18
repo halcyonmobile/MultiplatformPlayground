@@ -30,7 +30,7 @@ class CoroutineTestRule(private val testDispatcher: TestCoroutineDispatcher = Te
     /**
      * Use this method for running suspend methods inside your tests
      */
-    fun <T> runTest(block: suspend CoroutineScope.() -> T) = this.testDispatcher.runBlockingTest {
+    fun <T> runTest(block: suspend CoroutineScope.() -> T) = testDispatcher.runBlockingTest {
         block(this)
     }
 }
