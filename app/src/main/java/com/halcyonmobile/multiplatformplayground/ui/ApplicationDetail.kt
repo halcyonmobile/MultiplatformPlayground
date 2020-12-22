@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.halcyonmobile.multiplatformplayground.R
+import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationDetailViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -116,7 +117,7 @@ private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
     Row {
         Image(
             imageVector = vectorResource(id = iconRes),
-            colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
+            colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
             modifier = Modifier.align(Alignment.CenterVertically).padding(end = 8.dp)
         )
         Column {
