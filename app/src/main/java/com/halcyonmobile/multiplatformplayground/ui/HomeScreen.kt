@@ -1,14 +1,29 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.ScrollableTabRow
+import androidx.compose.material.Snackbar
+import androidx.compose.material.Surface
+import androidx.compose.material.Tab
+import androidx.compose.material.TabConstants
 import androidx.compose.material.TabConstants.defaultTabIndicatorOffset
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.AmbientDensity
@@ -18,10 +33,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
-import dev.chrisbanes.accompanist.coil.CoilImage
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
+import com.halcyonmobile.multiplatformplayground.viewmodel.HomeViewModel
+import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
@@ -119,10 +135,10 @@ fun Tabs(categoryTabs: List<CategoryTabUiModel>, onClick: (Int) -> Unit) {
             ScrollableTabRow(
                 selectedTabIndex,
                 modifier = Modifier.statusBarsPadding().wrapContentWidth(),
-                backgroundColor = MaterialTheme.colors.surface,
+                backgroundColor = AppTheme.colors.surface,
                 indicator = { tabPositions ->
                     TabConstants.DefaultIndicator(
-                        color = if (isSystemInDarkTheme()) MaterialTheme.colors.onSurface else MaterialTheme.colors.primary,
+                        color = AppTheme.colors.primary,
                         modifier = Modifier.defaultTabIndicatorOffset(tabPositions[selectedTabIndex])
                     )
                 }

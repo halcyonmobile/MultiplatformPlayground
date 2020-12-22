@@ -2,8 +2,14 @@ package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
@@ -19,7 +25,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
-import com.halcyonmobile.multiplatformplayground.shared.util.log
+import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
@@ -71,7 +77,7 @@ private fun Application(
                 )
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_rating),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
+                    colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
                     modifier = Modifier.size(16.dp).padding(start = 4.dp)
                 )
             }
