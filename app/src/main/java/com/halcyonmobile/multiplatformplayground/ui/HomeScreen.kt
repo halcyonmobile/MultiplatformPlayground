@@ -25,7 +25,6 @@ import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationsViewModel
 import dev.chrisbanes.accompanist.insets.AmbientWindowInsets
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Composable
 fun HomeScreen(
@@ -70,7 +69,6 @@ fun HomeScreen(
     }
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 private fun ApplicationsPerCategory(
     categoryId: Long,

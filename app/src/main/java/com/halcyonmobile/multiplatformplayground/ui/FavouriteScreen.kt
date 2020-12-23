@@ -18,9 +18,7 @@ import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
     val viewModel = remember {
