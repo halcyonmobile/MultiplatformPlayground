@@ -20,9 +20,7 @@ import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationDetailViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
     val viewModel =
