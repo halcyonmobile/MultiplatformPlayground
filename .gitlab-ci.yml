@@ -8,6 +8,7 @@ cache:
 stages:
   - build
   - lint
+  - test
 
 # Default configuration inherited by other jobs.
 .default: &default
@@ -29,10 +30,25 @@ build:
       - app/build/outputs/apk/debug/
     expire_in: 1 days
 
+test:
+  <<: *default
+  stage: test
+  script:
+    - ./gradlew test
+  only:
+    - master
+    - develop
+    - /^release.*$/
+    - merge_requests
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+
 lint:
   <<: *default
   stage: lint
-  before_script: []
+  before_script: [ ]
   script:
     - ./gradlew lint
   only:
