@@ -13,8 +13,7 @@ internal class CategoryRepository(
 
     suspend fun get(id: Long) = localSource.get(id)
 
-    suspend fun fetch() = remoteSource.get(0, DEFAULT_PER_PAGE)
-        .also { categories -> categories.forEach { localSource.insert(it) } }
+    suspend fun fetch() = remoteSource.get(0, DEFAULT_PER_PAGE).onEach { localSource.insert(it) }
 
     companion object {
         private const val DEFAULT_PER_PAGE = 999

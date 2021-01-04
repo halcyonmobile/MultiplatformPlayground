@@ -28,7 +28,6 @@ allprojects {
         maven("https://dl.bintray.com/kotlin/ktor")
         maven("https://dl.bintray.com/kotlin/exposed")
         maven("https://jitpack.io")
-        maven("https://dl.bintray.com/kodein-framework/Kodein-DI")
         maven("https://dl.bintray.com/icerockdev/moko")
         maven("https://dl.bintray.com/ekito/koin") // Needed for some of the koin-mp metadata
     }
