@@ -9,10 +9,8 @@ import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
 import com.halcyonmobile.multiplatformplayground.util.*
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.slot
-import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -25,6 +23,8 @@ class ApplicationRemoteSourceTest : BaseTest() {
     @RelaxedMockK
     private lateinit var api: ApplicationApi
 
+    // TODO this is probably an indication, that a better
+    // abstraction is needed
     @RelaxedMockK
     private lateinit var imageFile: ImageFile
 

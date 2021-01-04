@@ -1,11 +1,25 @@
 package com.halcyonmobile.multiplatformplayground.util
 
+import com.halcyonmobile.multiplatformplayground.db.Categories
 import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
 import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
 import io.ktor.util.*
 
+// TODO restructure this
 val category = Category(
+    id = 1,
+    name = "Category 1",
+    icon = "icon 1"
+)
+
+val category2 = Category(
+    id = 2,
+    name = "Category 2",
+    icon = "icon 2"
+)
+
+val categoryEntity = Categories(
     id = 1,
     name = "Category 1",
     icon = "icon 1"
