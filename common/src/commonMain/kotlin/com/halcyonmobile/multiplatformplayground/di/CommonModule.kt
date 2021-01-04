@@ -50,7 +50,7 @@ private val useCaseModule = module {
     factory { CreateApplicationUseCase(get()) }
 }
 
-private val commonModules =
+internal val commonModules =
     listOf(apiModule, repositoryModule, useCaseModule)
 
 fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
