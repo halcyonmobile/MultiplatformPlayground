@@ -14,7 +14,7 @@ internal sealed class Result<out T> {
          */
         suspend operator fun <T> invoke(function: suspend () -> T): Result<T> = try {
             Success(function())
-        } catch (exception: Exception) {
+        } catch (exception: Throwable) {
             Error(exception)
         }
     }
