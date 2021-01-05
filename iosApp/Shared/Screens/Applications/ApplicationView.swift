@@ -15,12 +15,12 @@ struct ApplicationView: View {
     var application: ApplicationUiModel.App
     
     var body: some View {
-        HStack(alignment: .center){
+        HStack(alignment: .center) {
             KFImage(URL(string: application.icon))
                 .frame(width: 64, height: 64, alignment: .center)
-                .padding(.horizontal, 16)
                 .cornerRadius(8)
-            VStack(alignment: .leading){
+                .padding(.trailing)
+            VStack(alignment: .leading) {
                 Text(application.name)
                     .font(.body)
                 Text(application.developer)
@@ -29,9 +29,9 @@ struct ApplicationView: View {
                     Text(application.rating.description)
                         .font(.caption)
                     Image(systemName: "star.fill")
-                        .foregroundColor(Color(ApplicationColors.accentColor))
+                        .foregroundColor(.accentColor)
                 }
-            }.padding(.horizontal, 16)
+            }
         }
     }
 }

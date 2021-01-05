@@ -23,14 +23,8 @@ struct FavoritesView: View {
             case FavouritesViewModel.State.loading:
                 ProgressView()
             case FavouritesViewModel.State.error:
-                VStack{
-                    Spacer()
-                    Text(MR.strings().general_error.localize())
-                        .multilineTextAlignment(.center)
-                    Button(MR.strings().retry.localize(), action: {
-                        state.viewModel.loadFavourites()
-                    }).padding(.top, 8)
-                    Spacer()
+                PlaceholderView(message: MR.strings().general_error.localize()) {
+                    state.viewModel.loadFavourites()
                 }
             default:
                 List(state.favourites, id: \.id){ favourite in

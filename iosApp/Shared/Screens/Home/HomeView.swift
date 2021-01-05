@@ -11,38 +11,31 @@ import common
 import SlidingTabView
 
 struct HomeView: View {
-    
-    @ObservedObject var homeState = HomeState()
+    @ObservedObject var state = HomeState()
     @State private var showsUploadScreen = false
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
-                VStack {
-                    let tabs = homeState.categoryTabs.map { categoryTabs in
-                        categoryTabs.name
-                    }
-                    if(tabs.count >= 2) {
+                let tabs = state.tabs.map { $0.name }
+                if !tabs.isEmpty {
+                    VStack {
                         ScrollView(.horizontal) {
-                            SlidingTabView(selection: Binding(
-                                            get: { (homeState.categoryTabs.firstIndex(where: {$0.id == homeState.selectedCategoryId}) ?? 0)},
-                                            set:{ selectedTabIndex in
-                                                homeState.homeViewModel.onTabClicked(index: Int32(selectedTabIndex))
-                                            }), tabs: tabs)
+                            SlidingTabView(selection: $state.selectedTab, tabs: tabs, activeAccentColor: .accentColor)
                         }
-                        ApplicationsView(categoryId: homeState.selectedCategoryId)
-                    } else {
-                        ProgressView()
+                        ApplicationsView(categoryId: state.selectedCategoryId)
                     }
+                } else {
+                    ProgressView()
                 }
-                .navigationBarHidden(true)
                 
                 FloatingActionButton(icon: "plus.circle.fill", action: { showsUploadScreen.toggle() })
                     .padding([.trailing, .bottom])
                     .sheet(isPresented: $showsUploadScreen, content: {
-                        UploadApplicationView(categoryId: homeState.selectedCategoryId)
+                        UploadApplicationView(categoryId: state.selectedCategoryId)
                     })
             }
+            .navigationBarHidden(true)
         }
     }
 }

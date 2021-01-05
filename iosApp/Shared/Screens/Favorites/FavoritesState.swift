@@ -15,7 +15,7 @@ class FavoritesState: ObservableObject{
     @Published private(set) var favourites: [ApplicationUiModel.App] = []
     @Published private(set) var state: FavouritesViewModel.State = FavouritesViewModel.State.normal
     
-    init(){
+    init() {
         viewModel.observeFavourites { favourites in
             self.favourites = favourites
         }

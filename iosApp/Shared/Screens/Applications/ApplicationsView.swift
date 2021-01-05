@@ -22,24 +22,14 @@ struct ApplicationsView: View {
     var body: some View {
         switch state.state {
         case ApplicationsViewModel.State.error:
-            VStack{
-                Spacer()
-                Text(MR.strings().general_error.localize())
-                    .multilineTextAlignment(.center)
-                Spacer()
-            }
+            PlaceholderView(message: MR.strings().general_error.localize())
         case ApplicationsViewModel.State.empty:
-            VStack{
-                Spacer()
-                Text(MR.strings().applications_empty_message.localize())
-                    .multilineTextAlignment(.center)
-                Spacer()
-            }
+            PlaceholderView(message: MR.strings().applications_empty_message.localize())
         default:
             List(state.items, id: \.id) { item in
                 switch item {
                 case let app as ApplicationUiModel.App:
-                    NavigationLink(destination: ApplicationDetailView(applicationId: app.id)){
+                    NavigationLink(destination: ApplicationDetailView(applicationId: app.id)) {
                         ApplicationView(application: app)
                     }.onAppear{
                         if(app.id == state.items.last?.id){

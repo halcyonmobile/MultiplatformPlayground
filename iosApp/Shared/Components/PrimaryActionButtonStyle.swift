@@ -19,7 +19,7 @@ struct PrimaryActionButtonStyle: ButtonStyle {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .blendMode(.overlay)
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(Color(ApplicationColors.accentColor))
+                        .fill(Color.accentColor)
                 }
         )
             .scaleEffect(configuration.isPressed ? 0.95: 1)

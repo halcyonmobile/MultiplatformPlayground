@@ -7,24 +7,31 @@
 //
 
 import Foundation
+import SwiftUI
 import common
 
 class HomeState: ObservableObject {
     
     let homeViewModel = HomeViewModel()
-    @Published private(set) var categoryTabs = [CategoryTabUiModel]()
+    
+    @Published private(set) var tabs = [CategoryTabUiModel]()
     @Published private(set) var selectedCategoryId: Int64 = 0
+    @Published var selectedTab = 0 {
+        didSet { tabSelected(index: selectedTab) }
+    }
     
     init() {
         homeViewModel.observeCategories { items in
-            self.categoryTabs = items
+            self.tabs = items
             
-            if let categoryId = items.first(where: { tab in
-                tab.isSelected
-            })?.id {
+            if let categoryId = items.first(where: { $0.isSelected })?.id {
                 self.selectedCategoryId = categoryId
             }
         }
+    }
+    
+    func tabSelected(index: Int) {
+        homeViewModel.onTabClicked(index: Int32(index))
     }
     
     deinit {

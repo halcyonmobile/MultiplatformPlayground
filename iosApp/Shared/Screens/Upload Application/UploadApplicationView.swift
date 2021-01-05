@@ -57,7 +57,7 @@ struct UploadApplicationView: View {
                             .font(.headline)
                         HStack{
                             Image(systemName: "bookmark.fill")
-                                .foregroundColor(Color(ApplicationColors.accentColor))
+                                .foregroundColor(.accentColor)
                             TextField(MR.strings().application_name.localize(), text: Binding(
                                 get: { state.application?.name ?? "" },
                                 set: { state.viewModel.onNameChanged(name: $0) }
@@ -66,7 +66,7 @@ struct UploadApplicationView: View {
                         }.padding(8)
                         HStack{
                             Image(systemName: "person.2.fill")
-                                .foregroundColor(Color(ApplicationColors.accentColor))
+                                .foregroundColor(.accentColor)
                             TextField(MR.strings().developer.localize(), text: Binding(
                                 get: { state.application?.developer ?? "" },
                                 set: { state.viewModel.onDeveloperChanged(developer: $0)}
@@ -78,7 +78,7 @@ struct UploadApplicationView: View {
                         .padding(.trailing, 8)
                         HStack{
                             Image(systemName: "pencil")
-                                .foregroundColor(Color(ApplicationColors.accentColor))
+                                .foregroundColor(.accentColor)
                             TextField(MR.strings().description_.localize(), text: Binding(
                                 get: { state.application?.description_ ?? "" },
                                 set: { state.viewModel.onDescriptionChanged(description: $0)}
@@ -87,7 +87,7 @@ struct UploadApplicationView: View {
                         }.padding(8)
                         HStack{
                             Image(systemName: "square.and.arrow.down")
-                                .foregroundColor(Color(ApplicationColors.accentColor))
+                                .foregroundColor(.accentColor)
                             TextField(MR.strings().downloads.localize(), text: Binding(
                                 get: { state.application?.downloads ?? "" },
                                 set: { state.viewModel.onDownloadsChanged(downloads: $0)}
@@ -95,7 +95,7 @@ struct UploadApplicationView: View {
                             .padding(.leading, 6)
                             
                             Image(systemName: "star.fill")
-                                .foregroundColor(Color(ApplicationColors.accentColor))
+                                .foregroundColor(.accentColor)
                             TextField(MR.strings().rating.localize(), text: Binding(
                                 get: {
                                     if let rating = state.application?.rating?.floatValue{

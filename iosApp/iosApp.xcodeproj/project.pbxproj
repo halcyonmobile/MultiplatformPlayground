@@ -45,17 +45,17 @@
 		F9F2C82825A4CE7400826680 /* ApplicationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD286A257F585500889ED6 /* ApplicationDetailView.swift */; };
 		F9F2C82C25A4CE7500826680 /* ApplicationDetailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD2865257F4E3200889ED6 /* ApplicationDetailState.swift */; };
 		F9F2C82D25A4CE7500826680 /* ApplicationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD286A257F585500889ED6 /* ApplicationDetailView.swift */; };
-		F9F2C83125A4CE8D00826680 /* ApplicationColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B6525513E70001F2131 /* ApplicationColors.swift */; };
 		F9F2C83225A4CE8D00826680 /* PrimaryActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */; };
 		F9F2C83325A4CE8D00826680 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD55D258205A800080769 /* ImagePicker.swift */; };
 		F9F2C83425A4CE8D00826680 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
-		F9F2C83825A4CE8E00826680 /* ApplicationColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B6525513E70001F2131 /* ApplicationColors.swift */; };
 		F9F2C83925A4CE8E00826680 /* PrimaryActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */; };
 		F9F2C83A25A4CE8E00826680 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD55D258205A800080769 /* ImagePicker.swift */; };
 		F9F2C83B25A4CE8E00826680 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
 		F9F2C83F25A4CE9100826680 /* MokoResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */; };
 		F9F2C84325A4CE9200826680 /* MokoResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */; };
 		F9F2C84825A4CEC100826680 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = F9F2C84725A4CEC100826680 /* SlidingTabView */; };
+		F9F2C89925A4EA1700826680 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C89825A4EA1700826680 /* PlaceholderView.swift */; };
+		F9F2C89A25A4EA1700826680 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C89825A4EA1700826680 /* PlaceholderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +66,6 @@
 		173037B325754B9F00DDC467 /* FavoritesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesState.swift; sourceTree = "<group>"; };
 		17353AC52550378B001F2131 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		17353B2125512EAA001F2131 /* UploadApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadApplicationView.swift; sourceTree = "<group>"; };
-		17353B6525513E70001F2131 /* ApplicationColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationColors.swift; sourceTree = "<group>"; };
 		173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryActionButtonStyle.swift; sourceTree = "<group>"; };
 		179DD553258203A700080769 /* ScreenshotUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotUploadButton.swift; sourceTree = "<group>"; };
 		179DD5582582051D00080769 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
@@ -93,6 +92,7 @@
 		F9F2C7C425A4CD2900826680 /* Portfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Portfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F2C7C625A4CD2900826680 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9F2C7C725A4CD2900826680 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		F9F2C89825A4EA1700826680 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,10 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				17ED221D257E56F6003BE46D /* Util */,
-				17353AC52550378B001F2131 /* FloatingActionButton.swift */,
-				17353B6525513E70001F2131 /* ApplicationColors.swift */,
 				179DD55D258205A800080769 /* ImagePicker.swift */,
-				173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -238,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				F9F2C7DE25A4CE0800826680 /* Screens */,
+				F9F2C89525A4E76D00826680 /* Components */,
 				17353AC42550374E001F2131 /* Shared */,
 				F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */,
 				F9F2C7B825A4CD2800826680 /* Assets.xcassets */,
@@ -274,6 +272,16 @@
 				7B0C0B4A25499EE900AED8CB /* Settings */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		F9F2C89525A4E76D00826680 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				17353AC52550378B001F2131 /* FloatingActionButton.swift */,
+				173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */,
+				F9F2C89825A4EA1700826680 /* PlaceholderView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,12 +523,12 @@
 				F9F2C7FD25A4CE4600826680 /* FavoritesView.swift in Sources */,
 				F9F2C7CA25A4CD2900826680 /* ContentView.swift in Sources */,
 				F9F2C82825A4CE7400826680 /* ApplicationDetailView.swift in Sources */,
-				F9F2C83125A4CE8D00826680 /* ApplicationColors.swift in Sources */,
 				F9F2C81C25A4CE7100826680 /* ApplicationsState.swift in Sources */,
 				F9F2C7C825A4CD2900826680 /* App_PortfolioApp.swift in Sources */,
 				F9F2C83225A4CE8D00826680 /* PrimaryActionButtonStyle.swift in Sources */,
 				F9F2C83425A4CE8D00826680 /* FloatingActionButton.swift in Sources */,
 				F9F2C80C25A4CE6D00826680 /* UploadApplicationState.swift in Sources */,
+				F9F2C89925A4EA1700826680 /* PlaceholderView.swift in Sources */,
 				F9F2C83325A4CE8D00826680 /* ImagePicker.swift in Sources */,
 				F9F2C83F25A4CE9100826680 /* MokoResourceExtensions.swift in Sources */,
 				F9F2C7FC25A4CE4600826680 /* FavoritesState.swift in Sources */,
@@ -544,12 +552,12 @@
 				F9F2C7FF25A4CE4600826680 /* FavoritesView.swift in Sources */,
 				F9F2C7CB25A4CD2900826680 /* ContentView.swift in Sources */,
 				F9F2C82D25A4CE7500826680 /* ApplicationDetailView.swift in Sources */,
-				F9F2C83825A4CE8E00826680 /* ApplicationColors.swift in Sources */,
 				F9F2C82225A4CE7100826680 /* ApplicationsState.swift in Sources */,
 				F9F2C7C925A4CD2900826680 /* App_PortfolioApp.swift in Sources */,
 				F9F2C83925A4CE8E00826680 /* PrimaryActionButtonStyle.swift in Sources */,
 				F9F2C83B25A4CE8E00826680 /* FloatingActionButton.swift in Sources */,
 				F9F2C81425A4CE6D00826680 /* UploadApplicationState.swift in Sources */,
+				F9F2C89A25A4EA1700826680 /* PlaceholderView.swift in Sources */,
 				F9F2C83A25A4CE8E00826680 /* ImagePicker.swift in Sources */,
 				F9F2C84325A4CE9200826680 /* MokoResourceExtensions.swift in Sources */,
 				F9F2C7FE25A4CE4600826680 /* FavoritesState.swift in Sources */,

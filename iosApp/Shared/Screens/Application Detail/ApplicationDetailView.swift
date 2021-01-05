@@ -39,27 +39,26 @@ struct ApplicationDetailView: View {
                 Spacer()
             }
         default:
-            ScrollView{
-                ZStack(alignment: .bottom){
-                    VStack{
-                        Header(imageUrl: state.applicationDetail!.icon, name: state.applicationDetail!.name, developer: state.applicationDetail!.developer)
-                        HStack{
-                            Property(name: MR.strings().rating.localize(), value: String(state.applicationDetail!.rating), icon: "star.fill")
-                            Spacer()
-                            Property(name: MR.strings().downloads.localize(), value: String(state.applicationDetail!.downloads), icon: "icloud.and.arrow.down")
-                        }.padding(.top, 32)
-                        Description(description: state.applicationDetail!.description_)
-                            .padding(.top, 8)
-                        
-                        // TODO add screenshots
-                    }.frame(alignment: .topLeading)
-                    .padding(16)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Header(imageUrl: state.applicationDetail!.icon, name: state.applicationDetail!.name, developer: state.applicationDetail!.developer)
+                    HStack{
+                        Property(name: MR.strings().rating.localize(), value: String(state.applicationDetail!.rating), icon: "star.fill")
+                        Spacer()
+                        Property(name: MR.strings().downloads.localize(), value: String(state.applicationDetail!.downloads), icon: "icloud.and.arrow.down")
+                    }
+                    Description(description: state.applicationDetail!.description_)
+                        .padding(.top, 8)
+                    
                     Button((state.applicationDetail?.favourite ?? false) ? MR.strings().remove_from_favourites.localize() : MR.strings().add_to_favourites.localize(), action: {
                         state.viewModel.updateFavourite()
                     }).buttonStyle(PrimaryActionButtonStyle())
-                    .alignmentGuide(.bottom) { d in d[.bottom] - 64 }
                 }
+                .padding()
+                
+                
             }
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -70,13 +69,12 @@ private struct Description: View{
     @State private var showMore = false
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 16) {
             Text(MR.strings().description_.localize())
                 .font(.title)
             Text(description)
                 .font(.caption)
                 .lineLimit(showMore ? nil : 3)
-                .padding(8)
             Button(!showMore ? MR.strings().show_more.localize() : MR.strings().show_less.localize(), action:  {
                 showMore = !showMore
             })
@@ -119,7 +117,7 @@ private struct Property: View {
     var body: some View{
         HStack{
             Image(systemName: icon)
-                .foregroundColor(Color(ApplicationColors.accentColor))
+                .foregroundColor(.accentColor)
                 .frame(alignment: .center)
                 .padding(8)
             VStack {
