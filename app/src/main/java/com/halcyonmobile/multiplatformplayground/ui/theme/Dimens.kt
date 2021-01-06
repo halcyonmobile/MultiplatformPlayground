@@ -1,3 +1,5 @@
+package com.halcyonmobile.multiplatformplayground.ui.theme
+
 import androidx.compose.runtime.staticAmbientOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
