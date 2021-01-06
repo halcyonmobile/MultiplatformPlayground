@@ -1,9 +1,9 @@
 image: circleci/android:api-29
 
 cache:
+  key: ${CI_PROJECT_ID}
   paths:
-    - .gradle/wrapper
-    - .gradle/caches
+    - .gradle
 
 stages:
   - build
