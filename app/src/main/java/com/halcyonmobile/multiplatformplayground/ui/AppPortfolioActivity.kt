@@ -2,7 +2,6 @@ package com.halcyonmobile.multiplatformplayground.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.platform.setContent
 import androidx.core.view.WindowCompat
@@ -19,7 +18,7 @@ class AppPortfolioActivity : AppCompatActivity() {
         setContent {
             MultiplatformPlaygroundTheme {
                 ProvideWindowInsets {
-                    Surface(color = MaterialTheme.colors.background) {
+                    Surface {
                         MainScreen()
                     }
                 }
