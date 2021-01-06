@@ -2,7 +2,10 @@ package com.halcyonmobile.multiplatformplayground.util
 
 import com.halcyonmobile.multiplatformplayground.db.Categories
 import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationDetailUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
+import com.halcyonmobile.multiplatformplayground.shared.util.PER_PAGE
 import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
 import io.ktor.util.*
 
@@ -35,6 +38,18 @@ val applicationData = Application(
     categoryId = 0
 )
 
+val fullPageApplicationData = (0..10).map {
+    Application(
+        id = it.toLong(),
+        name = "application $it",
+        icon = "",
+        developer = "developer $it",
+        rating = 4.5f,
+        favourite = it % 2 == 0,
+        categoryId = 0
+    )
+}
+
 val screenshot = Screenshot(0, "image 1", "imageUrl")
 
 val applicationDetailResponseData = ApplicationDetailResponse(
@@ -55,6 +70,33 @@ val applicationDetailResponseData = ApplicationDetailResponse(
 )
 
 val applicationDetailData = ApplicationDetail(
+    id = 1,
+    name = "application 1",
+    developer = "developer 1",
+    icon = "",
+    rating = 4.5f,
+    ratingCount = 100,
+    storeUrl = "https://",
+    description = "Lorem ipsum",
+    downloads = "4.2M",
+    version = "4.1.1",
+    size = "427 MB",
+    favourite = true,
+    categoryId = 0,
+    screenshots = listOf(screenshot)
+)
+
+val applicationUiModelData = ApplicationUiModel.App(
+    id = 1,
+    name = "application 1",
+    developer = "developer 1",
+    icon = "",
+    rating = 4.5f,
+    favourite = true,
+    categoryId = 0
+)
+
+val applicationDetailUiModelData = ApplicationDetailUiModel(
     id = 1,
     name = "application 1",
     developer = "developer 1",

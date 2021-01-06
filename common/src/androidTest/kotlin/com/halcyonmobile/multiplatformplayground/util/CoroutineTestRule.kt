@@ -25,6 +25,7 @@ class CoroutineTestRule(private val testDispatcher: TestCoroutineDispatcher = Te
     override fun finished(description: Description?) {
         super.finished(description)
         Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
     }
 
     /**
