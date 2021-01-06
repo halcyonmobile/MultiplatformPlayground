@@ -34,6 +34,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         useIR = true
+        freeCompilerArgs = listOf("-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
