@@ -88,6 +88,7 @@ kotlin {
                 implementation("junit:junit:4.13.1")
                 implementation(Versions.Android.COROUTINES_TEST)
                 implementation(Versions.Android.MOCKK)
+                implementation(Versions.Android.TURBINE)
             }
         }
         val iosMain by getting {

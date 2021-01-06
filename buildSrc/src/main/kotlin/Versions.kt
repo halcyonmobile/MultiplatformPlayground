@@ -111,6 +111,7 @@ object Versions {
         // Tests
         const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
         const val MOCKK = "io.mockk:mockk:1.10.3"
+        const val TURBINE = "app.cash.turbine:turbine:0.3.0"
     }
 
     object iOS {

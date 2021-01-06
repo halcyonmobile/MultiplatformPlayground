@@ -12,12 +12,11 @@ import com.halcyonmobile.multiplatformplayground.shared.util.DefaultDispatcherPr
 import com.halcyonmobile.multiplatformplayground.shared.util.DispatcherProvider
 import com.halcyonmobile.multiplatformplayground.usecase.*
 import org.koin.core.context.startKoin
-import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-private val apiModule = module {
-    factory<DispatcherProvider> { DefaultDispatcherProvider() }
+private fun getApiModule(dispatcherProvider: DispatcherProvider) = module {
+    factory { dispatcherProvider }
     single<KtorApi> { KtorApiImpl }
 
     factory { ApplicationApi(get()) }
@@ -50,12 +49,12 @@ private val useCaseModule = module {
     factory { CreateApplicationUseCase(get()) }
 }
 
-internal val commonModules =
-    listOf(apiModule, repositoryModule, useCaseModule)
+internal fun getCommonModules(dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()) =
+    listOf(getApiModule(dispatcherProvider), repositoryModule, useCaseModule)
 
 fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
     appDeclaration()
-    modules(commonModules + platformModule)
+    modules(getCommonModules() + platformModule)
 }
 
 fun initKoin() = initKoin {}
