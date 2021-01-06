@@ -23,18 +23,10 @@ class ApplicationRemoteSourceTest : BaseTest() {
     @RelaxedMockK
     private lateinit var api: ApplicationApi
 
-    // TODO this is probably an indication, that a better
-    // abstraction is needed
-    @RelaxedMockK
-    private lateinit var imageFile: ImageFile
-
     @Before
     fun setup() {
         MockKAnnotations.init(this)
         sut = ApplicationRemoteSource(api, TestDispatcherProvider())
-
-        val dummyByteArray = (1..10).map { it.toByte() }.toByteArray()
-        coEvery { imageFile.toByteArray() } returns dummyByteArray
     }
 
     @Test
@@ -80,27 +72,6 @@ class ApplicationRemoteSourceTest : BaseTest() {
             coEvery { api.getApplicationsByCategory(any(), any(), any()) } throws RuntimeException()
 
             assertFails { sut.getDetail(0) }
-        }
-
-    @Test
-    fun `When create application is called Then the correct request is sent`() =
-        coroutineTestRule.runTest {
-            val applicationUpload = getUploadApplication(imageFile, listOf(imageFile))
-            val expected = getUploadApplicationRequest(imageFile, listOf(imageFile))
-
-            val actualSlot = slot<ApplicationRequest>()
-            coEvery { api.createApplication(capture(actualSlot)) }
-            sut.create(applicationUpload)
-
-            assertEquals(expected, actualSlot.captured)
-        }
-
-    @Test
-    fun `When create application fails Then the exception is propagated downward`() =
-        coroutineTestRule.runTest {
-            coEvery { api.createApplication(any()) } throws RuntimeException()
-
-            assertFails { sut.create(getUploadApplication(imageFile, listOf(imageFile))) }
         }
 
     @Test
