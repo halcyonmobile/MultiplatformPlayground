@@ -12,7 +12,7 @@ It's primary purpose being an **MVVM** project example, if sharing ViewModel log
 
 ### Shared pieces
 
-- Every layer except UI (so ViewModel, Usecase, Repository layers)
+- Every layer except UI (so ViewModel, UseCase, Repository layers)
 - Localization
 - DI
 - Shared DTOs (between Backend & Clients)
@@ -34,3 +34,8 @@ It's primary purpose being an **MVVM** project example, if sharing ViewModel log
 - macOS (in-progress)
 - desktop (planned)
 - web (planned)
+
+### Further Development
+
+- Shared testing (currently android only, [Mockk K/N support](https://github.com/mockk/mockk/issues/58))
+- Supporting more targets
