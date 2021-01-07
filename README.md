@@ -1,22 +1,36 @@
-# Known Kotlin <-> Obj-c <-> Swift interopability issues
-* Obj-c Arrays are not typed => `Observable<List<T>>` will lose it's `T` type, when compiled to **Swift**
-* Missing `struct` value types in *Kotlin* and *Obj-c* => No `copy-on_write` capability
-# Project set-up
-##### BE
-- Run `./gradlew backend:run` from terminal (Additionally you can set up a **Gradle** configuration for this command)
-##### iOS
-1) Import the `iosApp` from Xcode
-2) Run `./gradlew common:podspec` to generate/update the **common.framework**
-3) Run the app from Xcode
-# Resources
-##### Multiplatform
-- [KMM documentation](https://kotlinlang.org/docs/mobile/home.html)
-- [IceRock KMP library finder](https://libs.kmp.icerock.dev/)
-- [Kotlin Multiplatform libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries)
-- [Jetbrains KMP project collection](https://www.jetbrains.com/lp/mobilecrossplatform/?_ga=2.202856727.765867490.1593685697-1840297874.1578984105)
-- [KaMPKit from Touchlab](https://github.com/touchlab/KaMPKit)
-- [Urbantz KMP networking example](https://gitlab.com/halcyonmobile/urbantz-kmp-networking)
-- [Kotlinlang official multiplatform documentation](https://kotlinlang.org/docs/reference/multiplatform.html?_ga=2.5643317.765867490.1593685697-1840297874.1578984105)
-##### KTor
-- [Official KTor documentation](https://ktor.io)
-##### iOS
+# Multiplatform Playground (AppPortfolio)
+
+A **Kotlin Multiplatform** project with the purpose of experimenting with and providing a possible direction to newcomers having questions about *tech stack*, *project setup*, *architectural decisions* in a KMP environment.
+
+#### Note:
+
+It's primary purpose being an **MVVM** project example, if sharing ViewModel logic is out of scope for you, then consider checking out the following repositorys:
+
+- https://github.com/joreilly/PeopleInSpace
+- https://github.com/touchlab/KaMPKit
+- https://github.com/joreilly/BikeShare
+
+### Shared pieces
+
+- Every layer except UI (so ViewModel, Usecase, Repository layers)
+- Localization
+- DI
+- Shared DTOs (between Backend & Clients)
+
+### Tech stack
+
+- Declarative UI with `Jetpack Compose` and `SwiftUI`
+- [Koin](https://github.com/InsertKoinIO/koin)
+- [Ktor](https://ktor.io/) (Backend + Client logic)
+- [Kotlinx-serialization](https://github.com/Kotlin/kotlinx.serialization)
+- [SqlDelight](https://github.com/cashapp/sqldelight)
+- [Moko-Resources](https://github.com/icerockdev/moko-resources) (Localization)
+
+### Targets
+
+- JVM (Backend)
+- Android
+- iOS
+- macOS (in-progress)
+- desktop (planned)
+- web (planned)
