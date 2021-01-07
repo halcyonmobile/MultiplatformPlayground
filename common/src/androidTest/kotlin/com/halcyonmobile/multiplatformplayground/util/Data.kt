@@ -4,6 +4,7 @@ import com.halcyonmobile.multiplatformplayground.db.Categories
 import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationDetailUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
 import com.halcyonmobile.multiplatformplayground.shared.util.PER_PAGE
 import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
@@ -16,11 +17,17 @@ val category = Category(
     icon = "icon 1"
 )
 
+val categoryTabUiModel =
+    CategoryTabUiModel(id = 1, name = "Category 1", icon = "icon 1", isSelected = true)
+
 val category2 = Category(
     id = 2,
     name = "Category 2",
     icon = "icon 2"
 )
+
+val categoryTabUiModel2 =
+    CategoryTabUiModel(id = 2, name = "Category 2", icon = "icon 2", isSelected = false)
 
 val categoryEntity = Categories(
     id = 1,
