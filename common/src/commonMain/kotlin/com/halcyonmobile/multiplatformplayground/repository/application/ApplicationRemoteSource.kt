@@ -29,12 +29,10 @@ internal class ApplicationRemoteSource internal constructor(private val applicat
     }
 }
 
-@OptIn(InternalAPI::class)
 fun UploadApplicationModel.toApplicationRequest() =
     ApplicationRequest(
         name = name,
         developer = developer,
-        encodedIcon = icon.toByteArray().encodeBase64(),
         rating = rating,
         ratingCount = 0,
         storeUrl = "",
@@ -43,8 +41,5 @@ fun UploadApplicationModel.toApplicationRequest() =
         version = "",
         size = "",
         favourite = false,
-        categoryId = categoryId,
-        screenshots = screenshots.map {
-            Screenshot(image = it.toByteArray().encodeBase64(), name = "")
-        }
+        categoryId = categoryId
     )
