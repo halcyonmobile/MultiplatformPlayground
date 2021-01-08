@@ -1,6 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
 import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.storage.file.FileStorage
 import com.halcyonmobile.multiplatformplayground.storage.model.application.*
 import com.halcyonmobile.multiplatformplayground.storage.model.application.ApplicationTable
 import com.halcyonmobile.multiplatformplayground.storage.model.category.CategoryEntity
@@ -9,14 +10,12 @@ import com.halcyonmobile.multiplatformplayground.storage.model.category.toCatego
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotEntity
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotTable
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.toScreenshot
-import com.halcyonmobile.multiplatformplayground.util.getPage
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.log
 import io.ktor.util.KtorExperimentalAPI
-import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newFixedThreadPoolContext
-import kotlinx.coroutines.withContext
+import com.halcyonmobile.multiplatformplayground.util.getPage
+import kotlinx.coroutines.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.coroutines.CoroutineContext
@@ -24,7 +23,10 @@ import kotlin.coroutines.CoroutineContext
 @OptIn(
     KtorExperimentalAPI::class, ObsoleteCoroutinesApi::class
 )
-internal class LocalSourceImpl(application: io.ktor.application.Application) : LocalSource {
+internal class LocalSourceImpl(
+    private val fileStorage: FileStorage,
+    application: io.ktor.application.Application
+) : LocalSource {
     private val dispatcher: CoroutineContext
 
     init {
@@ -64,12 +66,17 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
 
     override suspend fun saveApplication(applicationRequest: ApplicationRequest) {
         withContext(dispatcher) {
+            val iconUrl = fileStorage.save(applicationRequest.name, applicationRequest.encodedIcon)
+            val screenshotUrls = applicationRequest.screenshots
+                .map { async { fileStorage.save(it.name, it.image) } }
+                .awaitAll()
+
             transaction {
                 val category = CategoryEntity[applicationRequest.categoryId.toInt()]
                 ApplicationEntity.new {
                     name = applicationRequest.name
                     developer = applicationRequest.developer
-                    icon = applicationRequest.encodedIcon
+                    icon = iconUrl
                     rating = applicationRequest.rating.toBigDecimal()
                     ratingCount = applicationRequest.ratingCount
                     storeUrl = applicationRequest.storeUrl
@@ -93,7 +100,6 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                     it.developer = application.developer
                     it.rating = application.rating.toBigDecimal()
                     it.favourite = application.favourite
-                    // todo update screenshots also
                 }
             }
         }

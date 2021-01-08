@@ -10,6 +10,7 @@ application {
 
 dependencies {
     implementation(project(":commonModel"))
+    implementation(Versions.Jvm.STANDARD_LIBRARY)
     implementation(Versions.Jvm.KTOR_CLIENT_APACHE)
     implementation(Versions.Jvm.KTOR_SERIALIZATION)
 
@@ -28,4 +29,6 @@ dependencies {
     implementation(Versions.Jvm.HIKARI_CONNECTION_POOL)
 
     implementation(Versions.Jvm.LOGBACK)
+
+    implementation(Versions.Jvm.AWS_JAVA_SDK)
 }
