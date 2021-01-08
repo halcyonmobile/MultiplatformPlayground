@@ -12,9 +12,8 @@ import io.ktor.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.time.LocalDateTime
 
-@OptIn(KtorExperimentalAPI::class, InternalAPI::class)
+@OptIn(KtorExperimentalAPI::class)
 class AmazonFileStorage(application: Application) : FileStorage {
 
     private val client: AmazonS3Client
@@ -37,21 +36,17 @@ class AmazonFileStorage(application: Application) : FileStorage {
         }
     }
 
-    override suspend fun save(name: String, encodedFile: String): String =
+    override suspend fun save(file: File): String =
         withContext(Dispatchers.IO) {
-            val fileName = "${LocalDateTime.now()}_$name.jpg"
-            val file = File(name).apply {
-                writeBytes(encodedFile.decodeBase64Bytes())
-            }
             val objectRequest = PutObjectRequest(
                 bucketName,
-                fileName,
+                file.nameWithoutExtension,
                 file
             ).withCannedAcl(CannedAccessControlList.PublicRead)
 
             with(client) {
                 putObject(objectRequest)
-                getResourceUrl(bucketName, fileName)
+                getResourceUrl(bucketName, file.nameWithoutExtension)
             }
         }
 }
