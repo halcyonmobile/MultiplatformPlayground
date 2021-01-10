@@ -65,7 +65,7 @@ internal class LocalSourceImpl(
     ): List<Application> =
         getApplications().filter { it.categoryId == categoryId }.getPage(page, perPage)
 
-    override suspend fun saveApplication(applicationRequest: ApplicationRequest) {
+    override suspend fun saveApplication(applicationRequest: ApplicationRequest) =
         withContext(dispatcher) {
             transaction {
                 val category = CategoryEntity[applicationRequest.categoryId.toInt()]
@@ -82,10 +82,9 @@ internal class LocalSourceImpl(
                     size = applicationRequest.size
                     favourite = applicationRequest.favourite
                     this.category = category
-                }
+                }.id.value.toLong()
             }
         }
-    }
 
     override suspend fun updateApplication(application: Application) {
         withContext(dispatcher) {
@@ -151,7 +150,7 @@ internal class LocalSourceImpl(
         }
     }
 
-    override suspend fun saveScreenshot(appId: Long, name: String, image: File) =
+    override suspend fun saveScreenshot(appId: Long, name: String, image: File) {
         withContext(dispatcher) {
             val imageUrl = fileStorage.save(image)
             transaction {
@@ -160,9 +159,10 @@ internal class LocalSourceImpl(
                     this.name = name
                     this.image = imageUrl
                     this.application = application
-                }.id.value.toLong()
+                }
             }
         }
+    }
 
     override suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot> =
         withContext(dispatcher) {

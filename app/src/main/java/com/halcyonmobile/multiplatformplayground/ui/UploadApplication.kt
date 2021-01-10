@@ -19,12 +19,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRowFor
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -59,6 +54,12 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
     val uploadApplicationUiModel by viewModel.uploadApplicationUiModel.collectAsState(
         UploadApplicationUiModel(categoryId = initialCategoryId)
     )
+    val state by viewModel.state.collectAsState()
+    val event by viewModel.event.collectAsState(null)
+
+    if (event == UploadApplicationViewModel.Event.SUCCESSFUL_UPLOAD) {
+        upPress()
+    }
 
     val getIcon = registerForGalleryResult(viewModel::onIconChanged)
     val getScreenshot = registerForGalleryResult(viewModel::onAddScreenshot)
@@ -66,33 +67,48 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
     Scaffold(
         topBar = { BackBar(upPress = upPress) },
         bodyContent = {
-            ScrollableColumn(contentPadding = PaddingValues(16.dp)) {
-                Card(
-                    modifier = Modifier.preferredSize(88.dp).align(Alignment.CenterHorizontally),
-                    shape = CircleShape,
-                    backgroundColor = AppTheme.colors.cardButton
+            when (state) {
+                UploadApplicationViewModel.State.LOADING -> Box(
+                    Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
                 ) {
-                    Box(Modifier.clickable { getIcon.launchAsImageResult() }) {
-                        if (uploadApplicationUiModel.icon == null) {
-                            Image(
-                                imageVector = vectorResource(id = R.drawable.ic_add_image),
-                                colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
-                                modifier = Modifier.wrapContentSize().align(Alignment.Center)
-                            )
-                        } else {
-                            CoilImage(
-                                data = uploadApplicationUiModel.icon!!.uri,
-                                modifier = Modifier.matchParentSize(),
-                                contentScale = ContentScale.Crop
-                            )
+                    CircularProgressIndicator()
+                }
+                UploadApplicationViewModel.State.NORMAL -> ScrollableColumn(
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    Card(
+                        modifier = Modifier.preferredSize(88.dp)
+                            .align(Alignment.CenterHorizontally),
+                        shape = CircleShape,
+                        backgroundColor = AppTheme.colors.cardButton
+                    ) {
+                        Box(Modifier.clickable { getIcon.launchAsImageResult() }) {
+                            if (uploadApplicationUiModel.icon == null) {
+                                Image(
+                                    imageVector = vectorResource(id = R.drawable.ic_add_image),
+                                    colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
+                                    modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                                )
+                            } else {
+                                CoilImage(
+                                    data = uploadApplicationUiModel.icon!!.uri,
+                                    modifier = Modifier.matchParentSize(),
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
                         }
                     }
+                    Screenshots(
+                        screenshots = uploadApplicationUiModel.screenshots,
+                        onAddScreenshot = { getScreenshot.launchAsImageResult() }
+                    )
+                    ApplicationDetails(uploadApplicationUiModel, viewModel)
+                    ExtendedFloatingActionButton(
+                        text = { Text(stringResource(R.string.submit)) },
+                        onClick = viewModel::submit,
+                        modifier = Modifier.fillMaxWidth().padding(16.dp)
+                    )
                 }
-                Screenshots(
-                    screenshots = uploadApplicationUiModel.screenshots,
-                    onAddScreenshot = { getScreenshot.launchAsImageResult() }
-                )
-                ApplicationDetails(uploadApplicationUiModel, viewModel)
             }
         }
     )
