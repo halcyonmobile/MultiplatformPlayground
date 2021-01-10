@@ -19,7 +19,6 @@ private val apiModule = module {
 
     factory { ApplicationApi(get()) }
     factory { CategoryApi(get()) }
-    factory { ScreenshotApi(get()) }
     factory { FavouritesApi(get()) }
 
     single { MultiplatformDatabase(get()) }

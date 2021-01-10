@@ -9,14 +9,19 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.takeFrom
 import com.halcyonmobile.multiplatformplayground.BuildKonfig
+import io.ktor.client.features.logging.*
 
 object KtorApiImpl : KtorApi {
 
     val baseUrl = BuildKonfig.baseUrl
 
-    @OptIn(ExperimentalStdlibApi::class)
     override val client = HttpClient {
-        installNetworkLogger()
+//        Enabling logger causes Multipart requests to suspend endlessly
+//        installNetworkLogger()
+//        install(Logging) {
+//            logger = Logger.SIMPLE
+//            level = LogLevel.ALL
+//        }
         install(JsonFeature) {
             serializer = KotlinxSerializer()
         }

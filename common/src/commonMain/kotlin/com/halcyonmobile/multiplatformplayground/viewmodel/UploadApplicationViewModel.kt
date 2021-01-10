@@ -4,7 +4,6 @@ import com.halcyonmobile.multiplatformplayground.model.ui.*
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
-import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.CreateApplicationUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoryUseCase
 import kotlinx.coroutines.flow.*

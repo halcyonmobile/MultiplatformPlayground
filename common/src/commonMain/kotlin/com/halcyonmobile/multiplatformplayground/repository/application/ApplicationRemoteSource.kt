@@ -6,26 +6,36 @@ import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
 import io.ktor.util.InternalAPI
 import io.ktor.util.encodeBase64
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 
-internal class ApplicationRemoteSource internal constructor(private val applicationApi: ApplicationApi) {
+internal class ApplicationRemoteSource internal constructor(private val api: ApplicationApi) {
 
     suspend fun get(categoryId: Long, offset: Int, perPage: Int) =
         withContext(Dispatchers.Default) {
-            applicationApi.getApplicationsByCategory(offset, perPage, categoryId)
+            api.getApplicationsByCategory(offset, perPage, categoryId)
         }
 
-    suspend fun create(uploadApplicationModel: UploadApplicationModel) =
+    suspend fun create(uploadApplicationModel: UploadApplicationModel) {
         withContext(Dispatchers.Default) {
-            applicationApi.createApplication(uploadApplicationModel.toApplicationRequest())
+            val appId = api.createApplication(uploadApplicationModel.toApplicationRequest())
+            val fileRequests = uploadApplicationModel.screenshots.mapIndexed { index, screenshot ->
+                async {
+                    api.postScreenshot(appId, "${appId}_screenshot_$index", screenshot)
+                }
+            } + async { api.postIcon(appId, uploadApplicationModel.icon) }
+
+            fileRequests.awaitAll()
         }
+    }
 
     suspend fun getDetail(id: Long) = withContext(Dispatchers.Default) {
-        applicationApi.getApplicationDetail(id).toApplicationDetail()
+        api.getApplicationDetail(id).toApplicationDetail()
     }
 
     suspend fun update(application: Application) = withContext(Dispatchers.Default) {
-        applicationApi.update(application)
+        api.update(application)
     }
 }
 

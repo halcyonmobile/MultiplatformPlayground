@@ -9,7 +9,7 @@ internal interface LocalSource {
 
     suspend fun getApplications(page: Int, perPage: Int, categoryId: Long): List<Application>
 
-    suspend fun saveApplication(applicationRequest: ApplicationRequest)
+    suspend fun saveApplication(applicationRequest: ApplicationRequest): Long
 
     suspend fun updateApplication(application: Application)
 

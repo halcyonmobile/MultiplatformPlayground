@@ -13,6 +13,8 @@ import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.serialization.json
 import io.ktor.util.error
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -60,21 +62,24 @@ internal fun Application.main() {
 }
 
 // TODO remove mocked data
-private fun Application.mock(localSource: LocalSource) = with(environment.classLoader) {
-    // Init database with pre-defined categories located in resources/categories.json
-    getResourceAsStream("categories.json")?.bufferedReader()?.readText()
-        ?.let {
-            Json.decodeFromString<List<Category>>(it).forEach { category ->
-                launch {
-                    localSource.saveCategory(category)
+private fun Application.mock(localSource: LocalSource) = GlobalScope.launch {
+    delay(2000)
+    with(environment.classLoader) {
+        // Init database with pre-defined categories located in resources/categories.json
+        getResourceAsStream("categories.json")?.bufferedReader()?.readText()
+            ?.let {
+                Json.decodeFromString<List<Category>>(it).forEach { category ->
+                    launch {
+                        localSource.saveCategory(category)
+                    }
                 }
             }
-        }
 
-    getResourceAsStream("applications.json")?.bufferedReader()?.readText()?.let {
-        Json.decodeFromString<List<ApplicationRequest>>(it).forEach { applicationRequest ->
-            launch {
-                localSource.saveApplication(applicationRequest)
+        getResourceAsStream("applications.json")?.bufferedReader()?.readText()?.let {
+            Json.decodeFromString<List<ApplicationRequest>>(it).forEach { applicationRequest ->
+                launch {
+                    localSource.saveApplication(applicationRequest)
+                }
             }
         }
     }

@@ -2,7 +2,6 @@
   {
     "name": "Application 1",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -11,13 +10,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 2",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -26,13 +23,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 3",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -41,13 +36,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 4",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -56,13 +49,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 5",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -71,13 +62,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 6",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -86,13 +75,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 7",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -101,13 +88,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 8",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -116,13 +101,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 2,
-    "screenshots": []
+    "category_id": 2
   },
   {
     "name": "Application 9",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -131,13 +114,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 10",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -146,13 +127,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 11",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -161,13 +140,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 12",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -176,13 +153,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 13",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -191,13 +166,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 14",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -206,13 +179,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 15",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -221,13 +192,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 16",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -236,13 +205,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 17",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -251,13 +218,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 18",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -266,13 +231,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 19",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -281,8 +244,7 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   },
   {
     "name": "Application 20",
@@ -302,7 +264,6 @@
   {
     "name": "Application 21",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -311,13 +272,11 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": true,
-    "category_id": 2,
-    "screenshots": []
+    "category_id": 2
   },
   {
     "name": "Application 22",
     "developer": "Developer XY",
-    "icon": "https://picsum.photos/100/100",
     "rating": 4.5,
     "rating_count": 1432,
     "store_url": "N/A",
@@ -326,7 +285,6 @@
     "size": "24 mb",
     "version": "0.9",
     "favourite": false,
-    "category_id": 1,
-    "screenshots": []
+    "category_id": 1
   }
 ]

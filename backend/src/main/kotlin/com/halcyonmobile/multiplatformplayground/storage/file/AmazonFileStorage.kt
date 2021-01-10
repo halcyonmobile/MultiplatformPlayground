@@ -40,7 +40,7 @@ class AmazonFileStorage(application: Application) : FileStorage {
         withContext(Dispatchers.IO) {
             val objectRequest = PutObjectRequest(
                 bucketName,
-                file.nameWithoutExtension,
+                file.name,
                 file
             ).withCannedAcl(CannedAccessControlList.PublicRead)
 

@@ -3,11 +3,13 @@ package com.halcyonmobile.multiplatformplayground
 import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import com.halcyonmobile.multiplatformplayground.util.*
+import com.halcyonmobile.multiplatformplayground.shared.util.*
 import io.ktor.application.call
 import io.ktor.features.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.*
-import io.ktor.request.*
+import io.ktor.request.receive
+import io.ktor.request.receiveMultipart
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
@@ -48,10 +50,8 @@ private fun Routing.getApplications(localSource: LocalSource) {
 @OptIn(InternalAPI::class)
 private fun Routing.createApplication(localSource: LocalSource) {
     post("/applications") {
-        val applicationRequest = call.receive<ApplicationRequest>()
-
-        val appId = localSource.getNextApplicationId().toLong()
-        localSource.saveApplication(applicationRequest)
+        val appId = localSource.saveApplication(call.receive<ApplicationRequest>())
+        call.respond(appId)
     }
 }
 
@@ -65,7 +65,7 @@ private fun Routing.postIcon(localSource: LocalSource) {
 
         call.receiveMultipart().forEachPart {
             if (it is PartData.FileItem) {
-                icon = it.toFile(it.iconName)
+                icon = it.toFile()
             }
             it.dispose()
         }
@@ -73,6 +73,7 @@ private fun Routing.postIcon(localSource: LocalSource) {
             icon ?: throw BadRequestException("icon part is missing"),
             appId
         )
+        icon?.delete()
     }
 }
 
@@ -88,10 +89,10 @@ private fun Routing.postScreenshot(localSource: LocalSource) {
 
         call.receiveMultipart().forEachPart {
             when (it) {
-                is PartData.FormItem -> if (it.name == "name") {
+                is PartData.FormItem -> if (it.name == SCREENSHOT_NAME_PART) {
                     name = it.value
                 }
-                is PartData.FileItem -> image = it.toFile(it.imageName)
+                is PartData.FileItem -> image = it.toFile()
                 else -> Unit
             }
             it.dispose()
@@ -101,6 +102,7 @@ private fun Routing.postScreenshot(localSource: LocalSource) {
             name ?: throw BadRequestException("name part is missing"),
             image ?: throw BadRequestException("image part is missing")
         )
+        image?.delete()
     }
 }
 
@@ -175,9 +177,6 @@ private fun Routing.getFavourites(localSource: LocalSource) {
         }
     }
 }
-
-private suspend fun LocalSource.getNextApplicationId() =
-    getApplications().map { it.id }.max() ?: 0 + 1
 
 const val NAME_QUERY_KEY = "name"
 const val CATEGORY_QUERY_KEY = "categoryId"
