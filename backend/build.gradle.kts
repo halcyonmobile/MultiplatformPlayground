@@ -1,12 +1,26 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath(Versions.Jvm.SHADOW_GRADLE_PLUGIN)
+    }
+}
+
+application {
+    // TODO to solve deprecation checkout https://github.com/johnrengelman/shadow/issues/336
+    mainClassName = "com.halcyonmobile.multiplatformplayground.ServerKt"
+}
+
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
     application
+    id("com.github.johnrengelman.shadow") version Versions.Jvm.SHADOW_JAR_VERSION
 }
 
-application {
-    mainClass.set("com.halcyonmobile.multiplatformplayground.ServerKt")
-}
 
 dependencies {
     implementation(project(":commonModel"))
@@ -31,4 +45,11 @@ dependencies {
     implementation(Versions.Jvm.LOGBACK)
 
     implementation(Versions.Jvm.AWS_JAVA_SDK)
+}
+
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("Backend")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+    isZip64 = true
 }
