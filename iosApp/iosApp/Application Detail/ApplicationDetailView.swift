@@ -95,6 +95,9 @@ private struct Header: View{
         HStack{
             KFImage(URL(string: imageUrl))
                 .cornerRadius(8)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 104,height: 104, alignment: .topLeading)
+                .clipped()
             VStack{
                 Text(name)
                     .font(.title3)

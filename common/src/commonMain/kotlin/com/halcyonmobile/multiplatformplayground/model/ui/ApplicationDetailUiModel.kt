@@ -22,28 +22,28 @@ data class ApplicationDetailUiModel(
 )
 
 fun ApplicationDetail.toApplicationDetailUiModel() = ApplicationDetailUiModel(
-    id,
-    name,
-    developer,
-    icon,
-    rating,
-    ratingCount,
-    storeUrl,
-    description,
-    downloads,
-    version,
-    size,
-    favourite,
-    categoryId,
-    screenshots
+    id = id,
+    name =name,
+    developer = developer,
+    icon = icon,
+    rating = rating,
+    ratingCount = ratingCount,
+    storeUrl = storeUrl,
+    description = description,
+    downloads = downloads,
+    version = version,
+    size = size,
+    favourite = favourite,
+    categoryId = categoryId,
+    screenshots = screenshots
 )
 
 fun ApplicationDetailUiModel.toApplication() = Application(
-    id,
-    name,
-    developer,
-    icon,
-    rating,
-    favourite,
-    categoryId
+    id = id,
+    name = name,
+    developer = developer,
+    icon = icon,
+    rating = rating,
+    favourite = favourite,
+    categoryId = categoryId
 )

@@ -8,6 +8,6 @@ import io.ktor.application.*
 import org.koin.dsl.module
 
 internal fun Application.getKoinModule() = module {
-    single<FileStorage> { AmazonFileStorage(this@getKoinModule) }
+    single<FileStorage> { AmazonFileStorage() }
     single<LocalSource> { LocalSourceImpl(get(), this@getKoinModule) }
 }
