@@ -93,8 +93,9 @@ class UploadApplicationViewModel(
     }
 
     override fun onRatingChanged(rating: String) {
+        val newRating = rating.toFloatOrNull() ?: return
         _uploadApplicationUiModel.value =
-            _uploadApplicationUiModel.value.copy(rating = rating.toFloat())
+            _uploadApplicationUiModel.value.copy(rating = newRating)
     }
 
     override fun onDescriptionChanged(description: String) {

@@ -50,8 +50,15 @@ struct ApplicationDetailView: View {
                         }.padding(.top, 32)
                         Description(description: state.applicationDetail!.description_)
                             .padding(.top, 8)
-                        
-                        // TODO add screenshots
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: 88), spacing: 8)], alignment: .leading, spacing: 8){
+                            ForEach(state.applicationDetail?.screenshots ?? [], id: \.self) { screenshot in
+                                KFImage(URL(string: screenshot.image))
+                                    .resizable()
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .aspectRatio(1, contentMode: .fill)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                            }
+                        }
                     }.frame(alignment: .topLeading)
                     .padding(16)
                     Button((state.applicationDetail?.favourite ?? false) ? MR.strings().remove_from_favourites.localize() : MR.strings().add_to_favourites.localize(), action: {
