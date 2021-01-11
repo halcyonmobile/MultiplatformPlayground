@@ -1,6 +1,6 @@
 {
-  "name": "Start on Heroku: AppPortfolio backend",
-  "description": "A barebones Kotlin app, which can easily be deployed to Heroku.",
+  "name": "Start on Heroku: Multiplatform backend",
+  "description": "Kotlin multiplatform backend",
   "image": "heroku/java",
   "addons": [ "heroku-postgresql" ]
 }

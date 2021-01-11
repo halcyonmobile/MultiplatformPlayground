@@ -17,7 +17,8 @@ object Versions {
             "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
         const val SQL_DELIGHT_GRADLE_PLUGIN =
             "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
-        const val BUILD_KONFIG_GRADLE_PLUGIN = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.7.0"
+        const val BUILD_KONFIG_GRADLE_PLUGIN =
+            "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.7.0"
 
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
@@ -39,6 +40,10 @@ object Versions {
         private const val EXPOSED_VERSION = "0.28.1"
         const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
+        const val SHADOW_JAR_VERSION = "6.1.0"
+
+        const val SHADOW_GRADLE_PLUGIN =
+            "com.github.jengelman.gradle.plugins:shadow:$SHADOW_JAR_VERSION"
 
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
         const val KTOR_WEB_SOCKETS = "io.ktor:ktor-websockets:$KTOR_VERSION"
