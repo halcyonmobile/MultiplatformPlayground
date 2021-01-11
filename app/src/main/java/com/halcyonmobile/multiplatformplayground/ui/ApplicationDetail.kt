@@ -1,6 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.layout.*
@@ -14,8 +15,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
 import com.halcyonmobile.multiplatformplayground.R
+import com.halcyonmobile.multiplatformplayground.shared.util.toImageFile
+import com.halcyonmobile.multiplatformplayground.ui.shared.Screenshots
 import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
 import com.halcyonmobile.multiplatformplayground.viewmodel.ApplicationDetailViewModel
@@ -28,6 +33,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
         remember(applicationId) { ApplicationDetailViewModel(applicationId) }
     val applicationWithDetail by viewModel.applicationDetailUiModel.collectAsState()
     val state by viewModel.state.collectAsState()
+    val contentResolver = (AmbientContext.current as AppCompatActivity).contentResolver
 
     Scaffold(
         topBar = { BackBar(upPress = upPress) },
@@ -72,7 +78,9 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                         )
                     }
                     Description(it.description)
-                    // TODO add screenshots
+                    Screenshots(screenshots = it.screenshots.map { screenshot ->
+                        screenshot.image.toUri().toImageFile(contentResolver)
+                    })
                 }
             }
             ApplicationDetailViewModel.State.ERROR -> Column(

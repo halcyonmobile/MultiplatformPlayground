@@ -18,7 +18,7 @@ data class ApplicationDetailUiModel(
     val size: String,
     val favourite: Boolean = false,
     val categoryId: Long,
-    val screenshots: List<Screenshot>
+    val screenshots: List<ScreenshotUiModel>
 )
 
 fun ApplicationDetail.toApplicationDetailUiModel() = ApplicationDetailUiModel(
@@ -35,7 +35,7 @@ fun ApplicationDetail.toApplicationDetailUiModel() = ApplicationDetailUiModel(
     size = size,
     favourite = favourite,
     categoryId = categoryId,
-    screenshots = screenshots
+    screenshots = screenshots.map { it.toScreenshotUiModel() }
 )
 
 fun ApplicationDetailUiModel.toApplication() = Application(
