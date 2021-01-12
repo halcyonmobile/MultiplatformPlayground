@@ -1,25 +1,8 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Snackbar
-import androidx.compose.material.Surface
-import androidx.compose.material.Tab
-import androidx.compose.material.TabConstants
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.TabConstants.defaultTabIndicatorOffset
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -52,20 +35,27 @@ fun HomeScreen(
     }
     val categoryTabs by viewModel.categoryTabs.collectAsState(emptyList())
     val selectedCategory by viewModel.selectedCategory.collectAsState(null)
-    val error by viewModel.error.collectAsState(null)
+    val state by viewModel.state.collectAsState(HomeViewModel.State.LOADING)
 
-    Scaffold(floatingActionButton = {
-        selectedCategory?.let {
-            FloatingActionButton(
-                onClick = { onUploadApplication(it.id) },
-                modifier = Modifier
-                    .padding(bottom = AppTheme.dimens.bottomNavHeight)
-                    .navigationBarsPadding()
-            ) { Icon(imageVector = vectorResource(id = R.drawable.ic_add)) }
+
+    when (state) {
+        HomeViewModel.State.LOADING -> Column(
+            Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center
+        ) {
+            CircularProgressIndicator(Modifier.align(Alignment.CenterHorizontally))
         }
-    }) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Column(modifier = Modifier.fillMaxSize().weight(1f)) {
+        HomeViewModel.State.NORMAL -> Scaffold(floatingActionButton = {
+            selectedCategory?.let {
+                FloatingActionButton(
+                    onClick = { onUploadApplication(it.id) },
+                    modifier = Modifier
+                        .padding(bottom = AppTheme.dimens.bottomNavHeight)
+                        .navigationBarsPadding()
+                ) { Icon(imageVector = vectorResource(id = R.drawable.ic_add)) }
+            }
+        }) {
+            Column(modifier = Modifier.fillMaxSize()) {
                 Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
                 selectedCategory?.let {
                     ApplicationsPerCategory(
@@ -80,7 +70,19 @@ fun HomeScreen(
                     )
                 }
             }
-            error?.let { Snackbar(text = { Text(text = it) }, modifier = Modifier.padding(16.dp)) }
+        }
+        HomeViewModel.State.ERROR -> Column(
+            Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(id = R.string.general_error),
+                style = MaterialTheme.typography.h6
+            )
+            Button(onClick = { viewModel.fetch() }) {
+                Text(text = stringResource(id = R.string.retry))
+            }
         }
     }
 }
