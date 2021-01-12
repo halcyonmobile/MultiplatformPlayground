@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.LazyRowFor
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -34,29 +34,31 @@ fun Screenshots(screenshots: List<ImageFile>, onAddScreenshot: () -> Unit = {}, 
             style = MaterialTheme.typography.h6,
             modifier = Modifier.padding(16.dp)
         )
-        LazyRowFor(items = items, modifier = Modifier.padding(8.dp)) {
-            if (it != null) {
-                CoilImage(
-                    data = it.uri,
-                    modifier = Modifier.preferredSize(88.dp).padding(8.dp),
-                    contentScale = ContentScale.Crop
-                )
-            } else {
-                Card(
-                    modifier = Modifier.preferredSize(88.dp).padding(8.dp),
-                    shape = RectangleShape,
-                    backgroundColor = AppTheme.colors.cardButton
-                ) {
-                    Box(Modifier.clickable(onClick = onAddScreenshot)) {
-                        Image(
-                            imageVector = vectorResource(id = R.drawable.ic_add_image),
-                            colorFilter = ColorFilter.tint(AppTheme.colors.primary),
-                            modifier = Modifier.wrapContentSize().align(Alignment.Center)
-                        )
-                    }
+        LazyRow(modifier = Modifier.padding(8.dp)) {
+            items(items = items, itemContent = {
+                if (it != null) {
+                    CoilImage(
+                        data = it.uri,
+                        modifier = Modifier.preferredSize(88.dp).padding(8.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Card(
+                        modifier = Modifier.preferredSize(88.dp).padding(8.dp),
+                        shape = RectangleShape,
+                        backgroundColor = AppTheme.colors.cardButton
+                    ) {
+                        Box(Modifier.clickable(onClick = onAddScreenshot)) {
+                            Image(
+                                imageVector = vectorResource(id = R.drawable.ic_add_image),
+                                colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                                modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                            )
+                        }
 
+                    }
                 }
-            }
+            })
         }
     }
 }

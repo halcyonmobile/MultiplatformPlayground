@@ -12,24 +12,24 @@ import com.halcyonmobile.multiplatformplayground.ui.theme.color.appColors
 import com.halcyonmobile.multiplatformplayground.ui.theme.color.materialColors
 
 object AppTheme {
-    @Composable
     @ComposableContract(readonly = true)
     val dimens: Dimens
+        @Composable
         get() = AmbientDimens.current
 
-    @Composable
     @ComposableContract(readonly = true)
     val colors: AppColors
+        @Composable
         get() = AmbientColors.current
 
-    @Composable
     @ComposableContract(readonly = true)
     val typography: Typography
+        @Composable
         get() = MaterialTheme.typography
 
-    @Composable
     @ComposableContract(readonly = true)
     val shapes: Shapes
+        @Composable
         get() = MaterialTheme.shapes
 }
 
