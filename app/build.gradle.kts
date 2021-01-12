@@ -41,7 +41,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     composeOptions {
-        kotlinCompilerVersion = "1.4.20"
+        kotlinCompilerVersion = "1.4.21"
         kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER_VERSION
     }
     lintOptions {

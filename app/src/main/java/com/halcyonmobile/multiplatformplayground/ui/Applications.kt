@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -47,9 +48,11 @@ fun Applications(
         }
         when (item) {
             is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
-            ApplicationUiModel.Loading -> CircularProgressIndicator(
-                Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
-            )
+            ApplicationUiModel.Loading -> Box(Modifier.fillMaxWidth()) {
+                CircularProgressIndicator(
+                    Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
+                )
+            }
         }
     }
 }

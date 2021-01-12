@@ -1,7 +1,7 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.4.20"
+    const val KOTLIN_VERSION = "1.4.21"
     const val COROUTINES_VERSION = "1.4.2-native-mt"
-    const val COMPOSE_COMPILER_VERSION = "1.0.0-alpha08"
+    const val COMPOSE_COMPILER_VERSION = "1.0.0-alpha09"
     private const val KTOR_VERSION = "1.5.0"
     private const val SERIALIZATION_VERSION = "1.0.1"
     private const val KOIN_VERSION = "3.0.0-alpha-4"
@@ -70,7 +70,7 @@ object Versions {
         const val SDK_VERSION = 29
         const val MINIMUM_SDK_VERSION = 23
         const val BUILD_TOOLS_VERSION = "29.0.2"
-        private const val COMPOSE_VERSION = "1.0.0-alpha08"
+        private const val COMPOSE_VERSION = "1.0.0-alpha09"
         private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha03"
         private const val ACCOMPANIST_COMPOSE_VERSION = "0.4.0"
 
