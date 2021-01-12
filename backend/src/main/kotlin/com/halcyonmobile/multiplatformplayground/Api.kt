@@ -82,6 +82,7 @@ private fun Routing.postIcon(localSource: LocalSource) {
             appId
         )
         icon?.delete()
+        call.respond(HttpStatusCode.OK)
     }
 }
 
@@ -111,6 +112,7 @@ private fun Routing.postScreenshot(localSource: LocalSource) {
             image ?: throw BadRequestException("image part is missing")
         )
         image?.delete()
+        call.respond(HttpStatusCode.OK)
     }
 }
 
