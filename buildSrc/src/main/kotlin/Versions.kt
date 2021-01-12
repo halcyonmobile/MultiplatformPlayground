@@ -40,9 +40,10 @@ object Versions {
         private const val EXPOSED_VERSION = "0.28.1"
         const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
+        const val SHADOW_JAR_VERSION = "6.1.0"
 
         const val SHADOW_GRADLE_PLUGIN =
-            "com.github.jengelman.gradle.plugins:shadow:6.1.0"
+            "com.github.jengelman.gradle.plugins:shadow:$SHADOW_JAR_VERSION"
 
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
         const val KTOR_WEB_SOCKETS = "io.ktor:ktor-websockets:$KTOR_VERSION"
