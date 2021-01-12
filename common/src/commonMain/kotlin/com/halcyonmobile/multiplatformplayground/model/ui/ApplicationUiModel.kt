@@ -6,7 +6,7 @@ sealed class ApplicationUiModel {
 
     abstract val id: Long // Added for easier List construction in SwiftUI
 
-    class App(
+    data class App(
         override val id: Long,
         val name: String,
         val icon: String,
@@ -16,7 +16,7 @@ sealed class ApplicationUiModel {
         val categoryId: Long
     ) : ApplicationUiModel()
 
-    object Loading : ApplicationUiModel(){
+    object Loading : ApplicationUiModel() {
         override val id = 0L
     }
 }
