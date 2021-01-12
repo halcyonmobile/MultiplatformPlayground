@@ -39,7 +39,7 @@ dependencies {
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_CORE)
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_DAO)
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_JDBC)
-    implementation(Versions.Jvm.H2_DATABASE)
+    implementation(Versions.Jvm.POSTGRESQL)
     implementation(Versions.Jvm.HIKARI_CONNECTION_POOL)
 
     implementation(Versions.Jvm.LOGBACK)
