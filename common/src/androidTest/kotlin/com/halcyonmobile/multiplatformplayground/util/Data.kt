@@ -5,12 +5,12 @@ import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationDetailUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.toScreenshotUiModel
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
 import com.halcyonmobile.multiplatformplayground.shared.util.PER_PAGE
 import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
 import io.ktor.util.*
 
-// TODO restructure this
 val category = Category(
     id = 1,
     name = "Category 1",
@@ -117,7 +117,7 @@ val applicationDetailUiModelData = ApplicationDetailUiModel(
     size = "427 MB",
     favourite = true,
     categoryId = 0,
-    screenshots = listOf(screenshot)
+    screenshots = listOf(screenshot).map { it.toScreenshotUiModel() }
 )
 
 fun getUploadApplication(icon: ImageFile, screenshots: List<ImageFile>) = UploadApplicationModel(
@@ -129,20 +129,4 @@ fun getUploadApplication(icon: ImageFile, screenshots: List<ImageFile>) = Upload
     downloads = "4.2M",
     categoryId = 0,
     screenshots = screenshots
-)
-
-@OptIn(InternalAPI::class)
-fun getUploadApplicationRequest(icon: ImageFile, screenshots: List<ImageFile>) = ApplicationRequest(
-    name = "application 1",
-    developer = "developer 1",
-    encodedIcon = icon.toByteArray().encodeBase64(),
-    rating = 4.5f,
-    ratingCount = 0,
-    storeUrl = "",
-    description = "Lorem ipsum",
-    downloads = "4.2M",
-    version = "",
-    size = "",
-    categoryId = 0,
-    screenshots = screenshots.map { Screenshot(image = it.toByteArray().encodeBase64(), name = "") }
 )
