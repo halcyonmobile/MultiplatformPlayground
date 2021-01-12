@@ -7,8 +7,8 @@ import androidx.compose.ui.graphics.Color
 val primary200 = Color(0xff73e8ff)
 val primary500 = Color(0xff29b6f6)
 val primary700 = Color(0xff0086c3)
-val accent200 = Color(0xffffab40)
-val accent700 = Color(0xffffab00)
+val accent200 = Color(0xffffff00)
+val accent700 = Color(0xffc7cc00)
 
 val darkColors: AppColors = AppColors(
     primary = primary200,
