@@ -66,7 +66,7 @@ class FavouritesViewModel :
             _state.value = when (val result = getFavourites()) {
                 is Result.Success -> {
                     _favourites.value =
-                        result.value.mapNotNull { it.toApplicationUiModel() as? ApplicationUiModel.App }
+                        result.value.map { it.toApplicationUiModel() }
                     State.NORMAL
                 }
                 is Result.Error -> State.ERROR

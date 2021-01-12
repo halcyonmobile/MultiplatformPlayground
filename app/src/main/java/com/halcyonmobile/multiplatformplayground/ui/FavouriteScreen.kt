@@ -44,7 +44,7 @@ fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
                     items = favourites,
                     onApplicationClicked = onApplicationClicked
                 )
-
+            // TODO extract error to separate composable
             FavouritesViewModel.State.ERROR -> Column(
                 Modifier.align(Alignment.CenterHorizontally).weight(1f)
             ) {

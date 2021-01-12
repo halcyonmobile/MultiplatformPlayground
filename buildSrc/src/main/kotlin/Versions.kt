@@ -13,6 +13,7 @@ object Versions {
     object Common {
         private const val MOKO_RESOURCES_VERSION = "0.13.1"
 
+        const val KOIN_GRADLE_PLUGIN = "org.koin:koin-gradle-plugin:$KOIN_VERSION"
         const val MOKO_RESOURCES_GRADLE_PLUGIN =
             "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
         const val SQL_DELIGHT_GRADLE_PLUGIN =
@@ -33,6 +34,7 @@ object Versions {
         const val MOKO_RESOURCES = "dev.icerock.moko:resources:$MOKO_RESOURCES_VERSION"
 
         const val KOIN_CORE = "org.koin:koin-core:$KOIN_VERSION"
+        const val KOIN_TEST = "org.koin:koin-test:$KOIN_VERSION"
     }
 
     object Jvm {
@@ -105,6 +107,11 @@ object Versions {
         const val BEAGLE_NOOP = "com.github.pandulapeter.beagle:noop:$BEAGLE_VERSION"
 
         const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:android-driver:$SQL_DELIGHT_VERSION"
+
+        // Tests
+        const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
+        const val MOCKK = "io.mockk:mockk:1.10.3"
+        const val TURBINE = "app.cash.turbine:turbine:0.3.0"
     }
 
     object iOS {

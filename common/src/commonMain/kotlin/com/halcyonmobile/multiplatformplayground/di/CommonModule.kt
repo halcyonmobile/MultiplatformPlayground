@@ -8,13 +8,15 @@ import com.halcyonmobile.multiplatformplayground.repository.application.Applicat
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryLocalSource
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
+import com.halcyonmobile.multiplatformplayground.shared.util.DefaultDispatcherProvider
+import com.halcyonmobile.multiplatformplayground.shared.util.DispatcherProvider
 import com.halcyonmobile.multiplatformplayground.usecase.*
 import org.koin.core.context.startKoin
-import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-private val apiModule = module {
+private fun getApiModule(dispatcherProvider: DispatcherProvider) = module {
+    factory { dispatcherProvider }
     single<KtorApi> { KtorApiImpl }
 
     factory { ApplicationApi(get()) }
@@ -26,14 +28,14 @@ private val apiModule = module {
 }
 
 private val repositoryModule = module {
-    factory { ApplicationRemoteSource(get()) }
+    factory { ApplicationRemoteSource(get(), get()) }
     single { ApplicationRepository(get()) }
 
     factory { CategoryLocalSource(get()) }
-    factory { CategoryRemoteSource(get()) }
+    factory { CategoryRemoteSource(get(), get()) }
     single { CategoryRepository(get(), get()) }
 
-    factory { FavouritesRemoteSource(get()) }
+    factory { FavouritesRemoteSource(get(), get()) }
 }
 
 private val useCaseModule = module {
@@ -47,12 +49,12 @@ private val useCaseModule = module {
     factory { CreateApplicationUseCase(get()) }
 }
 
-private val commonModules =
-    listOf(apiModule, repositoryModule, useCaseModule)
+internal fun getCommonModules(dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()) =
+    listOf(getApiModule(dispatcherProvider), repositoryModule, useCaseModule)
 
 fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
     appDeclaration()
-    modules(commonModules + platformModule)
+    modules(getCommonModules() + platformModule)
 }
 
-fun initKoin() = initKoin{}
+fun initKoin() = initKoin {}
