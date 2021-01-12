@@ -4,7 +4,6 @@ import com.halcyonmobile.multiplatformplayground.model.ui.*
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
-import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.CreateApplicationUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoryUseCase
 import kotlinx.coroutines.flow.*
@@ -94,8 +93,9 @@ class UploadApplicationViewModel(
     }
 
     override fun onRatingChanged(rating: String) {
+        val newRating = rating.toFloatOrNull() ?: return
         _uploadApplicationUiModel.value =
-            _uploadApplicationUiModel.value.copy(rating = rating.toFloat())
+            _uploadApplicationUiModel.value.copy(rating = newRating)
     }
 
     override fun onDescriptionChanged(description: String) {

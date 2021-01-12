@@ -1,6 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
 import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.storage.file.FileStorage
 import com.halcyonmobile.multiplatformplayground.storage.model.application.*
 import com.halcyonmobile.multiplatformplayground.storage.model.application.ApplicationTable
 import com.halcyonmobile.multiplatformplayground.storage.model.category.CategoryEntity
@@ -9,27 +10,29 @@ import com.halcyonmobile.multiplatformplayground.storage.model.category.toCatego
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotEntity
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.ScreenshotTable
 import com.halcyonmobile.multiplatformplayground.storage.model.screenshot.toScreenshot
-import com.halcyonmobile.multiplatformplayground.util.getPage
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.log
 import io.ktor.util.KtorExperimentalAPI
-import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.newFixedThreadPoolContext
-import kotlinx.coroutines.withContext
+import com.halcyonmobile.multiplatformplayground.util.getPage
+import kotlinx.coroutines.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.io.File
 import kotlin.coroutines.CoroutineContext
 
 @OptIn(
     KtorExperimentalAPI::class, ObsoleteCoroutinesApi::class
 )
-internal class LocalSourceImpl(application: io.ktor.application.Application) : LocalSource {
+internal class LocalSourceImpl(
+    private val fileStorage: FileStorage,
+    application: io.ktor.application.Application
+) : LocalSource {
     private val dispatcher: CoroutineContext
 
     init {
         val config = application.environment.config.config("database")
-        val url = config.property("connection").getString()
+        val url = System.getenv("JDBC_DATABASE_URL")
         val driver = config.property("driver").getString()
         val poolSize = config.property("poolSize").getString().toInt()
         application.log.info("Connecting to db at $url")
@@ -45,7 +48,7 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         Database.connect(HikariDataSource(hikariConfig))
 
         transaction {
-            SchemaUtils.create(ApplicationTable, CategoryTable, ScreenshotTable)
+            SchemaUtils.createMissingTablesAndColumns(ApplicationTable, CategoryTable, ScreenshotTable)
         }
     }
 
@@ -62,14 +65,14 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
     ): List<Application> =
         getApplications().filter { it.categoryId == categoryId }.getPage(page, perPage)
 
-    override suspend fun saveApplication(applicationRequest: ApplicationRequest) {
+    override suspend fun saveApplication(applicationRequest: ApplicationRequest) =
         withContext(dispatcher) {
             transaction {
                 val category = CategoryEntity[applicationRequest.categoryId.toInt()]
                 ApplicationEntity.new {
                     name = applicationRequest.name
                     developer = applicationRequest.developer
-                    icon = applicationRequest.encodedIcon
+                    icon = ""
                     rating = applicationRequest.rating.toBigDecimal()
                     ratingCount = applicationRequest.ratingCount
                     storeUrl = applicationRequest.storeUrl
@@ -79,11 +82,9 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                     size = applicationRequest.size
                     favourite = applicationRequest.favourite
                     this.category = category
-                    // todo add screenshots also
-                }
+                }.id.value.toLong()
             }
         }
-    }
 
     override suspend fun updateApplication(application: Application) {
         withContext(dispatcher) {
@@ -93,7 +94,6 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
                     it.developer = application.developer
                     it.rating = application.rating.toBigDecimal()
                     it.favourite = application.favourite
-                    // todo update screenshots also
                 }
             }
         }
@@ -121,6 +121,16 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
+    override suspend fun updateCategory(category: Category) = withContext(dispatcher) {
+        transaction {
+            CategoryEntity[category.id.toInt()].let{
+                it.name = category.name
+                it.icon = category.icon
+            }
+        }
+    }
+
+
     override suspend fun getApplications(name: String, categoryId: Long): List<Application> =
         withContext(dispatcher) {
             transaction {
@@ -142,17 +152,27 @@ internal class LocalSourceImpl(application: io.ktor.application.Application) : L
         }
     }
 
-    override suspend fun saveScreenshot(screenshot: Screenshot, appId: Long) =
+    override suspend fun saveIcon(icon: File, appId: Long) = withContext(dispatcher) {
+        val iconUrl = fileStorage.save(icon)
+        transaction {
+            val application = ApplicationEntity[appId.toInt()]
+            application.icon = iconUrl
+        }
+    }
+
+    override suspend fun saveScreenshot(appId: Long, name: String, image: File) {
         withContext(dispatcher) {
+            val imageUrl = fileStorage.save(image)
             transaction {
                 val application = ApplicationEntity[appId.toInt()]
                 ScreenshotEntity.new {
-                    name = screenshot.name
-                    image = screenshot.image
+                    this.name = name
+                    this.image = imageUrl
                     this.application = application
-                }.id.value.toLong()
+                }
             }
         }
+    }
 
     override suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot> =
         withContext(dispatcher) {

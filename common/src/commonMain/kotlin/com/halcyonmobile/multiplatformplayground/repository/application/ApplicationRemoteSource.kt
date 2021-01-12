@@ -3,43 +3,46 @@ package com.halcyonmobile.multiplatformplayground.repository.application
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
 import com.halcyonmobile.multiplatformplayground.model.*
 import com.halcyonmobile.multiplatformplayground.shared.util.DispatcherProvider
-import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
-import io.ktor.util.InternalAPI
-import io.ktor.util.encodeBase64
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 
 internal class ApplicationRemoteSource internal constructor(
-    private val applicationApi: ApplicationApi,
+    private val api: ApplicationApi,
     private val dispatcherProvider: DispatcherProvider
 ) {
 
     suspend fun get(categoryId: Long, offset: Int, perPage: Int) =
         withContext(dispatcherProvider.io) {
-            applicationApi.getApplicationsByCategory(offset, perPage, categoryId)
+            api.getApplicationsByCategory(offset, perPage, categoryId)
         }
 
-    suspend fun create(uploadApplicationModel: UploadApplicationModel) =
+    suspend fun create(uploadApplicationModel: UploadApplicationModel) {
         withContext(dispatcherProvider.io) {
-            applicationApi.createApplication(uploadApplicationModel.toApplicationRequest())
+            val appId = api.createApplication(uploadApplicationModel.toApplicationRequest())
+            val fileRequests = uploadApplicationModel.screenshots.mapIndexed { index, screenshot ->
+                async {
+                    api.postScreenshot(appId, "${appId}_screenshot_$index", screenshot)
+                }
+            } + async { api.postIcon(appId, uploadApplicationModel.icon) }
+
+            fileRequests.awaitAll()
         }
+    }
 
     suspend fun getDetail(id: Long) = withContext(dispatcherProvider.io) {
-        applicationApi.getApplicationDetail(id).toApplicationDetail()
+        api.getApplicationDetail(id).toApplicationDetail()
     }
 
     suspend fun update(application: Application) = withContext(dispatcherProvider.io) {
-        applicationApi.update(application)
+        api.update(application)
     }
 }
 
-// TODO add missing parameters also
-@OptIn(InternalAPI::class)
 fun UploadApplicationModel.toApplicationRequest() =
     ApplicationRequest(
         name = name,
         developer = developer,
-        encodedIcon = icon.toByteArray().encodeBase64(),
         rating = rating,
         ratingCount = 0,
         storeUrl = "",
@@ -48,8 +51,5 @@ fun UploadApplicationModel.toApplicationRequest() =
         version = "",
         size = "",
         favourite = false,
-        categoryId = categoryId,
-        screenshots = screenshots.map {
-            Screenshot(image = it.toByteArray().encodeBase64(), name = "")
-        }
+        categoryId = categoryId
     )

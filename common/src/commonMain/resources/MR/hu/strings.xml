@@ -4,6 +4,7 @@
     <string name="app_name">AppPortfolio</string>
     <string name="retry">Próbálja újra</string>
     <string name="general_error">Hoppácska, valami félrement..</string>
+    <string name="submit">Feltölt</string>
     <!--  Bottom Navigation  -->
     <string name="home">Főoldal</string>
     <string name="favourites">Kedvencek</string>

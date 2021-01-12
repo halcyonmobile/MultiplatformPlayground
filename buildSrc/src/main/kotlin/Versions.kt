@@ -2,7 +2,7 @@ object Versions {
     const val KOTLIN_VERSION = "1.4.20"
     const val COROUTINES_VERSION = "1.4.2-native-mt"
     const val COMPOSE_COMPILER_VERSION = "1.0.0-alpha08"
-    private const val KTOR_VERSION = "1.4.2"
+    private const val KTOR_VERSION = "1.5.0"
     private const val SERIALIZATION_VERSION = "1.0.1"
     private const val KOIN_VERSION = "3.0.0-alpha-4"
     private const val SQL_DELIGHT_VERSION = "1.4.4"
@@ -18,7 +18,8 @@ object Versions {
             "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
         const val SQL_DELIGHT_GRADLE_PLUGIN =
             "com.squareup.sqldelight:gradle-plugin:$SQL_DELIGHT_VERSION"
-        const val BUILD_KONFIG_GRADLE_PLUGIN = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.7.0"
+        const val BUILD_KONFIG_GRADLE_PLUGIN =
+            "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.7.0"
 
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:$KTOR_VERSION"
         const val KTOR_CLIENT_JSON = "io.ktor:ktor-client-json:$KTOR_VERSION"
@@ -40,6 +41,11 @@ object Versions {
     object Jvm {
         private const val EXPOSED_VERSION = "0.28.1"
         const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
+        const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
+        const val SHADOW_JAR_VERSION = "6.1.0"
+
+        const val SHADOW_GRADLE_PLUGIN =
+            "com.github.jengelman.gradle.plugins:shadow:$SHADOW_JAR_VERSION"
 
         const val KTOR_AUTH = "io.ktor:ktor-auth:$KTOR_VERSION"
         const val KTOR_WEB_SOCKETS = "io.ktor:ktor-websockets:$KTOR_VERSION"
@@ -53,9 +59,11 @@ object Versions {
         const val JETBRAINS_EXPOSED_DAO = "org.jetbrains.exposed:exposed-dao:$EXPOSED_VERSION"
         const val JETBRAINS_EXPOSED_JDBC = "org.jetbrains.exposed:exposed-jdbc:$EXPOSED_VERSION"
 
-        const val H2_DATABASE = "com.h2database:h2:1.4.200"
         const val HIKARI_CONNECTION_POOL = "com.zaxxer:HikariCP:3.4.5"
+        const val POSTGRESQL = "org.postgresql:postgresql:42.2.18"
         const val LOGBACK = "ch.qos.logback:logback-classic:1.2.3"
+
+        const val AWS_JAVA_SDK = "com.amazonaws:aws-java-sdk:1.11.933"
     }
 
     object Android {

@@ -1,15 +1,15 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
 import com.halcyonmobile.multiplatformplayground.model.*
+import java.io.File
 
-// todo add paging
 internal interface LocalSource {
 
     suspend fun getApplications(): List<Application>
 
     suspend fun getApplications(page: Int, perPage: Int, categoryId: Long): List<Application>
 
-    suspend fun saveApplication(applicationRequest: ApplicationRequest)
+    suspend fun saveApplication(applicationRequest: ApplicationRequest): Long
 
     suspend fun updateApplication(application: Application)
 
@@ -21,11 +21,15 @@ internal interface LocalSource {
 
     suspend fun saveCategory(category: Category): Long
 
+    suspend fun updateCategory(category: Category)
+
     suspend fun getCategories(): List<Category>
 
     suspend fun getCategory(id: Long): Category
 
-    suspend fun saveScreenshot(screenshot: Screenshot, appId: Long): Long
+    suspend fun saveIcon(icon: File, appId: Long)
+
+    suspend fun saveScreenshot(appId: Long, name: String, image: File)
 
     suspend fun getScreenshots(screenshotIds: List<Long>): List<Screenshot>
 

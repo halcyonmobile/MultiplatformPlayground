@@ -9,7 +9,7 @@ import org.jetbrains.exposed.sql.ReferenceOption
 
 object ScreenshotTable : IntIdTable("screenshots") {
     val name = varchar(SCREENSHOT_NAME, 50)
-    val image = varchar(SCREENSHOT_IMAGE, 255)
+    val image = varchar(SCREENSHOT_IMAGE, 1024)
     val application = reference(
         SCREENSHOT_APP_ID,
         ApplicationTable,

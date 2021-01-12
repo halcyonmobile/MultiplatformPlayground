@@ -37,4 +37,8 @@ const val PER_PAGE = "perPage"
 
 const val CATEGORY_ID_QUERY = "categoryId"
 
-
+// region Multipart constants
+const val ICON_FILE_PART = "icon"
+const val SCREENSHOT_FILE_PART = "screenshot"
+const val SCREENSHOT_NAME_PART = "name"
+// endregion
