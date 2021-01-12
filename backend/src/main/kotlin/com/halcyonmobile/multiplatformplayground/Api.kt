@@ -160,10 +160,9 @@ private fun Routing.getCategories(localSource: LocalSource) {
 private fun Routing.postCategory(localSource: LocalSource) {
     post("/category") {
         val category = call.receive<Category>()
-        val savedCategory = category.copy(icon = category.icon)
-        val id = localSource.saveCategory(savedCategory)
+        val id = localSource.saveCategory(category)
 
-        call.respond(savedCategory.copy(id))
+        call.respond(category.copy(id))
     }
 }
 
