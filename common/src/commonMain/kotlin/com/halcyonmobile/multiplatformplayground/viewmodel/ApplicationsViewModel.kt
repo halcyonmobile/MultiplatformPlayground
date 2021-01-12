@@ -4,7 +4,6 @@ import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.toApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
-import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,7 +21,8 @@ class ApplicationsViewModel(
     private val _event = MutableSharedFlow<Event>()
 
     private val isLoading get() = items.value.contains(ApplicationUiModel.Loading)
-    var isLastPage = false
+    private var isLastPage = false
+
     /**
      * Represents all the UI items
      */
@@ -79,6 +79,7 @@ class ApplicationsViewModel(
      */
     fun refresh() {
         pageOffset = 0
+        isLastPage = false
         _items.value = emptyList()
         load()
     }
