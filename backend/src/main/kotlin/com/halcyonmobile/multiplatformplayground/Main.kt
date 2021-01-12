@@ -52,35 +52,9 @@ internal fun Application.main() {
     install(Koin) {
         modules(getKoinModule())
     }
+
     val localSource by inject<LocalSource>()
     install(Routing) {
-        // todo update uploadDir
         api(localSource)
-    }
-
-    mock(localSource)
-}
-
-// TODO remove mocked data
-private fun Application.mock(localSource: LocalSource) = GlobalScope.launch {
-    delay(2000)
-    with(environment.classLoader) {
-        // Init database with pre-defined categories located in resources/categories.json
-        getResourceAsStream("categories.json")?.bufferedReader()?.readText()
-            ?.let {
-                Json.decodeFromString<List<Category>>(it).forEach { category ->
-                    launch {
-                        localSource.saveCategory(category)
-                    }
-                }
-            }
-
-        getResourceAsStream("applications.json")?.bufferedReader()?.readText()?.let {
-            Json.decodeFromString<List<ApplicationRequest>>(it).forEach { applicationRequest ->
-                launch {
-                    localSource.saveApplication(applicationRequest)
-                }
-            }
-        }
     }
 }
