@@ -4,7 +4,6 @@ buildscript {
         google()
         jcenter()
         maven("https://kotlin.bintray.com/kotlinx")
-        maven("https://dl.bintray.com/jetbrains/kotlin-native-dependencies")
         maven("https://dl.bintray.com/icerockdev/plugins")
         mavenCentral()
     }

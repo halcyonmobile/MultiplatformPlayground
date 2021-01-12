@@ -19,8 +19,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Surface
 import androidx.compose.material.Tab
-import androidx.compose.material.TabConstants
-import androidx.compose.material.TabConstants.defaultTabIndicatorOffset
+import androidx.compose.material.TabDefaults
+import androidx.compose.material.TabDefaults.tabIndicatorOffset
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -155,9 +155,9 @@ fun Tabs(categoryTabs: List<CategoryTabUiModel>, onClick: (Int) -> Unit) {
                 modifier = Modifier.statusBarsPadding().wrapContentWidth(),
                 backgroundColor = AppTheme.colors.surface,
                 indicator = { tabPositions ->
-                    TabConstants.DefaultIndicator(
+                    TabDefaults.Indicator(
                         color = AppTheme.colors.primary,
-                        modifier = Modifier.defaultTabIndicatorOffset(tabPositions[selectedTabIndex])
+                        modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex])
                     )
                 }
             ) {
