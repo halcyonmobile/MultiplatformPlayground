@@ -15,6 +15,8 @@ version = "1.0.0"
 
 kotlin {
     android()
+    macosX64("macOS")
+
     // Set the target based on if it's real phone ore simulator
     if (System.getenv("SDK_NAME").orEmpty().startsWith("iphoneos")) {
         iosArm64("ios")
@@ -79,6 +81,12 @@ kotlin {
                 implementation(Versions.iOS.SQL_DELIGHT_DRIVER)
             }
         }
+        val macOSMain by getting {
+            dependencies {
+                implementation(Versions.iOS.KTOR_CLIENT)
+                implementation(Versions.iOS.SQL_DELIGHT_DRIVER)
+            }
+        }
     }
 }
 
@@ -89,7 +97,11 @@ android {
         minSdkVersion(Versions.Android.MINIMUM_SDK_VERSION)
         targetSdkVersion(Versions.Android.SDK_VERSION)
     }
-
+    configurations {
+        create("testApi")
+        create("testDebugApi")
+        create("testReleaseApi")
+    }
     sourceSets {
         getByName("main") {
             manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -106,7 +118,7 @@ val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
     val framework =
-        kotlin.targets.getByName<KotlinNativeTarget>("ios").binaries.getFramework(mode)
+        kotlin.targets.getByName<KotlinNativeTarget>("macOS").binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")

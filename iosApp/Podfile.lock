@@ -1,16 +1,8 @@
 PODS:
   - common (1.0.0)
-  - Kingfisher/Core (5.15.7)
-  - Kingfisher/SwiftUI (5.15.7):
-    - Kingfisher/Core
 
 DEPENDENCIES:
   - common (from `../common/`)
-  - Kingfisher/SwiftUI (~> 5.15.7)
-
-SPEC REPOS:
-  trunk:
-    - Kingfisher
 
 EXTERNAL SOURCES:
   common:
@@ -18,8 +10,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   common: 657653be3063afd276daf6f040300b5010d7d5fc
-  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
 
-PODFILE CHECKSUM: a4516a5944962ae53ef11f6a56417fec537fc533
+PODFILE CHECKSUM: 7734dc31378010d3a843baf50576fb73175fb8fa
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

@@ -8,7 +8,7 @@
 
 import SwiftUI
 import common
-import SlidingTabView
+//import SlidingTabView
 
 struct HomeView: View {
     @ObservedObject var state = HomeState()
@@ -20,9 +20,9 @@ struct HomeView: View {
                 let tabs = state.tabs.map { $0.name }
                 if !tabs.isEmpty {
                     VStack {
-                        ScrollView(.horizontal) {
-                            SlidingTabView(selection: $state.selectedTab, tabs: tabs, activeAccentColor: .accentColor)
-                        }
+//                        ScrollView(.horizontal) {
+//                            SlidingTabView(selection: $state.selectedTab, tabs: tabs, activeAccentColor: .accentColor)
+//                        }
                         ApplicationsView(categoryId: state.selectedCategoryId)
                     }
                 } else {

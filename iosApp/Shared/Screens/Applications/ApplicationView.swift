@@ -8,7 +8,8 @@
 
 import SwiftUI
 import common
-import struct Kingfisher.KFImage
+//import Kingfisher
+//import struct Kingfisher.KFImage
 
 struct ApplicationView: View {
     
@@ -16,10 +17,10 @@ struct ApplicationView: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            KFImage(URL(string: application.icon))
-                .frame(width: 64, height: 64, alignment: .center)
-                .cornerRadius(8)
-                .padding(.trailing)
+//            KFImage(URL(string: application.icon))
+//                .frame(width: 64, height: 64, alignment: .center)
+//                .cornerRadius(8)
+//                .padding(.trailing)
             VStack(alignment: .leading) {
                 Text(application.name)
                     .font(.body)

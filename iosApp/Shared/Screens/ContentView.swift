@@ -12,14 +12,18 @@ import common
 struct ContentView: View {
     
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem { Label(MR.strings().home.localize(), systemImage: "house") }
-            FavoritesView()
-                .tabItem { Label(MR.strings().favourites.localize(), systemImage: "heart") }
-            SettingsView()
-                .tabItem { Label(MR.strings().settings.localize(), systemImage: "gearshape") }
-        }
+//        if UIDevice.current.userInterfaceIdiom == .pad {
+//            SidebarView()
+//        } else {
+            TabView {
+                HomeView()
+                    .tabItem { Label(MR.strings().home.localize(), systemImage: "house") }
+                FavoritesView()
+                    .tabItem { Label(MR.strings().favourites.localize(), systemImage: "heart") }
+                SettingsView()
+                    .tabItem { Label(MR.strings().settings.localize(), systemImage: "gearshape") }
+            }
+//        }
     }
 }
 

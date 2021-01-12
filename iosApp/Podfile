@@ -5,10 +5,8 @@ use_frameworks!
 
 target 'App Portfolio (iOS)' do
   pod 'common', :path => '../common/'
-  pod 'Kingfisher/SwiftUI', '~> 5.15.7'
 end
 
 target 'App Portfolio (macOS)' do
   pod 'common', :path => '../common/'
-  pod 'Kingfisher/SwiftUI', '~> 5.15.7'
 end

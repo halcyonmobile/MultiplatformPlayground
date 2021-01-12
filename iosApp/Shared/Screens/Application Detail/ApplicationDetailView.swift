@@ -42,23 +42,23 @@ struct ApplicationDetailView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     Header(imageUrl: state.applicationDetail!.icon, name: state.applicationDetail!.name, developer: state.applicationDetail!.developer)
-                    HStack{
+                    HStack(spacing: 32) {
                         Property(name: MR.strings().rating.localize(), value: String(state.applicationDetail!.rating), icon: "star.fill")
-                        Spacer()
                         Property(name: MR.strings().downloads.localize(), value: String(state.applicationDetail!.downloads), icon: "icloud.and.arrow.down")
                     }
                     Description(description: state.applicationDetail!.description_)
                         .padding(.top, 8)
-                    
-                    Button((state.applicationDetail?.favourite ?? false) ? MR.strings().remove_from_favourites.localize() : MR.strings().add_to_favourites.localize(), action: {
-                        state.viewModel.updateFavourite()
-                    }).buttonStyle(PrimaryActionButtonStyle())
                 }
                 .padding()
-                
-                
             }
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { state.viewModel.updateFavourite() }) {
+                        Image(systemName: state.applicationDetail?.favourite ?? false ? "heart.fill" : "heart")
+                    }
+                }
+            }
         }
     }
 }

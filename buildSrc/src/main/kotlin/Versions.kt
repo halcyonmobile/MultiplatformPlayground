@@ -11,7 +11,7 @@ object Versions {
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
 
     object Common {
-        private const val MOKO_RESOURCES_VERSION = "0.13.1"
+        private const val MOKO_RESOURCES_VERSION = "0.14.0"
 
         const val MOKO_RESOURCES_GRADLE_PLUGIN =
             "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
@@ -110,5 +110,10 @@ object Versions {
     object iOS {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
         const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver:$SQL_DELIGHT_VERSION"
+    }
+
+    object macOS {
+        const val KTOR_CLIENT = "io.ktor:ktor-client-macos:$KTOR_VERSION"
+        const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver-macosx64:$SQL_DELIGHT_VERSION"
     }
 }

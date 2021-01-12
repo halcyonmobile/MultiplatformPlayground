@@ -6,7 +6,6 @@
 //  Copyright © 2020 orgName. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 
 //https://www.hackingwithswift.com/books/ios-swiftui/importing-an-image-into-swiftui-using-uiimagepickercontroller

@@ -8,6 +8,8 @@ version = "1.0.0"
 kotlin {
     jvm()
 
+    macosX64("macOS")
+
     if (System.getenv("SDK_NAME").orEmpty().startsWith("iphoneos")) {
         iosArm64("ios")
     } else {

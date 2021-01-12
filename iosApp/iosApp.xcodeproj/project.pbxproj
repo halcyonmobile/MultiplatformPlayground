@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7834B7EF01C184E83C8C6760 /* Pods_App_Portfolio__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A972725BFE1E8ACF6C03C4F /* Pods_App_Portfolio__iOS_.framework */; };
 		D50976A9603016CF114B1FF9 /* Pods_App_Portfolio__macOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4D473C76E7C71B419EC77BB /* Pods_App_Portfolio__macOS_.framework */; };
+		F942780125ADF8CF0077472A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F942780025ADF8CF0077472A /* Kingfisher */; };
+		F942780525ADF8D70077472A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F942780425ADF8D70077472A /* Kingfisher */; };
+		F942780C25ADF9060077472A /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = F942780B25ADF9060077472A /* SlidingTabView */; };
+		F950463825A4F484003A6C08 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F950463725A4F484003A6C08 /* SidebarView.swift */; };
 		F9F2C7C825A4CD2900826680 /* App_PortfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */; };
 		F9F2C7C925A4CD2900826680 /* App_PortfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */; };
 		F9F2C7CA25A4CD2900826680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B725A4CD2800826680 /* ContentView.swift */; };
@@ -53,7 +57,6 @@
 		F9F2C83B25A4CE8E00826680 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
 		F9F2C83F25A4CE9100826680 /* MokoResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */; };
 		F9F2C84325A4CE9200826680 /* MokoResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */; };
-		F9F2C84825A4CEC100826680 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = F9F2C84725A4CEC100826680 /* SlidingTabView */; };
 		F9F2C89925A4EA1700826680 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C89825A4EA1700826680 /* PlaceholderView.swift */; };
 		F9F2C89A25A4EA1700826680 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C89825A4EA1700826680 /* PlaceholderView.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +87,7 @@
 		A4D473C76E7C71B419EC77BB /* Pods_App_Portfolio__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App_Portfolio__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADBA2D53875F1238EF65B01D /* Pods-App Portfolio (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Portfolio (iOS).release.xcconfig"; path = "Target Support Files/Pods-App Portfolio (iOS)/Pods-App Portfolio (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		CB367ED3A4521DD632FBB3CB /* Pods-App Portfolio (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Portfolio (iOS).debug.xcconfig"; path = "Target Support Files/Pods-App Portfolio (iOS)/Pods-App Portfolio (iOS).debug.xcconfig"; sourceTree = "<group>"; };
+		F950463725A4F484003A6C08 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_PortfolioApp.swift; sourceTree = "<group>"; };
 		F9F2C7B725A4CD2800826680 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F9F2C7B825A4CD2800826680 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,7 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9F2C84825A4CEC100826680 /* SlidingTabView in Frameworks */,
+				F942780C25ADF9060077472A /* SlidingTabView in Frameworks */,
+				F942780125ADF8CF0077472A /* Kingfisher in Frameworks */,
 				7834B7EF01C184E83C8C6760 /* Pods_App_Portfolio__iOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F942780525ADF8D70077472A /* Kingfisher in Frameworks */,
 				D50976A9603016CF114B1FF9 /* Pods_App_Portfolio__macOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +237,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		F950463625A4F471003A6C08 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				F950463725A4F484003A6C08 /* SidebarView.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
 		F9F2C7B525A4CD2800826680 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +277,7 @@
 		F9F2C7DE25A4CE0800826680 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F950463625A4F471003A6C08 /* Sidebar */,
 				F9F2C7B725A4CD2800826680 /* ContentView.swift */,
 				17CD2861257F4DFB00889ED6 /* Application Detail */,
 				1717E5B22552D1630064239B /* Applications */,
@@ -296,7 +311,6 @@
 				F9F2C7B925A4CD2800826680 /* Sources */,
 				F9F2C7BA25A4CD2800826680 /* Frameworks */,
 				F9F2C7BB25A4CD2800826680 /* Resources */,
-				72BC9EFB911F9661E79A5D71 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -304,7 +318,8 @@
 			);
 			name = "App Portfolio (iOS)";
 			packageProductDependencies = (
-				F9F2C84725A4CEC100826680 /* SlidingTabView */,
+				F942780025ADF8CF0077472A /* Kingfisher */,
+				F942780B25ADF9060077472A /* SlidingTabView */,
 			);
 			productName = "App Portfolio (iOS)";
 			productReference = F9F2C7BD25A4CD2800826680 /* Portfolio.app */;
@@ -319,13 +334,15 @@
 				F9F2C7C025A4CD2900826680 /* Sources */,
 				F9F2C7C125A4CD2900826680 /* Frameworks */,
 				F9F2C7C225A4CD2900826680 /* Resources */,
-				DBCC1E27F98503CF1962F7D4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "App Portfolio (macOS)";
+			packageProductDependencies = (
+				F942780425ADF8D70077472A /* Kingfisher */,
+			);
 			productName = "App Portfolio (macOS)";
 			productReference = F9F2C7C425A4CD2900826680 /* Portfolio.app */;
 			productType = "com.apple.product-type.application";
@@ -358,7 +375,8 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				172C7407254C133B008B9580 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				F94277FF25ADF8CF0077472A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				F942780A25ADF9060077472A /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -390,23 +408,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		72BC9EFB911F9661E79A5D71 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App Portfolio (iOS)/Pods-App Portfolio (iOS)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App Portfolio (iOS)/Pods-App Portfolio (iOS)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App Portfolio (iOS)/Pods-App Portfolio (iOS)-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		93B4BC9F05F5BF3636FF613F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,23 +450,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DBCC1E27F98503CF1962F7D4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App Portfolio (macOS)/Pods-App Portfolio (macOS)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App Portfolio (macOS)/Pods-App Portfolio (macOS)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App Portfolio (macOS)/Pods-App Portfolio (macOS)-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F9F2C87625A4D8E100826680 /* Moko */ = {
@@ -530,6 +514,7 @@
 				F9F2C80C25A4CE6D00826680 /* UploadApplicationState.swift in Sources */,
 				F9F2C89925A4EA1700826680 /* PlaceholderView.swift in Sources */,
 				F9F2C83325A4CE8D00826680 /* ImagePicker.swift in Sources */,
+				F950463825A4F484003A6C08 /* SidebarView.swift in Sources */,
 				F9F2C83F25A4CE9100826680 /* MokoResourceExtensions.swift in Sources */,
 				F9F2C7FC25A4CE4600826680 /* FavoritesState.swift in Sources */,
 				F9F2C82725A4CE7400826680 /* ApplicationDetailState.swift in Sources */,
@@ -594,6 +579,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -655,6 +641,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -814,7 +801,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		172C7407254C133B008B9580 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
+		F94277FF25ADF8CF0077472A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.1;
+			};
+		};
+		F942780A25ADF9060077472A /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView";
 			requirement = {
@@ -825,9 +820,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F9F2C84725A4CEC100826680 /* SlidingTabView */ = {
+		F942780025ADF8CF0077472A /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 172C7407254C133B008B9580 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
+			package = F94277FF25ADF8CF0077472A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		F942780425ADF8D70077472A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F94277FF25ADF8CF0077472A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		F942780B25ADF9060077472A /* SlidingTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F942780A25ADF9060077472A /* XCRemoteSwiftPackageReference "SlidingTabView" */;
 			productName = SlidingTabView;
 		};
 /* End XCSwiftPackageProductDependency section */

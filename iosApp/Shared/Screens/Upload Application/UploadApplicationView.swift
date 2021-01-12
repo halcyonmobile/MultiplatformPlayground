@@ -117,12 +117,7 @@ struct UploadApplicationView: View {
                     }
                     .padding(.horizontal, 24)
                     .navigationBarTitle(MR.strings().upload_title.localize())
-                    .navigationBarItems(trailing:
-                                            Button {
-                                                state.viewModel.submit()
-                                            } label: {
-                                                Image(systemName: "checkmark").font(.system(size: 24, weight: .light))
-                                            }
+                    .navigationBarItems(trailing: Button("Save", action: state.viewModel.submit)
                     )
                 }
             }
