@@ -3,8 +3,8 @@
     <color name="primary_200">#73e8ff</color>
     <color name="primary_500">#29b6f6</color>
     <color name="primary_700">#0086c3</color>
-    <color name="accent_200">#ffff00</color>
-    <color name="accent_700">#c7cc00</color>
+    <color name="accent_200">#ffc400</color>
+    <color name="accent_700">#b28900</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

@@ -67,7 +67,7 @@ class FavouritesViewModel :
                 is Result.Success -> {
                     _favourites.value =
                         result.value.map { it.toApplicationUiModel() }
-                    State.NORMAL
+                    if(_favourites.value.isEmpty()) State.EMPTY else State.NORMAL
                 }
                 is Result.Error -> State.ERROR
             }
@@ -77,6 +77,7 @@ class FavouritesViewModel :
     enum class State {
         LOADING,
         NORMAL,
+        EMPTY,
         ERROR
     }
 }

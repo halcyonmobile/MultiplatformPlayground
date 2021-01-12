@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground
 
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
+import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
 import com.halcyonmobile.multiplatformplayground.shared.util.SCREENSHOT_NAME_PART
 import com.halcyonmobile.multiplatformplayground.util.requirePage
