@@ -50,7 +50,7 @@ fun Screenshots(screenshots: List<ImageFile>, onAddScreenshot: () -> Unit = {}, 
                     Box(Modifier.clickable(onClick = onAddScreenshot)) {
                         Image(
                             imageVector = vectorResource(id = R.drawable.ic_add_image),
-                            colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
+                            colorFilter = ColorFilter.tint(AppTheme.colors.primary),
                             modifier = Modifier.wrapContentSize().align(Alignment.Center)
                         )
                     }
