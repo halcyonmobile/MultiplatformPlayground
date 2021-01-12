@@ -7,12 +7,9 @@ sealed class BottomNavigationScreen(val route: String, @DrawableRes open val ico
     object Home : BottomNavigationScreen("home", R.drawable.ic_home)
 
     object Favourites : BottomNavigationScreen("favourites", R.drawable.ic_favourites)
-
-    object Settings : BottomNavigationScreen("settings", R.drawable.ic_settings)
 }
 
 val bottomNavigationScreens = listOf(
     BottomNavigationScreen.Home,
     BottomNavigationScreen.Favourites,
-    BottomNavigationScreen.Settings
 )

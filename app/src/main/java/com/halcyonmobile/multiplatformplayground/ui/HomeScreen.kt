@@ -56,7 +56,6 @@ fun HomeScreen(
     val selectedCategory by viewModel.selectedCategory.collectAsState(null)
     val state by viewModel.state.collectAsState(HomeViewModel.State.LOADING)
 
-
     when (state) {
         HomeViewModel.State.LOADING -> Column(
             Modifier.fillMaxSize(),

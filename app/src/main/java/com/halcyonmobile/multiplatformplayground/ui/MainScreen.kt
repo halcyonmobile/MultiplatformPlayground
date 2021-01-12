@@ -59,9 +59,6 @@ fun MainScreen() {
                 composable(BottomNavigationScreen.Favourites.route) {
                     FavouriteScreen(onApplicationClicked = { navController.navigate("applicationDetail/${it.id}") })
                 }
-                composable(BottomNavigationScreen.Settings.route) {
-                    // TODO
-                }
                 composable(
                     "applicationDetail/{id}",
                     arguments = listOf(navArgument("id") { type = NavType.LongType })
