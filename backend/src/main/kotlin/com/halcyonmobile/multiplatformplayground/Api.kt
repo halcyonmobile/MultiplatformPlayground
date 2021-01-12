@@ -1,13 +1,17 @@
 package com.halcyonmobile.multiplatformplayground
 
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
 import com.halcyonmobile.multiplatformplayground.storage.LocalSource
-import com.halcyonmobile.multiplatformplayground.util.*
-import com.halcyonmobile.multiplatformplayground.shared.util.*
+import com.halcyonmobile.multiplatformplayground.shared.util.SCREENSHOT_NAME_PART
+import com.halcyonmobile.multiplatformplayground.util.requirePage
+import com.halcyonmobile.multiplatformplayground.util.requirePerPage
+import com.halcyonmobile.multiplatformplayground.util.toFile
 import io.ktor.application.call
-import io.ktor.features.*
+import io.ktor.features.BadRequestException
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.content.*
+import io.ktor.http.content.PartData
+import io.ktor.http.content.forEachPart
 import io.ktor.request.receive
 import io.ktor.request.receiveMultipart
 import io.ktor.response.respond
@@ -15,7 +19,9 @@ import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
-import io.ktor.util.*
+import io.ktor.util.InternalAPI
+import io.ktor.util.KtorExperimentalAPI
+import io.ktor.util.getOrFail
 import java.io.File
 
 internal fun Routing.api(localSource: LocalSource) {

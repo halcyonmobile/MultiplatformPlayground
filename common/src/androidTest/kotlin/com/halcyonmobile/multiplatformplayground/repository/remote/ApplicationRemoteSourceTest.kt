@@ -2,11 +2,12 @@ package com.halcyonmobile.multiplatformplayground.repository.remote
 
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
 import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
-import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
-import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
-import com.halcyonmobile.multiplatformplayground.util.*
+import com.halcyonmobile.multiplatformplayground.util.BaseTest
+import com.halcyonmobile.multiplatformplayground.util.TestDispatcherProvider
+import com.halcyonmobile.multiplatformplayground.util.applicationData
+import com.halcyonmobile.multiplatformplayground.util.applicationDetailData
+import com.halcyonmobile.multiplatformplayground.util.applicationDetailResponseData
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK

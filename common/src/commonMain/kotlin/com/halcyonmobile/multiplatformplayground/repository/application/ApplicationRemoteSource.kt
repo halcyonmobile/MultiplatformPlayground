@@ -1,7 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.repository.application
 
 import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
+import com.halcyonmobile.multiplatformplayground.model.UploadApplicationModel
+import com.halcyonmobile.multiplatformplayground.model.toApplicationDetail
 import com.halcyonmobile.multiplatformplayground.shared.util.DispatcherProvider
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

@@ -21,7 +21,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version Versions.Jvm.SHADOW_JAR_VERSION
 }
 
-
 dependencies {
     implementation(project(":commonModel"))
     implementation(Versions.Jvm.STANDARD_LIBRARY)
@@ -52,4 +51,10 @@ tasks.withType<ShadowJar> {
     archiveClassifier.set("")
     archiveVersion.set("")
     isZip64 = true
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
+    }
 }

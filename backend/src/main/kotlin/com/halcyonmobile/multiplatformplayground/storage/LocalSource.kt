@@ -1,6 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
+import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import java.io.File
 
 internal interface LocalSource {
