@@ -1,6 +1,5 @@
 package com.halcyonmobile.multiplatformplayground.usecase
 
-import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.util.BaseTest
@@ -12,7 +11,6 @@ import org.junit.Before
 import org.junit.Test
 import java.lang.IllegalArgumentException
 import kotlin.test.assertEquals
-import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 class GetCategoryUseCaseTest : BaseTest() {

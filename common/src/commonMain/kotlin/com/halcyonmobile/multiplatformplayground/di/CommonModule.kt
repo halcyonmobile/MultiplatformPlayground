@@ -1,6 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.di
 
-import com.halcyonmobile.multiplatformplayground.api.*
+import com.halcyonmobile.multiplatformplayground.api.ApplicationApi
+import com.halcyonmobile.multiplatformplayground.api.CategoryApi
+import com.halcyonmobile.multiplatformplayground.api.FavouritesApi
+import com.halcyonmobile.multiplatformplayground.api.KtorApi
+import com.halcyonmobile.multiplatformplayground.api.KtorApiImpl
 import com.halcyonmobile.multiplatformplayground.db.MultiplatformDatabase
 import com.halcyonmobile.multiplatformplayground.repository.FavouritesRemoteSource
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRemoteSource
@@ -10,7 +14,14 @@ import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRem
 import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRepository
 import com.halcyonmobile.multiplatformplayground.shared.util.DefaultDispatcherProvider
 import com.halcyonmobile.multiplatformplayground.shared.util.DispatcherProvider
-import com.halcyonmobile.multiplatformplayground.usecase.*
+import com.halcyonmobile.multiplatformplayground.usecase.CreateApplicationUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationDetailUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetCategoryUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.GetFavouritesUseCase
+import com.halcyonmobile.multiplatformplayground.usecase.UpdateApplicationUseCase
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
@@ -56,4 +67,5 @@ fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
     modules(getCommonModules() + platformModule)
 }
 
+// Used by iOS
 fun initKoin() = initKoin {}

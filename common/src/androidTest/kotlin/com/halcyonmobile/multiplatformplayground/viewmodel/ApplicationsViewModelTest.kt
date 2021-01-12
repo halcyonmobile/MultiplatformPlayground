@@ -4,7 +4,6 @@ import app.cash.turbine.test
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.usecase.GetApplicationsUseCase
 import com.halcyonmobile.multiplatformplayground.util.KoinBaseTest
-import com.halcyonmobile.multiplatformplayground.util.applicationData
 import com.halcyonmobile.multiplatformplayground.util.fullPageApplicationData
 import io.mockk.coEvery
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,13 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.usecase
 
 import com.halcyonmobile.multiplatformplayground.model.Application
-import com.halcyonmobile.multiplatformplayground.model.Category
 import com.halcyonmobile.multiplatformplayground.repository.application.ApplicationRepository
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.util.BaseTest
 import com.halcyonmobile.multiplatformplayground.util.applicationData
-import com.halcyonmobile.multiplatformplayground.util.category
-import com.halcyonmobile.multiplatformplayground.util.category2
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.RelaxedMockK

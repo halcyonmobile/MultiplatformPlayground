@@ -1,15 +1,17 @@
 package com.halcyonmobile.multiplatformplayground.util
 
 import com.halcyonmobile.multiplatformplayground.db.Categories
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
+import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.Screenshot
+import com.halcyonmobile.multiplatformplayground.model.UploadApplicationModel
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationDetailUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.CategoryTabUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.toScreenshotUiModel
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
-import com.halcyonmobile.multiplatformplayground.shared.util.PER_PAGE
-import com.halcyonmobile.multiplatformplayground.shared.util.toByteArray
-import io.ktor.util.*
 
 val category = Category(
     id = 1,

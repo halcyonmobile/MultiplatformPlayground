@@ -12,7 +12,6 @@ import org.junit.Before
 import org.junit.Test
 import org.koin.test.mock.declareMock
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class FavouritesViewModelTest : KoinBaseTest() {
 

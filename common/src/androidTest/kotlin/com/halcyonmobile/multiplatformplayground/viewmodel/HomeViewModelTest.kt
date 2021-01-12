@@ -3,7 +3,11 @@ package com.halcyonmobile.multiplatformplayground.viewmodel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.usecase.FetchCategoriesUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoriesUseCase
-import com.halcyonmobile.multiplatformplayground.util.*
+import com.halcyonmobile.multiplatformplayground.util.KoinBaseTest
+import com.halcyonmobile.multiplatformplayground.util.category
+import com.halcyonmobile.multiplatformplayground.util.category2
+import com.halcyonmobile.multiplatformplayground.util.categoryTabUiModel
+import com.halcyonmobile.multiplatformplayground.util.categoryTabUiModel2
 import io.mockk.coEvery
 import kotlinx.coroutines.flow.first
 import org.junit.Before

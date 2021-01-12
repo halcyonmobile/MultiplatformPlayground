@@ -6,8 +6,11 @@ import com.halcyonmobile.multiplatformplayground.repository.category.CategoryRep
 import com.halcyonmobile.multiplatformplayground.util.BaseTest
 import com.halcyonmobile.multiplatformplayground.util.category
 import com.halcyonmobile.multiplatformplayground.util.category2
-import io.mockk.*
+import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.verify
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals

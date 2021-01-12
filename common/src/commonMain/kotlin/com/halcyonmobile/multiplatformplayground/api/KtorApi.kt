@@ -1,7 +1,7 @@
 package com.halcyonmobile.multiplatformplayground.api
 
-import io.ktor.client.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.request.HttpRequestBuilder
 
 interface KtorApi {
     val client: HttpClient

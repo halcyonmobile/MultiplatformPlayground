@@ -8,7 +8,18 @@ import com.pandulapeter.beagle.common.configuration.Appearance
 import com.pandulapeter.beagle.common.configuration.Behavior
 import com.pandulapeter.beagle.log.BeagleLogger
 import com.pandulapeter.beagle.logKtor.BeagleKtorLogger
-import com.pandulapeter.beagle.modules.*
+import com.pandulapeter.beagle.modules.AppInfoButtonModule
+import com.pandulapeter.beagle.modules.DeveloperOptionsButtonModule
+import com.pandulapeter.beagle.modules.DeviceInfoModule
+import com.pandulapeter.beagle.modules.DividerModule
+import com.pandulapeter.beagle.modules.HeaderModule
+import com.pandulapeter.beagle.modules.KeylineOverlaySwitchModule
+import com.pandulapeter.beagle.modules.LifecycleLogListModule
+import com.pandulapeter.beagle.modules.LogListModule
+import com.pandulapeter.beagle.modules.NetworkLogListModule
+import com.pandulapeter.beagle.modules.PaddingModule
+import com.pandulapeter.beagle.modules.ScreenCaptureToolboxModule
+import com.pandulapeter.beagle.modules.SectionHeaderModule
 import org.koin.android.ext.koin.androidContext
 
 @Suppress("unused")
