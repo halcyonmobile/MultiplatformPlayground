@@ -28,6 +28,7 @@ internal fun Routing.api(localSource: LocalSource) {
     filterApplications(localSource)
     getCategories(localSource)
     postCategory(localSource)
+    putCategory(localSource)
     getFavourites(localSource)
 }
 
@@ -154,15 +155,26 @@ private fun Routing.getCategories(localSource: LocalSource) {
 }
 
 /**
- * POST /api/v1/categories
+ * POST /categories
  */
 @OptIn(InternalAPI::class)
 private fun Routing.postCategory(localSource: LocalSource) {
-    post("/category") {
+    post("/categories") {
         val category = call.receive<Category>()
         val id = localSource.saveCategory(category)
 
         call.respond(category.copy(id))
+    }
+}
+
+/**
+ * PUT /categories
+ */
+@OptIn(InternalAPI::class)
+private fun Routing.putCategory(localSource: LocalSource) {
+    put("/categories") {
+        localSource.updateCategory(call.receive<Category>())
+        call.respond(HttpStatusCode.OK)
     }
 }
 

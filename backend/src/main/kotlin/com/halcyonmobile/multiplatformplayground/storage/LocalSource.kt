@@ -21,6 +21,8 @@ internal interface LocalSource {
 
     suspend fun saveCategory(category: Category): Long
 
+    suspend fun updateCategory(category: Category)
+
     suspend fun getCategories(): List<Category>
 
     suspend fun getCategory(id: Long): Category

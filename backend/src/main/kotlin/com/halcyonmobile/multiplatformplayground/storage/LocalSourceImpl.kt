@@ -121,6 +121,16 @@ internal class LocalSourceImpl(
         }
     }
 
+    override suspend fun updateCategory(category: Category) = withContext(dispatcher) {
+        transaction {
+            CategoryEntity[category.id.toInt()].let{
+                it.name = category.name
+                it.icon = category.icon
+            }
+        }
+    }
+
+
     override suspend fun getApplications(name: String, categoryId: Long): List<Application> =
         withContext(dispatcher) {
             transaction {
