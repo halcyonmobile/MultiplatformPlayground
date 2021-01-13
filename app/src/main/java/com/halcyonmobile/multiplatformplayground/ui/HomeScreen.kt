@@ -96,7 +96,7 @@ fun HomeScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.general_error),
-                style = MaterialTheme.typography.h6
+                style = AppTheme.typography.h6
             )
             Button(onClick = { viewModel.fetch() }) {
                 Text(text = stringResource(id = R.string.retry))
@@ -123,7 +123,7 @@ private fun ApplicationsPerCategory(
             Text(
                 text = stringResource(id = R.string.applications_empty_message),
                 modifier = Modifier.align(Alignment.Center),
-                style = MaterialTheme.typography.h6,
+                style = AppTheme.typography.body1,
                 textAlign = TextAlign.Center
             )
         }
@@ -131,7 +131,7 @@ private fun ApplicationsPerCategory(
             Text(
                 text = stringResource(id = R.string.general_error),
                 modifier = Modifier.align(Alignment.Center),
-                style = MaterialTheme.typography.h6,
+                style = AppTheme.typography.body1,
                 textAlign = TextAlign.Center
             )
         }

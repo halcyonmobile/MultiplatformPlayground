@@ -112,7 +112,7 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
                 Text(
                     text = stringResource(id = R.string.general_error),
                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                    style = MaterialTheme.typography.h6
+                    style = AppTheme.typography.body1
                 )
                 Button(onClick = { viewModel.loadDetail() }) {
                     Text(text = stringResource(id = R.string.retry))
@@ -130,11 +130,11 @@ fun Header(imageUrl: String, name: String, developer: String, category: String =
             CoilImage(data = imageUrl, modifier = Modifier.size(80.dp))
         }
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-            Text(text = name, style = MaterialTheme.typography.h6)
-            Text(text = developer, style = MaterialTheme.typography.caption)
+            Text(text = name, style = AppTheme.typography.h6)
+            Text(text = developer, style = AppTheme.typography.body2)
             Text(
                 text = category,
-                style = MaterialTheme.typography.caption,
+                style = AppTheme.typography.body2,
                 modifier = Modifier.padding(top = 8.dp)
             )
         }
@@ -150,8 +150,8 @@ private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
             modifier = Modifier.align(Alignment.CenterVertically).padding(end = 8.dp)
         )
         Column {
-            Text(text = value, style = MaterialTheme.typography.h5)
-            Text(text = name, style = MaterialTheme.typography.caption)
+            Text(text = value, style = AppTheme.typography.h6)
+            Text(text = name, style = AppTheme.typography.caption)
         }
     }
 }
@@ -160,10 +160,10 @@ private fun Property(name: String, value: String, @DrawableRes iconRes: Int) {
 private fun Description(description: String) {
     val (showMore, updateShowMore) = remember { mutableStateOf(false) }
     Column(modifier = Modifier.padding(top = 16.dp).fillMaxWidth()) {
-        Text(style = MaterialTheme.typography.h6, text = stringResource(id = R.string.description))
+        Text(style = AppTheme.typography.h6, text = stringResource(id = R.string.description))
         Text(
             modifier = Modifier.padding(top = 8.dp),
-            style = MaterialTheme.typography.caption,
+            style = AppTheme.typography.body2,
             maxLines = if (showMore) Int.MAX_VALUE else 3,
             text = description
         )

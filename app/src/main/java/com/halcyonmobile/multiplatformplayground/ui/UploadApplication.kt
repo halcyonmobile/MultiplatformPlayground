@@ -141,7 +141,7 @@ private fun ApplicationDetails(
     Column(modifier = Modifier.padding(vertical = 16.dp)) {
         Text(
             text = stringResource(id = R.string.application_details),
-            style = MaterialTheme.typography.h6
+            style = AppTheme.typography.h6
         )
         // TODO add category
         TextField(
