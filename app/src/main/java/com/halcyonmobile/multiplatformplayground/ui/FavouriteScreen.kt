@@ -32,11 +32,11 @@ fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
     val favourites by viewModel.favourites.collectAsState()
     val state by viewModel.state.collectAsState()
 
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
+    Column(Modifier.fillMaxSize()) {
         Text(
             text = stringResource(id = R.string.favourites),
             style = AppTheme.typography.h4,
-            modifier = Modifier.statusBarsPadding().padding(vertical = 16.dp)
+            modifier = Modifier.statusBarsPadding().padding(16.dp)
         )
         when (state) {
             FavouritesViewModel.State.LOADING -> Box(
@@ -74,7 +74,7 @@ fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
                 Text(
                     text = stringResource(id = R.string.favourites_empty_message),
                     modifier = Modifier.align(Alignment.Center),
-                    style = MaterialTheme.typography.h6,
+                    style = AppTheme.typography.h6,
                     textAlign = TextAlign.Center
                 )
 
