@@ -4,7 +4,9 @@ A **Kotlin Multiplatform** project with the purpose of experimenting with and pr
 
 #### Note:
 
-It's primary purpose being an **MVVM** project example, if sharing ViewModel logic is out of scope for you, then consider checking out the following repositorys:
+It's primary purpose is to showcase sharing every layer except the UI layer in between multiple platforms, so shared **Presentation layer** using the MVVM pattern, shared **Domain** and **Data layers** (UseCase, Repositories, Entities, etc.).
+
+ If sharing ViewModel logic is out of scope for you, then consider checking out the following repositorys:
 
 - https://github.com/joreilly/PeopleInSpace
 - https://github.com/touchlab/KaMPKit
@@ -31,9 +33,12 @@ It's primary purpose being an **MVVM** project example, if sharing ViewModel log
 - JVM (Backend)
 - Android
 - iOS
-- macOS (in-progress)
+- macOS (Coming soon)
 - desktop (planned)
 - web (planned)
+
+### Module Hierarchy
+![module-hierarchy](img/modules.png)
 
 ### Further Development
 
