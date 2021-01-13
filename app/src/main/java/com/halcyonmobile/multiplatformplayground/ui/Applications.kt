@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -73,13 +72,13 @@ private fun Application(
             CoilImage(data = uiModel.icon, modifier = Modifier.size(64.dp))
         }
         Column(modifier = Modifier.fillMaxSize().align(Alignment.Top).padding(start = 16.dp)) {
-            Text(text = uiModel.name, style = MaterialTheme.typography.body1)
-            Text(text = uiModel.developer, style = MaterialTheme.typography.caption)
+            Text(text = uiModel.name, style = AppTheme.typography.body1)
+            Text(text = uiModel.developer, style = AppTheme.typography.caption)
             Row(Modifier.wrapContentSize(Alignment.TopStart)) {
                 Text(
                     text = uiModel.rating.toString(),
                     modifier = Modifier.align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.caption
+                    style = AppTheme.typography.caption
                 )
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_rating),

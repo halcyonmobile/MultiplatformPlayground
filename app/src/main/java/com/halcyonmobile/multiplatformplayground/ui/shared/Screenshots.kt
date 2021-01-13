@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,7 +34,7 @@ fun Screenshots(
         val items = if (showAdd) screenshots + null else screenshots
         Text(
             text = stringResource(id = R.string.screenshots),
-            style = MaterialTheme.typography.h6,
+            style = AppTheme.typography.h6,
             modifier = Modifier.padding(vertical = 8.dp)
         )
         LazyRow(modifier = Modifier.padding(vertical = 8.dp)) {

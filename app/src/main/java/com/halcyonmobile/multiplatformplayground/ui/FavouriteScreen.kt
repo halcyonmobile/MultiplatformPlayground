@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,11 +16,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.style.TextAlign
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
@@ -36,7 +35,7 @@ fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Text(
             text = stringResource(id = R.string.favourites),
-            style = MaterialTheme.typography.h4.copy(fontWeight = FontWeight.SemiBold),
+            style = AppTheme.typography.h4,
             modifier = Modifier.statusBarsPadding().padding(vertical = 16.dp)
         )
         when (state) {
@@ -59,7 +58,7 @@ fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
             ) {
                 Text(
                     text = stringResource(id = R.string.general_error),
-                    style = MaterialTheme.typography.h6
+                    style = AppTheme.typography.body1
                 )
                 Button(
                     onClick = { viewModel.loadFavourites() },
