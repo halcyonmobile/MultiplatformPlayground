@@ -1,6 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
+import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import java.io.File
 
 internal interface LocalSource {
@@ -10,6 +14,8 @@ internal interface LocalSource {
     suspend fun getApplications(page: Int, perPage: Int, categoryId: Long): List<Application>
 
     suspend fun saveApplication(applicationRequest: ApplicationRequest): Long
+
+    suspend fun deleteApplication(id: Long)
 
     suspend fun updateApplication(application: Application)
 

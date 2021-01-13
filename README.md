@@ -4,7 +4,9 @@ A **Kotlin Multiplatform** project with the purpose of experimenting with and pr
 
 #### Note:
 
-It's primary purpose being an **MVVM** project example, if sharing ViewModel logic is out of scope for you, then consider checking out the following repositorys:
+Its primary purpose is to showcase sharing every layer except the UI layer in between multiple platforms, so shared **Presentation layer** using the MVVM pattern, shared **Domain** and **Data layers** (UseCase, Repositories, Entities, etc.).
+
+ If sharing ViewModel logic is out of scope for you, then consider checking out the following repositories:
 
 - https://github.com/joreilly/PeopleInSpace
 - https://github.com/touchlab/KaMPKit
@@ -31,11 +33,30 @@ It's primary purpose being an **MVVM** project example, if sharing ViewModel log
 - JVM (Backend)
 - Android
 - iOS
-- macOS (in-progress)
+- macOS (Coming soon)
 - desktop (planned)
 - web (planned)
+
+### Module Hierarchy
+![module-hierarchy](img/modules.png)
 
 ### Further Development
 
 - Shared testing (currently android only, [Mockk K/N support](https://github.com/mockk/mockk/issues/58))
 - Supporting more targets
+
+### License
+
+    Copyright 2021 HalcyonMobile https://www.halcyonmobile.com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       https://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.

@@ -2,7 +2,6 @@ package com.halcyonmobile.multiplatformplayground.repository.category
 
 import com.halcyonmobile.multiplatformplayground.api.CategoryApi
 import com.halcyonmobile.multiplatformplayground.shared.util.DispatcherProvider
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 internal class CategoryRemoteSource(

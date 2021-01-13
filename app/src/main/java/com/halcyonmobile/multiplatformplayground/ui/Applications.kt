@@ -2,6 +2,7 @@ package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -10,7 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.LazyColumnForIndexed
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
@@ -34,22 +35,27 @@ fun Applications(
     contentPadding: PaddingValues = PaddingValues(),
     onBottomReached: () -> Unit = {}
 ) {
-    LazyColumnForIndexed(
-        items = items,
+    LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = contentPadding
-    ) { index, item ->
-        if (items.lastIndex == index) {
-            onActive {
-                onBottomReached()
-            }
-        }
-        when (item) {
-            is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
-            ApplicationUiModel.Loading -> CircularProgressIndicator(
-                Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
-            )
-        }
+    ) {
+        itemsIndexed(items = items,
+            itemContent = { index, item ->
+                if (items.lastIndex == index) {
+                    onActive {
+                        onBottomReached()
+                    }
+                }
+                when (item) {
+                    is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
+                    ApplicationUiModel.Loading -> Box(
+                        Modifier.fillParentMaxWidth(),
+                        Alignment.Center
+                    ) {
+                        CircularProgressIndicator(Modifier.padding(16.dp))
+                    }
+                }
+            })
     }
 }
 

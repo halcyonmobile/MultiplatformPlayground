@@ -1,23 +1,15 @@
 package com.halcyonmobile.multiplatformplayground.util
 
-import android.app.Activity
-import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistryOwner
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.onDispose
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.savedinstancestate.rememberSavedInstanceState
 import androidx.compose.ui.platform.AmbientContext
-import androidx.core.app.ActivityOptionsCompat
-import java.util.*
-
-private const val EDGE_TO_EDGE_FLAGS =
-    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_VISIBLE
-
-fun Activity.applyEdgeToEdgeFlags() {
-    window.decorView.systemUiVisibility =
-        if (isInNightMode) EDGE_TO_EDGE_FLAGS else EDGE_TO_EDGE_FLAGS or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-}
+import java.util.UUID
 
 // See https://issuetracker.google.com/issues/172690553
 @Composable

@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.LazyRowFor
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -25,37 +25,43 @@ import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun Screenshots(screenshots: List<ImageFile>, onAddScreenshot: () -> Unit = {}, showAdd: Boolean = false) {
+fun Screenshots(
+    screenshots: List<ImageFile>,
+    onAddScreenshot: () -> Unit = {},
+    showAdd: Boolean = false
+) {
     Column {
-        val items = if(showAdd) screenshots + null else screenshots
+        val items = if (showAdd) screenshots + null else screenshots
         Text(
             text = stringResource(id = R.string.screenshots),
             style = AppTheme.typography.h6,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(vertical = 8.dp)
         )
-        LazyRowFor(items = items, modifier = Modifier.padding(8.dp)) {
-            if (it != null) {
-                CoilImage(
-                    data = it.uri,
-                    modifier = Modifier.preferredSize(88.dp).padding(8.dp),
-                    contentScale = ContentScale.Crop
-                )
-            } else {
-                Card(
-                    modifier = Modifier.preferredSize(88.dp).padding(8.dp),
-                    shape = RectangleShape,
-                    backgroundColor = AppTheme.colors.cardButton
-                ) {
-                    Box(Modifier.clickable(onClick = onAddScreenshot)) {
-                        Image(
-                            imageVector = vectorResource(id = R.drawable.ic_add_image),
-                            colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
-                            modifier = Modifier.wrapContentSize().align(Alignment.Center)
-                        )
-                    }
+        LazyRow(modifier = Modifier.padding(vertical = 8.dp)) {
+            items(items = items, itemContent = {
+                if (it != null) {
+                    CoilImage(
+                        data = it.uri,
+                        modifier = Modifier.preferredSize(88.dp).padding(8.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Card(
+                        modifier = Modifier.preferredSize(88.dp).padding(8.dp),
+                        shape = RectangleShape,
+                        backgroundColor = AppTheme.colors.cardButton
+                    ) {
+                        Box(Modifier.clickable(onClick = onAddScreenshot)) {
+                            Image(
+                                imageVector = vectorResource(id = R.drawable.ic_add_image),
+                                colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                                modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                            )
+                        }
 
+                    }
                 }
-            }
+            })
         }
     }
 }

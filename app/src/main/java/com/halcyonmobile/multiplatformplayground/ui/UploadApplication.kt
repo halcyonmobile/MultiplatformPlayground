@@ -17,8 +17,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExtendedFloatingActionButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -68,7 +76,8 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
         bodyContent = {
             when (state) {
                 UploadApplicationViewModel.State.LOADING -> Box(
-                    Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
+                    Modifier.fillMaxSize(),
+                    Alignment.Center
                 ) {
                     CircularProgressIndicator()
                 }
@@ -78,14 +87,14 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
                     Card(
                         modifier = Modifier.preferredSize(88.dp)
                             .align(Alignment.CenterHorizontally),
-                        shape = CircleShape,
+                        shape = RoundedCornerShape(51),
                         backgroundColor = AppTheme.colors.cardButton
                     ) {
                         Box(Modifier.clickable { getIcon.launchAsImageResult() }) {
                             if (uploadApplicationUiModel.icon == null) {
                                 Image(
                                     imageVector = vectorResource(id = R.drawable.ic_add_image),
-                                    colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
+                                    colorFilter = ColorFilter.tint(AppTheme.colors.primary),
                                     modifier = Modifier.wrapContentSize().align(Alignment.Center)
                                 )
                             } else {
@@ -106,7 +115,7 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
                     ExtendedFloatingActionButton(
                         text = { Text(stringResource(R.string.submit)) },
                         onClick = viewModel::submit,
-                        modifier = Modifier.fillMaxWidth().padding(16.dp)
+                        modifier = Modifier.fillMaxWidth().padding(8.dp)
                     )
                 }
             }
@@ -129,7 +138,7 @@ private fun ApplicationDetails(
     uploadApplicationUiModel: UploadApplicationUiModel,
     changeListener: UploadApplicationUiModelChangeListener
 ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.padding(vertical = 16.dp)) {
         Text(
             text = stringResource(id = R.string.application_details),
             style = AppTheme.typography.h6
@@ -143,7 +152,7 @@ private fun ApplicationDetails(
             leadingIcon = {
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_label),
-                    colorFilter = ColorFilter.tint(AppTheme.colors.secondary)
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                 )
             })
         TextField(
@@ -154,7 +163,7 @@ private fun ApplicationDetails(
             leadingIcon = {
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_developer),
-                    colorFilter = ColorFilter.tint(AppTheme.colors.secondary)
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                 )
             })
         TextField(
@@ -165,7 +174,7 @@ private fun ApplicationDetails(
             leadingIcon = {
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_description),
-                    colorFilter = ColorFilter.tint(AppTheme.colors.secondary)
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                 )
             })
         Row(modifier = Modifier.navigationBarsPadding().fillMaxWidth().padding(top = 8.dp)) {
@@ -177,7 +186,7 @@ private fun ApplicationDetails(
                 leadingIcon = {
                     Image(
                         imageVector = vectorResource(id = R.drawable.ic_downloads),
-                        colorFilter = ColorFilter.tint(AppTheme.colors.secondary)
+                        colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                     )
                 })
             TextField(
@@ -189,7 +198,7 @@ private fun ApplicationDetails(
                 leadingIcon = {
                     Image(
                         imageVector = vectorResource(id = R.drawable.ic_rating),
-                        colorFilter = ColorFilter.tint(AppTheme.colors.secondary)
+                        colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                     )
                 })
         }

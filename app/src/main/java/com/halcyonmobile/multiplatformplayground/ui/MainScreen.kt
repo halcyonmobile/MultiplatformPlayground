@@ -7,7 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
+import androidx.navigation.compose.KEY_ROUTE
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.halcyonmobile.multiplatformplayground.BottomNavigationScreen
 import com.halcyonmobile.multiplatformplayground.bottomNavigationScreens
 import com.halcyonmobile.multiplatformplayground.util.composables.BottomNavigation
@@ -52,9 +58,6 @@ fun MainScreen() {
                 }
                 composable(BottomNavigationScreen.Favourites.route) {
                     FavouriteScreen(onApplicationClicked = { navController.navigate("applicationDetail/${it.id}") })
-                }
-                composable(BottomNavigationScreen.Settings.route) {
-                    // TODO
                 }
                 composable(
                     "applicationDetail/{id}",

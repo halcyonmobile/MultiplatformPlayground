@@ -2,18 +2,20 @@ package com.halcyonmobile.multiplatformplayground.ui.theme.color
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposableContract
 import androidx.compose.ui.graphics.Color
 
-val purple200 = Color(0xFFBB86FC)
-val purple500 = Color(0xFF6200EE)
-val purple700 = Color(0xFF3700B3)
-val teal200 = Color(0xFF03DAC5)
+val primary200 = Color(0xff73e8ff)
+val primary500 = Color(0xff29b6f6)
+val primary700 = Color(0xff0086c3)
+val accent200 = Color(0xffffc400)
+val accent700 = Color(0xffb28900)
 
 val darkColors: AppColors = AppColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200,
-    secondaryVariant = Color(0xFF03DAC6),
+    primary = primary200,
+    primaryVariant = primary700,
+    secondary = accent200,
+    secondaryVariant = accent200,
     background = Color(0xFF121212),
     surface = Color(0xFF121212),
     error = Color(0xFFCF6679),
@@ -27,10 +29,10 @@ val darkColors: AppColors = AppColors(
 )
 
 val lightColors: AppColors = AppColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200,
-    secondaryVariant = Color(0xFF018786),
+    primary = primary500,
+    primaryVariant = primary700,
+    secondary = accent200,
+    secondaryVariant = accent700,
     background = Color.White,
     surface = Color.White,
     error = Color(0xFFB00020),
@@ -43,9 +45,9 @@ val lightColors: AppColors = AppColors(
     true
 )
 
-
-@Composable
-val appColors
+@ComposableContract(readonly = true)
+val appColors: AppColors
+    @Composable
     get() = if (isSystemInDarkTheme()) {
         darkColors
     } else {

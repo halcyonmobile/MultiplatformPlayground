@@ -1,9 +1,15 @@
 package com.halcyonmobile.multiplatformplayground.storage
 
-import com.halcyonmobile.multiplatformplayground.model.*
+import com.halcyonmobile.multiplatformplayground.model.Application
+import com.halcyonmobile.multiplatformplayground.model.ApplicationRequest
+import com.halcyonmobile.multiplatformplayground.model.ApplicationDetailResponse
+import com.halcyonmobile.multiplatformplayground.model.Category
+import com.halcyonmobile.multiplatformplayground.model.Screenshot
 import com.halcyonmobile.multiplatformplayground.storage.file.FileStorage
-import com.halcyonmobile.multiplatformplayground.storage.model.application.*
+import com.halcyonmobile.multiplatformplayground.storage.model.application.ApplicationEntity
 import com.halcyonmobile.multiplatformplayground.storage.model.application.ApplicationTable
+import com.halcyonmobile.multiplatformplayground.storage.model.application.toApplication
+import com.halcyonmobile.multiplatformplayground.storage.model.application.toApplicationDetailResponse
 import com.halcyonmobile.multiplatformplayground.storage.model.category.CategoryEntity
 import com.halcyonmobile.multiplatformplayground.storage.model.category.CategoryTable
 import com.halcyonmobile.multiplatformplayground.storage.model.category.toCategory
@@ -15,15 +21,16 @@ import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.log
 import io.ktor.util.KtorExperimentalAPI
 import com.halcyonmobile.multiplatformplayground.util.getPage
-import kotlinx.coroutines.*
-import org.jetbrains.exposed.sql.*
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newFixedThreadPoolContext
+import kotlinx.coroutines.withContext
+import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.io.File
 import kotlin.coroutines.CoroutineContext
 
-@OptIn(
-    KtorExperimentalAPI::class, ObsoleteCoroutinesApi::class
-)
+@OptIn(KtorExperimentalAPI::class, ObsoleteCoroutinesApi::class)
 internal class LocalSourceImpl(
     private val fileStorage: FileStorage,
     application: io.ktor.application.Application
@@ -48,7 +55,11 @@ internal class LocalSourceImpl(
         Database.connect(HikariDataSource(hikariConfig))
 
         transaction {
-            SchemaUtils.createMissingTablesAndColumns(ApplicationTable, CategoryTable, ScreenshotTable)
+            SchemaUtils.createMissingTablesAndColumns(
+                ApplicationTable,
+                CategoryTable,
+                ScreenshotTable
+            )
         }
     }
 
@@ -85,6 +96,14 @@ internal class LocalSourceImpl(
                 }.id.value.toLong()
             }
         }
+
+    override suspend fun deleteApplication(id: Long) {
+        withContext(dispatcher) {
+            transaction {
+                ApplicationEntity[id.toInt()].delete()
+            }
+        }
+    }
 
     override suspend fun updateApplication(application: Application) {
         withContext(dispatcher) {
@@ -123,7 +142,7 @@ internal class LocalSourceImpl(
 
     override suspend fun updateCategory(category: Category) = withContext(dispatcher) {
         transaction {
-            CategoryEntity[category.id.toInt()].let{
+            CategoryEntity[category.id.toInt()].let {
                 it.name = category.name
                 it.icon = category.icon
             }

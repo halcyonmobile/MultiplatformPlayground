@@ -2,7 +2,6 @@ package com.halcyonmobile.multiplatformplayground.model.ui
 
 import com.halcyonmobile.multiplatformplayground.model.Application
 import com.halcyonmobile.multiplatformplayground.model.ApplicationDetail
-import com.halcyonmobile.multiplatformplayground.model.Screenshot
 
 data class ApplicationDetailUiModel(
     val id: Long,
