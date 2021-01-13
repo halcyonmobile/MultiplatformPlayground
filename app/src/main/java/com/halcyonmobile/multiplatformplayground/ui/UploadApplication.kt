@@ -76,7 +76,8 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
         bodyContent = {
             when (state) {
                 UploadApplicationViewModel.State.LOADING -> Box(
-                    Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
+                    Modifier.fillMaxSize(),
+                    Alignment.Center
                 ) {
                     CircularProgressIndicator()
                 }
@@ -114,7 +115,7 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
                     ExtendedFloatingActionButton(
                         text = { Text(stringResource(R.string.submit)) },
                         onClick = viewModel::submit,
-                        modifier = Modifier.fillMaxWidth().padding(16.dp)
+                        modifier = Modifier.fillMaxWidth().padding(8.dp)
                     )
                 }
             }
@@ -137,7 +138,7 @@ private fun ApplicationDetails(
     uploadApplicationUiModel: UploadApplicationUiModel,
     changeListener: UploadApplicationUiModelChangeListener
 ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.padding(vertical = 16.dp)) {
         Text(
             text = stringResource(id = R.string.application_details),
             style = MaterialTheme.typography.h6

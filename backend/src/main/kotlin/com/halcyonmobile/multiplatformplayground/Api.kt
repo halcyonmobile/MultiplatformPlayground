@@ -17,6 +17,7 @@ import io.ktor.request.receive
 import io.ktor.request.receiveMultipart
 import io.ktor.response.respond
 import io.ktor.routing.Routing
+import io.ktor.routing.delete
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.put
@@ -28,6 +29,7 @@ import java.io.File
 internal fun Routing.api(localSource: LocalSource) {
     getApplications(localSource)
     createApplication(localSource)
+    deleteApplication(localSource)
     postIcon(localSource)
     postScreenshot(localSource)
     updateApplication(localSource)
@@ -64,11 +66,22 @@ private fun Routing.createApplication(localSource: LocalSource) {
 }
 
 /**
+ * DELETE /applications
+ */
+@OptIn(InternalAPI::class)
+private fun Routing.deleteApplication(localSource: LocalSource) {
+    delete("/applications") {
+        localSource.deleteApplication(call.parameters["id"]!!.toLong())
+        call.respond(HttpStatusCode.OK)
+    }
+}
+
+/**
  * POST /icon
  */
 private fun Routing.postIcon(localSource: LocalSource) {
     post("/applications/{appId}/icon") {
-        val appId = call.parameters["appId"].toString().toLong()
+        val appId = call.parameters["appId"]!!.toLong()
         var icon: File? = null
 
         call.receiveMultipart().forEachPart {
@@ -91,7 +104,7 @@ private fun Routing.postIcon(localSource: LocalSource) {
  */
 private fun Routing.postScreenshot(localSource: LocalSource) {
     post("/applications/{appId}/screenshot") {
-        val appId = call.parameters["appId"].toString().toLong()
+        val appId = call.parameters["appId"]!!.toLong()
 
         var name: String? = null
         var image: File? = null
