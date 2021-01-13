@@ -2,10 +2,13 @@ package com.halcyonmobile.multiplatformplayground.ui.shared
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRowFor
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,7 +30,7 @@ fun Screenshots(screenshots: List<ImageFile>, onAddScreenshot: () -> Unit = {}, 
         val items = if(showAdd) screenshots + null else screenshots
         Text(
             text = stringResource(id = R.string.screenshots),
-            style = MaterialTheme.typography.h6,
+            style = AppTheme.typography.h6,
             modifier = Modifier.padding(16.dp)
         )
         LazyRowFor(items = items, modifier = Modifier.padding(8.dp)) {
