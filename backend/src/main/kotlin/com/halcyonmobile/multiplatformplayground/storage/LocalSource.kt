@@ -15,7 +15,7 @@ internal interface LocalSource {
 
     suspend fun saveApplication(applicationRequest: ApplicationRequest): Long
 
-    suspend fun deleteApplication(id: Long): Long
+    suspend fun deleteApplication(id: Long)
 
     suspend fun updateApplication(application: Application)
 
