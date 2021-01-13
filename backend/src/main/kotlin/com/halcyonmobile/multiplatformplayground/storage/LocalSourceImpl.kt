@@ -97,6 +97,14 @@ internal class LocalSourceImpl(
             }
         }
 
+    override suspend fun deleteApplication(id: Long) {
+        withContext(dispatcher) {
+            transaction {
+                ApplicationEntity[id.toInt()].delete()
+            }
+        }
+    }
+
     override suspend fun updateApplication(application: Application) {
         withContext(dispatcher) {
             transaction {

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -71,7 +72,8 @@ fun ApplicationDetail(applicationId: Long, upPress: () -> Unit) {
         }) {
         when (state) {
             ApplicationDetailViewModel.State.LOADING -> Box(
-                Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
+                Modifier.fillMaxSize(),
+                Alignment.Center
             ) {
                 CircularProgressIndicator()
             }

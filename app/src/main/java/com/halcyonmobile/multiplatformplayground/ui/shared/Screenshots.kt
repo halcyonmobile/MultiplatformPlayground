@@ -26,15 +26,19 @@ import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun Screenshots(screenshots: List<ImageFile>, onAddScreenshot: () -> Unit = {}, showAdd: Boolean = false) {
+fun Screenshots(
+    screenshots: List<ImageFile>,
+    onAddScreenshot: () -> Unit = {},
+    showAdd: Boolean = false
+) {
     Column {
-        val items = if(showAdd) screenshots + null else screenshots
+        val items = if (showAdd) screenshots + null else screenshots
         Text(
             text = stringResource(id = R.string.screenshots),
             style = MaterialTheme.typography.h6,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(vertical = 8.dp)
         )
-        LazyRow(modifier = Modifier.padding(8.dp)) {
+        LazyRow(modifier = Modifier.padding(vertical = 8.dp)) {
             items(items = items, itemContent = {
                 if (it != null) {
                     CoilImage(
