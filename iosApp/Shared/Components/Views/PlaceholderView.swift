@@ -1,9 +1,9 @@
 //
 //  PlaceholderView.swift
-//  iosApp
+//  App Portfolio
 //
 //  Created by Botond Magyarosi on 05.01.2021.
-//  Copyright © 2021 orgName. All rights reserved.
+//  Copyright © 2021 Halcyon Mobile. All rights reserved.
 //
 
 import SwiftUI

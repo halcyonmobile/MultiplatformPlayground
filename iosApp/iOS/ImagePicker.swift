@@ -3,16 +3,16 @@
 //  iosApp
 //
 //  Created by Nagy Robert on 10/12/2020.
-//  Copyright © 2020 orgName. All rights reserved.
+//  Copyright © 2020 Halcyon Mobile. All rights reserved.
 //
 
 import SwiftUI
 
-//https://www.hackingwithswift.com/books/ios-swiftui/importing-an-image-into-swiftui-using-uiimagepickercontroller
+// https://www.hackingwithswift.com/books/ios-swiftui/importing-an-image-into-swiftui-using-uiimagepickercontroller
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
-    var onImageSelected: ((UIImage) -> ())
+    var onImageSelected: ((Image) -> ())
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
         let picker = UIImagePickerController()

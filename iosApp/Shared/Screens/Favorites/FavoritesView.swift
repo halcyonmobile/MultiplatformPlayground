@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Zsolt Boldizsar on 9/10/20.
-//  Copyright © 2020 orgName. All rights reserved.
+//  Copyright © 2020 Halcyon Mobile. All rights reserved.
 //
 
 import SwiftUI
@@ -19,21 +19,20 @@ struct FavoritesView: View {
     
     var body: some View {
         NavigationView {
-            switch state.state {
-            case FavouritesViewModel.State.loading:
-                ProgressView()
-            case FavouritesViewModel.State.error:
+            StatefulView(state: state.state, error: {
                 PlaceholderView(message: MR.strings().general_error.localize()) {
                     state.viewModel.loadFavourites()
                 }
-            default:
+            }, empty: {
+                EmptyView()
+            }, content: {
                 List(state.favourites, id: \.id){ favourite in
                     NavigationLink(destination: ApplicationDetailView(applicationId: favourite.id)){
                         ApplicationView(application: favourite)
                     }
                 }
-                .navigationTitle(MR.strings().favourites.localize())
-            }
+            })
+            .navigationTitle(MR.strings().favourites.localize())
         }
     }
 }

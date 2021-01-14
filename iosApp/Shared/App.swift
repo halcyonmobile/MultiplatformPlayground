@@ -3,7 +3,7 @@
 //  Shared
 //
 //  Created by Botond Magyarosi on 05.01.2021.
-//  Copyright © 2021 orgName. All rights reserved.
+//  Copyright © 2021 Halcyon Mobile. All rights reserved.
 //
 
 import SwiftUI
@@ -11,8 +11,12 @@ import common
 
 @main
 struct App_PortfolioApp: App {
+    #if os(iOS)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+    #elseif os(macOS)
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
+ 
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -20,6 +24,7 @@ struct App_PortfolioApp: App {
     }
 }
 
+#if os(iOS)
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -28,4 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
-
+#elseif os(macOS)
+class AppDelegate: NSResponder, NSApplicationDelegate {
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        CommonModuleKt.doInitKoin()
+    }
+}
+#endif

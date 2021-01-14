@@ -111,9 +111,4 @@ object Versions {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
         const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver:$SQL_DELIGHT_VERSION"
     }
-
-    object macOS {
-        const val KTOR_CLIENT = "io.ktor:ktor-client-macos:$KTOR_VERSION"
-        const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver-macosx64:$SQL_DELIGHT_VERSION"
-    }
 }

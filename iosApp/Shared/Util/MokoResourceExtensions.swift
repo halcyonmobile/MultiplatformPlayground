@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Nagy Robert on 07/12/2020.
-//  Copyright © 2020 orgName. All rights reserved.
+//  Copyright © 2020 Halcyon Mobile. All rights reserved.
 //
 
 import Foundation

@@ -3,33 +3,42 @@
 //  App Portfolio (iOS)
 //
 //  Created by Botond Magyarosi on 05.01.2021.
-//  Copyright © 2021 orgName. All rights reserved.
+//  Copyright © 2021 Halcyon Mobile. All rights reserved.
 //
 
 import SwiftUI
-
-enum Categories: String, CaseIterable {
-    case work = "Work"
-    case creativity = "Creativity"
-}
+import common
+import Kingfisher
 
 struct SidebarView: View {
-    @State var selectedFolder: String?
+    @ObservedObject var state = SidebarViewModel()
     
     var body: some View {
         NavigationView {
-            List(selection: $selectedFolder) {
-                NavigationLink(destination: Text("Detail"), label: { Label("Favorites", systemImage: "hearth") })
-                Section(header: Text("Categories")) {
-                    ForEach(Categories.allCases, id: \.self) { folder in
-                        NavigationLink(
-                            destination: Text("Detail")
-                        ) {
-                            Text(folder.rawValue).font(.headline)
+            List {
+                Spacer(minLength: 8)
+                NavigationLink(destination: FavoritesView()) {
+                    Label(MR.strings().favourites.localize(), systemImage: "heart.fill")
+                }
+                Spacer(minLength: 8)
+                if !state.categories.isEmpty {
+                    Section(header: Text(MR.strings().category.localize())) {
+                        ForEach(state.categories, id: \.self) { category in
+                            NavigationLink(destination: ApplicationsView(categoryId: category.id, title: category.name), label: {
+                                HStack {
+                                    KFImage(URL(string: category.icon))
+                                        .renderingMode(.template)
+                                    Text(category.name)
+                                }
+                            })
                         }
                     }
+                } else {
+                    ProgressView()
                 }
-            }.listStyle(SidebarListStyle())
+            }
+            .listStyle(SidebarListStyle())
+            .navigationTitle(MR.strings().app_name.localize())
         }
     }
 }

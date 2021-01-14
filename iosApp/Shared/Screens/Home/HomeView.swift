@@ -3,12 +3,13 @@
 //  iosApp
 //
 //  Created by Zsolt Boldizsar on 9/10/20.
-//  Copyright © 2020 orgName. All rights reserved.
+//  Copyright © 2020 Halcyon Mobile. All rights reserved.
 //
 
+#if os(iOS)
 import SwiftUI
 import common
-//import SlidingTabView
+import SlidingTabView
 
 struct HomeView: View {
     @ObservedObject var state = HomeState()
@@ -16,32 +17,25 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottomTrailing) {
+            VStack {
                 let tabs = state.tabs.map { $0.name }
                 if !tabs.isEmpty {
-                    VStack {
-//                        ScrollView(.horizontal) {
-//                            SlidingTabView(selection: $state.selectedTab, tabs: tabs, activeAccentColor: .accentColor)
-//                        }
-                        ApplicationsView(categoryId: state.selectedCategoryId)
+                    ScrollView(.horizontal) {
+                        SlidingTabView(selection: $state.selectedTab, tabs: tabs, activeAccentColor: .accentColor)
                     }
+                    ApplicationsView(categoryId: state.selectedCategoryId)
                 } else {
                     ProgressView()
                 }
-                
-                FloatingActionButton(icon: "plus.circle.fill", action: { showsUploadScreen.toggle() })
-                    .padding([.trailing, .bottom])
-                    .sheet(isPresented: $showsUploadScreen, content: {
-                        UploadApplicationView(categoryId: state.selectedCategoryId)
-                    })
             }
-            .navigationBarHidden(true)
+            .navigationTitle(MR.strings().app_name.localize())
         }
     }
 }
 
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}
+#endif

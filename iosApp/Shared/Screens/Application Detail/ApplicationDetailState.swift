@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Nagy Robert on 08/12/2020.
-//  Copyright © 2020 orgName. All rights reserved.
+//  Copyright © 2020 Halcyon Mobile. All rights reserved.
 //
 
 import Foundation
@@ -15,7 +15,8 @@ class ApplicationDetailState: ObservableObject{
     let viewModel: ApplicationDetailViewModel
     
     @Published private(set) var applicationDetail: ApplicationDetailUiModel? = nil
-    @Published private(set) var state = ApplicationDetailViewModel.State.loading
+    
+    @Published var state: ViewState = .idle
     
     init(applicationId: Int64) {
         self.applicationId = applicationId
@@ -24,9 +25,11 @@ class ApplicationDetailState: ObservableObject{
         viewModel.observeApplicationDetail{ applicationDetail in
             self.applicationDetail = applicationDetail
         }
+        
         viewModel.observeState { state in
-            self.state = state
+            self.state = state.toViewState()
         }
+        
         viewModel.observeEvent{ event in
             // TODO handle events
         }
@@ -34,5 +37,17 @@ class ApplicationDetailState: ObservableObject{
     
     deinit {
         viewModel.dispose()
+    }
+}
+
+private extension ApplicationDetailViewModel.State {
+    
+    func toViewState() -> ViewState {
+        switch self {
+        case .error: return .error
+        case .loading: return .loading
+        case .normal: return .idle
+        default: return .idle
+        }
     }
 }

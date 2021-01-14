@@ -12,11 +12,18 @@
 		F942780125ADF8CF0077472A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F942780025ADF8CF0077472A /* Kingfisher */; };
 		F942780525ADF8D70077472A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F942780425ADF8D70077472A /* Kingfisher */; };
 		F942780C25ADF9060077472A /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = F942780B25ADF9060077472A /* SlidingTabView */; };
+		F942782625ADFF810077472A /* SidebarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F942782525ADFF810077472A /* SidebarViewModel.swift */; };
 		F950463825A4F484003A6C08 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F950463725A4F484003A6C08 /* SidebarView.swift */; };
-		F9F2C7C825A4CD2900826680 /* App_PortfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */; };
-		F9F2C7C925A4CD2900826680 /* App_PortfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */; };
+		F9BD2D8D25B0A479006B33B7 /* IconPrefixViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD2D8C25B0A479006B33B7 /* IconPrefixViewModifier.swift */; };
+		F9BD2D9125B0A89E006B33B7 /* StatefulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD2D9025B0A89E006B33B7 /* StatefulView.swift */; };
+		F9D6206925B0C0C800DD9A76 /* StatefulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD2D9025B0A89E006B33B7 /* StatefulView.swift */; };
+		F9D6206F25B0C1D300DD9A76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D6206E25B0C1CF00DD9A76 /* ContentView.swift */; };
+		F9D6207225B0C1F000DD9A76 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F950463725A4F484003A6C08 /* SidebarView.swift */; };
+		F9D6207525B0C20300DD9A76 /* SidebarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F942782525ADFF810077472A /* SidebarViewModel.swift */; };
+		F9D6207825B0C2BD00DD9A76 /* IconPrefixViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD2D8C25B0A479006B33B7 /* IconPrefixViewModifier.swift */; };
+		F9F2C7C825A4CD2900826680 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B625A4CD2800826680 /* App.swift */; };
+		F9F2C7C925A4CD2900826680 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B625A4CD2800826680 /* App.swift */; };
 		F9F2C7CA25A4CD2900826680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B725A4CD2800826680 /* ContentView.swift */; };
-		F9F2C7CB25A4CD2900826680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C7B725A4CD2800826680 /* ContentView.swift */; };
 		F9F2C7CC25A4CD2900826680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9F2C7B825A4CD2800826680 /* Assets.xcassets */; };
 		F9F2C7CD25A4CD2900826680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9F2C7B825A4CD2800826680 /* Assets.xcassets */; };
 		F9F2C7E225A4CE2100826680 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8D2250A217C005FDEAD /* HomeView.swift */; };
@@ -27,8 +34,6 @@
 		F9F2C7FD25A4CE4600826680 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8CE250A2153005FDEAD /* FavoritesView.swift */; };
 		F9F2C7FE25A4CE4600826680 /* FavoritesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173037B325754B9F00DDC467 /* FavoritesState.swift */; };
 		F9F2C7FF25A4CE4600826680 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8CE250A2153005FDEAD /* FavoritesView.swift */; };
-		F9F2C80325A4CE4900826680 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8D0250A2162005FDEAD /* SettingsView.swift */; };
-		F9F2C80725A4CE4900826680 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67B8D0250A2162005FDEAD /* SettingsView.swift */; };
 		F9F2C80B25A4CE6D00826680 /* UploadApplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353B2125512EAA001F2131 /* UploadApplicationView.swift */; };
 		F9F2C80C25A4CE6D00826680 /* UploadApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD5672582079300080769 /* UploadApplicationState.swift */; };
 		F9F2C80D25A4CE6D00826680 /* ScreenshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD5622582062100080769 /* ScreenshotView.swift */; };
@@ -49,12 +54,7 @@
 		F9F2C82825A4CE7400826680 /* ApplicationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD286A257F585500889ED6 /* ApplicationDetailView.swift */; };
 		F9F2C82C25A4CE7500826680 /* ApplicationDetailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD2865257F4E3200889ED6 /* ApplicationDetailState.swift */; };
 		F9F2C82D25A4CE7500826680 /* ApplicationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD286A257F585500889ED6 /* ApplicationDetailView.swift */; };
-		F9F2C83225A4CE8D00826680 /* PrimaryActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */; };
 		F9F2C83325A4CE8D00826680 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD55D258205A800080769 /* ImagePicker.swift */; };
-		F9F2C83425A4CE8D00826680 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
-		F9F2C83925A4CE8E00826680 /* PrimaryActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */; };
-		F9F2C83A25A4CE8E00826680 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179DD55D258205A800080769 /* ImagePicker.swift */; };
-		F9F2C83B25A4CE8E00826680 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17353AC52550378B001F2131 /* FloatingActionButton.swift */; };
 		F9F2C83F25A4CE9100826680 /* MokoResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */; };
 		F9F2C84325A4CE9200826680 /* MokoResourceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ED221E257E5720003BE46D /* MokoResourceExtensions.swift */; };
 		F9F2C89925A4EA1700826680 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F2C89825A4EA1700826680 /* PlaceholderView.swift */; };
@@ -67,9 +67,7 @@
 		1717E5B82552D6BB0064239B /* ApplicationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsView.swift; sourceTree = "<group>"; };
 		1717E5BD2552D6DD0064239B /* ApplicationsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationsState.swift; sourceTree = "<group>"; };
 		173037B325754B9F00DDC467 /* FavoritesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesState.swift; sourceTree = "<group>"; };
-		17353AC52550378B001F2131 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		17353B2125512EAA001F2131 /* UploadApplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadApplicationView.swift; sourceTree = "<group>"; };
-		173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryActionButtonStyle.swift; sourceTree = "<group>"; };
 		179DD553258203A700080769 /* ScreenshotUploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotUploadButton.swift; sourceTree = "<group>"; };
 		179DD5582582051D00080769 /* IconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView.swift; sourceTree = "<group>"; };
 		179DD55D258205A800080769 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -82,13 +80,16 @@
 		2EA6958EE07007489693E1D2 /* Pods-App Portfolio (macOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Portfolio (macOS).debug.xcconfig"; path = "Target Support Files/Pods-App Portfolio (macOS)/Pods-App Portfolio (macOS).debug.xcconfig"; sourceTree = "<group>"; };
 		6A972725BFE1E8ACF6C03C4F /* Pods_App_Portfolio__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App_Portfolio__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B67B8CE250A2153005FDEAD /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
-		7B67B8D0250A2162005FDEAD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7B67B8D2250A217C005FDEAD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A4D473C76E7C71B419EC77BB /* Pods_App_Portfolio__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App_Portfolio__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADBA2D53875F1238EF65B01D /* Pods-App Portfolio (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Portfolio (iOS).release.xcconfig"; path = "Target Support Files/Pods-App Portfolio (iOS)/Pods-App Portfolio (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		CB367ED3A4521DD632FBB3CB /* Pods-App Portfolio (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Portfolio (iOS).debug.xcconfig"; path = "Target Support Files/Pods-App Portfolio (iOS)/Pods-App Portfolio (iOS).debug.xcconfig"; sourceTree = "<group>"; };
+		F942782525ADFF810077472A /* SidebarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewModel.swift; sourceTree = "<group>"; };
 		F950463725A4F484003A6C08 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
-		F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_PortfolioApp.swift; sourceTree = "<group>"; };
+		F9BD2D8C25B0A479006B33B7 /* IconPrefixViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPrefixViewModifier.swift; sourceTree = "<group>"; };
+		F9BD2D9025B0A89E006B33B7 /* StatefulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulView.swift; sourceTree = "<group>"; };
+		F9D6206E25B0C1CF00DD9A76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F9F2C7B625A4CD2800826680 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		F9F2C7B725A4CD2800826680 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F9F2C7B825A4CD2800826680 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9F2C7BD25A4CD2800826680 /* Portfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Portfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,20 +126,10 @@
 		1717E5B22552D1630064239B /* Applications */ = {
 			isa = PBXGroup;
 			children = (
-				1717E5B32552D17A0064239B /* ApplicationView.swift */,
 				1717E5B82552D6BB0064239B /* ApplicationsView.swift */,
 				1717E5BD2552D6DD0064239B /* ApplicationsState.swift */,
 			);
 			path = Applications;
-			sourceTree = "<group>";
-		};
-		17353AC42550374E001F2131 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				17ED221D257E56F6003BE46D /* Util */,
-				179DD55D258205A800080769 /* ImagePicker.swift */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		17353B0F2550401F001F2131 /* Upload Application */ = {
@@ -229,20 +220,31 @@
 			path = Favorites;
 			sourceTree = "<group>";
 		};
-		7B0C0B4A25499EE900AED8CB /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				7B67B8D0250A2162005FDEAD /* SettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		F950463625A4F471003A6C08 /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
 				F950463725A4F484003A6C08 /* SidebarView.swift */,
+				F942782525ADFF810077472A /* SidebarViewModel.swift */,
 			);
 			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		F9BD2D8625B0A45B006B33B7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1717E5B32552D17A0064239B /* ApplicationView.swift */,
+				F9F2C89825A4EA1700826680 /* PlaceholderView.swift */,
+				F9BD2D9025B0A89E006B33B7 /* StatefulView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F9BD2D8B25B0A467006B33B7 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				F9BD2D8C25B0A479006B33B7 /* IconPrefixViewModifier.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 		F9F2C7B525A4CD2800826680 /* Shared */ = {
@@ -250,8 +252,8 @@
 			children = (
 				F9F2C7DE25A4CE0800826680 /* Screens */,
 				F9F2C89525A4E76D00826680 /* Components */,
-				17353AC42550374E001F2131 /* Shared */,
-				F9F2C7B625A4CD2800826680 /* App_PortfolioApp.swift */,
+				17ED221D257E56F6003BE46D /* Util */,
+				F9F2C7B625A4CD2800826680 /* App.swift */,
 				F9F2C7B825A4CD2800826680 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -260,6 +262,8 @@
 		F9F2C7BE25A4CD2900826680 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F9F2C7B725A4CD2800826680 /* ContentView.swift */,
+				179DD55D258205A800080769 /* ImagePicker.swift */,
 				F9F2C7BF25A4CD2900826680 /* Info.plist */,
 			);
 			path = iOS;
@@ -270,6 +274,7 @@
 			children = (
 				F9F2C7C625A4CD2900826680 /* Info.plist */,
 				F9F2C7C725A4CD2900826680 /* macOS.entitlements */,
+				F9D6206E25B0C1CF00DD9A76 /* ContentView.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -278,13 +283,11 @@
 			isa = PBXGroup;
 			children = (
 				F950463625A4F471003A6C08 /* Sidebar */,
-				F9F2C7B725A4CD2800826680 /* ContentView.swift */,
 				17CD2861257F4DFB00889ED6 /* Application Detail */,
 				1717E5B22552D1630064239B /* Applications */,
 				17353B0F2550401F001F2131 /* Upload Application */,
 				7B0C0B4825499EDA00AED8CB /* Home */,
 				7B0C0B4925499EE000AED8CB /* Favorites */,
-				7B0C0B4A25499EE900AED8CB /* Settings */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -292,9 +295,8 @@
 		F9F2C89525A4E76D00826680 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				17353AC52550378B001F2131 /* FloatingActionButton.swift */,
-				173DA3112583575500CB9E75 /* PrimaryActionButtonStyle.swift */,
-				F9F2C89825A4EA1700826680 /* PlaceholderView.swift */,
+				F9BD2D8B25B0A467006B33B7 /* Modifiers */,
+				F9BD2D8625B0A45B006B33B7 /* Views */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -330,7 +332,7 @@
 			buildConfigurationList = F9F2C7D125A4CD2900826680 /* Build configuration list for PBXNativeTarget "App Portfolio (macOS)" */;
 			buildPhases = (
 				D15D49C8EDFF63BBA80A8660 /* [CP] Check Pods Manifest.lock */,
-				F9F2C88E25A4DBAE00826680 /* Moko */,
+				F9F2C88E25A4DBAE00826680 /* Build common */,
 				F9F2C7C025A4CD2900826680 /* Sources */,
 				F9F2C7C125A4CD2900826680 /* Frameworks */,
 				F9F2C7C225A4CD2900826680 /* Resources */,
@@ -355,7 +357,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = orgName;
+				ORGANIZATIONNAME = "Halcyon Mobile";
 				TargetAttributes = {
 					F9F2C7BC25A4CD2800826680 = {
 						CreatedOnToolsVersion = 12.3;
@@ -470,7 +472,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :common:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n\n./gradlew :common:copyFrameworkResourcesToApp \\\n-Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n-Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n-Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n-Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n";
 		};
-		F9F2C88E25A4DBAE00826680 /* Moko */ = {
+		F9F2C88E25A4DBAE00826680 /* Build common */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -479,7 +481,7 @@
 			);
 			inputPaths = (
 			);
-			name = Moko;
+			name = "Build common";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -495,22 +497,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9BD2D8D25B0A479006B33B7 /* IconPrefixViewModifier.swift in Sources */,
 				F9F2C80D25A4CE6D00826680 /* ScreenshotView.swift in Sources */,
 				F9F2C80F25A4CE6D00826680 /* IconView.swift in Sources */,
 				F9F2C81B25A4CE7100826680 /* ApplicationView.swift in Sources */,
 				F9F2C81D25A4CE7100826680 /* ApplicationsView.swift in Sources */,
-				F9F2C80325A4CE4900826680 /* SettingsView.swift in Sources */,
 				F9F2C7F225A4CE2800826680 /* HomeState.swift in Sources */,
 				F9F2C80B25A4CE6D00826680 /* UploadApplicationView.swift in Sources */,
+				F9BD2D9125B0A89E006B33B7 /* StatefulView.swift in Sources */,
 				F9F2C80E25A4CE6D00826680 /* ScreenshotUploadButton.swift in Sources */,
 				F9F2C7E225A4CE2100826680 /* HomeView.swift in Sources */,
 				F9F2C7FD25A4CE4600826680 /* FavoritesView.swift in Sources */,
 				F9F2C7CA25A4CD2900826680 /* ContentView.swift in Sources */,
 				F9F2C82825A4CE7400826680 /* ApplicationDetailView.swift in Sources */,
 				F9F2C81C25A4CE7100826680 /* ApplicationsState.swift in Sources */,
-				F9F2C7C825A4CD2900826680 /* App_PortfolioApp.swift in Sources */,
-				F9F2C83225A4CE8D00826680 /* PrimaryActionButtonStyle.swift in Sources */,
-				F9F2C83425A4CE8D00826680 /* FloatingActionButton.swift in Sources */,
+				F9F2C7C825A4CD2900826680 /* App.swift in Sources */,
+				F942782625ADFF810077472A /* SidebarViewModel.swift in Sources */,
 				F9F2C80C25A4CE6D00826680 /* UploadApplicationState.swift in Sources */,
 				F9F2C89925A4EA1700826680 /* PlaceholderView.swift in Sources */,
 				F9F2C83325A4CE8D00826680 /* ImagePicker.swift in Sources */,
@@ -525,25 +527,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D6207825B0C2BD00DD9A76 /* IconPrefixViewModifier.swift in Sources */,
 				F9F2C81525A4CE6D00826680 /* ScreenshotView.swift in Sources */,
 				F9F2C81725A4CE6D00826680 /* IconView.swift in Sources */,
+				F9D6206F25B0C1D300DD9A76 /* ContentView.swift in Sources */,
 				F9F2C82125A4CE7100826680 /* ApplicationView.swift in Sources */,
 				F9F2C82325A4CE7100826680 /* ApplicationsView.swift in Sources */,
-				F9F2C80725A4CE4900826680 /* SettingsView.swift in Sources */,
 				F9F2C7EE25A4CE2800826680 /* HomeState.swift in Sources */,
 				F9F2C81325A4CE6D00826680 /* UploadApplicationView.swift in Sources */,
+				F9D6207225B0C1F000DD9A76 /* SidebarView.swift in Sources */,
+				F9D6207525B0C20300DD9A76 /* SidebarViewModel.swift in Sources */,
 				F9F2C81625A4CE6D00826680 /* ScreenshotUploadButton.swift in Sources */,
+				F9D6206925B0C0C800DD9A76 /* StatefulView.swift in Sources */,
 				F9F2C7ED25A4CE2800826680 /* HomeView.swift in Sources */,
 				F9F2C7FF25A4CE4600826680 /* FavoritesView.swift in Sources */,
-				F9F2C7CB25A4CD2900826680 /* ContentView.swift in Sources */,
 				F9F2C82D25A4CE7500826680 /* ApplicationDetailView.swift in Sources */,
 				F9F2C82225A4CE7100826680 /* ApplicationsState.swift in Sources */,
-				F9F2C7C925A4CD2900826680 /* App_PortfolioApp.swift in Sources */,
-				F9F2C83925A4CE8E00826680 /* PrimaryActionButtonStyle.swift in Sources */,
-				F9F2C83B25A4CE8E00826680 /* FloatingActionButton.swift in Sources */,
+				F9F2C7C925A4CD2900826680 /* App.swift in Sources */,
 				F9F2C81425A4CE6D00826680 /* UploadApplicationState.swift in Sources */,
 				F9F2C89A25A4EA1700826680 /* PlaceholderView.swift in Sources */,
-				F9F2C83A25A4CE8E00826680 /* ImagePicker.swift in Sources */,
 				F9F2C84325A4CE9200826680 /* MokoResourceExtensions.swift in Sources */,
 				F9F2C7FE25A4CE4600826680 /* FavoritesState.swift in Sources */,
 				F9F2C82C25A4CE7500826680 /* ApplicationDetailState.swift in Sources */,

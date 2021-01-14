@@ -15,6 +15,7 @@ version = "1.0.0"
 
 kotlin {
     android()
+
     macosX64("macOS")
 
     // Set the target based on if it's real phone ore simulator
@@ -22,7 +23,8 @@ kotlin {
         iosArm64("ios")
     } else {
         iosX64("ios")
-    }.apply {
+    }
+    .apply {
         compilations {
             val main by getting {
                 kotlinOptions.freeCompilerArgs =
@@ -97,6 +99,12 @@ android {
         minSdkVersion(Versions.Android.MINIMUM_SDK_VERSION)
         targetSdkVersion(Versions.Android.SDK_VERSION)
     }
+    /*
+    There seems to be an issue with the latest canary (7.0.0-alpha03) Android studio.
+    Revisit this workaround once the issue is patched.
+
+    https://youtrack.jetbrains.com/issue/KT-43944
+     */
     configurations {
         create("testApi")
         create("testDebugApi")
@@ -117,8 +125,9 @@ android {
 val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
+    val target = if(System.getenv("SDK_NAME").orEmpty().startsWith("macosx")) "macOS" else "ios"
     val framework =
-        kotlin.targets.getByName<KotlinNativeTarget>("macOS").binaries.getFramework(mode)
+        kotlin.targets.getByName<KotlinNativeTarget>(target).binaries.getFramework(mode)
     inputs.property("mode", mode)
     dependsOn(framework.linkTask)
     val targetDir = File(buildDir, "xcode-frameworks")

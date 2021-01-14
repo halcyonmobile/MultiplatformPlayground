@@ -3,13 +3,13 @@
 //  iosApp
 //
 //  Created by Nagy Robert on 10/12/2020.
-//  Copyright © 2020 orgName. All rights reserved.
+//  Copyright © 2020 Halcyon Mobile. All rights reserved.
 //
 
 import Foundation
 import common
 
-class UploadApplicationState: ObservableObject{
+class UploadApplicationState: ObservableObject {
     
     let categoryId: Int64
     let viewModel: UploadApplicationViewModel

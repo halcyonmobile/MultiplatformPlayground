@@ -3,12 +3,12 @@
 //  iosApp
 //
 //  Created by Nagy Robert on 08/12/2020.
-//  Copyright © 2020 orgName. All rights reserved.
+//  Copyright © 2020 Halcyon Mobile. All rights reserved.
 //
 
 import SwiftUI
 import common
-import struct Kingfisher.KFImage
+import Kingfisher
 
 struct ApplicationDetailView: View {
     
@@ -21,44 +21,85 @@ struct ApplicationDetailView: View {
     }
     
     var body: some View {
-        switch state.state {
-        case ApplicationDetailViewModel.State.loading:
-            VStack{
-                Spacer()
-                ProgressView()
-                Spacer()
+        StatefulView(state: state.state, error: {
+            PlaceholderView(message: MR.strings().general_error.localize()) {
+                state.viewModel.loadDetail()
             }
-        case ApplicationDetailViewModel.State.error:
-            VStack{
-                Spacer()
-                Text(MR.strings().general_error.localize())
-                    .multilineTextAlignment(.center)
-                Button(MR.strings().retry.localize(), action: {
-                    state.viewModel.loadDetail()
-                }).padding(.top, 8)
-                Spacer()
-            }
-        default:
+        }, empty: {
+            EmptyView()
+        }, content: {
             ScrollView {
-                VStack(alignment: .leading) {
-                    Header(imageUrl: state.applicationDetail!.icon, name: state.applicationDetail!.name, developer: state.applicationDetail!.developer)
-                    HStack(spacing: 32) {
-                        Property(name: MR.strings().rating.localize(), value: String(state.applicationDetail!.rating), icon: "star.fill")
-                        Property(name: MR.strings().downloads.localize(), value: String(state.applicationDetail!.downloads), icon: "icloud.and.arrow.down")
+                VStack(alignment: .leading, spacing: 16) {
+                    header
+                    
+                    #if os(iOS)
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        ratings
                     }
+                    #endif
+                    
+                    ScrollView(.horizontal, showsIndicators: true, content: {
+                        LazyHStack {
+                            ForEach(state.applicationDetail!.screenshots, id: \.id, content: { screenshot in
+                                KFImage(URL(string: screenshot.image))
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            })
+                        }
+                    })
+                    .frame(height: 250)
+                    
                     Description(description: state.applicationDetail!.description_)
-                        .padding(.top, 8)
                 }
                 .padding()
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { state.viewModel.updateFavourite() }) {
-                        Image(systemName: state.applicationDetail?.favourite ?? false ? "heart.fill" : "heart")
-                    }
+            
+        })
+//        #if os(iOS)
+//        .navigationBarTitleDisplayMode(.inline)
+//        #endif
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Button(action: { state.viewModel.updateFavourite() }) {
+                    Image(systemName: state.applicationDetail?.favourite ?? false ? "heart.fill" : "heart")
                 }
             }
+        }
+    }
+    
+    var header: some View {
+        HStack(alignment: .top) {
+            KFImage(URL(string: state.applicationDetail!.icon))
+                .resizable()
+                .frame(maxWidth: 200, maxHeight: 200)
+                .aspectRatio(1, contentMode: .fill)
+                .cornerRadius(8)
+            VStack(alignment: .leading) {
+                Text(state.applicationDetail!.name)
+                    .font(.title)
+                Text(state.applicationDetail!.developer)
+                    .font(.title3)
+                Text("CHANGE_ME: CATEGORY")
+                    .font(.caption)
+                Spacer()
+                #if os(iOS)
+                if UIDevice.current.userInterfaceIdiom != .phone {
+                    ratings
+                }
+                #else
+                ratings
+                #endif
+                Spacer()
+            }
+            .padding(.leading)
+            Spacer()
+        }
+    }
+    
+    private var ratings: some View {
+        HStack(spacing: 32) {
+            Property(name: MR.strings().rating.localize(), value: String(state.applicationDetail!.rating), icon: "star.fill")
+            Property(name: MR.strings().downloads.localize(), value: String(state.applicationDetail!.downloads), icon: "icloud.and.arrow.down")
         }
     }
 }
@@ -73,37 +114,11 @@ private struct Description: View{
             Text(MR.strings().description_.localize())
                 .font(.title)
             Text(description)
-                .font(.caption)
+                .font(.body)
                 .lineLimit(showMore ? nil : 3)
             Button(!showMore ? MR.strings().show_more.localize() : MR.strings().show_less.localize(), action:  {
                 showMore = !showMore
             })
-        }
-    }
-}
-
-private struct Header: View{
-    
-    let imageUrl: String
-    let name: String
-    let developer: String
-    let category: String = "Update this" // todo update this
-    
-    var body: some View{
-        HStack(alignment: .top) {
-            KFImage(URL(string: imageUrl))
-                .cornerRadius(8)
-            VStack(alignment: .leading) {
-                Text(name)
-                    .font(.title)
-                Text(developer)
-                    .font(.title3)
-                Text(category)
-                    .font(.caption)
-                Spacer()
-            }
-            .padding(.leading, 8)
-            Spacer()
         }
     }
 }
@@ -129,7 +144,6 @@ private struct Property: View {
         }
     }
 }
-
 
 struct Description_Previews: PreviewProvider {
     static var previews: some View {
