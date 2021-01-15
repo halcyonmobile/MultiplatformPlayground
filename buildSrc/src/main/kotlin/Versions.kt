@@ -107,7 +107,7 @@ object Versions {
         const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:android-driver:$SQL_DELIGHT_VERSION"
     }
 
-    object iOS {
+    object Apple {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
         const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver:$SQL_DELIGHT_VERSION"
     }

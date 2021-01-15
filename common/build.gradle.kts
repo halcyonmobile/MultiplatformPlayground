@@ -77,16 +77,22 @@ kotlin {
                 implementation(Versions.Android.SQL_DELIGHT_DRIVER)
             }
         }
+        val appleMain by creating {
+            dependsOn(commonMain)
+            // TODO Other common dependencies should be added here
+        }
         val iosMain by getting {
+            dependsOn(appleMain)
             dependencies {
-                implementation(Versions.iOS.KTOR_CLIENT)
-                implementation(Versions.iOS.SQL_DELIGHT_DRIVER)
+                implementation(Versions.Apple.KTOR_CLIENT)
+                implementation(Versions.Apple.SQL_DELIGHT_DRIVER)
             }
         }
         val macOSMain by getting {
+            dependsOn(appleMain)
             dependencies {
-                implementation(Versions.iOS.KTOR_CLIENT)
-                implementation(Versions.iOS.SQL_DELIGHT_DRIVER)
+                implementation(Versions.Apple.KTOR_CLIENT)
+                implementation(Versions.Apple.SQL_DELIGHT_DRIVER)
             }
         }
     }
