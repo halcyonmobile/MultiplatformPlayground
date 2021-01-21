@@ -55,10 +55,10 @@ import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 fun UploadApplication(upPress: () -> Unit) {
     // TODO remove initial categoryId and add category selection
     val viewModel = remember {
-        UploadApplicationViewModel(0)
+        UploadApplicationViewModel(1)
     }
     val uploadApplicationUiModel by viewModel.uploadApplicationUiModel.collectAsState(
-        UploadApplicationUiModel(categoryId = 0)
+        UploadApplicationUiModel(categoryId = 1)
     )
     val state by viewModel.state.collectAsState()
     val event by viewModel.event.collectAsState(null)
