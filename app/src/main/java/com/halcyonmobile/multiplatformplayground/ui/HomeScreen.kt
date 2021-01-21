@@ -45,10 +45,7 @@ import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
 @Composable
-fun HomeScreen(
-    onApplicationClicked: (ApplicationUiModel.App) -> Unit,
-    onUploadApplication: (categoryId: Long) -> Unit
-) {
+fun HomeScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
     val viewModel = remember {
         HomeViewModel()
     }
@@ -63,16 +60,7 @@ fun HomeScreen(
         ) {
             CircularProgressIndicator(Modifier.align(Alignment.CenterHorizontally))
         }
-        HomeViewModel.State.NORMAL -> Scaffold(floatingActionButton = {
-            selectedCategory?.let {
-                FloatingActionButton(
-                    onClick = { onUploadApplication(it.id) },
-                    modifier = Modifier
-                        .padding(bottom = AppTheme.dimens.bottomNavHeight)
-                        .navigationBarsPadding()
-                ) { Icon(imageVector = vectorResource(id = R.drawable.ic_add)) }
-            }
-        }) {
+        HomeViewModel.State.NORMAL -> Scaffold() {
             Column(modifier = Modifier.fillMaxSize()) {
                 Tabs(categoryTabs = categoryTabs, onClick = viewModel::onTabClicked)
                 selectedCategory?.let {
