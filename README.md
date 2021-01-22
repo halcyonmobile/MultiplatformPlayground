@@ -45,6 +45,8 @@ Its primary purpose is to showcase sharing every layer except the UI layer in be
 - Shared testing (currently android only, [Mockk K/N support](https://github.com/mockk/mockk/issues/58))
 - Supporting more targets
 
+##### The icons are from: https://icons8.com
+##
 ### License
 
     Copyright 2021 HalcyonMobile https://www.halcyonmobile.com

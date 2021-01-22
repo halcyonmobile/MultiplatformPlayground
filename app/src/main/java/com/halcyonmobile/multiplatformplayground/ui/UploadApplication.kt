@@ -16,13 +16,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredSize
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExtendedFloatingActionButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -54,12 +52,13 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
 @Composable
-fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
-    val viewModel = remember(initialCategoryId) {
-        UploadApplicationViewModel(initialCategoryId)
+fun UploadApplication(upPress: () -> Unit) {
+    // TODO remove initial categoryId and add category selection
+    val viewModel = remember {
+        UploadApplicationViewModel(1)
     }
     val uploadApplicationUiModel by viewModel.uploadApplicationUiModel.collectAsState(
-        UploadApplicationUiModel(categoryId = initialCategoryId)
+        UploadApplicationUiModel(categoryId = 1)
     )
     val state by viewModel.state.collectAsState()
     val event by viewModel.event.collectAsState(null)
@@ -208,6 +207,6 @@ private fun ApplicationDetails(
 @Composable
 fun UploadApplicationPreview() {
     Surface(Modifier.fillMaxSize()) {
-        UploadApplication(initialCategoryId = 1, upPress = {})
+        UploadApplication { }
     }
 }
