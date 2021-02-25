@@ -15,13 +15,14 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "assemble"
-  assemble:
+  # This workflow contains a single job called "build"
+  build:
 
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
+# for future use, see https://github.com/MobilityData/gtfs-validator/blob/add65e0a6f857951ff4d3c19fc268d99d7509e45/core/build.gradle#L22
     - name: Prepare version name
       id: prep
       run: |
