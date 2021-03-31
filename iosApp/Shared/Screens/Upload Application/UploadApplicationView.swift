@@ -29,23 +29,23 @@ struct UploadApplicationView: View {
                 }
             default:
                 ScrollView {
-                    IconView(image: Binding(
-                        get: { state.application?.icon },
-                        set: {
-                            if let icon = $0 {
-                                state.viewModel.onIconChanged(icon: icon)
-                            }
-                        }
-                    ))
+//                     IconView(image: Binding(
+//                         get: { state.application?.icon },
+//                         set: {
+//                             if let icon = $0 {
+//                                 state.viewModel.onIconChanged(icon: icon)
+//                             }
+//                         }
+//                     ))
                     
                     VStack(alignment:.leading) {
                         Text(MR.strings().screenshots.localize())
                             .font(.headline)
                         
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80, maximum: 88), spacing: 8)], alignment: .leading, spacing: 8) {
-                            ForEach(state.application?.screenshots ?? [], id: \.self) { image in
-                                ScreenshotView(image: Image(uiImage: image))
-                            }
+//                             ForEach(state.application?.screenshots ?? [], id: \.self) { image in
+//                                 ScreenshotView(image: Image(uiImage: image))
+//                             }
                             
                             ScreenshotUploadButton()
                                 .onTapGesture {

@@ -9,6 +9,7 @@ plugins {
     id("com.squareup.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.codingfeline.buildkonfig")
+    id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 
 version = "1.0.0"
@@ -128,19 +129,14 @@ android {
     }
 }
 
-val packForXcode by tasks.creating(Sync::class) {
-    group = "build"
-    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val target = if(System.getenv("SDK_NAME").orEmpty().startsWith("macosx")) "macOS" else "ios"
-    val framework =
-        kotlin.targets.getByName<KotlinNativeTarget>(target).binaries.getFramework(mode)
-    inputs.property("mode", mode)
-    dependsOn(framework.linkTask)
-    val targetDir = File(buildDir, "xcode-frameworks")
-    from({ framework.outputDirectory })
-    into(targetDir)
+multiplatformSwiftPackage {
+    packageName("AppPortfolioKit")
+    swiftToolsVersion("5.3")
+    targetPlatforms {
+        iOS { v("13") }
+        macOS{ v("10_15") }
+    }
 }
-tasks.getByName("build").dependsOn(packForXcode)
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     with(kotlinOptions) {
