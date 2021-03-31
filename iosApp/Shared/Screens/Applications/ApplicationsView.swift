@@ -44,7 +44,7 @@ struct ApplicationsView: View {
 //        .navigationTitle(title)
         .sheet(isPresented: $showsAddApplication, content: { UploadApplicationView(categoryId: categoryId) })
         .toolbar {
-            ToolbarItem(placement: .principal) {
+            ToolbarItem(placement: .primaryAction) {
                 Button(action: { showsAddApplication.toggle() }, label: { Label("Add", systemImage: "plus.circle.fill") })
             }
         }

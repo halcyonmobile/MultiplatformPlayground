@@ -59,7 +59,7 @@ struct ApplicationDetailView: View {
 //        .navigationBarTitleDisplayMode(.inline)
 //        #endif
         .toolbar {
-            ToolbarItem(placement: .principal) {
+            ToolbarItem(placement: .primaryAction) {
                 Button(action: { state.viewModel.updateFavourite() }) {
                     Image(systemName: state.applicationDetail?.favourite ?? false ? "heart.fill" : "heart")
                 }
