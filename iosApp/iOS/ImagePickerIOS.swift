@@ -10,17 +10,17 @@ import SwiftUI
 
 // https://www.hackingwithswift.com/books/ios-swiftui/importing-an-image-into-swiftui-using-uiimagepickercontroller
 
-struct ImagePicker: UIViewControllerRepresentable {
+struct ImagePickerIOS: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
     var onImageSelected: ((UIImage) -> ())
 
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerIOS>) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         return picker
     }
 
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePickerIOS>) {
 
     }
 
@@ -29,9 +29,9 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        let parent: ImagePicker
+        let parent: ImagePickerIOS
 
-        init(_ parent: ImagePicker) {
+        init(_ parent: ImagePickerIOS) {
             self.parent = parent
         }
 
