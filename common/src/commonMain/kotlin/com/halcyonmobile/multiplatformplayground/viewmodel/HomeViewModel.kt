@@ -11,7 +11,14 @@ import kotlinx.coroutines.launch
 import dev.icerock.moko.resources.desc.Resource
 import dev.icerock.moko.resources.desc.StringDesc
 import com.halcyonmobile.multiplatformplayground.model.ui.toCategoryTabUiModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -30,26 +37,27 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
     val selectedCategory =
         categoryTabs.map { categoryTabs -> categoryTabs.firstOrNull { it.isSelected } }
 
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> = _error
-
-    private val _isLoading = MutableStateFlow(true)
-    val isLoading: StateFlow<Boolean> = _isLoading
+    private val _state = MutableStateFlow(State.LOADING)
+    val state: StateFlow<State>
+        get() = _state
 
     val title = StringDesc.Resource(MR.strings.home)
 
     init {
+        getData(getCategories::invoke)
+    }
+
+    private fun getData(operation: suspend () -> Result<List<Category>>) {
         coroutineScope.launch {
-            _isLoading.value = true
-            when (val result = getCategories()) {
+            _state.value = State.LOADING
+
+            _state.value = when (val result = operation()) {
                 is Result.Success -> {
                     _categories.value = result.value
+                    State.NORMAL
                 }
-                is Result.Error -> {
-                    _error.value = result.exception.message
-                }
+                is Result.Error -> State.ERROR
             }
-            _isLoading.value = false
         }
     }
 
@@ -63,15 +71,17 @@ class HomeViewModel : CoroutineViewModel(), KoinComponent {
         }.launchIn(coroutineScope)
     }
 
-    fun fetch() = coroutineScope.launch {
-        _isLoading.value = true
-        when (val result = fetchCategories()) {
-            is Result.Error -> _error.value = result.exception.message
-        }
-        _isLoading.value = false
+    fun fetch() {
+        getData(fetchCategories::invoke)
     }
 
     fun onTabClicked(index: Int) {
         selectedTabIndex.value = index
+    }
+
+    enum class State {
+        LOADING,
+        NORMAL,
+        ERROR
     }
 }

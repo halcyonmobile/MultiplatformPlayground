@@ -1,55 +1,46 @@
 package com.halcyonmobile.multiplatformplayground.ui.theme
 
-import AmbientDimens
-import Dimens
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Shapes
+import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposableContract
-
-private val DarkColorPalette = darkColors(
-    primary = purple200,
-    primaryVariant = purple700,
-    secondary = teal200
-)
-
-private val LightColorPalette = lightColors(
-    primary = purple500,
-    primaryVariant = purple700,
-    secondary = teal200
-
-    /* Other default colors to override
-background = Color.White,
-surface = Color.White,
-onPrimary = Color.White,
-onSecondary = Color.Black,
-onBackground = Color.Black,
-onSurface = Color.Black,
-*/
-)
+import androidx.compose.runtime.Providers
+import com.halcyonmobile.multiplatformplayground.ui.theme.color.AmbientColors
+import com.halcyonmobile.multiplatformplayground.ui.theme.color.AppColors
+import com.halcyonmobile.multiplatformplayground.ui.theme.color.appColors
+import com.halcyonmobile.multiplatformplayground.ui.theme.color.materialColors
 
 object AppTheme {
-    @Composable
     @ComposableContract(readonly = true)
     val dimens: Dimens
+        @Composable
         get() = AmbientDimens.current
+
+    @ComposableContract(readonly = true)
+    val colors: AppColors
+        @Composable
+        get() = AmbientColors.current
+
+    @ComposableContract(readonly = true)
+    val typography: Typography
+        @Composable
+        get() = MaterialTheme.typography
+
+    @ComposableContract(readonly = true)
+    val shapes: Shapes
+        @Composable
+        get() = MaterialTheme.shapes
 }
 
 @Composable
-fun MultiplatformPlaygroundTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
+fun MultiplatformPlaygroundTheme(content: @Composable () -> Unit) {
+    Providers(AmbientColors provides appColors) {
+        MaterialTheme(
+            colors = AppTheme.colors.materialColors,
+            typography = AppTheme.typography,
+            shapes = AppTheme.shapes,
+            content = content
+        )
     }
-
-    MaterialTheme(
-        colors = colors,
-        typography = typography,
-        shapes = shapes,
-        content = content
-    )
 }

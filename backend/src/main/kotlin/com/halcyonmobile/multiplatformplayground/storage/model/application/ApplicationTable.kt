@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.ReferenceOption
 internal object ApplicationTable : IntIdTable("applications") {
     val name = varchar(APP_NAME, 50)
     val developer = varchar(APP_DEVELOPER, 50)
-    val icon = varchar(APP_ICON, 255)
+    val icon = varchar(APP_ICON, 1024)
     val rating = decimal(APP_RATING, 3, 1)
     val ratingCount = integer(APP_RATING_COUNT)
     val storeUrl = varchar(APP_STORE_URL, 255)

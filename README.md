@@ -1,22 +1,64 @@
-# Known Kotlin <-> Obj-c <-> Swift interopability issues
-* Obj-c Arrays are not typed => `Observable<List<T>>` will lose it's `T` type, when compiled to **Swift**
-* Missing `struct` value types in *Kotlin* and *Obj-c* => No `copy-on_write` capability
-# Project set-up
-##### BE
-- Run `./gradlew backend:run` from terminal (Additionally you can set up a **Gradle** configuration for this command)
-##### iOS
-1) Import the `iosApp` from Xcode
-2) Run `./gradlew common:podspec` to generate/update the **common.framework**
-3) Run the app from Xcode
-# Resources
-##### Multiplatform
-- [KMM documentation](https://kotlinlang.org/docs/mobile/home.html)
-- [IceRock KMP library finder](https://libs.kmp.icerock.dev/)
-- [Kotlin Multiplatform libraries](https://github.com/AAkira/Kotlin-Multiplatform-Libraries)
-- [Jetbrains KMP project collection](https://www.jetbrains.com/lp/mobilecrossplatform/?_ga=2.202856727.765867490.1593685697-1840297874.1578984105)
-- [KaMPKit from Touchlab](https://github.com/touchlab/KaMPKit)
-- [Urbantz KMP networking example](https://gitlab.com/halcyonmobile/urbantz-kmp-networking)
-- [Kotlinlang official multiplatform documentation](https://kotlinlang.org/docs/reference/multiplatform.html?_ga=2.5643317.765867490.1593685697-1840297874.1578984105)
-##### KTor
-- [Official KTor documentation](https://ktor.io)
-##### iOS
+# Multiplatform Playground (AppPortfolio)
+
+A **Kotlin Multiplatform** project with the purpose of experimenting with and providing a possible direction to newcomers having questions about *tech stack*, *project setup*, *architectural decisions* in a KMP environment.
+
+#### Note:
+
+Its primary purpose is to showcase sharing every layer except the UI layer in between multiple platforms, so shared **Presentation layer** using the MVVM pattern, shared **Domain** and **Data layers** (UseCase, Repositories, Entities, etc.).
+
+ If sharing ViewModel logic is out of scope for you, then consider checking out the following repositories:
+
+- https://github.com/joreilly/PeopleInSpace
+- https://github.com/touchlab/KaMPKit
+- https://github.com/joreilly/BikeShare
+
+### Shared pieces
+
+- Every layer except UI (so ViewModel, UseCase, Repository layers)
+- Localization
+- DI
+- Shared DTOs (between Backend & Clients)
+
+### Tech stack
+
+- Declarative UI with `Jetpack Compose` and `SwiftUI`
+- [Koin](https://github.com/InsertKoinIO/koin)
+- [Ktor](https://ktor.io/) (Backend + Client logic)
+- [Kotlinx-serialization](https://github.com/Kotlin/kotlinx.serialization)
+- [SqlDelight](https://github.com/cashapp/sqldelight)
+- [Moko-Resources](https://github.com/icerockdev/moko-resources) (Localization)
+
+### Targets
+
+- JVM (Backend)
+- Android
+- iOS
+- macOS
+- desktop (planned)
+- web (planned)
+
+### Module Hierarchy
+![module-hierarchy](img/modules.png)
+
+### Further Development
+
+- Shared testing (currently android only, [Mockk K/N support](https://github.com/mockk/mockk/issues/58))
+- Supporting more targets
+
+##### The icons are from: https://icons8.com
+##
+### License
+
+    Copyright 2021 HalcyonMobile https://www.halcyonmobile.com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       https://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.

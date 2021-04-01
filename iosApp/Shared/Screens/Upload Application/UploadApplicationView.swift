@@ -12,6 +12,8 @@ import common
 struct UploadApplicationView: View {
     
     let categoryId: Int64
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject var state: UploadApplicationState
     @State private var showingImagePicker = false
     
@@ -114,8 +116,10 @@ struct UploadApplicationView: View {
                                 ))
                                 .imagePrefix(systemImageName: "star.fill")
                             }
-                            Button("Submit", action: { state.viewModel.submit() })
-                                .padding(.vertical, 8)
+                            HStack{
+                                Button("Cancel", action: { presentationMode.wrappedValue.dismiss() })
+                                Button("Submit", action: { state.viewModel.submit() }).padding(.horizontal, 8)
+                            }.padding(.vertical, 8)
                         }
                     }
                 }.sheet(isPresented: $showingImagePicker) {

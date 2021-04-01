@@ -1,15 +1,29 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath(Versions.Jvm.SHADOW_GRADLE_PLUGIN)
+    }
+}
+
+application {
+    // TODO to solve deprecation checkout https://github.com/johnrengelman/shadow/issues/336
+    mainClassName = "com.halcyonmobile.multiplatformplayground.ServerKt"
+}
+
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
     application
-}
-
-application {
-    mainClass.set("com.halcyonmobile.multiplatformplayground.ServerKt")
+    id("com.github.johnrengelman.shadow") version Versions.Jvm.SHADOW_JAR_VERSION
 }
 
 dependencies {
     implementation(project(":commonModel"))
+    implementation(Versions.Jvm.STANDARD_LIBRARY)
     implementation(Versions.Jvm.KTOR_CLIENT_APACHE)
     implementation(Versions.Jvm.KTOR_SERIALIZATION)
 
@@ -24,8 +38,23 @@ dependencies {
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_CORE)
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_DAO)
     implementation(Versions.Jvm.JETBRAINS_EXPOSED_JDBC)
-    implementation(Versions.Jvm.H2_DATABASE)
+    implementation(Versions.Jvm.POSTGRESQL)
     implementation(Versions.Jvm.HIKARI_CONNECTION_POOL)
 
     implementation(Versions.Jvm.LOGBACK)
+
+    implementation(Versions.Jvm.AWS_JAVA_SDK)
+}
+
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("Backend")
+    archiveClassifier.set("")
+    archiveVersion.set("")
+    isZip64 = true
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
+    }
 }

@@ -1,12 +1,12 @@
 package com.halcyonmobile.multiplatformplayground.repository
 
 import com.halcyonmobile.multiplatformplayground.api.FavouritesApi
-import kotlinx.coroutines.Dispatchers
+import com.halcyonmobile.multiplatformplayground.shared.util.DispatcherProvider
 import kotlinx.coroutines.withContext
 
-internal class FavouritesRemoteSource(private val api: FavouritesApi) {
+internal class FavouritesRemoteSource(private val api: FavouritesApi, private val dispatcherProvider: DispatcherProvider) {
 
-    suspend fun get() = withContext(Dispatchers.Default) {
+    suspend fun get() = withContext(dispatcherProvider.io) {
         api.getFavourites()
     }
 }

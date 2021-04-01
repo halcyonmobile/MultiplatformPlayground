@@ -1,9 +1,10 @@
 package com.halcyonmobile.multiplatformplayground.util
 
-import io.ktor.application.*
-import io.ktor.util.pipeline.*
 import com.halcyonmobile.multiplatformplayground.shared.util.PAGE
 import com.halcyonmobile.multiplatformplayground.shared.util.PER_PAGE
+import io.ktor.application.ApplicationCall
+import io.ktor.application.call
+import io.ktor.util.pipeline.PipelineContext
 
 fun PipelineContext<Unit, ApplicationCall>.requirePage() =
     call.request.queryParameters[PAGE]?.toInt()

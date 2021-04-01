@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 #elseif os(macOS)
 class AppDelegate: NSResponder, NSApplicationDelegate {
     
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationWillFinishLaunching(_ notification: Notification) {
         CommonModuleKt.doInitKoin()
     }
 }

@@ -1,13 +1,21 @@
 package com.halcyonmobile.multiplatformplayground.viewmodel
 
-import com.halcyonmobile.multiplatformplayground.model.ui.*
+import com.halcyonmobile.multiplatformplayground.model.ui.CategoryUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
+import com.halcyonmobile.multiplatformplayground.model.ui.toCategoryUiModel
+import com.halcyonmobile.multiplatformplayground.model.ui.toUploadApplicationModel
 import com.halcyonmobile.multiplatformplayground.shared.CoroutineViewModel
 import com.halcyonmobile.multiplatformplayground.shared.Result
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
-import com.halcyonmobile.multiplatformplayground.shared.util.log
 import com.halcyonmobile.multiplatformplayground.usecase.CreateApplicationUseCase
 import com.halcyonmobile.multiplatformplayground.usecase.GetCategoryUseCase
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -94,8 +102,9 @@ class UploadApplicationViewModel(
     }
 
     override fun onRatingChanged(rating: String) {
+        val newRating = rating.toFloatOrNull() ?: return
         _uploadApplicationUiModel.value =
-            _uploadApplicationUiModel.value.copy(rating = rating.toFloat())
+            _uploadApplicationUiModel.value.copy(rating = newRating)
     }
 
     override fun onDescriptionChanged(description: String) {

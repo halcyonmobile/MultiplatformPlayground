@@ -6,6 +6,7 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN_VERSION
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("koin")
     id("com.squareup.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.codingfeline.buildkonfig")
@@ -67,6 +68,14 @@ kotlin {
                 api(Versions.Common.MOKO_RESOURCES)
             }
         }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+                // Koin tests
+                implementation(Versions.Common.KOIN_TEST)
+            }
+        }
         val androidMain by getting {
             dependencies {
                 implementation(Versions.Android.VIEW_MODEL)
@@ -76,6 +85,15 @@ kotlin {
                 implementation(Versions.Android.KTOR_CLIENT)
 
                 implementation(Versions.Android.SQL_DELIGHT_DRIVER)
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.13.1")
+                implementation(Versions.Android.COROUTINES_TEST)
+                implementation(Versions.Android.MOCKK)
+                implementation(Versions.Android.TURBINE)
             }
         }
         val appleMain by creating {

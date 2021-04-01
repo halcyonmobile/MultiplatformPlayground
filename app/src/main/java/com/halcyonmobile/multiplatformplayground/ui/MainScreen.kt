@@ -1,62 +1,72 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
-import androidx.navigation.compose.*
-import com.halcyonmobile.multiplatformplayground.BottomNavigationScreen
-import com.halcyonmobile.multiplatformplayground.bottomNavigationScreens
-import com.halcyonmobile.multiplatformplayground.util.composables.BottomNavigation
+import androidx.navigation.compose.KEY_ROUTE
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
+import com.halcyonmobile.multiplatformplayground.NavigationDirection
+import com.halcyonmobile.multiplatformplayground.R
+import com.halcyonmobile.multiplatformplayground.navigationDirectionRoutes
+import com.halcyonmobile.multiplatformplayground.navigationDirections
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
     Scaffold(
         bottomBar = {
-            val navBackStackEntry by navController.currentBackStackEntryAsState()
-            val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
-            if (currentRoute in bottomNavigationScreens.map { it.route }) {
-                BottomNavigation {
-                    bottomNavigationScreens.forEach {
-                        BottomNavigationItem(
-                            icon = { Icon(imageVector = vectorResource(id = it.iconRes)) },
-                            selected = currentRoute == it.route,
-                            onClick = {
-                                if (currentRoute != it.route) {
-                                    navController.popBackStack(
-                                        navController.graph.startDestination,
-                                        false
-                                    )
-                                    navController.navigate(it.route)
-                                }
-                            }
+            if (currentRoute in navigationDirections.map { it.route }) {
+                BottomAppBar(cutoutShape = CircleShape) {
+                    navigationDirections.forEach {
+                        Icon(
+                            imageVector = vectorResource(id = it.iconRes), Modifier.clickable(
+                                onClick = {
+                                    if (currentRoute != it.route) {
+                                        navController.popBackStack(
+                                            navController.graph.startDestination,
+                                            false
+                                        )
+                                        navController.navigate(it.route)
+                                    }
+                                }).padding(16.dp)
                         )
                     }
                 }
             }
-        }
+        },
+        floatingActionButton = {
+            if (currentRoute in navigationDirectionRoutes) {
+                FloatingActionButton(onClick = { navController.navigate("uploadApplication") }) {
+                    Icon(imageVector = vectorResource(id = R.drawable.ic_add))
+                }
+            }
+        },
+        isFloatingActionButtonDocked = true
     ) {
         NavHost(
             navController = navController,
-            startDestination = BottomNavigationScreen.Home.route,
+            startDestination = NavigationDirection.Home.route,
             builder = {
-                composable(BottomNavigationScreen.Home.route) {
-                    HomeScreen(
-                        onApplicationClicked = { navController.navigate("applicationDetail/${it.id}") },
-                        onUploadApplication = { navController.navigate("uploadApplication/${it}") }
-                    )
+                composable(NavigationDirection.Home.route) {
+                    HomeScreen(onApplicationClicked = { navController.navigate("applicationDetail/${it.id}") })
                 }
-                composable(BottomNavigationScreen.Favourites.route) {
+                composable(NavigationDirection.Favourites.route) {
                     FavouriteScreen(onApplicationClicked = { navController.navigate("applicationDetail/${it.id}") })
-                }
-                composable(BottomNavigationScreen.Settings.route) {
-                    // TODO
                 }
                 composable(
                     "applicationDetail/{id}",
@@ -66,14 +76,8 @@ fun MainScreen() {
                         applicationId = it.arguments!!.getLong("id"),
                         upPress = { navController.popBackStack() })
                 }
-                composable(
-                    "uploadApplication/{categoryId}",
-                    arguments = listOf(navArgument("categoryId") { type = NavType.LongType })
-                ) {
-                    UploadApplication(
-                        initialCategoryId = it.arguments!!.getLong("categoryId"),
-                        upPress = { navController.popBackStack() }
-                    )
+                composable("uploadApplication") {
+                    UploadApplication(upPress = { navController.popBackStack() })
                 }
             })
     }

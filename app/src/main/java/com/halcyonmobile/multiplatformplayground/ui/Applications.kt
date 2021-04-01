@@ -2,12 +2,18 @@ package com.halcyonmobile.multiplatformplayground.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumnFor
-import androidx.compose.foundation.lazy.LazyColumnForIndexed
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +25,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
-import com.halcyonmobile.multiplatformplayground.shared.util.log
+import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
@@ -29,22 +35,27 @@ fun Applications(
     contentPadding: PaddingValues = PaddingValues(),
     onBottomReached: () -> Unit = {}
 ) {
-    LazyColumnForIndexed(
-        items = items,
+    LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = contentPadding
-    ) { index, item ->
-        if (items.lastIndex == index) {
-            onActive {
-                onBottomReached()
-            }
-        }
-        when (item) {
-            is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
-            ApplicationUiModel.Loading -> CircularProgressIndicator(
-                Modifier.wrapContentSize(align = Alignment.Center).padding(16.dp)
-            )
-        }
+    ) {
+        itemsIndexed(items = items,
+            itemContent = { index, item ->
+                if (items.lastIndex == index) {
+                    onActive {
+                        onBottomReached()
+                    }
+                }
+                when (item) {
+                    is ApplicationUiModel.App -> Application(uiModel = item, onApplicationClicked)
+                    ApplicationUiModel.Loading -> Box(
+                        Modifier.fillParentMaxWidth(),
+                        Alignment.Center
+                    ) {
+                        CircularProgressIndicator(Modifier.padding(16.dp))
+                    }
+                }
+            })
     }
 }
 
@@ -61,17 +72,17 @@ private fun Application(
             CoilImage(data = uiModel.icon, modifier = Modifier.size(64.dp))
         }
         Column(modifier = Modifier.fillMaxSize().align(Alignment.Top).padding(start = 16.dp)) {
-            Text(text = uiModel.name, style = MaterialTheme.typography.body1)
-            Text(text = uiModel.developer, style = MaterialTheme.typography.caption)
+            Text(text = uiModel.name, style = AppTheme.typography.body1)
+            Text(text = uiModel.developer, style = AppTheme.typography.caption)
             Row(Modifier.wrapContentSize(Alignment.TopStart)) {
                 Text(
                     text = uiModel.rating.toString(),
                     modifier = Modifier.align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.caption
+                    style = AppTheme.typography.caption
                 )
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_rating),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary),
+                    colorFilter = ColorFilter.tint(AppTheme.colors.secondary),
                     modifier = Modifier.size(16.dp).padding(start = 4.dp)
                 )
             }

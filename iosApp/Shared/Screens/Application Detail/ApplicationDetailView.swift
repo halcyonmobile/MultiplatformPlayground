@@ -40,7 +40,7 @@ struct ApplicationDetailView: View {
                     
                     ScrollView(.horizontal, showsIndicators: true, content: {
                         LazyHStack {
-                            ForEach(state.applicationDetail!.screenshots, id: \.id, content: { screenshot in
+                            ForEach(state.applicationDetail!.screenshots, id: \.name, content: { screenshot in
                                 KFImage(URL(string: screenshot.image))
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)

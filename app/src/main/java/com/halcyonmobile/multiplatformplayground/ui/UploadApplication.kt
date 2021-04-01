@@ -4,23 +4,34 @@ import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumnFor
-import androidx.compose.foundation.lazy.LazyRowFor
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExtendedFloatingActionButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.AmbientContext
 import androidx.compose.ui.res.stringResource
@@ -32,21 +43,29 @@ import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiMod
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
 import com.halcyonmobile.multiplatformplayground.shared.util.toImageFile
-import com.halcyonmobile.multiplatformplayground.ui.theme.lightGray
-import com.halcyonmobile.multiplatformplayground.util.registerForActivityResult
+import com.halcyonmobile.multiplatformplayground.ui.shared.Screenshots
+import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
+import com.halcyonmobile.multiplatformplayground.util.registerForActivityResult
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
 @Composable
-fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
-    val viewModel = remember(initialCategoryId) {
-        UploadApplicationViewModel(initialCategoryId)
+fun UploadApplication(upPress: () -> Unit) {
+    // TODO remove initial categoryId and add category selection
+    val viewModel = remember {
+        UploadApplicationViewModel(1)
     }
     val uploadApplicationUiModel by viewModel.uploadApplicationUiModel.collectAsState(
-        UploadApplicationUiModel(categoryId = initialCategoryId)
+        UploadApplicationUiModel(categoryId = 1)
     )
+    val state by viewModel.state.collectAsState()
+    val event by viewModel.event.collectAsState(null)
+
+    if (event == UploadApplicationViewModel.Event.SUCCESSFUL_UPLOAD) {
+        upPress()
+    }
 
     val getIcon = registerForGalleryResult(viewModel::onIconChanged)
     val getScreenshot = registerForGalleryResult(viewModel::onAddScreenshot)
@@ -54,33 +73,50 @@ fun UploadApplication(initialCategoryId: Long, upPress: () -> Unit) {
     Scaffold(
         topBar = { BackBar(upPress = upPress) },
         bodyContent = {
-            ScrollableColumn(contentPadding = PaddingValues(16.dp)) {
-                Card(
-                    modifier = Modifier.preferredSize(88.dp).align(Alignment.CenterHorizontally),
-                    shape = CircleShape,
-                    backgroundColor = lightGray
+            when (state) {
+                UploadApplicationViewModel.State.LOADING -> Box(
+                    Modifier.fillMaxSize(),
+                    Alignment.Center
                 ) {
-                    Box(Modifier.clickable { getIcon.launchAsImageResult() }) {
-                        if (uploadApplicationUiModel.icon == null) {
-                            Image(
-                                imageVector = vectorResource(id = R.drawable.ic_add_image),
-                                colorFilter = ColorFilter.tint(Color.DarkGray),
-                                modifier = Modifier.wrapContentSize().align(Alignment.Center)
-                            )
-                        } else {
-                            CoilImage(
-                                data = uploadApplicationUiModel.icon!!.uri,
-                                modifier = Modifier.matchParentSize(),
-                                contentScale = ContentScale.Crop
-                            )
+                    CircularProgressIndicator()
+                }
+                UploadApplicationViewModel.State.NORMAL -> ScrollableColumn(
+                    contentPadding = PaddingValues(16.dp)
+                ) {
+                    Card(
+                        modifier = Modifier.preferredSize(88.dp)
+                            .align(Alignment.CenterHorizontally),
+                        shape = RoundedCornerShape(51),
+                        backgroundColor = AppTheme.colors.cardButton
+                    ) {
+                        Box(Modifier.clickable { getIcon.launchAsImageResult() }) {
+                            if (uploadApplicationUiModel.icon == null) {
+                                Image(
+                                    imageVector = vectorResource(id = R.drawable.ic_add_image),
+                                    colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                                    modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                                )
+                            } else {
+                                CoilImage(
+                                    data = uploadApplicationUiModel.icon!!.uri,
+                                    modifier = Modifier.matchParentSize(),
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
                         }
                     }
+                    Screenshots(
+                        screenshots = uploadApplicationUiModel.screenshots,
+                        onAddScreenshot = { getScreenshot.launchAsImageResult() },
+                        showAdd = true
+                    )
+                    ApplicationDetails(uploadApplicationUiModel, viewModel)
+                    ExtendedFloatingActionButton(
+                        text = { Text(stringResource(R.string.submit)) },
+                        onClick = viewModel::submit,
+                        modifier = Modifier.fillMaxWidth().padding(8.dp)
+                    )
                 }
-                Screenshots(
-                    screenshots = uploadApplicationUiModel.screenshots,
-                    onAddScreenshot = { getScreenshot.launchAsImageResult() }
-                )
-                ApplicationDetails(uploadApplicationUiModel, viewModel)
             }
         }
     )
@@ -97,50 +133,14 @@ private fun registerForGalleryResult(callback: (ImageFile) -> Unit) =
     }
 
 @Composable
-private fun Screenshots(screenshots: List<ImageFile>, onAddScreenshot: () -> Unit) {
-    Column {
-        Text(
-            text = stringResource(id = R.string.screenshots),
-            style = MaterialTheme.typography.h6,
-            modifier = Modifier.padding(16.dp)
-        )
-        LazyRowFor(items = screenshots + null, modifier = Modifier.padding(8.dp)) {
-            if (it != null) {
-                CoilImage(
-                    data = it.uri,
-                    modifier = Modifier.preferredSize(88.dp).padding(8.dp),
-                    contentScale = ContentScale.Crop
-                )
-            } else {
-                Card(
-                    modifier = Modifier.preferredSize(88.dp).padding(8.dp),
-                    shape = RectangleShape,
-                    backgroundColor = lightGray,
-                    border = BorderStroke(1.dp, Color.LightGray)
-                ) {
-                    Box(Modifier.clickable(onClick = onAddScreenshot)) {
-                        Image(
-                            imageVector = vectorResource(id = R.drawable.ic_add_image),
-                            colorFilter = ColorFilter.tint(Color.DarkGray),
-                            modifier = Modifier.wrapContentSize().align(Alignment.Center)
-                        )
-                    }
-
-                }
-            }
-        }
-    }
-}
-
-@Composable
 private fun ApplicationDetails(
     uploadApplicationUiModel: UploadApplicationUiModel,
     changeListener: UploadApplicationUiModelChangeListener
 ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.padding(vertical = 16.dp)) {
         Text(
             text = stringResource(id = R.string.application_details),
-            style = MaterialTheme.typography.h6
+            style = AppTheme.typography.h6
         )
         // TODO add category
         TextField(
@@ -151,7 +151,7 @@ private fun ApplicationDetails(
             leadingIcon = {
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_label),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                 )
             })
         TextField(
@@ -162,7 +162,7 @@ private fun ApplicationDetails(
             leadingIcon = {
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_developer),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                 )
             })
         TextField(
@@ -173,7 +173,7 @@ private fun ApplicationDetails(
             leadingIcon = {
                 Image(
                     imageVector = vectorResource(id = R.drawable.ic_description),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                 )
             })
         Row(modifier = Modifier.navigationBarsPadding().fillMaxWidth().padding(top = 8.dp)) {
@@ -185,7 +185,7 @@ private fun ApplicationDetails(
                 leadingIcon = {
                     Image(
                         imageVector = vectorResource(id = R.drawable.ic_downloads),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
+                        colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                     )
                 })
             TextField(
@@ -197,7 +197,7 @@ private fun ApplicationDetails(
                 leadingIcon = {
                     Image(
                         imageVector = vectorResource(id = R.drawable.ic_rating),
-                        colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
+                        colorFilter = ColorFilter.tint(AppTheme.colors.primary)
                     )
                 })
         }
@@ -207,6 +207,6 @@ private fun ApplicationDetails(
 @Composable
 fun UploadApplicationPreview() {
     Surface(Modifier.fillMaxSize()) {
-        UploadApplication(initialCategoryId = 1, upPress = {})
+        UploadApplication { }
     }
 }

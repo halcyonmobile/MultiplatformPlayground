@@ -4,6 +4,7 @@
     <string name="app_name">AppPortfolio</string>
     <string name="retry">Retry</string>
     <string name="general_error">Oops something went wrong..</string>
+    <string name="submit">Submit</string>
     <!--  Bottom Navigation  -->
     <string name="home">Home</string>
     <string name="favourites">Favourites</string>
@@ -26,4 +27,6 @@
     <!--  Applications  -->
     <string name="applications_empty_message">Oops. There are no applications in this category
     </string>
+    <!-- Favourites -->
+    <string name="favourites_empty_message">Oops. You don\'t have any favourite application</string>
 </resources>

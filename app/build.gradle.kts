@@ -34,14 +34,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         useIR = true
+        freeCompilerArgs = listOf("-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     composeOptions {
-        kotlinCompilerVersion = "1.4.20"
-        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER_VERSION
+        kotlinCompilerVersion = Versions.KOTLIN_VERSION
+        kotlinCompilerExtensionVersion = Versions.Android.COMPOSE_VERSION
     }
     lintOptions {
         disable("InvalidFragmentVersionForActivityResult")
