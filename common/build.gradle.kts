@@ -10,18 +10,23 @@ plugins {
     id("com.squareup.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.codingfeline.buildkonfig")
+    id("com.chromaticnoise.multiplatform-swiftpackage") version "2.0.3"
 }
 
 version = "1.0.0"
 
 kotlin {
     android()
+
+    macosX64("macOS")
+
     // Set the target based on if it's real phone ore simulator
     if (System.getenv("SDK_NAME").orEmpty().startsWith("iphoneos")) {
         iosArm64("ios")
     } else {
         iosX64("ios")
-    }.apply {
+    }
+    .apply {
         compilations {
             val main by getting {
                 kotlinOptions.freeCompilerArgs =
@@ -91,10 +96,22 @@ kotlin {
                 implementation(Versions.Android.TURBINE)
             }
         }
+        val appleMain by creating {
+            dependsOn(commonMain)
+            // TODO Other common dependencies should be added here
+        }
         val iosMain by getting {
+            dependsOn(appleMain)
             dependencies {
-                implementation(Versions.iOS.KTOR_CLIENT)
-                implementation(Versions.iOS.SQL_DELIGHT_DRIVER)
+                implementation(Versions.Apple.KTOR_CLIENT)
+                implementation(Versions.Apple.SQL_DELIGHT_DRIVER)
+            }
+        }
+        val macOSMain by getting {
+            dependsOn(appleMain)
+            dependencies {
+                implementation(Versions.Apple.KTOR_CLIENT)
+                implementation(Versions.Apple.SQL_DELIGHT_DRIVER)
             }
         }
     }
@@ -107,7 +124,17 @@ android {
         minSdkVersion(Versions.Android.MINIMUM_SDK_VERSION)
         targetSdkVersion(Versions.Android.SDK_VERSION)
     }
+    /*
+    There seems to be an issue with the latest canary (7.0.0-alpha03) Android studio.
+    Revisit this workaround once the issue is patched.
 
+    https://youtrack.jetbrains.com/issue/KT-43944
+     */
+    configurations {
+        create("testApi")
+        create("testDebugApi")
+        create("testReleaseApi")
+    }
     sourceSets {
         getByName("main") {
             manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -120,18 +147,14 @@ android {
     }
 }
 
-val packForXcode by tasks.creating(Sync::class) {
-    group = "build"
-    val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
-    val framework =
-        kotlin.targets.getByName<KotlinNativeTarget>("ios").binaries.getFramework(mode)
-    inputs.property("mode", mode)
-    dependsOn(framework.linkTask)
-    val targetDir = File(buildDir, "xcode-frameworks")
-    from({ framework.outputDirectory })
-    into(targetDir)
+multiplatformSwiftPackage {
+    packageName("AppPortfolioKit")
+    swiftToolsVersion("5.3")
+    targetPlatforms {
+        iOS { v("13") }
+        macOS{ v("10_15") }
+    }
 }
-tasks.getByName("build").dependsOn(packForXcode)
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     with(kotlinOptions) {

@@ -10,7 +10,7 @@ object Versions {
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
 
     object Common {
-        private const val MOKO_RESOURCES_VERSION = "0.13.1"
+        private const val MOKO_RESOURCES_VERSION = "0.14.0"
 
         const val KOIN_GRADLE_PLUGIN = "org.koin:koin-gradle-plugin:$KOIN_VERSION"
         const val MOKO_RESOURCES_GRADLE_PLUGIN =
@@ -121,7 +121,7 @@ object Versions {
         const val TURBINE = "app.cash.turbine:turbine:0.3.0"
     }
 
-    object iOS {
+    object Apple {
         const val KTOR_CLIENT = "io.ktor:ktor-client-ios:$KTOR_VERSION"
         const val SQL_DELIGHT_DRIVER = "com.squareup.sqldelight:native-driver:$SQL_DELIGHT_VERSION"
     }

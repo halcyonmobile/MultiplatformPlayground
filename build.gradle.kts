@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.0-alpha02")
+        classpath("com.android.tools.build:gradle:7.0.0-alpha11")
         classpath(Versions.KOTLIN_GRADLE_PLUGIN)
         classpath(Versions.Common.KOIN_GRADLE_PLUGIN)
         classpath(Versions.Common.MOKO_RESOURCES_GRADLE_PLUGIN)

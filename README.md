@@ -33,7 +33,7 @@ Its primary purpose is to showcase sharing every layer except the UI layer in be
 - JVM (Backend)
 - Android
 - iOS
-- macOS (Coming soon)
+- macOS
 - desktop (planned)
 - web (planned)
 
