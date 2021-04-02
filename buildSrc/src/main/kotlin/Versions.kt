@@ -1,18 +1,18 @@
 object Versions {
-    const val KOTLIN_VERSION = "1.4.21"
-    const val COROUTINES_VERSION = "1.4.2-native-mt"
-    private const val KTOR_VERSION = "1.5.0"
-    private const val SERIALIZATION_VERSION = "1.0.1"
-    private const val KOIN_VERSION = "3.0.0-alpha-4"
+    const val KOTLIN_VERSION = "1.4.31"
+    const val COROUTINES_VERSION = "1.4.3-native-mt"
+    private const val KTOR_VERSION = "1.5.2"
+    private const val SERIALIZATION_VERSION = "1.1.0"
+    private const val KOIN_VERSION = "3.0.1-beta-2"
     private const val SQL_DELIGHT_VERSION = "1.4.4"
     private const val BEAGLE_VERSION = "2.0.5"
 
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
 
     object Common {
-        private const val MOKO_RESOURCES_VERSION = "0.14.0"
+        private const val MOKO_RESOURCES_VERSION = "0.15.1"
 
-        const val KOIN_GRADLE_PLUGIN = "org.koin:koin-gradle-plugin:$KOIN_VERSION"
+        const val KOIN_GRADLE_PLUGIN = "io.insert-koin:koin-gradle-plugin:$KOIN_VERSION"
         const val MOKO_RESOURCES_GRADLE_PLUGIN =
             "dev.icerock.moko:resources-generator:$MOKO_RESOURCES_VERSION"
         const val SQL_DELIGHT_GRADLE_PLUGIN =
@@ -33,12 +33,12 @@ object Versions {
         const val BEAGLE_LOG_KTOR = "com.github.pandulapeter.beagle:log-ktor:$BEAGLE_VERSION"
         const val MOKO_RESOURCES = "dev.icerock.moko:resources:$MOKO_RESOURCES_VERSION"
 
-        const val KOIN_CORE = "org.koin:koin-core:$KOIN_VERSION"
-        const val KOIN_TEST = "org.koin:koin-test:$KOIN_VERSION"
+        const val KOIN_CORE = "io.insert-koin:koin-core:$KOIN_VERSION"
+        const val KOIN_TEST = "io.insert-koin:koin-test:$KOIN_VERSION"
     }
 
     object Jvm {
-        private const val EXPOSED_VERSION = "0.28.1"
+        private const val EXPOSED_VERSION = "0.29.1"
         const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
         const val SHADOW_JAR_VERSION = "6.1.0"
@@ -52,7 +52,7 @@ object Versions {
         const val KTOR_SERVER_NETTY = "io.ktor:ktor-server-netty:$KTOR_VERSION"
         const val KTOR_SERIALIZATION = "io.ktor:ktor-serialization:$KTOR_VERSION"
 
-        const val KOIN_KTOR = "org.koin:koin-ktor:$KOIN_VERSION"
+        const val KOIN_KTOR = "io.insert-koin:koin-ktor:$KOIN_VERSION"
 
         const val JETBRAINS_EXPOSED_CORE = "org.jetbrains.exposed:exposed-core:$EXPOSED_VERSION"
         const val JETBRAINS_EXPOSED_DAO = "org.jetbrains.exposed:exposed-dao:$EXPOSED_VERSION"
@@ -66,12 +66,12 @@ object Versions {
     }
 
     object Android {
-        const val SDK_VERSION = 29
+        const val SDK_VERSION = 30
         const val MINIMUM_SDK_VERSION = 23
-        const val BUILD_TOOLS_VERSION = "29.0.2"
-        const val COMPOSE_VERSION = "1.0.0-alpha10"
-        private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha05"
-        private const val ACCOMPANIST_COMPOSE_VERSION = "0.4.0"
+        const val BUILD_TOOLS_VERSION = "30.0.2"
+        const val COMPOSE_VERSION = "1.0.0-beta03"
+        private const val NAVIGATION_COMPOSE_VERSION = "1.0.0-alpha09"
+        private const val ACCOMPANIST_COMPOSE_VERSION = "0.7.0"
 
         // region Compose
         const val COMPOSE_UI = "androidx.compose.ui:ui:$COMPOSE_VERSION"
@@ -89,9 +89,9 @@ object Versions {
         const val NAVIGATION_COMPOSE =
             "androidx.navigation:navigation-compose:$NAVIGATION_COMPOSE_VERSION"
         const val COIL_COMPOSE =
-            "dev.chrisbanes.accompanist:accompanist-coil:$ACCOMPANIST_COMPOSE_VERSION"
+            "com.google.accompanist:accompanist-coil:$ACCOMPANIST_COMPOSE_VERSION"
         const val INSETS_COMPOSE =
-            "dev.chrisbanes.accompanist:accompanist-insets:$ACCOMPANIST_COMPOSE_VERSION"
+            "com.google.accompanist:accompanist-insets:$ACCOMPANIST_COMPOSE_VERSION"
 
         // endregion
         const val STANDARD_LIBRARY = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
@@ -106,7 +106,7 @@ object Versions {
         const val LIVE_DATA = "androidx.lifecycle:lifecycle-livedata-ktx:$LIFECYCLE_VERSION"
         const val VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VERSION"
 
-        const val KOIN_ANDROID_VIEWMODEL = "org.koin:koin-android-viewmodel:$KOIN_VERSION"
+        const val KOIN_ANDROID_VIEWMODEL = "io.insert-koin:koin-android:$KOIN_VERSION"
 
         const val KTOR_CLIENT = "io.ktor:ktor-client-android:$KTOR_VERSION"
 

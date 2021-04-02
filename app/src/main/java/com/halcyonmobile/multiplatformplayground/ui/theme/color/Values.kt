@@ -2,7 +2,7 @@ package com.halcyonmobile.multiplatformplayground.ui.theme.color
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ComposableContract
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.graphics.Color
 
 val primary200 = Color(0xff73e8ff)
@@ -45,9 +45,9 @@ val lightColors: AppColors = AppColors(
     true
 )
 
-@ComposableContract(readonly = true)
 val appColors: AppColors
     @Composable
+    @ReadOnlyComposable
     get() = if (isSystemInDarkTheme()) {
         darkColors
     } else {

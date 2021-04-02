@@ -6,9 +6,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
 import androidx.navigation.compose.KEY_ROUTE
@@ -34,16 +33,20 @@ fun MainScreen() {
                 BottomAppBar(cutoutShape = CircleShape) {
                     navigationDirections.forEach {
                         Icon(
-                            imageVector = vectorResource(id = it.iconRes), Modifier.clickable(
-                                onClick = {
-                                    if (currentRoute != it.route) {
-                                        navController.popBackStack(
-                                            navController.graph.startDestination,
-                                            false
-                                        )
-                                        navController.navigate(it.route)
-                                    }
-                                }).padding(16.dp)
+                            painter = painterResource(id = it.iconRes),
+                            modifier = Modifier
+                                .clickable(
+                                    onClick = {
+                                        if (currentRoute != it.route) {
+                                            navController.popBackStack(
+                                                navController.graph.startDestination,
+                                                false
+                                            )
+                                            navController.navigate(it.route)
+                                        }
+                                    })
+                                .padding(16.dp),
+                            contentDescription = null
                         )
                     }
                 }
@@ -52,7 +55,7 @@ fun MainScreen() {
         floatingActionButton = {
             if (currentRoute in navigationDirectionRoutes) {
                 FloatingActionButton(onClick = { navController.navigate("uploadApplication") }) {
-                    Icon(imageVector = vectorResource(id = R.drawable.ic_add))
+                    Icon(painter = painterResource(id = R.drawable.ic_add), contentDescription = null)
                 }
             }
         },

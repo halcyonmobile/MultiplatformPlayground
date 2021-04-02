@@ -1,23 +1,17 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import android.net.Uri
+import androidx.activity.compose.registerForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredSize
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExtendedFloatingActionButton
@@ -33,11 +27,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.coil.CoilImage
+import com.google.accompanist.insets.navigationBarsPadding
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.model.ui.UploadApplicationUiModelChangeListener
@@ -46,10 +42,7 @@ import com.halcyonmobile.multiplatformplayground.shared.util.toImageFile
 import com.halcyonmobile.multiplatformplayground.ui.shared.Screenshots
 import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.util.composables.BackBar
-import com.halcyonmobile.multiplatformplayground.util.registerForActivityResult
 import com.halcyonmobile.multiplatformplayground.viewmodel.UploadApplicationViewModel
-import dev.chrisbanes.accompanist.coil.CoilImage
-import dev.chrisbanes.accompanist.insets.navigationBarsPadding
 
 @Composable
 fun UploadApplication(upPress: () -> Unit) {
@@ -72,7 +65,7 @@ fun UploadApplication(upPress: () -> Unit) {
 
     Scaffold(
         topBar = { BackBar(upPress = upPress) },
-        bodyContent = {
+        content = {
             when (state) {
                 UploadApplicationViewModel.State.LOADING -> Box(
                     Modifier.fillMaxSize(),
@@ -80,11 +73,13 @@ fun UploadApplication(upPress: () -> Unit) {
                 ) {
                     CircularProgressIndicator()
                 }
-                UploadApplicationViewModel.State.NORMAL -> ScrollableColumn(
-                    contentPadding = PaddingValues(16.dp)
+                UploadApplicationViewModel.State.NORMAL -> Column(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .verticalScroll(rememberScrollState())
                 ) {
                     Card(
-                        modifier = Modifier.preferredSize(88.dp)
+                        modifier = Modifier.size(88.dp)
                             .align(Alignment.CenterHorizontally),
                         shape = RoundedCornerShape(51),
                         backgroundColor = AppTheme.colors.cardButton
@@ -92,15 +87,19 @@ fun UploadApplication(upPress: () -> Unit) {
                         Box(Modifier.clickable { getIcon.launchAsImageResult() }) {
                             if (uploadApplicationUiModel.icon == null) {
                                 Image(
-                                    imageVector = vectorResource(id = R.drawable.ic_add_image),
+                                    painter = painterResource(id = R.drawable.ic_add_image),
                                     colorFilter = ColorFilter.tint(AppTheme.colors.primary),
-                                    modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                                    modifier = Modifier
+                                        .wrapContentSize()
+                                        .align(Alignment.Center),
+                                    contentDescription = null
                                 )
                             } else {
                                 CoilImage(
                                     data = uploadApplicationUiModel.icon!!.uri,
                                     modifier = Modifier.matchParentSize(),
-                                    contentScale = ContentScale.Crop
+                                    contentScale = ContentScale.Crop,
+                                    contentDescription = null
                                 )
                             }
                         }
@@ -114,7 +113,9 @@ fun UploadApplication(upPress: () -> Unit) {
                     ExtendedFloatingActionButton(
                         text = { Text(stringResource(R.string.submit)) },
                         onClick = viewModel::submit,
-                        modifier = Modifier.fillMaxWidth().padding(8.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
                     )
                 }
             }
@@ -126,7 +127,7 @@ private fun ActivityResultLauncher<String>.launchAsImageResult() = launch("image
 
 @Composable
 private fun registerForGalleryResult(callback: (ImageFile) -> Unit) =
-    (AmbientContext.current as AppCompatActivity).contentResolver.let { contentResolver ->
+    (LocalContext.current as AppCompatActivity).contentResolver.let { contentResolver ->
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.toImageFile(contentResolver)?.let(callback)
         }
@@ -146,58 +147,73 @@ private fun ApplicationDetails(
         TextField(
             value = uploadApplicationUiModel.name,
             onValueChange = changeListener::onNameChanged,
-            modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
             placeholder = { Text(text = stringResource(id = R.string.application_name)) },
             leadingIcon = {
                 Image(
-                    imageVector = vectorResource(id = R.drawable.ic_label),
-                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
+                    painter = painterResource(id = R.drawable.ic_label),
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                    contentDescription = null
                 )
             })
         TextField(
             value = uploadApplicationUiModel.developer,
             onValueChange = changeListener::onDeveloperChanged,
-            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
             placeholder = { Text(text = stringResource(id = R.string.developer)) },
             leadingIcon = {
                 Image(
-                    imageVector = vectorResource(id = R.drawable.ic_developer),
-                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
+                    painter = painterResource(id = R.drawable.ic_developer),
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                    contentDescription = null
                 )
             })
         TextField(
             value = uploadApplicationUiModel.description,
             onValueChange = changeListener::onDescriptionChanged,
-            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
             placeholder = { Text(text = stringResource(id = R.string.description)) },
             leadingIcon = {
                 Image(
-                    imageVector = vectorResource(id = R.drawable.ic_description),
-                    colorFilter = ColorFilter.tint(AppTheme.colors.primary)
+                    painter = painterResource(id = R.drawable.ic_description),
+                    colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                    contentDescription = null
                 )
             })
         Row(modifier = Modifier.navigationBarsPadding().fillMaxWidth().padding(top = 8.dp)) {
             TextField(
                 value = uploadApplicationUiModel.downloads,
                 onValueChange = changeListener::onDownloadsChanged,
-                modifier = Modifier.weight(1f).padding(end = 4.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 4.dp),
                 placeholder = { Text(text = stringResource(id = R.string.downloads)) },
                 leadingIcon = {
                     Image(
-                        imageVector = vectorResource(id = R.drawable.ic_downloads),
-                        colorFilter = ColorFilter.tint(AppTheme.colors.primary)
+                        painter = painterResource(id = R.drawable.ic_downloads),
+                        colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                        contentDescription = null
                     )
                 })
             TextField(
                 value = uploadApplicationUiModel.rating?.toString() ?: "",
                 onValueChange = changeListener::onRatingChanged,
-                modifier = Modifier.weight(1f).padding(start = 4.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 4.dp),
                 placeholder = { Text(text = stringResource(id = R.string.rating)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 leadingIcon = {
                     Image(
-                        imageVector = vectorResource(id = R.drawable.ic_rating),
-                        colorFilter = ColorFilter.tint(AppTheme.colors.primary)
+                        painter = painterResource(id = R.drawable.ic_rating),
+                        colorFilter = ColorFilter.tint(AppTheme.colors.primary),
+                        contentDescription = null
                     )
                 })
         }

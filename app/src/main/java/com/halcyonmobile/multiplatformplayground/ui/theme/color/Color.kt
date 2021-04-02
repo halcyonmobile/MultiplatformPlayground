@@ -2,7 +2,7 @@ package com.halcyonmobile.multiplatformplayground.ui.theme.color
 
 import androidx.compose.material.Colors
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.staticAmbientOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 @Immutable
@@ -42,4 +42,4 @@ val AppColors.materialColors
 
 val AppColors.primarySurface: Color get() = if (isLight) primary else surface
 
-internal val AmbientColors = staticAmbientOf { lightColors }
+internal val localColors = staticCompositionLocalOf { lightColors }

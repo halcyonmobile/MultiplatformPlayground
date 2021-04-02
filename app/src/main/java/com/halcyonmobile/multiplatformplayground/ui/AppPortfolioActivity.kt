@@ -1,13 +1,13 @@
 package com.halcyonmobile.multiplatformplayground.ui
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Surface
-import androidx.compose.ui.platform.setContent
 import androidx.core.view.WindowCompat
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.ui.theme.MultiplatformPlaygroundTheme
-import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 class AppPortfolioActivity : AppCompatActivity() {
 

@@ -2,12 +2,9 @@ package com.halcyonmobile.multiplatformplayground.ui.shared
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.preferredSize
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,13 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.coil.CoilImage
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.shared.util.ImageFile
 import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
-import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun Screenshots(
@@ -38,24 +35,26 @@ fun Screenshots(
             modifier = Modifier.padding(vertical = 8.dp)
         )
         LazyRow(modifier = Modifier.padding(vertical = 8.dp)) {
-            items(items = items, itemContent = {
-                if (it != null) {
+            items(items = items, itemContent = { item ->
+                if (item != null) {
                     CoilImage(
-                        data = it.uri,
-                        modifier = Modifier.preferredSize(88.dp).padding(8.dp),
-                        contentScale = ContentScale.Crop
+                        data = item.uri,
+                        modifier = Modifier.size(88.dp).padding(8.dp),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = null
                     )
                 } else {
                     Card(
-                        modifier = Modifier.preferredSize(88.dp).padding(8.dp),
+                        modifier = Modifier.size(88.dp).padding(8.dp),
                         shape = RectangleShape,
                         backgroundColor = AppTheme.colors.cardButton
                     ) {
                         Box(Modifier.clickable(onClick = onAddScreenshot)) {
                             Image(
-                                imageVector = vectorResource(id = R.drawable.ic_add_image),
+                                painter = painterResource(id = R.drawable.ic_add_image),
                                 colorFilter = ColorFilter.tint(AppTheme.colors.primary),
-                                modifier = Modifier.wrapContentSize().align(Alignment.Center)
+                                modifier = Modifier.wrapContentSize().align(Alignment.Center),
+                                contentDescription = null
                             )
                         }
 

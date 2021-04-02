@@ -8,10 +8,10 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.statusBarsPadding
 import com.halcyonmobile.multiplatformplayground.R
-import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
 
 @Composable
@@ -19,10 +19,11 @@ fun BackBar(upPress: () -> Unit) {
     Surface(elevation = 8.dp) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Icon(
-                imageVector = vectorResource(id = R.drawable.ic_back),
+                painter = painterResource(id = R.drawable.ic_back),
                 modifier = Modifier.clickable(onClick = upPress)
                     .statusBarsPadding()
-                    .padding(16.dp)
+                    .padding(16.dp),
+                contentDescription = null
             )
         }
     }

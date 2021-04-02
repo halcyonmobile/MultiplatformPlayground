@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
+import com.google.accompanist.insets.statusBarsPadding
 import com.halcyonmobile.multiplatformplayground.R
 import com.halcyonmobile.multiplatformplayground.model.ui.ApplicationUiModel
 import com.halcyonmobile.multiplatformplayground.ui.theme.AppTheme
 import com.halcyonmobile.multiplatformplayground.viewmodel.FavouritesViewModel
-import dev.chrisbanes.accompanist.insets.statusBarsPadding
 
 @Composable
 fun FavouriteScreen(onApplicationClicked: (ApplicationUiModel.App) -> Unit) {
