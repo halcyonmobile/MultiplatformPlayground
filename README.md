@@ -1,8 +1,8 @@
 # Multiplatform Playground (AppPortfolio)
 
 <p float="left">
-    <img src="img/android.jpg" alt="Android" width="150"/>
-    <img src="img/iOS.png" alt="iOS" width="150"/>
+    <img src="img/android.jpg" alt="Android" width="350"/>
+    <img src="img/iOS.png" alt="iOS" width="350"/>
 </p>
 <img src="img/macOS.png" alt="macOS" width="600"/>
 
