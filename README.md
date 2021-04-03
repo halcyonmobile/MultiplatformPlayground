@@ -1,8 +1,8 @@
 # Multiplatform Playground (AppPortfolio)
 
-![Android](img/android.jpg)
-![iOS](img/iOS.png)
-![macOS](img/macOS.png)
+![Android](img/android.jpg =250x)
+![iOS](img/iOS.png =250x)
+![macOS](img/macOS.png =400x)
 
 A **Kotlin Multiplatform** project with the purpose of experimenting with and providing a possible direction to newcomers having questions about *tech stack*, *project setup*, *architectural decisions* in a KMP environment.
 
