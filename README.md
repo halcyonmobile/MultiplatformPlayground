@@ -5,8 +5,8 @@ A **Kotlin Multiplatform** project with the purpose of experimenting with and pr
 <p float="left">
     <img src="img/android.jpg" alt="Android" width="250"/>
     <img src="img/iOS.png" alt="iOS" width="250"/>
+    <img src="img/macOS.png" alt="macOS" width="350"/>
 </p>
-<img src="img/macOS.png" alt="macOS" width="400"/>
 
 #### Note:
 
